@@ -1,0 +1,103 @@
+I, [2017-08-30T21:12:17.331880 #3478]  INFO -- : Started GET "/" for 127.0.0.1 at 2017-08-30 21:12:17 +0200
+I, [2017-08-30T21:12:17.343051 #3478]  INFO -- : Processing by ApplicationController#welcome as HTML
+I, [2017-08-30T21:12:17.350195 #3478]  INFO -- :   Rendering application/welcome.html.erb within layouts/bare
+I, [2017-08-30T21:12:17.354822 #3478]  INFO -- :   Rendered application/welcome.html.erb within layouts/bare (4.5ms)
+I, [2017-08-30T21:12:17.356633 #3478]  INFO -- : Completed 200 OK in 13ms (Views: 7.3ms)
+I, [2017-08-30T21:12:17.425228 #3478]  INFO -- : Started GET "/images/Levumi-klein-blau.png" for 127.0.0.1 at 2017-08-30 21:12:17 +0200
+F, [2017-08-30T21:12:17.425837 #3478] FATAL -- :   
+F, [2017-08-30T21:12:17.425885 #3478] FATAL -- : ActionController::RoutingError (No route matches [GET] "/images/Levumi-klein-blau.png"):
+F, [2017-08-30T21:12:17.425935 #3478] FATAL -- :   
+F, [2017-08-30T21:12:17.425975 #3478] FATAL -- : actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+rack (2.0.3) lib/rack/handler/webrick.rb:86:in `service'
+/home/morten/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+/home/morten/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+/home/morten/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+I, [2017-08-30T21:12:36.064765 #3478]  INFO -- : Started GET "/" for 127.0.0.1 at 2017-08-30 21:12:36 +0200
+I, [2017-08-30T21:12:36.066292 #3478]  INFO -- : Processing by ApplicationController#welcome as HTML
+I, [2017-08-30T21:12:36.067099 #3478]  INFO -- :   Rendering application/welcome.html.erb within layouts/bare
+I, [2017-08-30T21:12:36.068165 #3478]  INFO -- :   Rendered application/welcome.html.erb within layouts/bare (1.0ms)
+I, [2017-08-30T21:12:36.069198 #3478]  INFO -- : Completed 200 OK in 3ms (Views: 2.3ms)
+I, [2017-08-30T21:12:36.096436 #3478]  INFO -- : Started GET "/images/Levumi-klein-blau.png" for 127.0.0.1 at 2017-08-30 21:12:36 +0200
+F, [2017-08-30T21:12:36.096916 #3478] FATAL -- :   
+F, [2017-08-30T21:12:36.096953 #3478] FATAL -- : ActionController::RoutingError (No route matches [GET] "/images/Levumi-klein-blau.png"):
+F, [2017-08-30T21:12:36.097318 #3478] FATAL -- :   
+F, [2017-08-30T21:12:36.097356 #3478] FATAL -- : actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+rack (2.0.3) lib/rack/handler/webrick.rb:86:in `service'
+/home/morten/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+/home/morten/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+/home/morten/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+I, [2017-08-30T21:12:42.194940 #3478]  INFO -- : Started POST "/login" for 127.0.0.1 at 2017-08-30 21:12:42 +0200
+I, [2017-08-30T21:12:42.195978 #3478]  INFO -- : Processing by ApplicationController#login as HTML
+I, [2017-08-30T21:12:42.196035 #3478]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"4lqEAI+8VC0UY+MFBXROqea8DrdSMHUu6cl0KYSwPFAqjCOOC3XFygarWV6MLk5louTCCsbhU7Hp9+C8RXljag==", "email"=>"test@test.com", "password"=>"[FILTERED]", "commit"=>"Einloggen"}
+I, [2017-08-30T21:12:42.529499 #3478]  INFO -- : Completed 500 Internal Server Error in 333ms
+F, [2017-08-30T21:12:42.531304 #3478] FATAL -- :   
+F, [2017-08-30T21:12:42.531402 #3478] FATAL -- : Mysql2::Error (Access denied for user 'levumi'@'localhost' (using password: YES)):
+F, [2017-08-30T21:12:42.531644 #3478] FATAL -- :   
+F, [2017-08-30T21:12:42.531715 #3478] FATAL -- : app/controllers/application_controller.rb:10:in `login'
+I, [2017-08-30T21:13:45.774244 #3558]  INFO -- : Started GET "/" for 127.0.0.1 at 2017-08-30 21:13:45 +0200
+I, [2017-08-30T21:13:45.788070 #3558]  INFO -- : Processing by ApplicationController#welcome as HTML
+I, [2017-08-30T21:13:45.796560 #3558]  INFO -- :   Rendering application/welcome.html.erb within layouts/bare
+I, [2017-08-30T21:13:45.802600 #3558]  INFO -- :   Rendered application/welcome.html.erb within layouts/bare (5.9ms)
+I, [2017-08-30T21:13:45.804676 #3558]  INFO -- : Completed 200 OK in 16ms (Views: 10.0ms)
+I, [2017-08-30T21:13:45.828372 #3558]  INFO -- : Started GET "/images/Levumi-klein-blau.png" for 127.0.0.1 at 2017-08-30 21:13:45 +0200
+F, [2017-08-30T21:13:45.829055 #3558] FATAL -- :   
+F, [2017-08-30T21:13:45.829137 #3558] FATAL -- : ActionController::RoutingError (No route matches [GET] "/images/Levumi-klein-blau.png"):
+F, [2017-08-30T21:13:45.829166 #3558] FATAL -- :   
+F, [2017-08-30T21:13:45.829195 #3558] FATAL -- : actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+rack (2.0.3) lib/rack/handler/webrick.rb:86:in `service'
+/home/morten/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+/home/morten/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+/home/morten/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+I, [2017-08-30T21:13:48.172955 #3558]  INFO -- : Started POST "/login" for 127.0.0.1 at 2017-08-30 21:13:48 +0200
+I, [2017-08-30T21:13:48.173824 #3558]  INFO -- : Processing by ApplicationController#login as HTML
+I, [2017-08-30T21:13:48.173888 #3558]  INFO -- :   Parameters: {"utf8"=>"✓", "authenticity_token"=>"wemVQ/kVUJAAyug2s5SvAd9+/YpPlY/+Nbxv/+OYZVcJPzLNfdzBdxICUm06zq/NmyYxN9tEqWE1gvtqIlE6bQ==", "email"=>"test@test.com", "password"=>"[FILTERED]", "commit"=>"Einloggen"}
+I, [2017-08-30T21:13:48.180352 #3558]  INFO -- : Completed 500 Internal Server Error in 6ms
+F, [2017-08-30T21:13:48.181368 #3558] FATAL -- :   
+F, [2017-08-30T21:13:48.181469 #3558] FATAL -- : Mysql2::Error (Access denied for user 'levumi'@'localhost' (using password: YES)):
+F, [2017-08-30T21:13:48.181504 #3558] FATAL -- :   
+F, [2017-08-30T21:13:48.181533 #3558] FATAL -- : app/controllers/application_controller.rb:10:in `login'
