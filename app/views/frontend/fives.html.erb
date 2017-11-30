@@ -1,18 +1,20 @@
+<div>Ihr seit fünfer!</div>
+
 <% content_for :top do%>
-  <p class="navbar-brand">Angemeldet als: <%= @student.name %></p>
-  <div class = "navbar-right" style="padding-right: 15px">
-    <form class="navbar-form" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-      <%= token_tag nil %>
-      <button type="submit" class="btn btn-lg btn-default">Abmelden</button>
-    </form>
-  </div>
+    <p class="navbar-brand">Angemeldet als: <%= @student.name %></p>
+    <div class = "navbar-right" style="padding-right: 15px">
+      <form class="navbar-form" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
+        <%= token_tag nil %>
+        <button type="submit" class="btn btn-lg btn-default">Abmelden</button>
+      </form>
+    </div>
 <% end %>
 
 <div class="well">
   <h3>Die folgenden Tests stehen für dich zur Verfügung:</h3>
   <br/>
   <table class="table">
-  <% @assessments.each do |m| %>
+    <% @assessments.each do |m| %>
         <tr>
           <td>
             <div id="groupName">
@@ -30,13 +32,13 @@
             </p>
           </td>
         </tr>
-  <% end %>
+    <% end %>
   </table>
 
 </div>
 
 <script>
-  //possible Hack
+    //possible Hack
     //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
     window.location.hash="no-back-button";
     window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history

@@ -6,7 +6,7 @@ class Student < ActiveRecord::Base
 
   #Validations:
   validates_presence_of :name
-  after_create :set_login
+  after_create :set_login, :set_group_type
 
 
  #Getter für Merkmale:
@@ -52,6 +52,12 @@ class Student < ActiveRecord::Base
         self.login = cur
         self.save
       end
+    end
+  end
+  def set_group_type
+    if self.group_type.nil? |self.group_type.blank?
+      self.group_type = 0
+      self.save
     end
   end
 

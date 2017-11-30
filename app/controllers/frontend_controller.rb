@@ -19,6 +19,7 @@ class FrontendController < ApplicationController
   def login
     s = Student.find_by_login(params[:login])
     if s != nil
+      @student = s
       session[:student_id] = s.id
       session[:user_id] = nil
       @login_user = nil
@@ -41,6 +42,19 @@ class FrontendController < ApplicationController
   # #TODO-A: Das sollte dann evtl. Measurements index übernehmen! Ggf. umbennen
   def index
     @assessments = @student.get_open_assessments
+    if @student.group_type == 0
+      render 'zeros'
+    elsif @student.group_type == 1
+      render 'ones'
+    elsif @student.group_type == 2
+      render 'twos'
+    elsif @student.group_type == 3
+      render 'threes'
+    elsif @student.group_type == 4
+      render 'fours'
+    else
+      render 'fives'
+    end
   end
 
   #start Test
