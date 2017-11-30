@@ -40,13 +40,16 @@ class FrontendController < ApplicationController
   #get all available measurements
   # #TODO-A: Das sollte dann evtl. Measurements index übernehmen! Ggf. umbennen
   def index
-    @measurements = @student.get_open_measurements
+    @assessments = @student.get_open_assessments
   end
 
   #start Test
   def start
-    @measurement = Measurement.find(params[:id])
-    @test = @measurement.assessment.test
+
+    @assessment = Assessment.find(params[:id])
+    @measurement = @assessment.measurements.build(date: Date.today+2, stuId: @student.id)
+    @measurement.save
+    @test = @assessment.test
     @result = @student.getCurrentResult(@measurement.id)
     if (@test.student_access) #...ggf mehr Tests
       render "results/tests/#{@test.view_info}"

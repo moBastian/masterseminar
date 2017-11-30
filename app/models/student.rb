@@ -140,32 +140,12 @@ class Student < ActiveRecord::Base
   end
 
   #Only get measurement which are available
-  def get_open_measurements
+  def get_open_assessments
     t = Test.where(:student_access => true)
     a = Assessment.where(:group => self.group.id).
                    where(:test => t)
-    #only return measurements which are not worked and out of date
-    m = Measurement.
-        where(:assessment => a).
-        where("date >?", Date.today)
-    r = Result.
-        where(:measurement => m).
-        where(:student_id => self.id).
-        where('responses LIKE ? OR responses LIKE ?', '%1%', '%0%')
-    r.each do |temp|
-     m = m.where.not(:id => temp.measurement_id)
-    end
-    #TODO-Morten ist gerade nur die schnelle Lösung. Ändere ich bei zeiten wieder zur schöneren + wahrscheinlich .select{}, da Array kein .where hat
-    # der Datenbankabruf muss nicht zweimal passieren
-    #return only Measurements, which has a resultobjekt
-    r = Result.
-        where(:measurement => m).
-        where(:student_id => self.id)
-    result = []
-    r.each do |temp|
-      result = result + m.where(:id => temp.measurement_id)
-    end
-	return result.nil? ? [] : result
+
+	return a
   end
 
   #get current result objekt of student
