@@ -2,11 +2,13 @@ var chart = c3.generate({
     bindto: '#chart',
     data: {
         x: 'x',
+        xFormat:'%Y-%m-%d %H:%M:%S %Z',
         columns: [
             ['x',
                 <% @assessment.measurements.each do |m| %>
-                '<%= m.date.to_date %>',
+                '<%= m.date.to_time %>',
                 <% end %>
+
             ],
             <% @group.students.each do |student| %>
             ['<%= student.name %>',

@@ -2,10 +2,11 @@ var chart<%=test%> = c3.generate({
     bindto: '#chart<%=test%>',
     data: {
         x: 'x',
+        xFormat:'%Y-%m-%d %H:%M:%S %Z',
         columns: [
             ['x',
                 <% results.each do |r| %>
-                '<%= r.measurement.date.to_date %>',
+                '<%= r.measurement.date.to_time %>',
                 <% end %>
             ],
             ['student',
