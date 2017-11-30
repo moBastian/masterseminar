@@ -12,12 +12,12 @@
   <h3>Die folgenden Tests stehen für dich zur Verfügung:</h3>
   <br/>
   <table class="table">
-  <% @measurements.sort_by(&:date).each do |m| %>
+  <% @assessments.each do |m| %>
         <tr>
           <td>
             <div id="groupName">
               <p class="lead" style="font-size: 32px" >
-                <%= m.assessment.test.name + " (" + m.assessment.test.level + ")" %>
+                <%= m.test.name + " (" + m.test.level + ")" %>
               </p>
             </div>
           </td>
@@ -26,7 +26,7 @@
           </td>
           <td>
             <p class="lead" style="font-size: 24px">
-              Möglich bis: <%=m.date.strftime("%d.%m.%y")%>
+              Möglich bis: nie
             </p>
           </td>
         </tr>
