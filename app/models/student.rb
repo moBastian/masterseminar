@@ -47,13 +47,11 @@ class Student < ActiveRecord::Base
   #Generate random login code
   def set_login
     while self.login.nil? | self.login.blank?
-      cur = (('0'..'9').to_a + ('a'..'z').to_a).shuffle.first(6).join
-      if(Student.where(:login => cur).empty?)
-        self.login = cur
-        self.save
-      end
+      self.login = self.name
+      self.save
     end
   end
+
   def set_group_type
     if self.group_type.nil? |self.group_type.blank?
       self.group_type = 0
@@ -158,6 +156,20 @@ class Student < ActiveRecord::Base
   def getCurrentResult(measurement_id)
     r = Result.where(:student_id => self.id, :measurement_id => measurement_id).first
     return r.nil? ? [] : r
+  end
+
+  def self.prepare_new_student(group)
+    testLoginFree = true
+    while testLoginFree
+      cur = (('0'..'9').to_a + ('a'..'z').to_a).shuffle.first(6).join
+      if(Student.where(:login => cur).empty?)
+        puts(cur)
+        testLoginFree=false
+      end
+    end
+    s = group.students.build(name: cur, group_type: Random.rand(6))
+    s.save
+    return s
   end
 
 end

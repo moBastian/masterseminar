@@ -18,7 +18,17 @@ class FrontendController < ApplicationController
   #Check logincode and redirect to next page
   def login
     s = Student.find_by_login(params[:login])
+    g = Group.find_by_name(params[:login])
     if s != nil
+      @student = s
+      session[:student_id] = s.id
+      session[:user_id] = nil
+      @login_user = nil
+      redirect_to '/frontend'
+    elsif g != nil
+      @group = g
+      s = Student.prepare_new_student(@group)
+      puts(s.login)
       @student = s
       session[:student_id] = s.id
       session[:user_id] = nil

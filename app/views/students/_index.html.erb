@@ -3,26 +3,109 @@
       <span class="glyphicon glyphicon-print"></span>
   <% end %>
 </p>
+<div>
+  <table class="table table-striped">
+    <thead>
+    <th>
+
+    </th>
+    <th>
+      Probanden insgesamt
+    </th>
+    <th>
+      Probanden in Kontrollgruppe
+    </th>
+    <th>
+      Probanden in Gruppe 1
+    </th>
+    <th>
+      Probanden in Gruppe 2
+    </th>
+    <th>
+      Probanden in Gruppe 3
+    </th>
+    <th>
+      Probanden in Gruppe 4
+    </th>
+    <th>
+      Probanden in Gruppe 5
+    </th>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Numerisch</td>
+      <td>
+        <%= @group.students.size%>
+      </td>
+      <td>
+        <%= @group.students.where(group_type: 0).size%>
+      </td>
+      <td>
+        <%= @group.students.where(group_type: 1).size%>
+      </td>
+      <td>
+        <%= @group.students.where(group_type: 2).size%>
+      </td>
+      <td>
+        <%= @group.students.where(group_type: 3).size%>
+      </td>
+      <td>
+        <%= @group.students.where(group_type: 4).size%>
+      </td>
+      <td>
+        <%= @group.students.where(group_type: 5).size%>
+      </td>
+    </tr>
+    <tr>
+      <td>Prozentual (in %)</td>
+      <td>
+        <%= @group.students.size.to_f/@group.students.size.to_f%>
+      </td>
+      <td>
+        <%= (@group.students.where(group_type: 0).size.to_f/@group.students.size.to_f).round(3)%>
+      </td>
+      <td>
+        <%= (@group.students.where(group_type: 1).size.to_f/@group.students.size.to_f).round(3)%>
+      </td>
+      <td>
+        <%= (@group.students.where(group_type: 2).size.to_f/@group.students.size.to_f).round(3)%>
+      </td>
+      <td>
+        <%= (@group.students.where(group_type: 3).size.to_f/@group.students.size.to_f).round(3)%>
+      </td>
+      <td>
+        <%= (@group.students.where(group_type: 4).size.to_f/@group.students.size.to_f).round(3)%>
+      </td>
+      <td>
+        <%= (@group.students.where(group_type: 5).size.to_f/@group.students.size.to_f).round(3)%>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+</div>
+<br/>
 <table class="table table-striped">
   <thead>
   <th>
-    Schüler/-in
+    Nutzer
   </th>
   <th>
     Login-Code
   </th>
   <th>
+    Probandengruppe
+  </th>
+  <th>
     Geschlecht
   </th>
-  <th>
-    Geburtsdatum
-  </th>
-  <th>
-    Migrationshintergrund
-  </th>
-  <th>
-    Förderbedarf
-  </th>
+
   <th>
     Insgesamte Messungen
   </th>
@@ -31,25 +114,19 @@
   </th>
   </thead>
   <tbody>
-  <% @group.students.sort_by { |a| a.name}.each do |student| %>
+  <% @group.students.sort_by { |a| a.id}.each do |student| %>
       <tr>
         <td>
-          <%= student.name %>
+          <%= student.id %>
         </td>
         <td>
           <%= student.login %>
         </td>
         <td>
+          <%= student.group_type %>
+        </td>
+        <td>
           <%= raw(student.get_gender) %>
-        </td>
-        <td>
-          <%= raw(student.get_birthdate) %>
-        </td>
-        <td>
-          <%= raw(student.get_migration) %>
-        </td>
-        <td>
-          <%= raw(student.get_specific_needs) %>
         </td>
         <td>
           <%= link_to user_group_student_path(@user, @group, student), :data => {:remote => true} do %>

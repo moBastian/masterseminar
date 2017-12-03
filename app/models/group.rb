@@ -5,6 +5,7 @@ class Group < ActiveRecord::Base
   has_many :assessments, :dependent => :destroy
 
   validates_presence_of :name
+  validates_uniqueness_of :name, scope: :user_id
 
   after_create :set_defaults
 
