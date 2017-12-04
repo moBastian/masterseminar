@@ -35,7 +35,7 @@ class FrontendController < ApplicationController
       @login_user = nil
       redirect_to '/frontend'
     else
-      redirect_to '/schueler', notice: "Der Code ist falsch! Bitte prüfe genau, ob du alles richtig eingegeben hast."
+      redirect_to root_url, notice: "Der Code ist falsch! Bitte prüfe genau, ob du alles richtig eingegeben hast."
     end
   end
 
@@ -45,7 +45,7 @@ class FrontendController < ApplicationController
       session[:student_id] = nil
       @login_student = nil
     end
-    redirect_to '/schueler'
+    redirect_to root_url
   end
 
   #get all available measurements
@@ -86,7 +86,7 @@ class FrontendController < ApplicationController
 
   def check_student
     if session[:student_id].nil?
-      redirect_to '/schueler', notice: "Bitte einloggen!"
+      redirect_to root_url, notice: "Bitte einloggen!"
     else
       @student = Student.find(session[:student_id])
     end

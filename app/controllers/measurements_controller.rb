@@ -86,7 +86,7 @@ class MeasurementsController < ApplicationController
 
     def is_allowed
       unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i))
-        redirect_to root_url
+        redirect_to '/backend'
       end
     end
 end

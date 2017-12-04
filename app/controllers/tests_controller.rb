@@ -79,7 +79,7 @@ class TestsController < ApplicationController
 
   def is_allowed
     unless !@login_user.nil? && @login_user.hasCapability?("test")
-      redirect_to root_url
+      redirect_to '/backend'
     end
   end
 end

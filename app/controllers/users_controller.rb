@@ -15,19 +15,19 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html {
         if @login_user.nil? || (!@login_user.hasCapability?("user") && (@user.id != @login_user.id))
-          redirect_to root_url
+          redirect_to '/backend'
         end
       }
       format.xml {
         if @login_user.nil? || (!@login_user.hasCapability?("export") && (@user.id != @login_user.id))
-          redirect_to root_url
+          redirect_to '/backend'
         else
           send_file Result.to_xls(nil, @user.id), filename: @user.name + " - Export.csv", type: "application/vnd.ms-excel"
         end
       }
       format.text {
         if @login_user.nil? || (!@login_user.hasCapability?("export") && (@user.id != @login_user.id))
-          redirect_to root_url
+          redirect_to '/backend'
         else
           send_file Result.to_csv(nil, @user.id), filename: @user.name + " - Export.csv", type: "text/csv"
         end
@@ -118,7 +118,7 @@ class UsersController < ApplicationController
 
   def is_allowed
     unless !@login_user.nil? && @login_user.hasCapability?("user") ||!@login_user.nil? && (params.has_key?(:id) && (@login_user.id == params[:id].to_i))
-      redirect_to root_url
+      redirect_to '/backend'
     end
   end
 
