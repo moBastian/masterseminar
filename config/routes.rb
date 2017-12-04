@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 Rails.application.routes.draw do
 
-  root 'application#welcome'
+  root 'frontend#welcome'
+
 
   resources :users do
     resources :groups do
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :tests
+  get 'backend' => 'application#welcome'
 
   post 'login' => 'application#login'
   post 'logout' => 'application#logout'
@@ -23,7 +25,6 @@ Rails.application.routes.draw do
   get 'static' => 'application#static'
   get 'export' => 'application#export'
 
-  get 'schueler' => 'frontend#welcome'
   post 'frontend/login' => 'frontend#login'
   post 'frontend/logout' => 'frontend#logout'
   get 'frontend' => 'frontend#index'
