@@ -73,9 +73,11 @@ class FrontendController < ApplicationController
     @assessment = Assessment.find(params[:id])
     @measurement = @assessment.measurements.build(date: Time.new, stuId: @student.id)
     @measurement.save
+    @measurement.prepare_test(@student)
     @test = @assessment.test
     @result = @student.getCurrentResult(@measurement.id)
     if (@test.student_access) #...ggf mehr Tests
+
       render "results/tests/#{@test.view_info}"
     else
       redirect_to '/schueler'

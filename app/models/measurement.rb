@@ -8,17 +8,13 @@ class Measurement < ActiveRecord::Base
   #Validations:
   validates_presence_of :date
 
-  #Active Record Callbacks:
-  after_create :prepare_test
 
   #Default model order: By (due) date.
   default_scope {order('date DESC')}
 
-  def prepare_test
-    assessment.group.students.each do |s|
-      r = results.build(student: s)
-      r.initialize_results()
-    end
+  def prepare_test(currentStudent)
+    r = results.build(student: currentStudent)
+    r.initialize_results()
   end
 
   def update_students(hash)

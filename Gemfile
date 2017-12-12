@@ -5,6 +5,7 @@ gem 'rails', '5.0.1'
 # Use sqlite3 as the database for Active Record
 
 gem 'sqlite3'
+gem 'fingerprintjs-rails'
 
 gem 'mysql2', '~> 0.3.13'
 

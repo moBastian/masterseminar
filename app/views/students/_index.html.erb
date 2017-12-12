@@ -3,6 +3,14 @@
       <span class="glyphicon glyphicon-print"></span>
   <% end %>
 </p>
+<%  students = @group.students
+    groupsize = students.size
+    controllgroupsize = @group.students.where(group_type: 0).size
+    testgroup1Size = @group.students.where(group_type: 1).size
+    testgroup2Size = @group.students.where(group_type: 2).size
+    testgroup3Size = @group.students.where(group_type: 3).size
+    testgroup4Size = @group.students.where(group_type: 4).size
+    testgroup5Size = @group.students.where(group_type: 5).size%>
 <div>
   <table class="table table-striped">
     <thead>
@@ -35,49 +43,49 @@
     <tr>
       <td>Numerisch</td>
       <td>
-        <%= @group.students.size%>
+        <%= groupsize%>
       </td>
       <td>
-        <%= @group.students.where(group_type: 0).size%>
+        <%= controllgroupsize%>
       </td>
       <td>
-        <%= @group.students.where(group_type: 1).size%>
+        <%= testgroup1Size%>
       </td>
       <td>
-        <%= @group.students.where(group_type: 2).size%>
+        <%= testgroup2Size%>
       </td>
       <td>
-        <%= @group.students.where(group_type: 3).size%>
+        <%= testgroup3Size%>
       </td>
       <td>
-        <%= @group.students.where(group_type: 4).size%>
+        <%= testgroup4Size%>
       </td>
       <td>
-        <%= @group.students.where(group_type: 5).size%>
+        <%= testgroup5Size%>
       </td>
     </tr>
     <tr>
       <td>Prozentual (in %)</td>
       <td>
-        <%= @group.students.size.to_f/@group.students.size.to_f%>
+        100
       </td>
       <td>
-        <%= (@group.students.where(group_type: 0).size.to_f/@group.students.size.to_f).round(3)%>
+        <%= (controllgroupsize.to_f/groupsize).round(3)*100%>
       </td>
       <td>
-        <%= (@group.students.where(group_type: 1).size.to_f/@group.students.size.to_f).round(3)%>
+        <%= (testgroup1Size.to_f/groupsize).round(3)*100%>
       </td>
       <td>
-        <%= (@group.students.where(group_type: 2).size.to_f/@group.students.size.to_f).round(3)%>
+        <%= (testgroup2Size.to_f/groupsize).round(3)*100%>
       </td>
       <td>
-        <%= (@group.students.where(group_type: 3).size.to_f/@group.students.size.to_f).round(3)%>
+        <%= (testgroup3Size.to_f/groupsize).round(3)*100%>
       </td>
       <td>
-        <%= (@group.students.where(group_type: 4).size.to_f/@group.students.size.to_f).round(3)%>
+        <%= (testgroup4Size.to_f/groupsize).round(3)*100%>
       </td>
       <td>
-        <%= (@group.students.where(group_type: 5).size.to_f/@group.students.size.to_f).round(3)%>
+        <%= (testgroup5Size.to_f/groupsize).round(3)*100%>
       </td>
     </tr>
     </tbody>
@@ -114,7 +122,7 @@
   </th>
   </thead>
   <tbody>
-  <% @group.students.sort_by { |a| a.id}.each do |student| %>
+  <% students.sort_by { |a| a.id}.each do |student| %>
       <tr>
         <td>
           <%= student.id %>
