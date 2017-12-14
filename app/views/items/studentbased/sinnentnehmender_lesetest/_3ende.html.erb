@@ -4,13 +4,19 @@
     <img id='pic' style='width: 250px;'/>
     <br/>
     <br/>
+  <div class='row text-center'>
+    <div>
+      <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>Für die Bearbeitug erhälst du&nbsp</label>
+      <label id='score' class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'></label>
+      <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>&nbsp Punkte.</label>
+    </div>
+  </div>
     <br/>
   </p>
 </div>
 <br><br>
 <br><br>
 <div class='row text-center'>
-
   <div class='col-md-4 col-md-offset-4'>
     <button id='geschafft' type='button' class='btn btn-lg btn-primary btn-block'><span style='font-size: 40px'>Geschafft</span></button>
   </div>
@@ -27,4 +33,12 @@
       tempPic.src = '/images/shared/Levumi-normal-blau.jpg';
   else
       tempPic.src = '/images/shared/Levumi-weiterlesen.gif';
+
+  //F5 abschalten <- kein aktualisieren möglich
+  $(window).keydown(function (event) {
+      var key = event.charCode || event.keyCode;
+      if (key == 116) {
+          event.preventDefault();
+      }});
+  $('#score').html(score);
 </script>

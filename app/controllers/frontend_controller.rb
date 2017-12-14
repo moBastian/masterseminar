@@ -71,7 +71,7 @@ class FrontendController < ApplicationController
   def start
 
     @assessment = Assessment.find(params[:id])
-    @measurement = @assessment.measurements.build(date: Time.new, stuId: @student.id)
+    @measurement = @assessment.measurements.build(date: Time.new + 3600, stuId: @student.id)
     @measurement.save
     @measurement.prepare_test(@student)
     @test = @assessment.test

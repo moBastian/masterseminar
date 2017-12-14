@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <p class="navbar-brand"><%= "Klasse #{@measurement.assessment.group.name}: Schüler: #{@student.name}: #{@measurement.assessment.test.short_name} bis zum #{@measurement.date.to_date.strftime("%d.%m.%Y")}" %></p>
+  <p class="navbar-brand"><%= "Tester: #{@student.name}: #{@measurement.assessment.test.name} durchgeführt am #{@measurement.date.to_date.strftime("%d.%m.%Y")} um #{@measurement.date.strftime("%H:%M")}" %></p>
   <p class="navbar-brand" id="state"></p>
 </nav>
 
@@ -19,6 +19,7 @@
     var pathMainPage = '<%= request.base_url + url_for(controller: 'frontend')%>';
     var currentItemIndex = -1;
     var currentStudent = -1;
+    var score = 0;
     currentStudent = <%=@result.id%>;
 
 

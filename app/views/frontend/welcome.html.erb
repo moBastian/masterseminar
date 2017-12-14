@@ -15,4 +15,21 @@
       <%= submit_tag 'Anmelden', :class => "btn btn-primary" %>
   <% end %>
   <br/>
+  <div id="test" style="font-size: 20px"></div>
+  <button onclick="test()">Klick mich</button>
 </div>
+
+<script>
+  function test() {
+      var test = new Fingerprint().get();
+      $('#test').html(test);
+  }
+
+  //F5 abschalten <- kein aktualisieren möglich
+  $(window).keydown(function (event) {
+      var key = event.charCode || event.keyCode;
+      if (key == 116) {
+          event.preventDefault();
+      }});
+
+</script>
