@@ -158,7 +158,7 @@ class Student < ActiveRecord::Base
     return r.nil? ? [] : r
   end
 
-  def self.prepare_new_student(group)
+  def self.prepare_new_student(group, ip, fingerprint)
     testLoginFree = true
     while testLoginFree
       cur = (('0'..'9').to_a + ('a'..'z').to_a).shuffle.first(6).join
@@ -167,7 +167,7 @@ class Student < ActiveRecord::Base
         testLoginFree=false
       end
     end
-    s = group.students.build(name: cur, group_type: Random.rand(6))
+    s = group.students.build(name: cur, group_type: Random.rand(6), ip: ip, fingerprint: fingerprint)
     s.save
     return s
   end

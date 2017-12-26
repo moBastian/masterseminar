@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20171212115348) do
     t.text     "login"
     t.integer  "group_type"
     t.text     "fingerprint"
+    t.text     "ip"
   end
 
   create_table "tests", force: :cascade do |t|
