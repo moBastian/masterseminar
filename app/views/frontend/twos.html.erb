@@ -9,33 +9,57 @@
 <% end %>
 <div style="font-size: 30px">Arbeitstitel Gruppe 2</div>
 <br/>
-<div class="well">
+<div>
   <h3>Die folgenden Tests stehen für dich zur Verfügung:</h3>
   <br/>
-  <table class="table">
-    <% @assessments.each do |m| %>
-        <tr>
-          <td>
-            <div id="groupName">
-              <p class="lead" style="font-size: 32px" >
-                <%= m.test.name + " (" + m.test.level + ")" %>
-              </p>
-            </div>
-          </td>
-          <td>
-            <%= link_to url_for(controller: 'frontend', action: 'start', id: m.id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
-          </td>
-          <td>
-            <p class="lead" style="font-size: 24px">
-              Möglich bis: nie
+  <% count = 0 %>
+  <% assessment_size = @assessments.size%>
+  <%while count < assessment_size%>
+      <% if(count % 3 == 0)%>
+          <div class="row">
+            <div class="col-lg-11">
+              <div class="row">
+                <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
+                  <p style="font-size: 32px;text-align: center" >
+                    <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="250px" src=<%= @assessments[count].test.picture%>><% end %>
+                    <br/>
+                    <%= @assessments[count].test.name %>
+                    <br/>
+                    <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
+                  </p>
+                </div>
+      <%elsif count % 3 == 2%>
+          <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
+            <p style="font-size: 32px;text-align: center" >
+              <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="250px" src=<%= @assessments[count].test.picture%>><% end %>
+              <br/>
+              <%= @assessments[count].test.name %>
+              <br/>
+              <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
             </p>
-          </td>
-        </tr>
-    <% end %>
-  </table>
-
-</div>
-
+          </div>
+          </div>
+          </div>
+          </div>
+          <br/>
+          <br/>
+      <%else%>
+          <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
+            <p style="font-size: 32px;text-align: center" >
+              <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="250px" src=<%= @assessments[count].test.picture%>><% end %>
+              <br/>
+              <%= @assessments[count].test.name %>
+              <br/>
+              <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
+            </p>
+          </div>
+      <%end%>
+      <% count = count + 1%>
+  <%end%>
+  <%if !(assessment_size % 3 == 0)%>
+      </div>
+  <% end%>
+  </div>
 <script>
     //possible Hack
     //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
