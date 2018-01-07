@@ -9,7 +9,10 @@ class Student < ActiveRecord::Base
   after_create :set_login, :set_group_type
 
 
- #Getter für Merkmale:
+  serialize :achievement, Hash
+
+
+  #Getter für Merkmale:
 
   def get_gender(raw = false)
     return self[:gender].nil? ? (raw ? "nicht erfasst" : "<i>nicht erfasst</i>") : (self[:gender] ? "männlich" : "weiblich")
@@ -159,6 +162,10 @@ class Student < ActiveRecord::Base
   end
 
   def self.prepare_new_student(group, ip, fingerprint)
+    achievement = {"1" => [false, "/images/trophyGray.png", "/images/trophy.png"], "2"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"3"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"4"=>[false, "/images/trophyGray.png", "/images/trophy.png"],
+                   "5"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"6"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"7"=>[false, "/images/trophyGray.png", "/images/trophy.png"], "8"=>[false, "/images/trophyGray.png", "/images/trophy.png"],
+                   "9"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"10"=>[false, "/images/trophyGray.png", "/images/trophy.png"], "11"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"12"=>[false, "/images/trophyGray.png", "/images/trophy.png"],
+                   "13"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"14"=>[false, "/images/trophyGray.png", "/images/trophy.png"], "15"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"16"=>[false, "/images/trophyGray.png", "/images/trophy.png"]}
     testLoginFree = true
     while testLoginFree
       cur = (('0'..'9').to_a + ('a'..'z').to_a).shuffle.first(6).join
@@ -167,7 +174,7 @@ class Student < ActiveRecord::Base
         testLoginFree=false
       end
     end
-    s = group.students.build(name: cur, group_type: Random.rand(6), ip: ip, fingerprint: fingerprint)
+    s = group.students.build(name: cur, group_type: Random.rand(6), ip: ip, fingerprint: fingerprint, achievement: achievement)
     s.save
     return s
   end

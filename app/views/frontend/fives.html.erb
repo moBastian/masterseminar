@@ -1,18 +1,53 @@
 
 
 <% content_for :top do%>
-    <p class="navbar-brand">Angemeldet als: <%= @student.name %></p>
+    <br/>
+    <div class="container-fluid">
+    <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Angemeldet als: <%= @student.name %></p>
+    <div>
+      <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Als E-Mail schicken:</p>
+      <form class="navbar-form navbar-left">
+        <div id="emailgroup" class="form-group">
+          <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style="font-size: 40px; height: 70px; font-family: fibel_nordregular;">
+        </div>
+        <button id="submit" type="submit" class="btn btn-default" style="font-size: 40px; font-family: fibel_nordregular;" onclick="sendMail();return false;">Absenden</button>
+      </form>
+    </div>
     <div class = "navbar-right" style="padding-right: 15px">
       <form class="navbar-form" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
         <%= token_tag nil %>
-        <button type="submit" class="btn btn-lg btn-default">Abmelden</button>
+        <button type="submit" class="btn btn-lg btn-info" style="font-size: 40px; font-family: fibel_nordregular;">Abmelden</button>
       </form>
     </div>
+    </div>
 <% end %>
-<div style="font-size: 30px">Arbeitstitel Gruppe 5</div>
+
+<div class="row">
+  <% count = 0%>
+  <% keys = @student.achievement.keys %>
+  <%while count<@student.achievement.size%>
+      <% achievementInfos = @student.achievement[keys[count]]%>
+      <% puts achievementInfos%>
+      <% if(! achievementInfos[0])%>
+          <div class="col-lg-1" >
+            <img src=<%= achievementInfos[1]%> width="60px" >
+          </div>
+      <% else %>
+          <div class="col-lg-1" >
+            <img src=<%= achievementInfos[2]%> width="60px" >
+          </div>
+      <% end%>
+      <% count = count +1%>
+      <% if(count == 8)%>
+          </div>
+          <br/>
+          <div class="row">
+      <%end%>
+  <%end%>
+</div>
 <br/>
 <div>
-  <h3>Die folgenden Tests stehen für dich zur Verfügung:</h3>
+  <h1 style="font-family: fibel_nordregular;">Die folgenden Tests stehen für dich zur Verfügung:</h1>
   <br/>
   <% count = 0 %>
   <% assessment_size = @assessments.size%>
@@ -68,4 +103,22 @@
       window.location.hash="no-back-button";
       window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
       window.onhashchange=function(){window.location.hash="no-back-button";}
+
+
+
+      function sendMail() {
+          $('#emailgroup').removeClass('has-error');
+          $('#emailgroup').removeClass('has-success');
+          $('#submit').removeClass('btn-danger');
+          $('#submit').removeClass('btn-success');
+          if ($('#email').is(':valid') && $('#email').val() != '') {
+              $.ajax({url: '<%= concept_map_path(@concept_map, format: :text)%>' + '?email=' + $('#email').val()});
+              $('#submit').addClass('btn-success');
+              $('#emailgroup').addClass('has-success');
+          }
+          else {
+              $('#submit').addClass('btn-danger');
+              $('#emailgroup').addClass('has-error');
+          }
+      }
   </script>

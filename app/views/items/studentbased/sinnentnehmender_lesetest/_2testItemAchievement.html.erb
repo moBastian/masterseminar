@@ -53,6 +53,10 @@
       if(answer=='<%= item.shorthand%>'){
           score = score +1;
           currentResult = currentResult + '1,';
+          <%
+          @student.achievement["1"][0] = true
+          @student.save
+          %>
       }
       else {
           currentResult = currentResult + '0,';
