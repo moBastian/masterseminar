@@ -17,12 +17,12 @@
   <div class="col-lg-7 col-md-offset-3">
     <div class='col-lg-4 col-lg-offset-0' >
       <div class ='row'>
-        <button id='button0' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[0] %>')"><%= alternatives[0] %></button>
+        <button id='button0' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[0] %>','#button0')"><%= alternatives[0] %></button>
       </div>
     </div>
     <div class='col-lg-4 col-lg-offset-2' >
       <div class ='row'>
-        <button id='button1' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[1] %>')"><%= alternatives[1] %></button>
+        <button id='button1' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[1] %>', '#button1')"><%= alternatives[1] %></button>
       </div>
     </div>
   </div>
@@ -32,12 +32,12 @@
   <div class="col-lg-7 col-md-offset-3">
     <div class='col-lg-4 col-lg-offset-0' >
       <div class ='row'>
-        <button id='button2' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[2] %>')"><%= alternatives[2] %></button>
+        <button id='button2' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[2] %>', '#button2')"><%= alternatives[2] %></button>
       </div>
     </div>
     <div class='col-lg-4 col-lg-offset-2' >
       <div class ='row'>
-        <button id='button3' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[3] %>')"><%= alternatives[3] %></button>
+        <button id='button3' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[3] %>', '#button3')"><%= alternatives[3] %></button>
       </div>
     </div>
   </div>
@@ -49,21 +49,53 @@
 
 <script>
 
-  function nextClicked(answer) {
+  function nextClicked(answer, buttonId) {
       if(answer=='<%= item.shorthand%>'){
           score = score +1;
           currentResult = currentResult + '1,';
-          <%
-          @student.achievement["1"][0] = true
-          @student.save
-          %>
+          $(buttonId).removeClass('btn-default');
+          $(buttonId).addClass('btn-success');
+          //Views for displayed Items
+          var achievementHash = {
+          <% @student.achievement.each do |a| %>
+          <%= a[0]%>: <%=raw a[1]%>,
+          <% end %>
+      };
+          achievementHash["1"][0] = true;
+
+          var test = {"student": {"achievement": achievementHash}};
+          $.ajax({
+              method: 'PUT',
+              url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
+              data: test,
+          });
+
       }
       else {
           currentResult = currentResult + '0,';
+          currentResult = currentResult + '0,';
+          $(buttonId).removeClass('btn-default');
+          $(buttonId).addClass('btn-danger');
+          if($('#button0').html() == '<%= item.shorthand%>') {
+              $('#button0').removeClass('btn-default');
+              $('#button0').addClass('btn-success');
+          }
+          else if($('#button1').html() == '<%= item.shorthand%>'){
+              $('#button1').removeClass('btn-default');
+              $('#button1').addClass('btn-success');
+          }
+          else if($('#button2').html() == '<%= item.shorthand%>'){
+              $('#button2').removeClass('btn-default');
+              $('#button2').addClass('btn-success');
+          }
+          else{
+              $('#button3').removeClass('btn-default');
+              $('#button3').addClass('btn-success');
+          }
       };
       currentTimes = currentTimes + (new Date() - stopwatch) + ',';
       stopwatch = new Date();
-      nextItem();
+      window.setTimeout(nextItem, 500);
   };
 
   function interruptMeasurement () {

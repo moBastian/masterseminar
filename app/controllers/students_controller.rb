@@ -119,11 +119,12 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:name, :login, :birthdate, :gender, :specific_needs, :migration, :file)
+      puts (params.inspect)
+      params.require(:student).permit(:name, :login, :birthdate, :gender, :specific_needs, :migration, :file, :achievement=>{})
     end
 
     def is_allowed
-      unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i))
+      unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i)) || !@login_student.nil?
         redirect_to '/backend'
       end
     end

@@ -2,6 +2,32 @@
   question = item.itemtext.split("{")[0]
   alternatives = item.itemtext.split("{")[1].split("}")[0].split(",")
 %>
+<% if  @student.group_type == 3%>
+<div class="row">
+  <% count = 0%>
+  <% keys = @student.achievement.keys %>
+  <%while count<@student.achievement.size%>
+      <% achievementInfos = @student.achievement[keys[count]]%>
+      <% puts achievementInfos%>
+      <% if(! achievementInfos[0])%>
+          <div class="col-lg-1" >
+            <img src=<%= achievementInfos[1]%> width="60px" >
+          </div>
+      <% else %>
+          <div class="col-lg-1" >
+            <img src=<%= achievementInfos[2]%> width="60px" >
+          </div>
+      <% end%>
+      <% count = count +1%>
+      <% if(count == 8)%>
+          </div>
+          <br/>
+          <div class="row">
+      <%end%>
+  <%end%>
+  </div>
+<% end%>
+
 <div class="row" style="margin-right: 15px">
   <button style='font-family: fibel_nordregular; float: right; font-size:40px' id="closeTest" class="btn btn-warning" onclick="interruptMeasurement()"><strong>Test beenden</strong></button>
 </div>
@@ -17,12 +43,12 @@
   <div class="col-lg-7 col-md-offset-3">
     <div class='col-lg-4 col-lg-offset-0' >
       <div class ='row'>
-        <button id='button0' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[0] %>')"><%= alternatives[0] %></button>
+        <button id='button0' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[0] %>','#button0')"><%= alternatives[0] %></button>
       </div>
     </div>
     <div class='col-lg-4 col-lg-offset-2' >
       <div class ='row'>
-        <button id='button1' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[1] %>')"><%= alternatives[1] %></button>
+        <button id='button1' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[1] %>', '#button1')"><%= alternatives[1] %></button>
       </div>
     </div>
   </div>
@@ -32,12 +58,12 @@
   <div class="col-lg-7 col-md-offset-3">
     <div class='col-lg-4 col-lg-offset-0' >
       <div class ='row'>
-        <button id='button2' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[2] %>')"><%= alternatives[2] %></button>
+        <button id='button2' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[2] %>', '#button2')"><%= alternatives[2] %></button>
       </div>
     </div>
     <div class='col-lg-4 col-lg-offset-2' >
       <div class ='row'>
-        <button id='button3' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[3] %>')"><%= alternatives[3] %></button>
+        <button id='button3' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[3] %>', '#button3')"><%= alternatives[3] %></button>
       </div>
     </div>
   </div>
@@ -49,17 +75,42 @@
 
 <script>
 
-  function nextClicked(answer) {
+  function nextClicked(answer, buttonId) {
+      $('#button0').prop('onclick',null).off('click');
+      $('#button1').prop('onclick',null).off('click');
+      $('#button2').prop('onclick',null).off('click');
+      $('#button3').prop('onclick',null).off('click');
       if(answer=='<%= item.shorthand%>'){
           score = score +1;
           currentResult = currentResult + '1,';
+          $(buttonId).removeClass('btn-default');
+          $(buttonId).addClass('btn-success');
       }
       else {
           currentResult = currentResult + '0,';
+          currentResult = currentResult + '0,';
+          $(buttonId).removeClass('btn-default');
+          $(buttonId).addClass('btn-danger');
+          if($('#button0').html() == '<%= item.shorthand%>') {
+              $('#button0').removeClass('btn-default');
+              $('#button0').addClass('btn-success');
+          }
+          else if($('#button1').html() == '<%= item.shorthand%>'){
+              $('#button1').removeClass('btn-default');
+              $('#button1').addClass('btn-success');
+          }
+          else if($('#button2').html() == '<%= item.shorthand%>'){
+              $('#button2').removeClass('btn-default');
+              $('#button2').addClass('btn-success');
+          }
+          else{
+              $('#button3').removeClass('btn-default');
+              $('#button3').addClass('btn-success');
+          }
       };
       currentTimes = currentTimes + (new Date() - stopwatch) + ',';
       stopwatch = new Date();
-      nextItem();
+      window.setTimeout(nextItem, 700);
   };
 
   function interruptMeasurement () {

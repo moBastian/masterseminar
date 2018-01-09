@@ -2,6 +2,9 @@ class TestSEL < Test
   # Fuer sinnentnehmendes Lesen SEL
 
   def draw_items(first)
+    if true
+      return super
+    end
     itemset = Array.new
     pools = content_items.map{|i| i.difficulty}.uniq  # we need just the content items. Using items instead will cause an error.
     if(pools.include? 0)

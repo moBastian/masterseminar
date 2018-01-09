@@ -224,7 +224,7 @@ item_alternatives_n4 = [
 		%w{Cottbus Potsdam Prenzlau Templin},
 		%w{Augsburg Berlin Bremen Hamburg},
 		%w{Augsburg Berlin Bremen Hamburg},
-		%w{Darmstadt Fulda Frankfurt(Main) Wiesbaden},
+		%w{Darmstadt Fulda Frankfurt\ am\ Main Wiesbaden},
 		%w{Greifswald Rostock Schwerin Stralsund},
 		%w{Braunschweig Hannover Lüneburg Salzgitter},
 		%w{Düsseldorf Essen Köln Wuppertal},
@@ -235,7 +235,7 @@ item_alternatives_n4 = [
 		%w{Flensburg Husum Kiel Lübeck},
 		%w{Erfurt Gera Jena Mühlhausen},
 		%w{10 13 15 16},
-		%w{Bundespräsident Bundesrat Bundestag Bundesverfassungsgericht},
+		%w{Bundespräsident Bundesrat Bundestag Bundesverfassungsgericht}, #sollte am besten raus bzw bundesverfassungsgericht ist sehr lang-.-
 		%w{30 40 50 60 70},
 		%w{Brüssel London New\ York Wien},
 		%w{1945 1949 1955 1961},

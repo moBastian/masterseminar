@@ -27,8 +27,7 @@
   <% keys = @student.achievement.keys %>
   <%while count<@student.achievement.size%>
       <% achievementInfos = @student.achievement[keys[count]]%>
-      <% puts achievementInfos%>
-      <% if(! achievementInfos[0])%>
+      <% if(!(achievementInfos[0] == "true"))%>
           <div class="col-lg-1" >
             <img src=<%= achievementInfos[1]%> width="60px" >
           </div>
@@ -106,19 +105,5 @@
 
 
 
-      function sendMail() {
-          $('#emailgroup').removeClass('has-error');
-          $('#emailgroup').removeClass('has-success');
-          $('#submit').removeClass('btn-danger');
-          $('#submit').removeClass('btn-success');
-          if ($('#email').is(':valid') && $('#email').val() != '') {
-              $.ajax({url: '<%= concept_map_path(@concept_map, format: :text)%>' + '?email=' + $('#email').val()});
-              $('#submit').addClass('btn-success');
-              $('#emailgroup').addClass('has-success');
-          }
-          else {
-              $('#submit').addClass('btn-danger');
-              $('#emailgroup').addClass('has-error');
-          }
-      }
+
   </script>

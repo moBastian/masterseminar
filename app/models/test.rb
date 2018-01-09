@@ -33,7 +33,7 @@ class Test < ActiveRecord::Base
 
   def draw_items(first)
     itemset = Array.new
-    if first                          #Erste Ziehung: Feste Reihenfolge (nach ID in Datenbank)
+    if true                          #Erste Ziehung: Feste Reihenfolge (nach ID in Datenbank)
       itemset = content_items
     else
       content_items.length.times do   # Folgende Ziehungen: Zufällig permutieren

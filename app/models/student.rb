@@ -174,7 +174,7 @@ class Student < ActiveRecord::Base
         testLoginFree=false
       end
     end
-    s = group.students.build(name: cur, group_type: Random.rand(6), ip: ip, fingerprint: fingerprint, achievement: achievement)
+    s = group.students.build(name: cur, group_type: 5, ip: ip, fingerprint: fingerprint, achievement: achievement)
     s.save
     return s
   end
