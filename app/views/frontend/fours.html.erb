@@ -8,7 +8,35 @@
     </div>
 <% end %>
 
-<div style="font-size: 30px">Arbeitstitel Gruppe 4</div>
+<div style="font-size: 30px"><u>Arbeitstitel Gruppe 4</u></div><br/>
+
+
+<% points = Student.where(group_id: @student.group_id).order(points: :desc).pluck(:points).uniq%>
+<% points = points + [0]%>
+<% count = -1%>
+<% tempPoints = -1%>
+<% while @student.points != tempPoints%>
+    <% count = count+1%>
+    <% tempPoints = points[count]%>
+<% end%>
+<div>
+  <%if points[count-1] == 0%>
+      <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie sind auf Platz <%= count+1%></div><br/>
+      <% if !points[count+1].nil?%>
+          <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie haben einen Vorsprung von <%= @student.points - points[count+1] %> richtigen Antworten!</div><br/>
+      <% end%>
+  <%else%>
+
+      <%puts @student.points%>
+      <div style="font-size: 40px; font-family: fibel_nordregular;"> Bis zum nächsten Platz sind es nur noch <%= points[count-1] - @student.points%> richtige Antworten!</div><br/>
+      <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie sind auf Platz <%= count+1%></div><br/>
+      <% if !points[count+1].nil?%>
+      <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie haben einen Vorsprung von <%= @student.points - points[count+1] %> Fragen!</div><br/>
+      <% end%>
+  <%end%>
+</div>
+
+
 
 <br/>
 <div>

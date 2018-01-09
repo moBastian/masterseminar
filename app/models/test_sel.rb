@@ -2,7 +2,7 @@ class TestSEL < Test
   # Fuer sinnentnehmendes Lesen SEL
 
   def draw_items(first)
-    if true
+    if first
       return super
     end
     itemset = Array.new
@@ -11,7 +11,7 @@ class TestSEL < Test
       pools = pools - [0]
     end
     categories = pools
-    content_items.length.times  do    # Don't use len to avoid items start and end items (itemtype > 0 or itemtype <0) 
+    20.times  do    # Don't use len to avoid items start and end items (itemtype > 0 or itemtype <0)
       remaining = content_items - itemset
       i = remaining.sample
       if (categories.length == 0)

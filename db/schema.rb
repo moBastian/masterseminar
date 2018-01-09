@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20180107143020) do
     t.text     "fingerprint"
     t.text     "ip"
     t.text     "achievement"
+    t.integer  "points"
   end
 
   create_table "tests", force: :cascade do |t|
