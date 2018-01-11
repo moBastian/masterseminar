@@ -120,7 +120,7 @@ class StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       puts (params.inspect)
-      params.require(:student).permit(:name, :login, :birthdate, :gender, :specific_needs, :migration, :file, :points , :achievement)
+      params.require(:student).permit(:name, :login, :birthdate, :gender, :specific_needs, :migration, :file, :points , :achievement =>{:a1 =>[], :a2=>[], :a3=>[], :a4=>[], :a5=>[], :a6=>[], :a7=>[], :a8=>[], :a9=>[], :a10=>[], :a11=>[], :a12=>[], :a13=>[], :a14=>[], :a15=>[], :a16=>[]})
     end
 
     def is_allowed

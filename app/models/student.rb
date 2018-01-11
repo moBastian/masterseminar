@@ -162,10 +162,10 @@ class Student < ActiveRecord::Base
   end
 
   def self.prepare_new_student(group, ip, fingerprint)
-    achievement = {"1" => [false, "/images/trophyGray.png", "/images/trophy.png"], "2"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"3"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"4"=>[false, "/images/trophyGray.png", "/images/trophy.png"],
-                   "5"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"6"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"7"=>[false, "/images/trophyGray.png", "/images/trophy.png"], "8"=>[false, "/images/trophyGray.png", "/images/trophy.png"],
-                   "9"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"10"=>[false, "/images/trophyGray.png", "/images/trophy.png"], "11"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"12"=>[false, "/images/trophyGray.png", "/images/trophy.png"],
-                   "13"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"14"=>[false, "/images/trophyGray.png", "/images/trophy.png"], "15"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"16"=>[false, "/images/trophyGray.png", "/images/trophy.png"]}
+    achievement = {"a1" => [false, "/images/trophyGray.png", "/images/trophy.png"], "a2"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"a3"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"a4"=>[false, "/images/trophyGray.png", "/images/trophy.png"],
+                   "a5"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"a6"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"a7"=>[false, "/images/trophyGray.png", "/images/trophy.png"], "a8"=>[false, "/images/trophyGray.png", "/images/trophy.png"],
+                   "a9"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"a10"=>[false, "/images/trophyGray.png", "/images/trophy.png"], "a11"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"a12"=>[false, "/images/trophyGray.png", "/images/trophy.png"],
+                   "a13"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"a14"=>[false, "/images/trophyGray.png", "/images/trophy.png"], "a15"=>[false, "/images/trophyGray.png", "/images/trophy.png"],"a16"=>[false, "/images/trophyGray.png", "/images/trophy.png"]}
     testLoginFree = true
     while testLoginFree
       cur = (('0'..'9').to_a + ('a'..'z').to_a).shuffle.first(6).join
@@ -174,7 +174,7 @@ class Student < ActiveRecord::Base
         testLoginFree=false
       end
     end
-    s = group.students.build(name: cur, group_type: 4, ip: ip, fingerprint: fingerprint, achievement: achievement, points:1)
+    s = group.students.build(name: cur, group_type: 5, ip: ip, fingerprint: fingerprint, achievement: achievement, points:1)
     s.save
     return s
   end

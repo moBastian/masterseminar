@@ -2,7 +2,7 @@ class TestSEL < Test
   # Fuer sinnentnehmendes Lesen SEL
 
   def draw_items(first)
-    if first
+    if true
       return super
     end
     itemset = Array.new
