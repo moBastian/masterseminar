@@ -1,5 +1,5 @@
 <p class="lead text-right">
-  <%= link_to user_group_students_path(@user, @group, :format => :pdf), :title => "Zugangsdaten der Klasse", :target => "blank" do %>
+  <%= link_to user_group_students_path(@user, @group, :format => :pdf), :title => "Zugangsdaten der Probandengruppe", :target => "blank" do %>
       <span class="glyphicon glyphicon-print"></span>
   <% end %>
 </p>
@@ -154,5 +154,5 @@
   </tbody>
 </table>
 <div id="studentForm">
-  <%= link_to "Schüler/-in hinzufügen", new_user_group_student_path(@user, @group), :class => "btn btn-default", :data => {:remote => true} %>
+  <%= link_to "Probanden hinzufügen", new_user_group_student_path(@user, @group), :class => "btn btn-default", :data => {:remote => true} %>
 </div>

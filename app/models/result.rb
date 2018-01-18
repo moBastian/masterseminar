@@ -165,7 +165,7 @@ class Result < ActiveRecord::Base
 
     itembank = Hash[Item.all.pluck(:id, :shorthand)]
     testbank = Hash[Test.all.pluck(:id), Test.all.map{|t| t.long_name}]
-    file.write("Item;Itemtext;Ergebnis;Antwort;Reaktionszeit;Position in Messreihe;Messung_id;Kind_id;Geburtstag;Geschlecht;Foerderbedarf;Migrationshintergrund;Messzeitpunkt_id;Erhebung_id;Klasse_id;Benutzer;Testname;Datum\n")
+    file.write("Item;Itemtext;Ergebnis;Antwort;Reaktionszeit;Position in Messreihe;Messung_id;Kind_id;Geburtstag;Geschlecht;Foerderbedarf;Migrationshintergrund;Messzeitpunkt_id;Erhebung_id;Probandengruppe_id;Benutzer;Testname;Datum\n")
 
     r = 1
     temp.each do |row|

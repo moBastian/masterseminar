@@ -11,7 +11,7 @@
     <div class="col-sm-1">
       <p class="lead text-right">
         <% unless @group.demo %>
-            <%= link_to edit_user_group_path(@user, @group), :title => "Klasse Bearbeiten oder Löschen", :data => {:remote => true} do %>
+            <%= link_to edit_user_group_path(@user, @group), :title => "Probandengruppe Bearbeiten oder Löschen", :data => {:remote => true} do %>
                 <span class="glyphicon glyphicon-pencil"></span>
             <% end %>
         <% else %>
@@ -32,7 +32,7 @@
 
   <ul id="tabs" class="nav nav-pills" role="tablist">
     <li role="presentation" class="active"><%= link_to "Tests", user_group_assessments_path(@user, @group), :data => {:remote => true, :target => "#tests"} %></li>
-    <li role="presentation"><%= link_to "Schüler/-innen", user_group_students_path(@user, @group), :data => {:remote => true, :target => "#students"} %></li>
+    <li role="presentation"><%= link_to "Probanden", user_group_students_path(@user, @group), :data => {:remote => true, :target => "#students"} %></li>
   </ul>
 
   <div class="tab-content">

@@ -210,8 +210,8 @@ de:
     pm: nachmittags
   activerecord:
     models:
-      group: Klasse
-      student: Schüler/-in
+      group: Probandengruppe
+      student: Probanden
       user: Benutzer
       measurement: Messzeitpunkt
     attributes:

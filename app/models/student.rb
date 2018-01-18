@@ -63,7 +63,7 @@ class Student < ActiveRecord::Base
   end
 
   def self.table_headings
-    return %w{ID Code Klassen-Id Klassen-Name Benutzer-Id Geschlecht Geburtsdatum Förderbedarf Migrationshintergrund}
+    return %w{ID Code Probandengruppen-Id Probandengruppen-Name Benutzer-Id Geschlecht Geburtsdatum Förderbedarf Migrationshintergrund}
   end
 
   def to_a
