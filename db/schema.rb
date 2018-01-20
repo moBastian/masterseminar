@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180107143020) do
+ActiveRecord::Schema.define(version: 20180118083930) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer  "group_id"
@@ -100,8 +100,10 @@ ActiveRecord::Schema.define(version: 20180107143020) do
     t.integer  "group_type"
     t.text     "fingerprint"
     t.text     "ip"
+    t.text     "age"
     t.text     "achievement"
     t.integer  "points"
+    t.text     "first_accept"
   end
 
   create_table "tests", force: :cascade do |t|
@@ -115,7 +117,6 @@ ActiveRecord::Schema.define(version: 20180107143020) do
     t.text     "short_info"
     t.text     "subject"
     t.text     "construct"
-    t.text     "level"
     t.text     "answers"
     t.boolean  "student_access"
     t.boolean  "archive"

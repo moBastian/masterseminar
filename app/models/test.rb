@@ -12,7 +12,6 @@ class Test < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :subject
   validates_presence_of :construct
-  validates_presence_of :level
   after_create :set_defaults
 
   def set_defaults
@@ -58,15 +57,15 @@ class Test < ActiveRecord::Base
   end
 
   def long_name
-    return name + ' - ' + level + ' (' + subject + ' - ' + construct + ')' + (archive ? ' - veraltet':'')
+    return name + ' - ' +  ' (' + subject + ' - ' + construct + ')' + (archive ? ' - veraltet':'')
   end
 
   def short_name
-    return name + ' - ' + level + (archive ? ' (veraltet)':'')
+    return name + ' - '  + (archive ? ' (veraltet)':'')
   end
 
   def code
-    name.split(' ').map{|w| w.slice(0, 2)}.join + level.last
+    name.split(' ').map{|w| w.slice(0, 2)}.join
   end
 
   #Count number of assessments for each test by a direct SQL query, to save time. Returns a hash that maps test ids to counts.

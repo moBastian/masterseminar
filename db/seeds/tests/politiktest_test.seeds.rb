@@ -315,7 +315,7 @@ item_alternatives_n4 = [
 
 ]
 
-t = TestSEL.create(name: "Politiktest",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "Politik", picture: "/images/politik.png", construct: "Probe", student_access:true, archive: false, level: "0")
+t = TestSEL.create(name: "Politiktest",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "Politik", picture: "/images/politik.png", construct: "Probe", student_access:true, archive: false)
 
 i = t.items.build(itemtext: "Hallo", difficulty: 0, itemtype:-1, itemview: "items/studentbased/sinnentnehmender_lesetest/1hallo")
 i.save

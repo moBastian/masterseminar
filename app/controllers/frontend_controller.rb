@@ -4,6 +4,7 @@ class FrontendController < ApplicationController
   skip_before_action :check_login, :check_accept
 
   before_action :check_student, except: [:welcome, :login]
+  before_action :check_accept_student, except: [:welcome, :login, :accept, :logout]
 
   layout 'plain'
 
@@ -28,7 +29,6 @@ class FrontendController < ApplicationController
     elsif g != nil
       @group = g
       s = Student.prepare_new_student(@group, params[:ip], params[:fingerprint])
-      puts(s.login)
       @student = s
       session[:student_id] = s.id
       session[:user_id] = nil
@@ -67,6 +67,7 @@ class FrontendController < ApplicationController
     end
   end
 
+
   #start Test
   def start
 
@@ -91,6 +92,13 @@ class FrontendController < ApplicationController
       redirect_to root_url, notice: "Bitte einloggen!"
     else
       @student = Student.find(session[:student_id])
+      @login_student = Student.find(session[:student_id])
+    end
+  end
+
+  def check_accept_student
+    if !@login_student.nil? && @login_student.first_accept.nil?
+      render 'frontend/accept'
     end
   end
 end

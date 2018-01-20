@@ -42,12 +42,12 @@
                         <div id="c<%=(s+c+t).parameterize %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h<%=(s+c+t).parameterize %>">
                           <div class="panel-body">
 
-                            <% @tests.where(:subject => s, :construct => c, :name => t).order(:level).each do |test| %>
+                            <% @tests.where(:subject => s, :construct => c, :name => t).each do |test| %>
                                 <div class="panel panel-default">
                                   <div class="panel-heading" role="tab" id="h<%=(s+c+t).parameterize %>">
                                     <h4 class="panel-title">
                                       <a role="button" data-toggle="collapse" href="#c<%=test.id %>" aria-expanded="false" aria-controls="c<%=test.id %>">
-                                        <%= test.level %>
+                                        nicht gebraucht
                                       </a>
                                     </h4>
                                   </div>

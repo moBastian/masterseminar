@@ -1,0 +1,94 @@
+<nav class="navbar">
+</nav>
+
+<div class="container-fluid">
+  <div id="content">
+    <div class="jumbotron">
+      <h2>Einverständnis</h2>
+      <p>
+        Hiermit bestätige ich, dass ich für alle Daten, die ich von Schülern mit Hilfe dieser Plattform erhebe, die nötige Berechtigung (Eltern, Schulleiter, ggf. Betreuungslehrkaft) eingeholt habe.
+      </p>
+      <p>
+        Die vollständige Datenschutzerklärung sowie eine Vorlage für einen Elternbrief finden Sie oben im Menü.
+      </p>
+      <div class="row">
+
+        <div class="col-xs-2" id="userName">
+          <div class="form-group">
+            <label for="usr">Username:</label>
+            <input type="text" class="form-control" id="usr">
+          </div>
+        </div>
+
+        <div class="col-xs-2">
+          <div class="form-group">
+            <label for="age">Alter:</label>
+            <input type="text" class="form-control" id="age">
+          </div>
+        </div>
+
+
+        <div class="col-xs-2">
+          <div class="form-group">
+            <label for="gender">Geschlecht:</label>
+            <select id="gender" class="form-control">
+              <option value=""></option>
+              <option value="true">männlich</option>
+              <option value="false">weiblich</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <button class="btn-lg btn btn-info" id="submit" onclick="submit()">Absenden</button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var pathMainPage = '<%= request.base_url + url_for(controller: 'frontend')%>';
+    var groupNum = "<%= @student.group_type%>";
+    $('#usr').val("user"+getRndInteger(100, 500));
+    if(groupNum=="0" || groupNum=="0"||groupNum=="0"||groupNum=="0"){
+        $('#userName').removeClass("col-xs-2").html("");
+    }
+
+    function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) ) + min;
+    }
+
+    function submit() {
+        var datetime = "<%= DateTime.now%>"
+        var age = $('#age').val();
+
+        if($('#gender').val()=="true") {
+            var gender = true;
+        }else if($('#gender').val()=="false"){
+            var gender = false;
+        }else{
+            var gender = ""
+        };
+
+        var username = $('#usr').val();
+        if(username== ""){
+            alert("username darf nicht leer sein")
+            return
+        }
+        var test = {"student": {"gender": gender, "name":username, "first_accept": datetime}};
+        $.ajax({
+            method: 'PUT',
+            url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
+            data: test,
+        });
+        window.location.replace(pathMainPage);
+    }
+</script>
+
+

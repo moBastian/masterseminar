@@ -235,7 +235,6 @@ de:
         info: Informationen
         short_info: Kurzinfo
         subject: Fach
-        level: Niveau
         construct: Konstrukt
       material:
         block: Förderblockbezeichnung

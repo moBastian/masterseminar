@@ -7,10 +7,15 @@ class Group < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name, scope: :user_id
 
-  after_create :set_defaults
+  after_create :set_defaults, :setName
 
   def set_defaults
       self.archive ||= false
+  end
+
+  def setName
+    self.name = self.user_id.to_s + "-" + self.name
+    self.save
   end
 
 end

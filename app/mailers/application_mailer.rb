@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@levumi.de'
+  default from: 'noreply@probename.de'
   layout 'mailer'
 end
 

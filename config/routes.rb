@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   post 'frontend/logout' => 'frontend#logout'
   get 'frontend' => 'frontend#index'
   get 'frontend/:id' => 'frontend#start'
+  post 'frontend/accept' => 'frontend#accept'
 
   resources :materials
 

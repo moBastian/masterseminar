@@ -12,4 +12,5 @@ class UserMailer < ApplicationMailer
     @body = text
     mail(to: email, subject: "Neuigkeiten von Levumi")
   end
+
 end

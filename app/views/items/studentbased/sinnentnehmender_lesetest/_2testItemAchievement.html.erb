@@ -13,7 +13,7 @@
   </div>
 </div>
 <br><br>
-<div class='row' id='rowButtons2' >
+<div class='row' id='rowButtons1' >
   <div class="col-lg-7 col-md-offset-3">
     <div class='col-lg-4 col-lg-offset-0' >
       <div class ='row'>
@@ -39,6 +39,20 @@
       <div class ='row'>
         <button id='button3' style='font-size: 60px; font-family: fibel_nordregular;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[3] %>', '#button3')"><%= alternatives[3] %></button>
       </div>
+    </div>
+  </div>
+</div>
+<br/>
+<div class='row' id='rowButtons3' >
+  <div class="col-lg-7 col-md-offset-3">
+    <div class='col-lg-3 col-lg-offset-0' >
+    </div>
+    <div class='col-lg-4 col-lg-offset-0' >
+      <div class ='row'>
+        <button id='buttonCon' style='font-size: 60px; font-family: fibel_nordregular; visibility: hidden' type='button' class='btn btn-info btn-block' onclick="nextItem()">Nächste Frage</button>
+      </div>
+    </div>
+    <div class='col-lg-3 col-lg-offset-2' >
     </div>
   </div>
 </div>
@@ -95,7 +109,7 @@
       };
       currentTimes = currentTimes + (new Date() - stopwatch) + ',';
       stopwatch = new Date();
-      window.setTimeout(nextItem, 500);
+      $('#buttonCon').css('visibility', 'visible');
   };
 
   function interruptMeasurement () {
