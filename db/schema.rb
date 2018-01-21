@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20180118083930) do
     t.integer  "group_type"
     t.text     "fingerprint"
     t.text     "ip"
-    t.text     "age"
+    t.integer  "age"
     t.text     "achievement"
     t.integer  "points"
     t.text     "first_accept"

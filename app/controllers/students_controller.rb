@@ -93,8 +93,9 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-
-        format.js {}
+        format.html{
+          render :nothing => true, :status => 200, :content_type => 'text/html'
+        }
       else
         format.js { render :edit }
       end

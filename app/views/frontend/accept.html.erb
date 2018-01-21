@@ -11,51 +11,48 @@
       <p>
         Die vollständige Datenschutzerklärung sowie eine Vorlage für einen Elternbrief finden Sie oben im Menü.
       </p>
-      <div class="row">
+      <%= form_tag(url_for(:controller => 'frontend', :action => 'accept'), :class => "form") do %>
+          <div class="row">
 
-        <div class="col-xs-2" id="userName">
-          <div class="form-group">
-            <label for="usr">Username:</label>
-            <input type="text" class="form-control" id="usr">
+            <div class="col-xs-2" id="userName">
+              <div class="form-group">
+                <label for="usr" style="font-size: 20px">Username:</label><br/>
+                <%= text_field_tag(:username) %>
+              </div>
+            </div>
+
+            <div class="col-xs-2">
+              <div class="form-group">
+                <label for="age" style="font-size: 20px">Alter:</label><br/>
+                <%= number_field_tag(:age) %>
+              </div>
+            </div>
+
+
+            <div class="col-xs-2">
+              <div class="form-group">
+                <label for="gender" style="font-size: 20px">Geschlecht:</label><br/>
+                <%= select_tag(:gender, options_for_select([['', nil], ['männlich', true], ['weiblich', false]])) %>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="col-xs-2">
-          <div class="form-group">
-            <label for="age">Alter:</label>
-            <input type="text" class="form-control" id="age">
-          </div>
-        </div>
-
-
-        <div class="col-xs-2">
-          <div class="form-group">
-            <label for="gender">Geschlecht:</label>
-            <select id="gender" class="form-control">
-              <option value=""></option>
-              <option value="true">männlich</option>
-              <option value="false">weiblich</option>
-            </select>
-          </div>
-        </div>
-      </div>
 
 
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <button class="btn-lg btn btn-info" id="submit" onclick="submit()">Absenden</button>
+              <%= submit_tag 'Absenden', :class => "btn btn-lg btn-info", :style => "font-size: 20px"%>
             </div>
           </div>
         </div>
+      <% end %>
     </div>
+
   </div>
 </div>
 
 <script>
-    var pathMainPage = '<%= request.base_url + url_for(controller: 'frontend')%>';
     var groupNum = "<%= @student.group_type%>";
-    $('#usr').val("user"+getRndInteger(100, 500));
     if(groupNum=="0" || groupNum=="0"||groupNum=="0"||groupNum=="0"){
         $('#userName').removeClass("col-xs-2").html("");
     }
@@ -63,32 +60,10 @@
     function getRndInteger(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
     }
+    $('#username').addClass("form-control").val("user"+getRndInteger(100, 500)).css('font-size', '20px');
+    $('#gender').addClass("form-control").css("background-color", "white");
+    $('#age').addClass("form-control").css('font-size', '20px');
 
-    function submit() {
-        var datetime = "<%= DateTime.now%>"
-        var age = $('#age').val();
-
-        if($('#gender').val()=="true") {
-            var gender = true;
-        }else if($('#gender').val()=="false"){
-            var gender = false;
-        }else{
-            var gender = ""
-        };
-
-        var username = $('#usr').val();
-        if(username== ""){
-            alert("username darf nicht leer sein")
-            return
-        }
-        var test = {"student": {"gender": gender, "name":username, "first_accept": datetime}};
-        $.ajax({
-            method: 'PUT',
-            url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
-            data: test,
-        });
-        window.location.replace(pathMainPage);
-    }
 </script>
 
 

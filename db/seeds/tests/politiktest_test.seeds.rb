@@ -315,10 +315,7 @@ item_alternatives_n4 = [
 
 ]
 
-t = TestSEL.create(name: "Politiktest",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "Politik", picture: "/images/politik.png", construct: "Probe", student_access:true, archive: false)
-
-i = t.items.build(itemtext: "Hallo", difficulty: 0, itemtype:-1, itemview: "items/studentbased/sinnentnehmender_lesetest/1hallo")
-i.save
+t = Test.create(name: "Politiktest",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "Politik", picture: "/images/politik.png", construct: "Probe", student_access:true, archive: false)
 
 i= 0
 while i<items_n4.size do
@@ -331,6 +328,6 @@ while i<items_n4.size do
 	i = i+1
 end
 
-it = t.items.build(itemtext: "Ende", difficulty: 1, itemtype:1, itemview:"items/studentbased/sinnentnehmender_lesetest/3ende")
+it = t.items.build(itemtext: "Ende", itemtype:1, itemview:"items/studentbased/sinnentnehmender_lesetest/3ende")
 it.save
 t.save

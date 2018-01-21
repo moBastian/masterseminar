@@ -84,6 +84,16 @@ class FrontendController < ApplicationController
       redirect_to '/schueler'
     end
   end
+  def accept
+    if(!params[:username]=="")
+      @login_student.name = params[:username]
+    end
+    @login_student.gender = params[:gender]
+    @login_student.age = params[:age]
+    @login_student.first_accept = DateTime.now
+    @login_student.save
+    redirect_to '/frontend'
+  end
 
   private
 

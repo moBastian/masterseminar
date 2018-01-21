@@ -14,7 +14,7 @@ class Group < ActiveRecord::Base
   end
 
   def setName
-    self.name = self.user_id.to_s + "-" + self.name
+    self.name = self.user_id.to_s + self.name
     self.save
   end
 

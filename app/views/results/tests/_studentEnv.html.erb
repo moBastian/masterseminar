@@ -21,7 +21,19 @@
     var currentStudent = -1;
     var score = 0;
     currentStudent = <%=@result.id%>;
+    var testName = "<%= raw @measurement.assessment.test.name%>";
+    <% Item.where(test_id:@measurement.assessment.test.id)%>;
 
+    var oldItems = [<% @result.getPriorResultsItem(@measurement, @student).each do |i|%>
+                    "<%= raw i.itemtext %>",
+                    <% end%>
+    ];
+
+    var achievementHash = {
+    <% @student.achievement.each do |a| %>
+    <%= a[0]%>: <%=raw a[1]%>,
+    <% end %>
+    };
 
 
     var studentData = {

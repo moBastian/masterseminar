@@ -88,8 +88,9 @@
 
 
 <script>
-
+  var toggle = false;
   function nextClicked(answer, buttonId) {
+      toggle = true;
       $('#button0').prop('onclick',null).off('click');
       $('#button1').prop('onclick',null).off('click');
       $('#button2').prop('onclick',null).off('click');
@@ -101,7 +102,6 @@
           $(buttonId).addClass('btn-success');
       }
       else {
-          currentResult = currentResult + '0,';
           currentResult = currentResult + '0,';
           $(buttonId).removeClass('btn-default');
           $(buttonId).addClass('btn-danger');
@@ -128,9 +128,11 @@
   };
 
   function interruptMeasurement () {
+      if(!toggle){
+          currentResult = currentResult + '0,';
+      }
       stopTest();
       $(window).unbind('keyup');
-      window.location.replace(pathMainPage);
   }
   //F5 abschalten <- kein aktualisieren möglich
   $(window).keydown(function (event) {
@@ -138,4 +140,90 @@
       if (key == 116) {
           event.preventDefault();
       }});
+
+
+  switch (testName) {
+      case "Tiere&Pflanzen-Test":
+          if(achievementHash["a8"][0]!= "true") {
+              check50("a8");
+              checkAll();
+          }
+          break;
+      case "Geographietest":
+          if(achievementHash["a9"][0]!= "true") {
+              check50("a9");
+              checkAll();
+          }
+          break;
+      case "Geschichtstest":
+          break;
+      case "Mathetest":
+          if(achievementHash["a10"][0]!= "true") {
+              check50("a10");
+              checkAll();
+          }
+          break;
+      case "Sporttest":
+          if(achievementHash["a11"][0]!= "true") {
+              check50("a11");
+              checkAll();
+          }
+          break;
+      case "Politiktest":
+          if(achievementHash["a12"][0]!= "true") {
+              check50("a12");
+              checkAll();
+          }
+          break;
+      default:
+          if(achievementHash["a13"][0]!= "true") {
+              check50("a13");
+              checkAll();
+
+          }
+          break;
+  }
+
+  function checkAll() {
+      if(achievementHash["a8"][0]== "true"&&achievementHash["a9"][0]== "true"&&achievementHash["a10"][0]== "true"
+          &&achievementHash["a11"][0]== "true"&&achievementHash["a12"][0]== "true"&&achievementHash["a13"][0]== "true"){
+          alert("Sie haben ein Abzeichen bekommen: Alles Testrelevaten Abzeichen erhalten")
+          achievementHash["a14"][0] = "true";
+
+          var test = {"student": {"achievement": achievementHash}};
+          $.ajax({
+              method: 'PUT',
+              url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
+              data: test,
+          });
+      }
+  }
+
+  function check50(key) {
+      var currentItemtext = "<%= raw item.itemtext%>";
+      var toggle2 = true;
+      for(i=0; i<oldItems.length;i++){
+          if(currentItemtext==oldItems[i]){
+              toggle2 = false;
+          }
+      }
+
+      if(toggle2){
+          oldItems.push(currentItemtext)
+      }
+
+      if(oldItems.length == 50){
+          alert("Sie haben ein neues abzeichen bekommen: 50%& der Fragen gesehen.")
+          achievementHash[key][0] = "true";
+
+          var test = {"student": {"achievement": achievementHash}};
+          $.ajax({
+              method: 'PUT',
+              url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
+              data: test,
+          });
+      }
+  }
+
+
 </script>

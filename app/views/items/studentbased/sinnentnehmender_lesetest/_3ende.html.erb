@@ -29,8 +29,61 @@
   var tempPic = (document.getElementById('pic'));
   if (lastResults[currentStudent] >= 0 && lastResults[currentStudent] < currentResult.split('1').length)
       tempPic.src = '/images/shared/Levumi-jubelt.gif';
-  else if(lastResults[currentStudent] == -1)
+  else if(lastResults[currentStudent] == -1) {
       tempPic.src = '/images/shared/Levumi-normal-blau.jpg';
+
+
+      switch (testName) {
+
+          case "Tiere&Pflanzen-Test":
+              if(achievementHash["a2"][0]!= "true") {
+                  alert("Sie haben ein neues Abzeichen bekommen!");
+                  achievementHash["a2"][0] = true;
+              }
+              break;
+          case "Geographietest":
+              if(achievementHash["a3"][0]!= "true") {
+                  alert("Sie haben ein neues Abzeichen bekommen!");
+                  achievementHash["a3"][0] = true;
+              }
+              break;
+          case "Geschichtstest":
+              break;
+          case "Mathetest":
+              if(achievementHash["a4"][0]!= "true") {
+                  alert("Sie haben ein neues Abzeichen bekommen!");
+                  achievementHash["a4"][0] = true;
+              }
+              break;
+          case "Sporttest":
+              if(achievementHash["a5"][0]!= "true") {
+                  alert("Sie haben ein neues Abzeichen bekommen!");
+                  achievementHash["a5"][0] = true;
+              }
+              break;
+          case "Politiktest":
+              if(achievementHash["a6"][0]!= "true") {
+                  alert("Sie haben ein neues Abzeichen bekommen!");
+                  achievementHash["a6"][0] = true;
+              }
+              break;
+          default:
+              if(achievementHash["a7"][0]!= "true") {
+                  alert("Sie haben ein neues Abzeichen bekommen!");
+                  achievementHash["a7"][0] = true;
+              }
+              break;
+      }
+
+
+
+      var test = {"student": {"achievement": achievementHash}};
+      $.ajax({
+          method: 'PUT',
+          url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
+          data: test,
+      });
+  }
   else
       tempPic.src = '/images/shared/Levumi-weiterlesen.gif';
 

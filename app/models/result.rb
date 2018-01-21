@@ -138,6 +138,24 @@ class Result < ActiveRecord::Base
     end
   end
 
+  def getPriorResultsItem(measurement, student)
+    measurements = Measurement.where("assessment_id = ? AND created_at < ?", measurement.assessment, measurement.created_at)
+    res = Result.where(:measurement => measurements, :student => student)
+    items =[]
+    for r in res
+      count = 0
+      puts(r.items)
+      puts(r.responses)
+      for respond in r.responses
+        if(!respond.nil?)
+          items = items + Item.where(id:r.items[count])
+        end
+        count= count +1
+      end
+    end
+    return items.uniq
+  end
+
   #Creates a csv file containing a "Big table" representation of a set of results objects. Additional information about test, student, group, and user is also included.
   #To restrict the export to a single test or a single user pass either a test id or user id as parameter. Use nil to indicate every test/every user.
   def self.to_csv(test, user)
