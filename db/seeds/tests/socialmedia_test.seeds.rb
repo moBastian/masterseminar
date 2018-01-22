@@ -17,7 +17,7 @@ item_alternatives_n4 = [
 
 ]
 
-t = Test.create(name: "Social Media-Test",  info: "Social Media-Test", short_info: "Social Media-Test",len: 1, time: 900, subject: "Social Media", picture: "/images/mathe.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Social Media-Test",  info: "Social Media-Test", short_info: "Social Media-Test",len: 1, time: 900, subject: "Social Media", picture: "/images/Logos/social_media.png", construct: "Probe", student_access:true, archive: false)
 
 i= 0
 while i<items_n4.size do

@@ -18,7 +18,7 @@ item_alternatives_n4 = [
 
 ]
 
-t = Test.create(name: "Geschichtstest",  info: "Geschichtstest", short_info: "Geschichtstest",len: 1, time: 900, subject: "Geschichte", picture: "/images/mathe.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Geschichtstest",  info: "Geschichtstest", short_info: "Geschichtstest",len: 1, time: 900, subject: "Geschichte", picture: "/images/Logos/welt.png", construct: "Probe", student_access:true, archive: false)
 
 i= 0
 while i<items_n4.size do

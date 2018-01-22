@@ -35,6 +35,12 @@
                 <%= select_tag(:gender, options_for_select([['', nil], ['männlich', true], ['weiblich', false]])) %>
               </div>
             </div>
+            <div class="col-xs-2">
+              <div class="form-group">
+                <label for="gender" style="font-size: 20px">E-Mail-Adresse:</label><br/>
+                <%= text_field_tag(:email) %>
+              </div>
+            </div>
           </div>
 
 
@@ -53,7 +59,7 @@
 
 <script>
     var groupNum = "<%= @student.group_type%>";
-    if(groupNum=="0" || groupNum=="0"||groupNum=="0"||groupNum=="0"){
+    if(!(groupNum=="3" || groupNum=="5")){
         $('#userName').removeClass("col-xs-2").html("");
     }
 
@@ -61,6 +67,7 @@
         return Math.floor(Math.random() * (max - min + 1) ) + min;
     }
     $('#username').addClass("form-control").val("user"+getRndInteger(100, 500)).css('font-size', '20px');
+    $('#email').addClass("form-control").css("width", "500px").css('font-size', '20px');
     $('#gender').addClass("form-control").css("background-color", "white");
     $('#age').addClass("form-control").css('font-size', '20px');
 

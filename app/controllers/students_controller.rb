@@ -129,11 +129,15 @@ class StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       puts (params.inspect)
-      params.require(:student).permit(:name, :login, :birthdate, :email, :gender, :gender, :specific_needs, :first_accept, :migration, :file, :points , :achievement =>{:a1 =>[], :a2=>[], :a3=>[], :a4=>[], :a5=>[], :a6=>[], :a7=>[], :a8=>[], :a9=>[], :a10=>[], :a11=>[], :a12=>[], :a13=>[], :a14=>[], :a15=>[], :a16=>[]})
+      params.require(:student).permit(:name, :login, :birthdate, :email, :gender, :gender, :specific_needs, :first_accept, :migration, :file, :points ,
+                                      :achievement =>{:a1 =>[], :a2=>[], :a3=>[], :a4=>[], :a5=>[], :a6=>[], :a7=>[], :a8=>[], :a9=>[], :a10=>[], :a11=>[],
+                                                      :a12=>[], :a13=>[], :a14=>[], :a15=>[], :a16=>[], :a17=>[], :a18=>[], :a19=>[], :a20=>[], :a21=>[], :a22=>[], :a23=>[], :a24=>[]})
     end
 
     def is_allowed
-      unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i)) || !@login_student.nil?
+      puts(@student.id)
+      puts(@login_student.id)
+      unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i)) || !@login_student.nil? && @login_student.id = @student.id
         redirect_to '/backend'
       end
     end

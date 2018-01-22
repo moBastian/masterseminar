@@ -1,0 +1,161 @@
+<% content_for :top do%>
+    <br/>
+    <div class="container-fluid">
+      <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Angemeldet als: <%= @student.login %></p>
+      <div>
+        <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Als E-Mail schicken:</p>
+        <form class="navbar-form navbar-left">
+          <div id="emailgroup" class="form-group">
+            <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style="width: 600px; font-size: 40px; height: 70px; font-family: fibel_nordregular;">
+          </div>
+          <button id="submit" type="submit" class="btn btn-default" style="font-size: 40px; font-family: fibel_nordregular;" onclick="sendMail();return false;">Absenden</button>
+        </form>
+      </div>
+      <div class = "navbar-right" style="padding-right: 15px">
+        <form class="navbar-form" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
+          <%= token_tag nil %>
+          <button type="submit" class="btn btn-lg btn-info" style="font-size: 40px; font-family: fibel_nordregular;">Abmelden</button>
+        </form>
+      </div>
+    </div>
+<% end %>
+
+<div class="row">
+  <% count = 0%>
+  <% keys = @student.achievement.keys %>
+  <%while count<@student.achievement.size%>
+      <% achievementInfos = @student.achievement[keys[count]]%>
+      <% if(!(achievementInfos[0] == "true"))%>
+          <div class="col-lg-1" >
+            <img src=<%= achievementInfos[1]%> width="60px" id="a<%= count%>">
+          </div>
+      <% else %>
+          <div class="col-lg-1">
+            <img src=<%= achievementInfos[2]%> width="60px" id="a<%= count%>">
+          </div>
+      <% end%>
+      <% count = count +1%>
+      <% if(count == 8|| count ==16)%>
+          </div>
+          <br/>
+          <div class="row">
+      <%end%>
+  <%end%>
+  </div>
+  <br/>
+  <div>
+    <h1 style="font-family: fibel_nordregular;">Die folgenden Tests stehen für dich zur Verfügung:</h1>
+    <br/>
+    <% count = 0 %>
+    <% if !@assessments.nil?%>
+        <% assessment_size = @assessments.size%>
+    <%else %>
+        <%assessment_size=0%>
+    <%end%>
+    <%while count < assessment_size%>
+        <% if(count % 3 == 0)%>
+            <div class="row">
+              <div class="col-lg-11">
+                <div class="row">
+                  <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
+                    <p style="font-size: 32px;text-align: center" >
+                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
+                      <br/>
+                      <%= @assessments[count].test.name %>
+                      <br/>
+                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
+                    </p>
+                  </div>
+        <%elsif count % 3 == 2%>
+            <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
+              <p style="font-size: 32px;text-align: center" >
+                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
+                <br/>
+                <%= @assessments[count].test.name %>
+                <br/>
+                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
+              </p>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+            <br/>
+        <%else%>
+            <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
+              <p style="font-size: 32px;text-align: center" >
+                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
+                <br/>
+                <%= @assessments[count].test.name %>
+                <br/>
+                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
+              </p>
+            </div>
+        <%end%>
+        <% count = count + 1%>
+    <%end%>
+    <%if !(assessment_size % 3 == 0)%>
+        </div>
+    <% end%>
+    </div>
+    <script>
+        //possible Hack
+        //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
+        window.location.hash="no-back-button";
+        window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+        window.onhashchange=function(){window.location.hash="no-back-button";};
+
+        var email = "<%= @student.email%>"
+        if(email!=""){
+            $('#email').val(email);
+        }
+        var achievementHash = {
+        <% @student.achievement.each do |a| %>
+        <%= a[0]%>: <%=raw a[1]%>,
+        <% end %>
+        };
+
+        function sendMail() {
+            $('#emailgroup').removeClass('has-error');
+            $('#emailgroup').removeClass('has-success');
+            $('#submit').removeClass('btn-danger');
+            $('#submit').removeClass('btn-success');
+            if(achievementHash["a8"][0]!= "true") {
+                achievementHash["a8"][0] = "true";
+                sendAchievement("a8","#a7");
+                alert("neuer Erfolg: Daten zugesandt");
+            }
+
+
+            if ($('#email').is(':valid') && $('#email').val() != '') {
+                $.ajax({url: '<%= user_group_student_path(@student.group.user,@student.group,@student, format: :text)%>' + '?email=' + $('#email').val()});
+                $('#submit').addClass('btn-success');
+                $('#emailgroup').addClass('has-success');
+            }
+            else {
+                $('#submit').addClass('btn-danger');
+                $('#emailgroup').addClass('has-error');
+            }
+        }
+        var not_first = "<%= $not_first%>";
+        if(achievementHash["a15"][0]!= "true" && not_first=="true") {
+            achievementHash["a15"][0] = "true";
+            sendAchievement("a15", "#a14");
+            alert("neuer Erfolg:Heimkehrer");
+
+
+        }
+
+        function sendAchievement(key, keyForJQ) {
+            var test = {"student": {"achievement": achievementHash}};
+            $.ajax({
+                method: 'PUT',
+                url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
+                data: test,
+            });
+
+            $(keyForJQ).attr("src", achievementHash[key][2]);
+        }
+
+
+    </script>

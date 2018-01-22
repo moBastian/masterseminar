@@ -2,35 +2,36 @@
   question = item.itemtext.split("{")[0]
   alternatives = item.itemtext.split("{")[1].split("}")[0].split(",")
 %>
-<% if  @student.group_type == 3%>
-<div class="row">
-  <% count = 0%>
-  <% keys = @student.achievement.keys %>
-  <%while count<@student.achievement.size%>
-      <% achievementInfos = @student.achievement[keys[count]]%>
-      <% puts achievementInfos%>
-      <% if(! achievementInfos[0])%>
-          <div class="col-lg-1" >
-            <img src=<%= achievementInfos[1]%> width="60px" >
-          </div>
-      <% else %>
-          <div class="col-lg-1" >
-            <img src=<%= achievementInfos[2]%> width="60px" >
-          </div>
-      <% end%>
-      <% count = count +1%>
-      <% if(count == 8)%>
-          </div>
-          <br/>
-          <div class="row">
-      <%end%>
-  <%end%>
-  </div>
-<% end%>
-
 <div class="row" style="margin-right: 15px">
   <button style='font-family: fibel_nordregular; float: right; font-size:40px' id="closeTest" class="btn btn-warning" onclick="interruptMeasurement()"><strong>Test beenden</strong></button>
 </div>
+<% if  @student.group_type == 2||@student.group_type == 4%>
+    <div class="row">
+      <% count = 0%>
+      <% keys = @student.achievement.keys %>
+      <%while count<@student.achievement.size%>
+          <% achievementInfos = @student.achievement[keys[count]]%>
+          <% if(!(achievementInfos[0] == "true"))%>
+              <div class="col-lg-1" >
+                <img src=<%= achievementInfos[1]%> width="60px" id="a<%= count%>">
+              </div>
+          <% else %>
+              <div class="col-lg-1">
+                <img src=<%= achievementInfos[2]%> width="60px" id="a<%= count%>">
+              </div>
+          <% end%>
+          <% count = count +1%>
+          <% if(count == 8|| count ==16)%>
+              </div>
+              <br/>
+              <div class="row">
+          <%end%>
+      <%end%>
+      </div>
+      <br/>
+<% end%>
+
+
 <br/>
 <br/>
 <div class='row text-center'>
@@ -88,142 +89,191 @@
 
 
 <script>
-  var toggle = false;
-  function nextClicked(answer, buttonId) {
-      toggle = true;
-      $('#button0').prop('onclick',null).off('click');
-      $('#button1').prop('onclick',null).off('click');
-      $('#button2').prop('onclick',null).off('click');
-      $('#button3').prop('onclick',null).off('click');
-      if(answer=='<%= item.shorthand%>'){
-          score = score +1;
-          currentResult = currentResult + '1,';
-          $(buttonId).removeClass('btn-default');
-          $(buttonId).addClass('btn-success');
-      }
-      else {
-          currentResult = currentResult + '0,';
-          $(buttonId).removeClass('btn-default');
-          $(buttonId).addClass('btn-danger');
-          if($('#button0').html() == '<%= item.shorthand%>') {
-              $('#button0').removeClass('btn-default');
-              $('#button0').addClass('btn-success');
-          }
-          else if($('#button1').html() == '<%= item.shorthand%>'){
-              $('#button1').removeClass('btn-default');
-              $('#button1').addClass('btn-success');
-          }
-          else if($('#button2').html() == '<%= item.shorthand%>'){
-              $('#button2').removeClass('btn-default');
-              $('#button2').addClass('btn-success');
-          }
-          else{
-              $('#button3').removeClass('btn-default');
-              $('#button3').addClass('btn-success');
-          }
-      };
-      currentTimes = currentTimes + (new Date() - stopwatch) + ',';
-      stopwatch = new Date();
-      $('#buttonCon').css('visibility', 'visible');
-  };
+    var toggle = false;
 
-  function interruptMeasurement () {
-      if(!toggle){
-          currentResult = currentResult + '0,';
-      }
-      stopTest();
-      $(window).unbind('keyup');
-  }
-  //F5 abschalten <- kein aktualisieren möglich
-  $(window).keydown(function (event) {
-      var key = event.charCode || event.keyCode;
-      if (key == 116) {
-          event.preventDefault();
-      }});
+    function nextClicked(answer, buttonId) {
+
+        if(!toggle){
+            if(answer=='<%= item.shorthand%>'){
+
+                score = score +1;
+                currentResult = currentResult + '1,';
+                if(groupNumber == "2"||groupNumber == "4"){
+                    checkFirst();
+                }
+                if(groupNumber == "1"||groupNumber == "4" ||groupNumber == "5" ){
+                    giveFeedback(true, buttonId);
+                }
+            }
+            else {
+
+                currentResult = currentResult + '0,';
+
+                if(groupNumber == "1"||groupNumber == "4" ||groupNumber == "5" ){
+                    giveFeedback(false, buttonId);
+                }
+
+            }
+            currentTimes = currentTimes + (new Date() - stopwatch) + ',';
+            stopwatch = new Date();
+
+            $('#buttonCon').css('visibility', 'visible');
+        }
+        toggle = true;
+    };
+
+    function interruptMeasurement () {
+        if(!toggle){
+            currentResult = currentResult + '0,';
+        }
+        stopTest();
+        $(window).unbind('keyup');
+    }
+    //F5 abschalten <- kein aktualisieren möglich
+    $(window).keydown(function (event) {
+        var key = event.charCode || event.keyCode;
+        if (key == 116) {
+            event.preventDefault();
+        }});
 
 
-  switch (testName) {
-      case "Tiere&Pflanzen-Test":
-          if(achievementHash["a8"][0]!= "true") {
-              check50("a8");
-              checkAll();
-          }
-          break;
-      case "Geographietest":
-          if(achievementHash["a9"][0]!= "true") {
-              check50("a9");
-              checkAll();
-          }
-          break;
-      case "Geschichtstest":
-          break;
-      case "Mathetest":
-          if(achievementHash["a10"][0]!= "true") {
-              check50("a10");
-              checkAll();
-          }
-          break;
-      case "Sporttest":
-          if(achievementHash["a11"][0]!= "true") {
-              check50("a11");
-              checkAll();
-          }
-          break;
-      case "Politiktest":
-          if(achievementHash["a12"][0]!= "true") {
-              check50("a12");
-              checkAll();
-          }
-          break;
-      default:
-          if(achievementHash["a13"][0]!= "true") {
-              check50("a13");
-              checkAll();
+    if(groupNumber == "2"||groupNumber == "4"){
+        checkBadges()
+    }
 
-          }
-          break;
-  }
+    function giveFeedback(answeredCorrect, buttonId) {
+        if(answeredCorrect){
+            $(buttonId).removeClass('btn-default');
+            $(buttonId).addClass('btn-success');
+        }
+        else{
+            $(buttonId).removeClass('btn-default');
+            $(buttonId).addClass('btn-danger');
+            if($('#button0').html() == '<%= item.shorthand%>') {
+                $('#button0').removeClass('btn-default');
+                $('#button0').addClass('btn-success');
+            }
+            else if($('#button1').html() == '<%= item.shorthand%>'){
+                $('#button1').removeClass('btn-default');
+                $('#button1').addClass('btn-success');
+            }
+            else if($('#button2').html() == '<%= item.shorthand%>'){
+                $('#button2').removeClass('btn-default');
+                $('#button2').addClass('btn-success');
+            }
+            else{
+                $('#button3').removeClass('btn-default');
+                $('#button3').addClass('btn-success');
+            }
+        }
+    }
 
-  function checkAll() {
-      if(achievementHash["a8"][0]== "true"&&achievementHash["a9"][0]== "true"&&achievementHash["a10"][0]== "true"
-          &&achievementHash["a11"][0]== "true"&&achievementHash["a12"][0]== "true"&&achievementHash["a13"][0]== "true"){
-          alert("Sie haben ein Abzeichen bekommen: Alles Testrelevaten Abzeichen erhalten")
-          achievementHash["a14"][0] = "true";
+    function checkBadges() {
+        switch (testName) {
+            case "Tiere&Pflanzen-Test":
+                if(achievementHash["a2"][0]!= "true") {
+                    checkProgress("a2", 50);
+                }
+                if(achievementHash["a2"][0]== "true"&&achievementHash["a3"][0]!= "true") {
+                    checkProgress("a3", 90);
+                    checkAll();
+                }
+                break;
+            case "Geographietest":
+                if(achievementHash["a5"][0]!= "true") {
+                    checkProgress("a5", 50);
+                }
+                if(achievementHash["a5"][0]== "true"&&achievementHash["a6"][0]!= "true") {
+                    checkProgress("a6", 90);
+                    checkAll();
+                }
+                break;
+            case "Geschichtstest":
+                break;
+            case "Mathetest":
+                if(achievementHash["a10"][0]!= "true") {
+                    checkProgress("a10", 50);
+                }
+                if(achievementHash["a10"][0]== "true"&&achievementHash["a11"][0]!= "true") {
+                    checkProgress("a11", 90);
+                    checkAll();
+                }
+                break;
+            case "Sporttest":
+                if(achievementHash["a13"][0]!= "true") {
+                    checkProgress("a13", 50);
+                }
+                if(achievementHash["a13"][0]== "true"&&achievementHash["a14"][0]!= "true") {
+                    checkProgress("a14", 90);
+                    checkAll();
+                }
+                break;
+            case "Politiktest":
+                if(achievementHash["a18"][0]!= "true") {
+                    checkProgress("a18", 50);
+                }
+                if(achievementHash["a18"][0]== "true"&&achievementHash["a19"][0]!= "true") {
+                    checkProgress("a19", 90);
+                    checkAll();
+                }
+                break;
+            default:
+                if(achievementHash["a21"][0]!= "true") {
+                    checkProgress("a21", 50);
+                }
+                if(achievementHash["a21"][0]== "true"&&achievementHash["a8"][0]!= "true") {
+                    checkProgress("a22", 90);
+                    checkAll();
+                }
+                break;
+        }
+    }
 
-          var test = {"student": {"achievement": achievementHash}};
-          $.ajax({
-              method: 'PUT',
-              url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
-              data: test,
-          });
-      }
-  }
 
-  function check50(key) {
-      var currentItemtext = "<%= raw item.itemtext%>";
-      var toggle2 = true;
-      for(i=0; i<oldItems.length;i++){
-          if(currentItemtext==oldItems[i]){
-              toggle2 = false;
-          }
-      }
+    function checkAll() {
+        if(achievementHash["a3"][0]== "true"&&achievementHash["a6"][0]== "true"&&achievementHash["a11"][0]== "true"
+            &&achievementHash["a14"][0]== "true"&&achievementHash["a19"][0]== "true"&&achievementHash["a22"][0]== "true"){
+            alert("Sie haben ein Abzeichen bekommen: Alles Testrelevaten Abzeichen erhalten")
+            achievementHash["a14"][0] = "true";
+            sendAchievements()
+        }
+    }
 
-      if(toggle2){
-          oldItems.push(currentItemtext)
-      }
+    function checkProgress(key, seenItemNumber) {
+        var currentItemtext = "<%= raw item.itemtext%>";
+        var toggle2 = true;
+        for(i=0; i<oldItems.length;i++){
+            if(currentItemtext==oldItems[i]){
+                toggle2 = false;
+            }
+        }
 
-      if(oldItems.length == 50){
-          alert("Sie haben ein neues abzeichen bekommen: 50%& der Fragen gesehen.")
-          achievementHash[key][0] = "true";
+        if(toggle2){
+            oldItems.push(currentItemtext)
+        }
 
-          var test = {"student": {"achievement": achievementHash}};
-          $.ajax({
-              method: 'PUT',
-              url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
-              data: test,
-          });
-      }
-  }
+        if(oldItems.length == seenItemNumber){
+            alert("Sie haben ein neues abzeichen bekommen: "+ seenItemNumber+"% der Fragen gesehen.")
+            achievementHash[key][0] = "true";
 
+            sendAchievements()
+        }
+    }
+
+    function sendAchievements() {
+        var test = {"student": {"achievement": achievementHash}};
+        $.ajax({
+            method: 'PUT',
+            url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
+            data: test,
+        });
+    }
+
+    function checkFirst() {
+        if(achievementHash["a7"][0]!= "true") {
+            achievementHash["a7"][0] = "true";
+            sendAchievements()
+        }
+    }
 
 </script>

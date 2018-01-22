@@ -25,7 +25,9 @@ class FrontendController < ApplicationController
       session[:student_id] = s.id
       session[:user_id] = nil
       @login_user = nil
+
       redirect_to '/frontend'
+      $not_first = "true"
     elsif g != nil
       @group = g
       s = Student.prepare_new_student(@group, params[:ip], params[:fingerprint])
@@ -33,6 +35,7 @@ class FrontendController < ApplicationController
       session[:student_id] = s.id
       session[:user_id] = nil
       @login_user = nil
+      $not_first = "false"
       redirect_to '/frontend'
     else
       redirect_to root_url, notice: "Der Code ist falsch! Bitte prüfe genau, ob du alles richtig eingegeben hast."
@@ -52,18 +55,12 @@ class FrontendController < ApplicationController
   # #TODO-A: Das sollte dann evtl. Measurements index übernehmen! Ggf. umbennen
   def index
     @assessments = @student.get_open_assessments
-    if @student.group_type == 0
-      render 'zeros'
-    elsif @student.group_type == 1
-      render 'ones'
-    elsif @student.group_type == 2
-      render 'twos'
-    elsif @student.group_type == 3
-      render 'threes'
-    elsif @student.group_type == 4
-      render 'fours'
+    if @student.group_type == 0 || @student.group_type == 1
+      render 'control_and_feedback_group'
+    elsif @student.group_type == 2 || @student.group_type == 4
+      render 'badges_group'
     else
-      render 'fives'
+      render 'ranking_group'
     end
   end
 
@@ -87,9 +84,12 @@ class FrontendController < ApplicationController
   def accept
     if(!params[:username]=="")
       @login_student.name = params[:username]
+    else
+      @login_student.name = "user" + @login_student.id.to_s
     end
     @login_student.gender = params[:gender]
     @login_student.age = params[:age]
+    @login_student.email = params[:email]
     @login_student.first_accept = DateTime.now
     @login_student.save
     redirect_to '/frontend'

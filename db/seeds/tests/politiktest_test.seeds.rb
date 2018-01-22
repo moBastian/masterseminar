@@ -315,7 +315,7 @@ item_alternatives_n4 = [
 
 ]
 
-t = Test.create(name: "Politiktest",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "Politik", picture: "/images/politik.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Politiktest",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "Politik", picture: "/images/Logos/politik.png", construct: "Probe", student_access:true, archive: false)
 
 i= 0
 while i<items_n4.size do

@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <p class="navbar-brand"><%= "Tester: #{@student.name}: #{@measurement.assessment.test.name} durchgeführt am #{@measurement.date.to_date.strftime("%d.%m.%Y")} um #{@measurement.date.strftime("%H:%M")}" %></p>
+  <p class="navbar-brand"><%= "Tester: #{@student.login}: #{@measurement.assessment.test.name} durchgeführt am #{@measurement.date.to_date.strftime("%d.%m.%Y")} um #{@measurement.date.strftime("%H:%M")}" %></p>
   <p class="navbar-brand" id="state"></p>
 </nav>
 
@@ -35,6 +35,7 @@
     <% end %>
     };
 
+    var groupNumber = "<%= @student.group_type%>";
 
     var studentData = {
         <%=@result.id%>: [

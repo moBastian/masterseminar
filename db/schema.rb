@@ -48,23 +48,6 @@ ActiveRecord::Schema.define(version: 20180118083930) do
     t.integer  "itemtype"
   end
 
-  create_table "materials", force: :cascade do |t|
-    t.text     "subject"
-    t.text     "construct"
-    t.text     "block"
-    t.text     "exercisetype"
-    t.text     "blockinfo"
-    t.text     "exerciseinfo"
-    t.text     "data"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  create_table "materials_tests", id: false, force: :cascade do |t|
-    t.integer "material_id"
-    t.integer "test_id"
-  end
-
   create_table "measurements", force: :cascade do |t|
     t.integer  "assessment_id"
     t.datetime "date"
@@ -101,6 +84,7 @@ ActiveRecord::Schema.define(version: 20180118083930) do
     t.text     "fingerprint"
     t.text     "ip"
     t.integer  "age"
+    t.text     "email"
     t.text     "achievement"
     t.integer  "points"
     t.text     "first_accept"

@@ -1,17 +1,21 @@
 </br></br></br></br></br></br>
 <div class='text-center'>
   <p class='text-center'>
-    <img id='pic' style='width: 250px;'/>
-    <br/>
-    <br/>
-  <div class='row text-center'>
-    <div>
-      <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>Du hast&nbsp</label>
-      <label id='score' class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'></label>
-      <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>&nbsp von 20 Fragen richtig beantwortet.</label>
-    </div>
-  </div>
-    <br/>
+    <%if @student.group_type == 1||@student.group_type == 4||@student.group_type == 5%>
+      <div class='row text-center'>
+        <div>
+          <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>Du hast&nbsp</label>
+          <label id='score' class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'></label>
+          <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>&nbspvon 20 Fragen richtig beantwortet.</label>
+        </div>
+      </div>
+    <%else%>
+      <div class='row text-center'>
+        <div>
+          <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>Danke!</label>
+        </div>
+      </div>
+    <%end%>
   </p>
 </div>
 <br><br>
@@ -26,56 +30,50 @@
     window.location.replace(pathMainPage);
   });
 
-  var tempPic = (document.getElementById('pic'));
-  if (lastResults[currentStudent] >= 0 && lastResults[currentStudent] < currentResult.split('1').length)
-      tempPic.src = '/images/shared/Levumi-jubelt.gif';
-  else if(lastResults[currentStudent] == -1) {
-      tempPic.src = '/images/shared/Levumi-normal-blau.jpg';
+  if(lastResults[currentStudent] == -1) {
+      if(groupNumber=="2"||groupNumber=="4"){
+          switch (testName) {
 
-
-      switch (testName) {
-
-          case "Tiere&Pflanzen-Test":
-              if(achievementHash["a2"][0]!= "true") {
-                  alert("Sie haben ein neues Abzeichen bekommen!");
-                  achievementHash["a2"][0] = true;
-              }
-              break;
-          case "Geographietest":
-              if(achievementHash["a3"][0]!= "true") {
-                  alert("Sie haben ein neues Abzeichen bekommen!");
-                  achievementHash["a3"][0] = true;
-              }
-              break;
-          case "Geschichtstest":
-              break;
-          case "Mathetest":
-              if(achievementHash["a4"][0]!= "true") {
-                  alert("Sie haben ein neues Abzeichen bekommen!");
-                  achievementHash["a4"][0] = true;
-              }
-              break;
-          case "Sporttest":
-              if(achievementHash["a5"][0]!= "true") {
-                  alert("Sie haben ein neues Abzeichen bekommen!");
-                  achievementHash["a5"][0] = true;
-              }
-              break;
-          case "Politiktest":
-              if(achievementHash["a6"][0]!= "true") {
-                  alert("Sie haben ein neues Abzeichen bekommen!");
-                  achievementHash["a6"][0] = true;
-              }
-              break;
-          default:
-              if(achievementHash["a7"][0]!= "true") {
-                  alert("Sie haben ein neues Abzeichen bekommen!");
-                  achievementHash["a7"][0] = true;
-              }
-              break;
+              case "Tiere&Pflanzen-Test":
+                  if(achievementHash["a1"][0]!= "true") {
+                      alert("Sie haben ein neues Abzeichen bekommen!");
+                      achievementHash["a1"][0] = true;
+                  }
+                  break;
+              case "Geographietest":
+                  if(achievementHash["a4"][0]!= "true") {
+                      alert("Sie haben ein neues Abzeichen bekommen!");
+                      achievementHash["a4"][0] = true;
+                  }
+                  break;
+              case "Geschichtstest":
+                  break;
+              case "Mathetest":
+                  if(achievementHash["a9"][0]!= "true") {
+                      alert("Sie haben ein neues Abzeichen bekommen!");
+                      achievementHash["a9"][0] = true;
+                  }
+                  break;
+              case "Sporttest":
+                  if(achievementHash["a12"][0]!= "true") {
+                      alert("Sie haben ein neues Abzeichen bekommen!");
+                      achievementHash["a12"][0] = true;
+                  }
+                  break;
+              case "Politiktest":
+                  if(achievementHash["a17"][0]!= "true") {
+                      alert("Sie haben ein neues Abzeichen bekommen!");
+                      achievementHash["a17"][0] = true;
+                  }
+                  break;
+              default:
+                  if(achievementHash["a20"][0]!= "true") {
+                      alert("Sie haben ein neues Abzeichen bekommen!");
+                      achievementHash["a20"][0] = true;
+                  }
+                  break;
+          }
       }
-
-
 
       var test = {"student": {"achievement": achievementHash}};
       $.ajax({
@@ -84,8 +82,6 @@
           data: test,
       });
   }
-  else
-      tempPic.src = '/images/shared/Levumi-weiterlesen.gif';
 
   //F5 abschalten <- kein aktualisieren möglich
   $(window).keydown(function (event) {
@@ -94,6 +90,7 @@
           event.preventDefault();
       }});
   $('#score').html(score);
+
 
   var mypoints = <%= raw @student.points%>
   var test = {"student": {"points": score + mypoints}};

@@ -1,14 +1,27 @@
 <% content_for :top do%>
-    <p class="navbar-brand">Angemeldet als: <%= @student.name %></p>
-    <div class = "navbar-right" style="padding-right: 15px">
-      <form class="navbar-form" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-        <%= token_tag nil %>
-        <button type="submit" class="btn btn-lg btn-default">Abmelden</button>
-      </form>
+    <br/>
+    <div class="container-fluid">
+      <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Angemeldet als: <%= @student.login %></p>
+      <div>
+        <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Als E-Mail schicken:</p>
+        <form class="navbar-form navbar-left">
+          <div id="emailgroup" class="form-group">
+            <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style="width: 600px; font-size: 40px; height: 70px; font-family: fibel_nordregular;">
+          </div>
+          <button id="submit" type="submit" class="btn btn-default" style="font-size: 40px; font-family: fibel_nordregular;" onclick="sendMail();return false;">Absenden</button>
+        </form>
+      </div>
+      <div class = "navbar-right" style="padding-right: 15px">
+        <form class="navbar-form" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
+          <%= token_tag nil %>
+          <button type="submit" class="btn btn-lg btn-info" style="font-size: 40px; font-family: fibel_nordregular;">Abmelden</button>
+        </form>
+      </div>
+
     </div>
 <% end %>
 
-<div style="font-size: 30px"><u>Arbeitstitel Gruppe 4</u></div><br/>
+
 
 
 <% points = Student.where(group_id: @student.group_id).order(points: :desc).pluck(:points).uniq%>
@@ -31,7 +44,7 @@
       <div style="font-size: 40px; font-family: fibel_nordregular;"> Bis zum nächsten Platz sind es nur noch <%= points[count-1] - @student.points%> richtige Antworten!</div><br/>
       <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie sind auf Platz <%= count+1%></div><br/>
       <% if !points[count+1].nil?%>
-      <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie haben einen Vorsprung von <%= @student.points - points[count+1] %> Fragen!</div><br/>
+          <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie haben einen Vorsprung von <%= @student.points - points[count+1] %> Fragen!</div><br/>
       <% end%>
   <%end%>
 </div>
@@ -40,10 +53,14 @@
 
 <br/>
 <div>
-  <h3>Die folgenden Tests stehen für dich zur Verfügung:</h3>
+  <h1 style="font-family: fibel_nordregular;">Die folgenden Tests stehen für dich zur Verfügung:</h1>
   <br/>
   <% count = 0 %>
-  <% assessment_size = @assessments.size%>
+  <% if !@assessments.nil?%>
+      <% assessment_size = @assessments.size%>
+  <%else %>
+      <%assessment_size=0%>
+  <%end%>
   <%while count < assessment_size%>
       <% if(count % 3 == 0)%>
           <div class="row">
@@ -51,7 +68,7 @@
               <div class="row">
                 <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
                   <p style="font-size: 32px;text-align: center" >
-                    <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="250px" src=<%= @assessments[count].test.picture%>><% end %>
+                    <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
                     <br/>
                     <%= @assessments[count].test.name %>
                     <br/>
@@ -61,7 +78,7 @@
       <%elsif count % 3 == 2%>
           <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
             <p style="font-size: 32px;text-align: center" >
-              <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="250px" src=<%= @assessments[count].test.picture%>><% end %>
+              <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
               <br/>
               <%= @assessments[count].test.name %>
               <br/>
@@ -76,7 +93,7 @@
       <%else%>
           <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
             <p style="font-size: 32px;text-align: center" >
-              <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="250px" src=<%= @assessments[count].test.picture%>><% end %>
+              <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
               <br/>
               <%= @assessments[count].test.name %>
               <br/>
