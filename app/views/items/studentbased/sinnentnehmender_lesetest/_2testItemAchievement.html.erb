@@ -5,36 +5,10 @@
 <div class="row" style="margin-right: 15px">
   <button style='font-family: fibel_nordregular; float: right; font-size:40px' id="closeTest" class="btn btn-warning" onclick="interruptMeasurement()"><strong>Test beenden</strong></button>
 </div>
-<% if  @student.group_type == 2||@student.group_type == 4%>
-    <div class="row">
-      <% count = 0%>
-      <% keys = @student.achievement.keys %>
-      <%while count<@student.achievement.size%>
-          <% achievementInfos = @student.achievement[keys[count]]%>
-          <% if(!(achievementInfos[0] == "true"))%>
-              <div class="col-lg-1" >
-                <img src=<%= achievementInfos[1]%> width="60px" id="a<%= count%>">
-              </div>
-          <% else %>
-              <div class="col-lg-1">
-                <img src=<%= achievementInfos[2]%> width="60px" id="a<%= count%>">
-              </div>
-          <% end%>
-          <% count = count +1%>
-          <% if(count == 8|| count ==16)%>
-              </div>
-              <br/>
-              <div class="row">
-          <%end%>
-      <%end%>
-      </div>
-      <br/>
-<% end%>
-<br/>
 <br/>
 <div class='row text-center'>
   <div>
-    <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'><%= question %>&nbsp</label>
+    <label id="question" class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'><%= question %>&nbsp</label>
   </div>
 </div>
 <br><br>
@@ -96,7 +70,7 @@
               score = score +1;
               currentResult = currentResult + '1,';
               if(groupNumber == "2"||groupNumber == "4"){
-                  checkFirstAndKiel();
+                  checkFirstAndCorrectness();
               }
               if(groupNumber == "1"||groupNumber == "4" ||groupNumber == "5" ){
                   giveFeedback(true, buttonId);
@@ -165,77 +139,6 @@
       }
   }
 
-  function checkBadges() {
-      switch (testName) {
-          case "Tiere&Pflanzen-Test":
-              if(achievementHash["a2"][0]!= "true") {
-                  checkProgress("a2", 50);
-              }
-              if(achievementHash["a2"][0]== "true"&&achievementHash["a3"][0]!= "true") {
-                  checkProgress("a3", 90);
-                  checkAll();
-              }
-              break;
-          case "Geographietest":
-              if(achievementHash["a5"][0]!= "true") {
-                  checkProgress("a5", 50);
-              }
-              if(achievementHash["a5"][0]== "true"&&achievementHash["a6"][0]!= "true") {
-                  checkProgress("a6", 90);
-                  checkAll();
-              }
-              break;
-          case "Geschichtstest":
-              break;
-          case "Mathetest":
-              if(achievementHash["a10"][0]!= "true") {
-                  checkProgress("a10", 50);
-              }
-              if(achievementHash["a10"][0]== "true"&&achievementHash["a11"][0]!= "true") {
-                  checkProgress("a11", 90);
-                  checkAll();
-              }
-              break;
-          case "Sporttest":
-              if(achievementHash["a13"][0]!= "true") {
-                  checkProgress("a13", 50);
-              }
-              if(achievementHash["a13"][0]== "true"&&achievementHash["a14"][0]!= "true") {
-                  checkProgress("a14", 90);
-                  checkAll();
-              }
-              break;
-          case "Politiktest":
-              if(achievementHash["a18"][0]!= "true") {
-                  checkProgress("a18", 50);
-              }
-              if(achievementHash["a18"][0]== "true"&&achievementHash["a19"][0]!= "true") {
-                  checkProgress("a19", 90);
-                  checkAll();
-              }
-              break;
-          default:
-              if(achievementHash["a21"][0]!= "true") {
-                  checkProgress("a21", 50);
-              }
-              if(achievementHash["a21"][0]== "true"&&achievementHash["a8"][0]!= "true") {
-                  checkProgress("a22", 90);
-                  checkAll();
-              }
-              break;
-      }
-  }
-
-
-  function checkAll() {
-      if(achievementHash["a3"][0]== "true"&&achievementHash["a6"][0]== "true"&&achievementHash["a11"][0]== "true"
-          &&achievementHash["a14"][0]== "true"&&achievementHash["a19"][0]== "true"&&achievementHash["a22"][0]== "true"){
-          alert("Sie haben ein Abzeichen bekommen: Alles Testrelevaten Abzeichen erhalten")
-          achievementHash["a14"][0] = "true";
-          sendAchievements()
-      }
-  }
-
   function checkProgress(key, seenItemNumber) {
       var currentItemtext = "<%= raw item.itemtext%>";
       var toggle2 = true;
@@ -250,31 +153,69 @@
       }
 
       if(oldItems.length == seenItemNumber){
-          alert("Sie haben ein neues abzeichen bekommen: "+ seenItemNumber+"% der Fragen gesehen.")
+          showBadge(key);
           achievementHash[key][0] = "true";
-
           sendAchievements()
       }
   }
 
-  function sendAchievements() {
-      var test = {"student": {"achievement": achievementHash}};
-      $.ajax({
-          method: 'PUT',
-          url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
-          data: test,
-      });
-  }
-
-  function checkFirstAndKiel() {
+  function checkFirstAndCorrectness() {
       if(achievementHash["a7"][0]!= "true") {
+          showBadge("a7");
           achievementHash["a7"][0] = "true";
-          sendAchievements()
+          sendAchievements();
+      }
+      switch (testName) {
+          case "Tiere&Pflanzen-Test":
+              if(achievementHash["a9"][0]!= "true") {
+                  showBadge("a9");
+                  achievementHash["a9"][0]= "true";
+                  sendAchievements();
+              }
+              break;
+          case "Geographietest":
+              specialQuest = $('#question').html();
+              if(achievementHash["a18"][0]!= "true" && specialQuest=="Im Rahmen welches Ereignisses findet die Windjammerparade statt?" ) {
+                  showBadge("a18");
+                  achievementHash["a18"][0]= "true";
+                  sendAchievements();
+              }
+              else if(achievementHash["a10"][0]!= "true") {
+                  achievementHash["a10"][0]= "true";
+                  sendAchievements();
+              }
+              break;
+          case "Geschichtstest":
+              break;
+          case "Mathetest":
+              if(achievementHash["a19"][0]!= "true") {
+                  showBadge("a19");
+                  achievementHash["a19"][0]= "true";
+                  sendAchievements();
+              }
+              break;
+          case "Sporttest":
+              if(achievementHash["a20"][0]!= "true") {
+                  showBadge("a20");
+                  achievementHash["a20"][0]= "true";
+                  sendAchievements();
+              }
+              break;
+          case "Politiktest":
+              if(achievementHash["a29"][0]!= "true") {
+                  showBadge("a29");
+                  achievementHash["a29"][0]= "true";
+                  sendAchievements();
+              }
+              break;
+          default:
+              if(achievementHash["a30"][0]!= "true") {
+                  showBadge("a30");
+                  achievementHash["a30"][0]= "true";
+                  sendAchievements();
+              }
+              break;
       }
 
-      if(achievementHash["a16"][0]!= "true") {
-          achievementHash["a16"][0] = "true";
-          sendAchievements()
-      }
   }
 </script>

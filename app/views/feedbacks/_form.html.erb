@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div id="content">
+    <div class="jumbotron">
+      <h2>Einverständnis</h2>
+      <p>
+        Hiermit bestätige ich, dass ich für alle Daten, die ich von Schülern mit Hilfe dieser Plattform erhebe, die nötige Berechtigung (Eltern, Schulleiter, ggf. Betreuungslehrkaft) eingeholt habe.
+      </p>
+      <p>
+        Die vollständige Datenschutzerklärung sowie eine Vorlage für einen Elternbrief finden Sie oben im Menü.
+      </p>
+      <%= form_for(feedback) do |f| %>
+          <% if feedback.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+
+                <ul>
+                  <% feedback.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+          <div class="row">
+
+          <div class="col-xs-2" style="width: 100%">
+            <div class="form-group">
+              <label for=:feedbacktext style="font-size: 3rem">Kommentar:</label><br/>
+              <%= f.text_area :feedbacktext , class:"form-control", rows:20, style:"font-size: 2.2rem; resize:none"%>
+            </div>
+          </div>
+          </div>
+
+
+          <div class="actions">
+            <%= f.submit "Kommentar abschicken",  class: "btn btn-lg btn-info", style:"font-size: 2rem", data: { confirm: 'Kommentar wirklich speichern?' }%>
+          </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

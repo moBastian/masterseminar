@@ -1,25 +1,49 @@
-<% content_for :top do%>
-    <br/>
-    <div class="container-fluid">
-      <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Angemeldet als: <%= @student.login %></p>
-      <div>
-        <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Als E-Mail schicken:</p>
-        <form class="navbar-form navbar-left">
-          <div id="emailgroup" class="form-group">
-            <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style="width: 600px; font-size: 40px; height: 70px; font-family: fibel_nordregular;">
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<div class="container-fluid">
+  <div id="content">
+    <div id="alert">
+      <% unless notice.blank? %>
+          <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p id="notice"><%= notice %></p>
           </div>
-          <button id="submit" type="submit" class="btn btn-default" style="font-size: 40px; font-family: fibel_nordregular;" onclick="sendMail();return false;">Absenden</button>
+      <% end %>
+    </div>
+    <%= yield %>
+  </div>
+</div>
+
+
+<% content_for :top do%>
+    <div class="container-fluid">
+      <p class = "navbar-text" style="font-size: 2.2rem;">Angemeldet als: <%= @student.login %></p>
+      <div>
+        <form class="navbar-form navbar-left">
+          <div class = "form-group" style="font-size: 2.2rem;">Anmeldecode per E-mail zusenden:</div>
+          <div id="emailgroup" class="form-group">
+            <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style=" font-size: 2.2rem; height: 4.4rem;">
+          </div>
+          <button id="submit" type="submit" class="btn btn-default" style="font-size: 2.2rem;" onclick="sendMail();return false;">Absenden</button>
         </form>
       </div>
       <div class = "navbar-right" style="padding-right: 15px">
         <form class="navbar-form" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
           <%= token_tag nil %>
-          <button type="submit" class="btn btn-lg btn-info" style="font-size: 40px; font-family: fibel_nordregular;">Abmelden</button>
+          <button type="submit" class="btn btn-lg btn-info" style="font-size: 2.2rem;">Abmelden</button>
+        </form>
+      </div>
+      <div class = "navbar-right" style="padding-right: 15px">
+        <form class="navbar-form">
+          <%= link_to 'Feedback', new_feedback_path, class:"btn btn-lg btn-info", style:"font-size: 2.2rem;"%>
         </form>
       </div>
     </div>
 <% end %>
-
 
   <br/>
   <div>

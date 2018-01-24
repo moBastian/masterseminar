@@ -35,10 +35,12 @@
                 <%= select_tag(:gender, options_for_select([['', nil], ['männlich', true], ['weiblich', false]])) %>
               </div>
             </div>
+
+
             <div class="col-xs-2">
               <div class="form-group">
                 <label for="gender" style="font-size: 20px">E-Mail-Adresse:</label><br/>
-                <%= text_field_tag(:email) %>
+                <%= email_field_tag(:email) %>
               </div>
             </div>
           </div>

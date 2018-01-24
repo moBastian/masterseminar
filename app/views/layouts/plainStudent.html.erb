@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Probename</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <%= yield :top %>
+</nav>
+
+<div class="container-fluid">
+  <div id="content">
+    <%= yield %>
+  </div>
+</div>
+
+
+</body>
+</html>
+

@@ -1,8 +1,12 @@
+
 <p class="lead text-right">
+  <span class="glyphicon glyphicon-envelope" onclick="notifyALl();return false;"></span>
   <%= link_to user_group_students_path(@user, @group, :format => :pdf), :title => "Zugangsdaten der Probandengruppe", :target => "blank" do %>
       <span class="glyphicon glyphicon-print"></span>
   <% end %>
 </p>
+
+
 <%  students = @group.students
     groupsize = students.size
     controllgroupsize = @group.students.where(group_type: 0).size
@@ -156,3 +160,10 @@
 <div id="studentForm">
   <%= link_to "Probanden hinzufügen", new_user_group_student_path(@user, @group), :class => "btn btn-default", :data => {:remote => true} %>
 </div>
+
+<script>
+  function notifyALl() {
+      $.ajax({url: '<%= user_group_student_path(@user,@group, @students, format: :text)%>' + '?email=allInGroup' });
+      alert("E-Mails wurden versandt.")
+  }
+</script>

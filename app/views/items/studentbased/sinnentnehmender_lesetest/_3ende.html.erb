@@ -12,7 +12,7 @@
     <%else%>
       <div class='row text-center'>
         <div>
-          <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>Danke!</label>
+          <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>Vielen Dank für die Teilnahme.</label>
         </div>
       </div>
     <%end%>
@@ -36,40 +36,40 @@
 
               case "Tiere&Pflanzen-Test":
                   if(achievementHash["a1"][0]!= "true") {
-                      alert("Sie haben ein neues Abzeichen bekommen!");
-                      achievementHash["a1"][0] = true;
+                      showBadge("a1");
+                      achievementHash["a1"][0] =true;
                   }
                   break;
               case "Geographietest":
                   if(achievementHash["a4"][0]!= "true") {
-                      alert("Sie haben ein neues Abzeichen bekommen!");
+                      showBadge("a4");
                       achievementHash["a4"][0] = true;
                   }
                   break;
               case "Geschichtstest":
                   break;
               case "Mathetest":
-                  if(achievementHash["a9"][0]!= "true") {
-                      alert("Sie haben ein neues Abzeichen bekommen!");
-                      achievementHash["a9"][0] = true;
+                  if(achievementHash["a11"][0]!= "true") {
+                      showBadge("a11");
+                      achievementHash["a11"][0] = true;
                   }
                   break;
               case "Sporttest":
-                  if(achievementHash["a12"][0]!= "true") {
-                      alert("Sie haben ein neues Abzeichen bekommen!");
-                      achievementHash["a12"][0] = true;
+                  if(achievementHash["a13"][0]!= "true") {
+                      showBadge("a13");
+                      achievementHash["a13"][0] = true;
                   }
                   break;
               case "Politiktest":
-                  if(achievementHash["a17"][0]!= "true") {
-                      alert("Sie haben ein neues Abzeichen bekommen!");
-                      achievementHash["a17"][0] = true;
+                  if(achievementHash["a21"][0]!= "true") {
+                      showBadge("a21");
+                      achievementHash["a21"][0] = true;
                   }
                   break;
               default:
-                  if(achievementHash["a20"][0]!= "true") {
-                      alert("Sie haben ein neues Abzeichen bekommen!");
-                      achievementHash["a20"][0] = true;
+                  if(achievementHash["a24"][0]!= "true") {
+                      showBadge("a24");
+                      achievementHash["a24"][0] = true;
                   }
                   break;
           }

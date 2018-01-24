@@ -214,6 +214,7 @@ de:
       student: Probanden
       user: Benutzer
       measurement: Messzeitpunkt
+      feedback: Kommentar
     attributes:
       user:
         school: Schule/Institution
@@ -236,9 +237,3 @@ de:
         short_info: Kurzinfo
         subject: Fach
         construct: Konstrukt
-      material:
-        block: Förderblockbezeichnung
-        exercisetype: Aufgabentyp
-        subject: Fach
-        construct: Konstrukt
-        exerciseinfo: Aufgabenbeschreibung

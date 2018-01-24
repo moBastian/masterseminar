@@ -25,7 +25,10 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
-    @results = @student.getResults
+    if params.has_key?(:email) && params[:email]=="allInGroup"
+    else
+      @results = @student.getResults
+    end
     if params.has_key?(:test)
       @results = {params[:test].to_i => @results[params[:test].to_i]}
     end
@@ -35,7 +38,12 @@ class StudentsController < ApplicationController
         render pdf: @student.name, template: "students/show.pdf.erb"
         }
       format.text {
-        if params.has_key?(:email)
+        if params.has_key?(:email) && params[:email]=="allInGroup"
+          Student.where(:group_id => @group.id).where.not(:email => "").each do |s|
+            StudentMailer.notifyAll(s.email,s.login).deliver_later
+          end
+          head :ok
+        elsif params.has_key?(:email)
           StudentMailer.edited(params[:email], @student.login).deliver_later
           head :ok
         end
@@ -114,7 +122,10 @@ class StudentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
-      @student = Student.find(params[:id])
+      if params.has_key?(:email) && params[:email]=="allInGroup"
+      else
+        @student = Student.find(params[:id])
+      end
     end
 
 
@@ -131,12 +142,11 @@ class StudentsController < ApplicationController
       puts (params.inspect)
       params.require(:student).permit(:name, :login, :birthdate, :email, :gender, :gender, :specific_needs, :first_accept, :migration, :file, :points ,
                                       :achievement =>{:a1 =>[], :a2=>[], :a3=>[], :a4=>[], :a5=>[], :a6=>[], :a7=>[], :a8=>[], :a9=>[], :a10=>[], :a11=>[],
-                                                      :a12=>[], :a13=>[], :a14=>[], :a15=>[], :a16=>[], :a17=>[], :a18=>[], :a19=>[], :a20=>[], :a21=>[], :a22=>[], :a23=>[], :a24=>[]})
+                                                      :a12=>[], :a13=>[], :a14=>[], :a15=>[], :a16=>[], :a17=>[], :a18=>[], :a19=>[], :a20=>[], :a21=>[], :a22=>[],
+                                                      :a23=>[], :a24=>[], :a25=>[], :a26=>[], :a27=>[], :a28=>[], :a29=>[], :a30=>[]})
     end
 
     def is_allowed
-      puts(@student.id)
-      puts(@login_student.id)
       unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i)) || !@login_student.nil? && @login_student.id = @student.id
         redirect_to '/backend'
       end

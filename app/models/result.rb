@@ -144,8 +144,6 @@ class Result < ActiveRecord::Base
     items =[]
     for r in res
       count = 0
-      puts(r.items)
-      puts(r.responses)
       for respond in r.responses
         if(!respond.nil?)
           items = items + Item.where(id:r.items[count])

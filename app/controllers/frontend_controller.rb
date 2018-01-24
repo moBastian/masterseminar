@@ -6,7 +6,7 @@ class FrontendController < ApplicationController
   before_action :check_student, except: [:welcome, :login]
   before_action :check_accept_student, except: [:welcome, :login, :accept, :logout]
 
-  layout 'plain'
+  layout 'plainStudent'
 
   def welcome
     if params.has_key?(:page)

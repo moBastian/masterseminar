@@ -1,50 +1,88 @@
-<% content_for :top do%>
-    <br/>
-    <div class="container-fluid">
-      <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Angemeldet als: <%= @student.login %></p>
-      <div>
-        <p class = "navbar-text" style="font-size: 40px; font-family: fibel_nordregular;">Als E-Mail schicken:</p>
-        <form class="navbar-form navbar-left">
-          <div id="emailgroup" class="form-group">
-            <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style="width: 600px; font-size: 40px; height: 70px; font-family: fibel_nordregular;">
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<div class="container-fluid">
+  <div id="content">
+    <div id="alert">
+      <% unless notice.blank? %>
+          <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p id="notice"><%= notice %></p>
           </div>
-          <button id="submit" type="submit" class="btn btn-default" style="font-size: 40px; font-family: fibel_nordregular;" onclick="sendMail();return false;">Absenden</button>
+      <% end %>
+    </div>
+    <%= yield %>
+  </div>
+</div>
+
+
+<% content_for :top do%>
+    <div class="container-fluid">
+      <p class = "navbar-text" style="font-size: 2.2rem;">Angemeldet als: <%= @student.login %></p>
+      <div>
+        <form class="navbar-form navbar-left">
+          <div class = "form-group" style="font-size: 2.2rem;">Anmeldecode per E-mail zusenden:</div>
+          <div id="emailgroup" class="form-group">
+            <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style=" font-size: 2.2rem; height: 4.4rem;">
+          </div>
+          <button id="submit" type="submit" class="btn btn-default" style="font-size: 2.2rem;" onclick="sendMail();return false;">Absenden</button>
         </form>
       </div>
       <div class = "navbar-right" style="padding-right: 15px">
         <form class="navbar-form" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
           <%= token_tag nil %>
-          <button type="submit" class="btn btn-lg btn-info" style="font-size: 40px; font-family: fibel_nordregular;">Abmelden</button>
+          <button type="submit" class="btn btn-lg btn-info" style="font-size: 2.2rem;">Abmelden</button>
+        </form>
+      </div>
+      <div class = "navbar-right" style="padding-right: 15px">
+        <form class="navbar-form">
+          <%= link_to 'Feedback', new_feedback_path, class:"btn btn-lg btn-info", style:"font-size: 2.2rem;"%>
         </form>
       </div>
     </div>
 <% end %>
 
-<div class="row">
-  <% count = 0%>
-  <% keys = @student.achievement.keys %>
-  <%while count<@student.achievement.size%>
-      <% achievementInfos = @student.achievement[keys[count]]%>
-      <% if(!(achievementInfos[0] == "true"))%>
-          <div class="col-lg-1" >
-            <img src=<%= achievementInfos[1]%> width="60px" id="a<%= count%>">
-          </div>
-      <% else %>
-          <div class="col-lg-1">
-            <img src=<%= achievementInfos[2]%> width="60px" id="a<%= count%>">
-          </div>
-      <% end%>
-      <% count = count +1%>
-      <% if(count == 8|| count ==16)%>
-          </div>
-          <br/>
-          <div class="row">
+
+<div style="overflow-x:auto;">
+  <table style="border:1px solid black ;margin-left: 1px;width: 70%">
+    <tr>
+      <% count = 0%>
+      <% paddingTop = false%>
+      <%paddingBottom = false%>
+      <% keys = @student.achievement.keys %>
+      <%while count<@student.achievement.size%>
+          <% achievementInfos = @student.achievement[keys[count]]%>
+          <% if(!(achievementInfos[0] == "true"))%>
+              <td style="padding-top: 1%; padding-left: 2%">
+                <img src=<%= achievementInfos[1]%> width="50vw" id="a<%= count%>" title="<%=achievementInfos[3]%>">
+              </td>
+          <% else %>
+              <td style="padding-top: 1%;padding-left: 2%">
+                <img src=<%= achievementInfos[2]%> width="50vw" id="a<%= count%>" title="<%= achievementInfos[4]%>">
+              </td>
+          <% end%>
+          <% count = count +1%>
+          <% if(count == 10)%>
+              </tr>
+              <% paddingTop = true%>
+              <tr>
+          <%end%>
+          <% if(count ==20)%>
+              </tr>
+              <% paddingBottom = true%>
+              <tr>
+          <%end%>
       <%end%>
-  <%end%>
-  </div>
+      </tr>
+      </table>
+</div>
   <br/>
   <div>
-    <h1 style="font-family: fibel_nordregular;">Die folgenden Tests stehen für dich zur Verfügung:</h1>
+    <h1 style="font-size: 2.2rem">Die folgenden Tests stehen für dich zur Verfügung:</h1>
     <br/>
     <% count = 0 %>
     <% if !@assessments.nil?%>
@@ -58,37 +96,31 @@
               <div class="col-lg-11">
                 <div class="row">
                   <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
-                    <p style="font-size: 32px;text-align: center" >
-                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
+                    <p style="font-size: 2.2rem;text-align: center" >
+                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150vw" src=<%= @assessments[count].test.picture%>><% end %>
                       <br/>
                       <%= @assessments[count].test.name %>
-                      <br/>
-                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
                     </p>
                   </div>
         <%elsif count % 3 == 2%>
             <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
-              <p style="font-size: 32px;text-align: center" >
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
+              <p style="font-size: 2.2rem;text-align: center" >
+                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150vw" src=<%= @assessments[count].test.picture%>><% end %>
                 <br/>
                 <%= @assessments[count].test.name %>
-                <br/>
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
               </p>
             </div>
             </div>
             </div>
             </div>
             <br/>
-            <br/>
         <%else%>
             <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
-              <p style="font-size: 32px;text-align: center" >
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
+              <p style="font-size: 2.2rem;text-align: center" >
+                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150vw" src=<%= @assessments[count].test.picture%>><% end %>
                 <br/>
                 <%= @assessments[count].test.name %>
                 <br/>
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
               </p>
             </div>
         <%end%>
@@ -98,6 +130,22 @@
         </div>
     <% end%>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" style="font-size: 2.2rem">Neues Abzeichen erhalten</h5>
+          </div>
+          <div class="modal-body" id="modalContent">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 2.2rem">Schließen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </body>
     <script>
         //possible Hack
         //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
@@ -121,9 +169,9 @@
             $('#submit').removeClass('btn-danger');
             $('#submit').removeClass('btn-success');
             if(achievementHash["a8"][0]!= "true") {
+                showBadge("a8");
                 achievementHash["a8"][0] = "true";
                 sendAchievement("a8","#a7");
-                alert("neuer Erfolg: Daten zugesandt");
             }
 
 
@@ -138,10 +186,19 @@
             }
         }
         var not_first = "<%= $not_first%>";
-        if(achievementHash["a15"][0]!= "true" && not_first=="true") {
-            achievementHash["a15"][0] = "true";
-            sendAchievement("a15", "#a14");
-            alert("neuer Erfolg:Heimkehrer");
+        if(achievementHash["a17"][0]!= "true" && not_first=="true") {
+            showBadge("a17");
+            achievementHash["a17"][0] = "true";
+            sendAchievement("a17", "#a16");
+
+
+        }
+
+        var send_first = "<%= $send_feedback%>";
+        if(achievementHash["a28"][0]!= "true" && send_first=="true") {
+            showBadge("a28");
+            achievementHash["a28"][0] = "true";
+            sendAchievement("a28", "#a27");
 
 
         }
@@ -155,6 +212,11 @@
             });
 
             $(keyForJQ).attr("src", achievementHash[key][2]);
+        }
+
+        function showBadge(key) {
+            $("#modalContent").html("<div class='text-center' style='font-size: 2.2rem'><img src=" + achievementHash[key][2] + " style='width:40%'><br/>" + achievementHash[key][4]+ "</div>");
+            $("#exampleModal").modal();
         }
 
 
