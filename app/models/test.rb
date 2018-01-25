@@ -28,7 +28,8 @@ class Test < ActiveRecord::Base
   def outro_items
     self.items.where("itemtype > ?", 0).order(:itemtype)
   end
-
+  #neues ziehen
+  # -> ziehe immer (hier 5) unbekannte Items
   def draw_items(oldItems)
     if false                          #Nett um zu testen (einfach auf true setzen)
       itemset = content_items
