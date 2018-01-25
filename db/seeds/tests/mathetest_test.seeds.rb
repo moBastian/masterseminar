@@ -12,7 +12,7 @@ items_n4 = %w{
 11
 97
 -1
-0,0001
+0.0001
 1/20
 1/2
 26
@@ -67,8 +67,6 @@ a^2\ +\ 2ab\ +\ b^2
 a^2\ -\ 2ab\ +\ b^2
 (a+b)(a-b)
 3
-
-
 }
 question_n4 = [
 		"Welche dieser Zahlen ist keine Primzahl?",
@@ -134,9 +132,7 @@ question_n4 = [
 		"Die erste binomische Formel besagt: (a + b)^2 = …",
 		"Die zweite binomische Formel besagt: (a - b)^2 = …",
 		"Die dritte binomische Formel besagt: a^2 - b^2 = …",
-		"Wieviele binomische Formeln gibt es?",
-
-
+		"Wieviele binomische Formeln gibt es?"
 ]
 
 
@@ -151,7 +147,7 @@ item_alternatives_n4 = [
 		%w{9 10 11 12},
 		%w{91 93 95 97},
 		%w{0,1 -1 0 1},
-		%w{0,1 0,01 0,001 0,0001},
+		%w{0.1 0.01 0.001 0.0001},
 		%w{1/3 1/7 1/20 1/2},
 		%w{1/2 3/4 20/35 14/15},
 		%w{-27 26 25 24},
@@ -208,13 +204,19 @@ item_alternatives_n4 = [
 		%w{1 2 3 4},
 ]
 
-t = Test.create(name: "Mathematik",  info: "Mathetest", short_info: "Mathetest",len: 1, time: 900, subject: "Mathe", picture: "/images/Logos/mathe.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Mathe",  info: "Mathetest", short_info: "Mathetest",len: 1, time: 900, subject: "Mathe", picture: "/images/Logos/mathe.png", construct: "Probe", student_access:true, archive: false)
 
 i= 0
 while i<items_n4.size do
+  if(i==0)
+			it = t.items.build(itemtext: question_n4[i] + "{" + item_alternatives_n4[i].join(",") + "}", shorthand: items_n4[i], itemtype: 0, itemview: "items/studentbased/sinnentnehmender_lesetest/2testItemAchievement")
+			it.save
+			i = i+1
+  else
 		it = t.items.build(itemtext: question_n4[i] + "{" + item_alternatives_n4[i].join(",") + "}", shorthand: items_n4[i], itemtype: 0, itemview: "items/studentbased/sinnentnehmender_lesetest/2testItemStudent")
-	it.save
-	i = i+1
+		it.save
+		i = i+1
+  end
 end
 
 it = t.items.build(itemtext: "Ende", itemtype:1, itemview:"items/studentbased/sinnentnehmender_lesetest/3ende")

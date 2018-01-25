@@ -1,4 +1,4 @@
-class Feedback < ApplicationRecord
-  belongs_to :student
+class Feedback < ActiveRecord::Base
+  belongs_to :groups
 
 end

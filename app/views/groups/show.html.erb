@@ -31,8 +31,9 @@
   </div>
 
   <ul id="tabs" class="nav nav-pills" role="tablist">
-    <li role="presentation" class="active"><%= link_to "Tests", user_group_assessments_path(@user, @group), :data => {:remote => true, :target => "#tests"} %></li>
-    <li role="presentation"><%= link_to "Probanden", user_group_students_path(@user, @group), :data => {:remote => true, :target => "#students"} %></li>
+    <li role="presentation" class="active" ><%= link_to "Tests", user_group_assessments_path(@user, @group), :data => {:remote => true, :target => "#tests"} %></li>
+    <li role="presentation" id="b"><%= link_to "Probanden", user_group_students_path(@user, @group), :data => {:remote => true, :target => "#students"} %></li>
+    <li role="presentation"><%= link_to "Feedback", user_group_feedbacks_path(@user, @group), :data => {:remote => true, :target => "#feedbacks"} %></li>
   </ul>
 
   <div class="tab-content">
@@ -40,7 +41,10 @@
       <%= render 'assessments/index' %>
     </div>
     <div role="tabpanel" class="tab-pane" id="students">
-      <!--TODO: zereißt einen die Laufzeit. Bedingt durch laden aller results von den schülern, auf der indexseite!! brauchen wir doch gar nicht oder ?! eigentlich hier: render 'students/index'  -->
+      <%= render 'students/index' %>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="feedbacks">
 
     </div>
   </div>

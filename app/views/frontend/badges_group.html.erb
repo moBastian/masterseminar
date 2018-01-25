@@ -38,9 +38,10 @@
           <button type="submit" class="btn btn-lg btn-info" style="font-size: 2.2rem;">Abmelden</button>
         </form>
       </div>
+
       <div class = "navbar-right" style="padding-right: 15px">
         <form class="navbar-form">
-          <%= link_to 'Feedback', new_feedback_path, class:"btn btn-lg btn-info", style:"font-size: 2.2rem;"%>
+          <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-lg btn-info", style:"font-size: 2.2rem;"%>
         </form>
       </div>
     </div>
@@ -185,7 +186,7 @@
                 $('#emailgroup').addClass('has-error');
             }
         }
-        var not_first = "<%= $not_first%>";
+        var not_first = "<%= @not_first%>";
         if(achievementHash["a17"][0]!= "true" && not_first=="true") {
             showBadge("a17");
             achievementHash["a17"][0] = "true";
@@ -194,7 +195,7 @@
 
         }
 
-        var send_first = "<%= $send_feedback%>";
+        var send_first = "<%= @sendFeedback%>";
         if(achievementHash["a28"][0]!= "true" && send_first=="true") {
             showBadge("a28");
             achievementHash["a28"][0] = "true";
@@ -218,6 +219,12 @@
             $("#modalContent").html("<div class='text-center' style='font-size: 2.2rem'><img src=" + achievementHash[key][2] + " style='width:40%'><br/>" + achievementHash[key][4]+ "</div>");
             $("#exampleModal").modal();
         }
+
+        $(document).ready(function(){
+            setTimeout(function(){
+                $('#alert').remove();
+            }, 5000);
+        })
 
 
     </script>

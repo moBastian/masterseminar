@@ -177,9 +177,15 @@ t = Test.create(name: "Geographie",  info: "Geographietest", short_info: "Geogra
 
 i= 0
 while i<items_n4.size do
+	if(i==0||i==1)
+		it = t.items.build(itemtext: question_n4[i] + "{" + item_alternatives_n4[i].join(",") + "}", shorthand: items_n4[i], itemtype: 0, itemview: "items/studentbased/sinnentnehmender_lesetest/2testItemAchievement")
+		it.save
+		i = i+1
+	else
 		it = t.items.build(itemtext: question_n4[i] + "{" + item_alternatives_n4[i].join(",") + "}", shorthand: items_n4[i], itemtype: 0, itemview: "items/studentbased/sinnentnehmender_lesetest/2testItemStudent")
-	it.save
-	i = i+1
+		it.save
+		i = i+1
+	end
 end
 
 it = t.items.build(itemtext: "Ende", itemtype:1, itemview:"items/studentbased/sinnentnehmender_lesetest/3ende")

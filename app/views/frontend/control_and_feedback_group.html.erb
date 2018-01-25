@@ -39,7 +39,7 @@
       </div>
       <div class = "navbar-right" style="padding-right: 15px">
         <form class="navbar-form">
-          <%= link_to 'Feedback', new_feedback_path, class:"btn btn-lg btn-info", style:"font-size: 2.2rem;"%>
+          <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-lg btn-info", style:"font-size: 2.2rem;"%>
         </form>
       </div>
     </div>
@@ -49,58 +49,56 @@
   <div>
     <h1 style="font-family: fibel_nordregular;">Die folgenden Tests stehen für dich zur Verfügung:</h1>
     <br/>
-    <% count = 0 %>
-    <% if !@assessments.nil?%>
-        <% assessment_size = @assessments.size%>
-    <%else %>
-        <%assessment_size=0%>
-    <%end%>
-    <%while count < assessment_size%>
-        <% if(count % 3 == 0)%>
-            <div class="row">
-              <div class="col-lg-11">
-                <div class="row">
-                  <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
-                    <p style="font-size: 32px;text-align: center" >
-                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
-                      <br/>
-                      <%= @assessments[count].test.name %>
-                      <br/>
-                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
-                    </p>
-                  </div>
-        <%elsif count % 3 == 2%>
-            <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
-              <p style="font-size: 32px;text-align: center" >
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
-                <br/>
-                <%= @assessments[count].test.name %>
-                <br/>
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
-              </p>
-            </div>
-            </div>
-            </div>
-            </div>
-            <br/>
-            <br/>
-        <%else%>
-            <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
-              <p style="font-size: 32px;text-align: center" >
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150px" src=<%= @assessments[count].test.picture%>><% end %>
-                <br/>
-                <%= @assessments[count].test.name %>
-                <br/>
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><button class="btn btn-success btn-lg">Jetzt starten!</button><% end %>
-              </p>
-            </div>
-        <%end%>
-        <% count = count + 1%>
-    <%end%>
-    <%if !(assessment_size % 3 == 0)%>
-        </div>
-    <% end%>
-    </div>
+    <div>
+      <h1 style="font-size: 2.2rem">Die folgenden Tests stehen für dich zur Verfügung:</h1>
+      <br/>
+      <% count = 0 %>
+      <% if !@assessments.nil?%>
+          <% assessment_size = @assessments.size%>
+      <%else %>
+          <%assessment_size=0%>
+      <%end%>
+      <%while count < assessment_size%>
+          <% if(count % 3 == 0)%>
+              <div class="row">
+                <div class="col-lg-11">
+                  <div class="row">
+                    <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
+                      <p style="font-size: 2.2rem;text-align: center" >
+                        <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150vw" src=<%= @assessments[count].test.picture%>><% end %>
+                        <br/>
+                        <%= @assessments[count].test.name %>
+                      </p>
+                    </div>
+          <%elsif count % 3 == 2%>
+              <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
+                <p style="font-size: 2.2rem;text-align: center" >
+                  <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150vw" src=<%= @assessments[count].test.picture%>><% end %>
+                  <br/>
+                  <%= @assessments[count].test.name %>
+                </p>
+              </div>
+              </div>
+              </div>
+              </div>
+              <br/>
+          <%else%>
+              <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
+                <p style="font-size: 2.2rem;text-align: center" >
+                  <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150vw" src=<%= @assessments[count].test.picture%>><% end %>
+                  <br/>
+                  <%= @assessments[count].test.name %>
+                  <br/>
+                </p>
+              </div>
+          <%end%>
+          <% count = count + 1%>
+      <%end%>
+      <%if !(assessment_size % 3 == 0)%>
+          </div>
+      <% end%>
+      </div>
+
     <script>
         //possible Hack
         //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
@@ -124,6 +122,12 @@
                 $('#emailgroup').addClass('has-error');
             }
         }
+
+        $(document).ready(function(){
+            setTimeout(function(){
+                $('#alert').remove();
+            }, 5000);
+        })
 
 
     </script>

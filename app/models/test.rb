@@ -29,13 +29,31 @@ class Test < ActiveRecord::Base
     self.items.where("itemtype > ?", 0).order(:itemtype)
   end
 
-  def draw_items(first)
-    itemset = Array.new
+  def draw_items(oldItems)
     if false                          #Nett um zu testen (einfach auf true setzen)
       itemset = content_items
     else
+      newItems = content_items - oldItems
+      canidateItems = Array.new
+      if(newItems.size>5)
+        5.times do
+          canidateItems = canidateItems + [newItems.sample]
+          newItems = newItems -canidateItems
+        end
+      else
+        canidateItems = newItems
+      end
+      if(!canidateItems.size ==0)
+        (20-canidateItems.size).times do
+          remaining = content_items - canidateItems
+          canidateItems = canidateItems + [remaining.sample]
+        end
+      else
+        canidateItems = content_items
+      end
+      itemset = Array.new
       20.times do   # Folgende Ziehungen: Zufällig permutieren
-        remaining = content_items - itemset
+        remaining = canidateItems - itemset
         itemset = itemset + [remaining.sample]
       end
     end

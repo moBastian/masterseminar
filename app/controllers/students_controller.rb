@@ -44,6 +44,7 @@ class StudentsController < ApplicationController
           end
           head :ok
         elsif params.has_key?(:email)
+          session[:extraData][0] = true
           StudentMailer.edited(params[:email], @student.login).deliver_later
           head :ok
         end

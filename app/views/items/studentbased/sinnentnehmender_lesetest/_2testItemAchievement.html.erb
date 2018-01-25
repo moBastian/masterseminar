@@ -166,14 +166,14 @@
           sendAchievements();
       }
       switch (testName) {
-          case "Tiere&Pflanzen-Test":
+          case "Tiere&Pflanzen":
               if(achievementHash["a9"][0]!= "true") {
                   showBadge("a9");
                   achievementHash["a9"][0]= "true";
                   sendAchievements();
               }
               break;
-          case "Geographietest":
+          case "Geographie":
               specialQuest = $('#question').html();
               if(achievementHash["a18"][0]!= "true" && specialQuest=="Im Rahmen welches Ereignisses findet die Windjammerparade statt?" ) {
                   showBadge("a18");
@@ -185,23 +185,23 @@
                   sendAchievements();
               }
               break;
-          case "Geschichtstest":
+          case "Geschichts":
               break;
-          case "Mathetest":
+          case "Mathe":
               if(achievementHash["a19"][0]!= "true") {
                   showBadge("a19");
                   achievementHash["a19"][0]= "true";
                   sendAchievements();
               }
               break;
-          case "Sporttest":
+          case "Sport":
               if(achievementHash["a20"][0]!= "true") {
                   showBadge("a20");
                   achievementHash["a20"][0]= "true";
                   sendAchievements();
               }
               break;
-          case "Politiktest":
+          case "Politik":
               if(achievementHash["a29"][0]!= "true") {
                   showBadge("a29");
                   achievementHash["a29"][0]= "true";

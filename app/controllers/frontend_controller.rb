@@ -26,8 +26,12 @@ class FrontendController < ApplicationController
       session[:user_id] = nil
       @login_user = nil
 
+
+      #not a good pratice but a solution
+      session[:extraData] = [true, false]
+
+
       redirect_to '/frontend'
-      $not_first = "true"
     elsif g != nil
       @group = g
       s = Student.prepare_new_student(@group, params[:ip], params[:fingerprint])
@@ -35,7 +39,8 @@ class FrontendController < ApplicationController
       session[:student_id] = s.id
       session[:user_id] = nil
       @login_user = nil
-      $not_first = "false"
+      #not a good pratice but a solution
+      session[:extraData] = [false, false]
       redirect_to '/frontend'
     else
       redirect_to root_url, notice: "Der Code ist falsch! Bitte prüfe genau, ob du alles richtig eingegeben hast."
@@ -46,6 +51,7 @@ class FrontendController < ApplicationController
   def logout
     if(!session[:student_id].nil?)
       session[:student_id] = nil
+      session[:extraData] = nil
       @login_student = nil
     end
     redirect_to root_url
@@ -103,6 +109,11 @@ class FrontendController < ApplicationController
     else
       @student = Student.find(session[:student_id])
       @login_student = Student.find(session[:student_id])
+      @group = @student.group
+      @user =@student.group.user
+      @not_first = session[:extraData][0]
+      @sendFeedback = session[:extraData][1]
+
     end
   end
 

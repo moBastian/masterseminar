@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Kommentare:</h2>
+
+<% @feedbacks.each do |f|%>
+    <div class="well groupCard">
+      <div style="font-size: 1.8rem"><%=raw f.feedbacktext%></div>
+    </div>
+<%end %>
+
+

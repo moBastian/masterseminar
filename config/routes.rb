@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 Rails.application.routes.draw do
 
-  resources :feedbacks
+
   root 'frontend#welcome'
 
 
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         end
       end
       resources :students
+      resources :feedbacks
     end
   end
 
@@ -31,9 +32,6 @@ Rails.application.routes.draw do
   get 'frontend' => 'frontend#index'
   get 'frontend/:id' => 'frontend#start'
   post 'frontend/accept' => 'frontend#accept'
-#  post 'feedbacks/sendNew' => 'feedbacks#sendNew'
- # post 'feedbacks/new' => 'feedbacks#new'
-  resources :feedback
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

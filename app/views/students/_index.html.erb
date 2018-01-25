@@ -163,7 +163,7 @@
 
 <script>
   function notifyALl() {
-      $.ajax({url: '<%= user_group_student_path(@user,@group, @students, format: :text)%>' + '?email=allInGroup' });
+      $.ajax({url: '<%= user_group_students_path(@user,@group, @students, format: :text)%>' + '?email=allInGroup' });
       alert("E-Mails wurden versandt.")
   }
 </script>

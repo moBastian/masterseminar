@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180123083233) do
 
   create_table "feedbacks", force: :cascade do |t|
     t.text     "feedbacktext"
+    t.integer  "group_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

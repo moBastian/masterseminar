@@ -1,5 +1,9 @@
+var user = "<%= @user.id%>";
+var group = "<%= @group.id%>";
+var buildhref = "#tabs a[href='/users/" + user + "/groups/" + group + "/students']"
 $('#students').html("<%= escape_javascript(render 'index')%>");
-$('#tabs a:last').tab('show');
+$(buildhref).tab('show');
+
 
 
 

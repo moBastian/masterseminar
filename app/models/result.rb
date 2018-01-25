@@ -28,7 +28,7 @@ class Result < ActiveRecord::Base
   def initialize_results()
     self.responses = Array.new
     self.extra_data = Hash.new
-    drawn_items = measurement.assessment.test.draw_items(self.getPriorResult == -1)
+    drawn_items = measurement.assessment.test.draw_items(self.getPriorResultsItem(measurement, self.student))
     self.extra_data["intro"] = drawn_items[0]
     self.items = drawn_items[1]
     self.extra_data["outro"] = drawn_items[2]

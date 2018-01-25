@@ -3,11 +3,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body style="background-color: #F4FBFF">
-<nav class="navbar">
-  <p class="navbar-brand"><%= "Tester: #{@student.login}: #{@measurement.assessment.test.name} durchgeführt am #{@measurement.date.to_date.strftime("%d.%m.%Y")} um #{@measurement.date.strftime("%H:%M")}" %></p>
-  <p class="navbar-brand" id="state"></p>
-</nav>
+<body style="background-color: #FFFFFF">
+<h2>Kategorie: <%= @measurement.assessment.test.name%></h2>
 
 <div id="testEnviroment">
 </div>
@@ -75,7 +72,7 @@
 
     function checkBadges() {
         switch (testName) {
-            case "Tiere&Pflanzen-Test":
+            case "Tiere&Pflanzen":
                 if(achievementHash["a2"][0]!= "true") {
                     checkProgress("a2", 50);
                 }
@@ -84,7 +81,7 @@
                     checkAll();
                 }
                 break;
-            case "Geographietest":
+            case "Geographie":
                 if(achievementHash["a5"][0]!= "true") {
                     checkProgress("a5", 50);
                 }
@@ -95,16 +92,16 @@
                 break;
             case "Geschichtstest":
                 break;
-            case "Mathetest":
-                if(achievementHash["a10"][0]!= "true") {
-                    checkProgress("a10", 50);
+            case "Mathe":
+                if(achievementHash["a12"][0]!= "true") {
+                    checkProgress("a12", 50);
                 }
-                if(achievementHash["a10"][0]== "true"&&achievementHash["a11"][0]!= "true") {
-                    checkProgress("a11", 90);
+                if(achievementHash["a12"][0]== "true"&&achievementHash["a13"][0]!= "true") {
+                    checkProgress("a13", 90);
                     checkAll();
                 }
                 break;
-            case "Sporttest":
+            case "Sport":
                 if(achievementHash["a13"][0]!= "true") {
                     checkProgress("a13", 50);
                 }
@@ -113,7 +110,7 @@
                     checkAll();
                 }
                 break;
-            case "Politiktest":
+            case "Politik":
                 if(achievementHash["a18"][0]!= "true") {
                     checkProgress("a18", 50);
                 }

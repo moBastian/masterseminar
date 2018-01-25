@@ -1,10 +1,26 @@
 class FeedbacksController < ApplicationController
+  before_action :set_user
+  before_action :set_group
+  before_action :convertFeedback, only: [:create]
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
   layout 'plainStudent'
   # GET /feedbacks
   # GET /feedbacks.json
   def index
-    @feedbacks = Feedback.all
+    @feedbacks = Feedback.where(group_id: @group.id)
+
+    respond_to do |format|
+      format.js {}
+      format.html {}
+      @students = Student.where(:group_id => @group.id)
+      format.pdf {
+        render pdf: "Zugangsdaten der Probandengruppe #{@group.name}",
+               template: "students/index.pdf.erb"
+      }
+      format.text {
+        render 'index', :formats => [:js], content_type: 'text/javascript'
+      }
+    end
   end
 
   # GET /feedbacks/1
@@ -24,13 +40,14 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks
   # POST /feedbacks.json
   def create
-    @feedback = Feedback.new(feedback_params)
+    feedback_params[:feedbacktext] = feedback_params[:feedbacktext].gsub!("\n", "<br/>")
+    @feedback = @group.feedbacks.new(feedback_params)
 
     respond_to do |format|
       if @feedback.save
 
         format.html {
-          $send_feedback = "true"
+          session[:extraData][1] = true
           redirect_to '/frontend', notice: 'Vielen Dank für das Feedback :)'
         }
         format.json { render :show, status: :created, location: @feedback }
@@ -65,14 +82,37 @@ class FeedbacksController < ApplicationController
     end
   end
 
+  def convertFeedback
+    feedback_params[:feedbacktext] = feedback_params[:feedbacktext].gsub!("\n", "<br/>")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feedback
       @feedback = Feedback.find(params[:id])
     end
 
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
+    def set_group
+      @group = Group.find(params[:group_id])
+    end
+
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def feedback_params
       params.require(:feedback).permit(:feedbacktext)
     end
+
+
+    def is_allowed
+      #check if user is allowed
+      #@result exists only before update => student can only update a result
+      unless (!@login_user.nil? && @login_user.hasCapability?("admin")) || (!@login_user.nil? && params.has_key?(:user_id) &&
+          (@login_user.id == params[:user_id].to_i)) ||((@login_student.id == @result.student.id) && !@login_student.nil?)
+        redirect_to '/backend'
+      end
+  end
 end
