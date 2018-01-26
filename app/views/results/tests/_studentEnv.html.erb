@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body style="background-color: #FFFFFF">
-<h2>Kategorie: <%= @measurement.assessment.test.name%></h2>
+
 
 <div id="testEnviroment">
 </div>
@@ -40,6 +40,7 @@
     var currentItemIndex = -1;
     var currentStudent = -1;
     var score = 0;
+    var played_questions = 0;
     currentStudent = <%=@result.id%>;
     var testName = "<%= raw @measurement.assessment.test.name%>";
     <% Item.where(test_id:@measurement.assessment.test.id)%>;

@@ -81,14 +81,14 @@ class FrontendController < ApplicationController
     @test = @assessment.test
     @result = @student.getCurrentResult(@measurement.id)
     if (@test.student_access) #...ggf mehr Tests
-
-      render "results/tests/#{@test.view_info}"
+      render "results/tests/#{@test.view_info}", layout: 'empty'
     else
       redirect_to '/schueler'
     end
   end
   def accept
-    if(!params[:username]=="")
+    puts(params[:username])
+    if(params[:username]!="")
       @login_student.name = params[:username]
     else
       @login_student.name = "user" + @login_student.id.to_s

@@ -29,6 +29,8 @@
           <div id="emailgroup" class="form-group">
             <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style=" font-size: 2.2rem; height: 4.4rem;">
           </div>
+          <input type="checkbox" class="form-check-input" id="emailCheck">
+          <label class="form-check-label" for="exampleCheck1">E-Mail speichern</label>
           <button id="submit" type="submit" class="btn btn-default" style="font-size: 2.2rem;" onclick="sendMail();return false;">Absenden</button>
         </form>
       </div>
@@ -177,10 +179,12 @@
 
 
             if ($('#email').is(':valid') && $('#email').val() != '') {
-                $.ajax({url: '<%= user_group_student_path(@student.group.user,@student.group,@student, format: :text)%>' + '?email=' + $('#email').val()});
+                $.ajax({url: '<%= user_group_student_path(@student.group.user,@student.group,@student, format: :text)%>' + '?email=' + $('#email').val()+  '/' + $('#emailCheck').prop( "checked" )});
                 $('#submit').addClass('btn-success');
                 $('#emailgroup').addClass('has-success');
-            }
+                if(!$('#emailCheck').prop( "checked" )){
+                    $('#email').val("")
+                }            }
             else {
                 $('#submit').addClass('btn-danger');
                 $('#emailgroup').addClass('has-error');

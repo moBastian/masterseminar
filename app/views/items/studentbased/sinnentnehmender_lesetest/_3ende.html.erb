@@ -93,7 +93,9 @@
 
 
   var mypoints = <%= raw @student.points%>
-  var test = {"student": {"points": score + mypoints}};
+  var saved_played_questions = <%= raw @student.played_questions%>;
+
+  var test = {"student": {"points": score + mypoints, "played_questions": played_questions + saved_played_questions}};
   $.ajax({
       method: 'PUT',
       url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",

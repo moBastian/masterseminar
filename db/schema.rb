@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20180123083233) do
     t.text     "email"
     t.text     "achievement"
     t.integer  "points"
+    t.integer  "played_questions"
     t.text     "first_accept"
   end
 

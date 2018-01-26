@@ -2,6 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/scss" href=<%= stylesheet_path "myStyle.css"%>/>
 </head>
 
 <div class="container-fluid">
@@ -17,7 +18,7 @@
     <%= yield %>
   </div>
 </div>
-
+<body>
 
 <% content_for :top do%>
     <div class="container-fluid">
@@ -28,6 +29,8 @@
           <div id="emailgroup" class="form-group">
             <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style=" font-size: 2.2rem; height: 4.4rem;">
           </div>
+          <input type="checkbox" class="form-check-input" id="emailCheck">
+          <label class="form-check-label" for="exampleCheck1">E-Mail speichern</label>
           <button id="submit" type="submit" class="btn btn-default" style="font-size: 2.2rem;" onclick="sendMail();return false;">Absenden</button>
         </form>
       </div>
@@ -45,43 +48,40 @@
     </div>
 <% end %>
 
-
-
-<% points = Student.where(group_id: @student.group_id).order(points: :desc).pluck(:points).uniq%>
-<% points = points + [0]%>
-<%puts(points)%>
-<% count = -1%>
-<% tempPoints = -1%>
-<% while @student.points != tempPoints%>
-    <% count = count+1%>
-    <% tempPoints = points[count]%>
-<% end%>
-<div>
-  <%if points[count-1] == 0%>
-      <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie sind auf Platz <%= count+1%></div><br/>
-      <% if !points[count+1].nil?%>
-          <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie haben einen Vorsprung von <%= @student.points - points[count+1] %> richtigen Antworten!</div><br/>
-      <% end%>
-  <%else%>
-
-      <%puts @student.points%>
-      <div style="font-size: 40px; font-family: fibel_nordregular;"> Bis zum nächsten Platz sind es nur noch <%= points[count-1] - @student.points%> richtige Antworten!</div><br/>
-      <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie sind auf Platz <%= count+1%></div><br/>
-      <% if !points[count+1].nil?%>
-          <div style="font-size: 40px; font-family: fibel_nordregular;"> Sie haben einen Vorsprung von <%= @student.points - points[count+1] %> Fragen!</div><br/>
-      <% end%>
-  <%end%>
+<% ranking_info =@student.get_data_ranking() %>
+<% points = ranking_info.pluck(:points).uniq%>
+<div class="container" style="width: auto;">
+    <table style="border:1px solid black ; font-size: 1.2em; margin-left: 1px; margin-right: 1px; width: auto">
+      <% points.each do |p|%>
+          <tr>
+            <td style="padding-left: 1px; text-align: right">
+              <%=p%> Fragen richtig beantwortet:&nbsp;
+            </td>
+            <%count=0%>
+            <%if @student.points==p%>
+                <td><b><--<%=@student.name%>-->, </b></td>
+            <%end%>
+            <%ranking_info.where(points: p).each_with_index do |s, i|%>
+                <%if(count<7)%>
+                    <%nextStudent = ranking_info.where(points: p)[i+1]%>
+                    <%if nextStudent.nil? || count==6%>
+                        <td>&nbsp;<%= s.name%>&nbsp;</td>
+                        <%count = count+1%>
+                    <%else%>
+                        <td>&nbsp;<%= s.name%>, </td>
+                        <%count = count+1%>
+                    <%end%>
+                <%end%>
+            <%end%>
+          </tr>
+      <%end%>
+    </table>
 </div>
-
-
-
 <br/>
 <div>
   <h1 style="font-family: fibel_nordregular;">Die folgenden Tests stehen für dich zur Verfügung:</h1>
   <br/>
   <div>
-    <h1 style="font-size: 2.2rem">Die folgenden Tests stehen für dich zur Verfügung:</h1>
-    <br/>
     <% count = 0 %>
     <% if !@assessments.nil?%>
         <% assessment_size = @assessments.size%>
@@ -128,21 +128,9 @@
         </div>
     <% end%>
     </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" style="font-size: 2.2rem">Neues Abzeichen erhalten</h5>
-      </div>
-      <div class="modal-body" id="modalContent">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 2.2rem">Schließen</button>
-      </div>
-    </div>
-  </div>
-</div>
+</body>
+</html>
+
   <script>
       //possible Hack
       //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
@@ -155,4 +143,25 @@
               $('#alert').remove();
           }, 5000);
       })
+
+      function sendMail() {
+          $('#emailgroup').removeClass('has-error');
+          $('#emailgroup').removeClass('has-success');
+          $('#submit').removeClass('btn-danger');
+          $('#submit').removeClass('btn-success');
+          if ($('#email').is(':valid') && $('#email').val() != '') {
+              $.ajax({url: '<%= user_group_student_path(@student.group.user,@student.group,@student, format: :text)%>' + '?email=' + $('#email').val()+  '/' + $('#emailCheck').prop( "checked" )});
+              $('#submit').addClass('btn-success');
+              $('#emailgroup').addClass('has-success');
+              if(!$('#emailCheck').prop( "checked" )){
+                  $('#email').val("")
+              }
+
+
+          }
+          else {
+              $('#submit').addClass('btn-danger');
+              $('#emailgroup').addClass('has-error');
+          }
+      }
   </script>

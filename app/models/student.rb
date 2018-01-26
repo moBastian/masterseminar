@@ -155,6 +155,37 @@ class Student < ActiveRecord::Base
 	return a
   end
 
+  def get_data_ranking()
+    potential_group = Student.where(group_id:self.group_id).
+        where.not(id: self.id).
+        where.not('points > :max_points', max_points:self.played_questions )
+    group_size = potential_group.size
+    if(group_size>5)
+      i=0
+      result_group= []
+      check_diff_point_group = 0
+      while result_group.size < 5  do
+        result_group = potential_group.
+            where('played_questions< :max_played AND played_questions > :min_played',max_played:self.played_questions+i, min_played:self.played_questions-i)
+        check_diff_point_group = result_group.pluck(:points).uniq.size
+        if(check_diff_point_group<5 && result_group.size!=potential_group.size)
+          result_group = []
+        end
+        i = i+1
+      end
+    else
+      i=0
+      result_group= []
+      while result_group.size < group_size do
+        result_group =
+            potential_group.
+                where('played_questions< :max_played AND played_questions > :min_played',max_played:self.played_questions+i, min_played:self.played_questions-i)
+        i = i+1
+      end
+    end
+    return result_group.order(points: :desc)
+  end
+
   #get current result objekt of student
   def getCurrentResult(measurement_id)
     r = Result.where(:student_id => self.id, :measurement_id => measurement_id).first
@@ -172,11 +203,10 @@ class Student < ActiveRecord::Base
     while testLoginFree
       cur = (('0'..'9').to_a + ('a'..'z').to_a).shuffle.first(6).join
       if(Student.where(:login => cur).empty?)
-        puts(cur)
         testLoginFree=false
       end
     end
-    s = group.students.build(name: cur, group_type: 4, ip: ip, fingerprint: fingerprint, achievement: achievement, points:0)
+    s = group.students.build(name: cur, group_type: 5, ip: ip, fingerprint: fingerprint, achievement: achievement, points:104, played_questions:105)
     s.save
     return s
   end
