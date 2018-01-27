@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20180123083233) do
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "gender"
+    t.text     "gender"
     t.text     "login"
     t.integer  "group_type"
     t.text     "fingerprint"

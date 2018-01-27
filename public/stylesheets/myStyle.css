@@ -1,0 +1,217 @@
+/*
+small resolution smartphones, tablets
+*/
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 991px)  {
+  h1{
+    font-size: 1.6em;
+  }
+
+  .myImg {
+    width: 116px;
+  }
+
+  p{
+    font-size: 1.4em;
+  }
+  .myP{
+    font-size: 1.4em;
+    text-align: center;
+  }
+
+  .secondColumn{
+    background-color:lavender
+  }
+
+  .notice{
+    font-size: 1.3em;
+  }
+
+  /* Force table to not be like tables anymore */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr { border: 1px solid #ccc; }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    text-align: center;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+  p {
+    font-size: 1.8em;
+  }
+  .myInput {
+    font-size: 1.5em;
+    height: 1.9em;
+    width: 100%;
+  }
+  button {
+    font-size: 2em;
+  }
+
+}
+
+/* Large desktop */
+@media (min-width: 992px) and (max-width: 1339px) {
+  .tdQuestion {
+    text-align: right;
+  }
+  p {
+    font-size: 1.4em;
+  }
+
+  h1{
+    font-size: 1.6em;
+  }
+
+  .myP{
+    font-size: 1.6em;
+    text-align: center;
+  }
+  .myInput {
+    font-size: 1.4em;
+    height: 1.6em;
+    width: 100%;
+  }
+  button {
+    font-size: 1.4em;
+  }
+  table {
+    border:1px solid black;
+    font-size: 0.9em;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: auto
+  }
+
+  .myImg {
+    width: 116px;
+  }
+
+  .secondColumn{
+    margin-top:30px;
+    text-align: center;
+    background-color:lavender
+  }
+
+  .notice{
+    font-size: 1.3em;
+  }
+
+
+}
+
+/* Large desktop */
+@media (min-width: 1340px) and (max-width: 1899px) {
+  .tdQuestion {
+    text-align: right;
+  }
+  h1{
+    font-size: 1.7em;
+  }
+  p {
+    font-size: 1.4em;
+  }
+  .myP{
+    font-size: 2.2em;
+    text-align: center;
+  }
+  .myInput {
+    font-size: 1.4em;
+    height: 1.6em;
+    width: 400px;
+  }
+  button {
+    font-size: 1.4em;
+  }
+  table {
+    border:1px solid black;
+    font-size: 0.9em;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: auto
+  }
+
+  .myImg {
+    width: 116px;
+  }
+
+  .secondColumn{
+    margin-top:30px;
+    text-align: center;
+    background-color:lavender
+  }
+
+  .notice{
+    font-size: 1.3em;
+  }
+
+}
+
+/*full-HD and 2k resolution*/
+@media (min-width: 1900px)  {
+  .tdQuestion {
+    text-align: right;
+  }
+  p {
+    font-size: 1.8em;
+  }
+  .myP{
+    font-size: 2.2em;
+    text-align: center;
+  }
+  .myInput {
+    font-size: 1.8em;
+    height: 1.9em;
+    width: 550px;
+  }
+  button {
+    font-size: 1.8em;
+  }
+  table {
+    border:1px solid black;
+    font-size: 1.2em;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: auto
+  }
+
+  .myImg {
+    width: auto;
+  }
+
+  .secondColumn{
+    margin-top:30px;
+    text-align: center;
+    background-color:lavender
+  }
+
+  .notice{
+    font-size: 1.3em;
+  }
+
+
+}

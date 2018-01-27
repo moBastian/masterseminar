@@ -2,69 +2,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/scss" href=<%= stylesheet_path "myStyle.css"%>/>
+  <%= stylesheet_link_tag '/stylesheets/myStyle.css', media: 'all', 'data-turbolinks-track' => true %>
 </head>
-
+<body>
+<div class="container" style="width: auto; height: auto">
 <div class="container-fluid">
   <div id="content">
     <div id="alert">
       <% unless notice.blank? %>
           <div class="alert alert-info alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <p id="notice"><%= notice %></p>
+            <div id="notice" class="notice"><%= notice %></div>
           </div>
       <% end %>
     </div>
     <%= yield %>
   </div>
 </div>
-<body>
+
 
 <% content_for :top do%>
     <div class="container-fluid">
-      <p class = "navbar-text" style="font-size: 2.2rem;">Angemeldet als: <%= @student.login %></p>
+      <div>
+        <p style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
+        <div align="right" style="padding-right: 15px">
+          <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
+            <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-lg btn-primary", style:"margin-right:40px;"%>
+            <%= token_tag nil %>
+            <button type="submit" class="btn btn-lg btn-primary">Abmelden</button>
+          </form>
+        </div>
+      </div>
       <div>
         <form class="navbar-form navbar-left">
-          <div class = "form-group" style="font-size: 2.2rem;">Anmeldecode per E-mail zusenden:</div>
+          <p class = "form-group">Anmeldecode per E-mail zusenden:</p>
           <div id="emailgroup" class="form-group">
-            <input id="email" type="email" class="form-control" placeholder="E-Mail Adresse" style=" font-size: 2.2rem; height: 4.4rem;">
+            <input id="email" type="email" class="myInput" placeholder="E-Mail Adresse">
           </div>
           <input type="checkbox" class="form-check-input" id="emailCheck">
           <label class="form-check-label" for="exampleCheck1">E-Mail speichern</label>
-          <button id="submit" type="submit" class="btn btn-default" style="font-size: 2.2rem;" onclick="sendMail();return false;">Absenden</button>
+          <button id="submit" type="submit" class="btn btn-lg btn-default"  onclick="sendMail();return false;">Absenden</button>
         </form>
       </div>
-      <div class = "navbar-right" style="padding-right: 15px">
-        <form class="navbar-form" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-          <%= token_tag nil %>
-          <button type="submit" class="btn btn-lg btn-info" style="font-size: 2.2rem;">Abmelden</button>
-        </form>
-      </div>
-      <div class = "navbar-right" style="padding-right: 15px">
-        <form class="navbar-form">
-          <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-lg btn-info", style:"font-size: 2.2rem;"%>
-        </form>
-      </div>
+
     </div>
 <% end %>
 
 <% ranking_info =@student.get_data_ranking() %>
 <% points = ranking_info.pluck(:points).uniq%>
 <div class="container" style="width: auto;">
-    <table style="border:1px solid black ; font-size: 1.2em; margin-left: 1px; margin-right: 1px; width: auto">
+    <table>
       <% points.each do |p|%>
           <tr>
-            <td style="padding-left: 1px; text-align: right">
+            <td style="padding-left: 1px;" class="tdQuestion">
               <%=p%> Fragen richtig beantwortet:&nbsp;
             </td>
             <%count=0%>
             <%if @student.points==p%>
-                <td><b><--<%=@student.name%>-->, </b></td>
+                <td><b>--><%=@student.name%><--</b>, </td>
             <%end%>
             <%ranking_info.where(points: p).each_with_index do |s, i|%>
-                <%if(count<7)%>
+                <%if s==@student%>
+                <%elsif(count<5)%>
                     <%nextStudent = ranking_info.where(points: p)[i+1]%>
-                    <%if nextStudent.nil? || count==6%>
+                    <%if nextStudent.nil? || count==4%>
                         <td>&nbsp;<%= s.name%>&nbsp;</td>
                         <%count = count+1%>
                     <%else%>
@@ -79,7 +80,7 @@
 </div>
 <br/>
 <div>
-  <h1 style="font-family: fibel_nordregular;">Die folgenden Tests stehen für dich zur Verfügung:</h1>
+  <h1>Die folgenden Tests stehen für dich zur Verfügung:</h1>
   <br/>
   <div>
     <% count = 0 %>
@@ -88,46 +89,36 @@
     <%else %>
         <%assessment_size=0%>
     <%end%>
-    <%while count < assessment_size%>
-        <% if(count % 3 == 0)%>
-            <div class="row">
-              <div class="col-lg-11">
-                <div class="row">
-                  <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
-                    <p style="font-size: 2.2rem;text-align: center" >
-                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150vw" src=<%= @assessments[count].test.picture%>><% end %>
+    <div class="row">
+      <div class="col-lg-11">
+        <div class="row">
+          <%while count < assessment_size%>
+              <% if(count<3)%>
+                  <div class='col-lg-3 col-md-4 col-lg-offset-1' style="text-align: center;background-color:lavender">
+                    <div class="myP" >
+                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img class="myImg" src=<%= @assessments[count].test.picture%>><% end %>
                       <br/>
                       <%= @assessments[count].test.name %>
-                    </p>
+                    </div>
                   </div>
-        <%elsif count % 3 == 2%>
-            <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
-              <p style="font-size: 2.2rem;text-align: center" >
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150vw" src=<%= @assessments[count].test.picture%>><% end %>
-                <br/>
-                <%= @assessments[count].test.name %>
-              </p>
-            </div>
-            </div>
-            </div>
-            </div>
-            <br/>
-        <%else%>
-            <div class='col-lg-3 col-md-offset-1' style="text-align: center;background-color:lavender">
-              <p style="font-size: 2.2rem;text-align: center" >
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img width="150vw" src=<%= @assessments[count].test.picture%>><% end %>
-                <br/>
-                <%= @assessments[count].test.name %>
-                <br/>
-              </p>
-            </div>
-        <%end%>
-        <% count = count + 1%>
-    <%end%>
-    <%if !(assessment_size % 3 == 0)%>
+              <%else%>
+                  <div class='col-lg-3 col-md-4 col-lg-offset-1 secondColumn'>
+                    <div class="myP">
+                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img class="myImg" src=<%= @assessments[count].test.picture%>><% end %>
+                      <br/>
+                      <%= @assessments[count].test.name %>
+                      <br/>
+                    </div>
+                  </div>
+              <%end%>
+              <% count = count + 1%>
+          <%end%>
         </div>
-    <% end%>
+      </div>
     </div>
+  </div>
+</div>
+</div>
 </body>
 </html>
 
@@ -142,7 +133,7 @@
           setTimeout(function(){
               $('#alert').remove();
           }, 5000);
-      })
+      });
 
       function sendMail() {
           $('#emailgroup').removeClass('has-error');

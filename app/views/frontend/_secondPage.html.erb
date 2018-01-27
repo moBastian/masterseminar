@@ -1,0 +1,117 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag '/stylesheets/myStyle.css', media: 'all', 'data-turbolinks-track' => true %>
+</head>
+<div class="container-fluid">
+  <div class="jumbotron" id="accept">
+    <%= form_tag(url_for(:controller => 'frontend', :action => 'accept'), :class => "form") do %>
+        <div class="row">
+          <div style="margin: 15px;">
+            <h3>Steckbrief:</h3>
+          </div>
+
+          <div class="col-xs-12" id="userName">
+            <div class="form-group">
+              <label for="usr" style="font-size: 20px">Username:</label><br/>
+              <%= text_field_tag(:username) %>
+            </div>
+          </div>
+
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="age" style="font-size: 20px">Alter:</label><br/>
+              <%= number_field_tag(:age) %>
+            </div>
+          </div>
+
+
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="gender" style="font-size: 20px">Geschlecht:</label><br/>
+              <%= radio_button_tag(:gender, 'keine Angabe', true, style:'height:2em; width: 2em;')%>
+              <label for="gender_keine_Angabe" style="font-size: 1.4em">Keine Angabe</label><br/>
+              <%= radio_button_tag(:gender, "male",false, style:'height:2em; width: 2em;')%>
+              <label for="gender_male" style="font-size: 1.4em">männlich</label><br/>
+              <%= radio_button_tag(:gender, 'female',false, style:'height:2em; width: 2em;')%>
+              <label for="gender_female" style="font-size: 1.4em">weiblich</label>
+            </div>
+          </div>
+
+
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="email" style="font-size: 20px; width: auto">E-Mail-Adresse:</label><br/>
+              <%= email_field_tag(:email) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <br/>
+          <div class="col-xs-12">
+            <div class="form-group">
+              <%= submit_tag 'Absenden', :class => "btn btn-lg btn-info", :style => "font-size: 20px"%>
+            </div>
+          </div>
+        </div>
+    <% end %>
+
+  </div>
+</div>
+
+<script>
+    var groupNum = "<%= @student.group_type%>";
+    var age = "<%= @student.age%>";
+    var gender = "<%= @student.gender%>";
+    var email = "<%= @student.email%>";
+    $(document).ready(function(){
+        setTimeout(function(){
+            $('#alert').remove();
+        }, 5000);
+    });
+    if(gender=="keine Angabe"){
+        $('#gender_keine_Angabe').prop('checked', true);
+    }else if(gender=="männlich"){
+        $('#gender_male').prop('checked', true);
+    }
+    else{
+        $('#gender_female').prop('checked', true);
+    }
+
+    $('#username').addClass("form-control").addClass("myInput").val("user"+getRndInteger(100, 500)).css('font-size', '1.3em').prop('required',true);
+    $('#email').addClass("form-control").addClass("myInput").css('font-size', '1.3em');
+    $('#gender').addClass("form-control").css("width", "auto").css("background-color", "white");
+    $('#age').addClass("form-control").css("width", "80px").css('font-size', '1.3em').prop("type", "number").prop("min",14).prop("max",99).prop("max",99).prop('required',true).attr('maxlength','2');
+    $('#age').get(0).type = 'number';
+    $('#age').on('keypress', function(key) {
+        if(key.charCode==8 && key.charCode < 48 || key.charCode > 57) return false;
+    });
+    if(!age==""){
+        $('#age').val(age)
+    }
+    if(!email==""){
+        $('#email').val(email)
+    }
+
+    if(!(groupNum=="3" || groupNum=="5")){
+        $('#userName').removeClass("col-xs-2").html("");
+    }
+
+    function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) ) + min;
+    }
+
+</script>
+
+<style>
+  /* Hide HTML5 Up and Down arrows. */
+  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+</style>

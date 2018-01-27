@@ -28,7 +28,8 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @groups = @user.groups
-    @group = @user.groups.build(group_params)
+    newName = @user.id.to_s + group_params[:name]
+    @group = @user.groups.build(name:newName, archive:group_params[:archive])
     @group.demo = false
     @group.export = true
     respond_to do |format|

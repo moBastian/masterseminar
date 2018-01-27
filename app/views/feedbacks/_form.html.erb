@@ -25,7 +25,11 @@
 
 
           <div class="actions">
-            <%= f.submit "Kommentar abschicken",  class: "btn btn-lg btn-info", style:"font-size: 2rem", data: { confirm: 'Kommentar wirklich speichern?' }%>
+            <%= link_to 'Zurück', frontend_path, class:"btn btn-lg btn-info",style:"font-size: 1.4em;margin-right:20px"%>
+
+            <%= f.submit "Kommentar abschicken",  class: "btn btn-lg btn-info", style:"font-size: 1.4em", data: { confirm: 'Kommentar speichern?' }%>
+          </div>
+          <div>
           </div>
       <% end %>
     </div>

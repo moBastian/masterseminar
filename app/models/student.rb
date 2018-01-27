@@ -5,8 +5,9 @@ class Student < ActiveRecord::Base
   has_many :results, :dependent => :destroy
 
   #Validations:
-  validates_presence_of :name
+  validates_presence_of :name, :gender
   after_create :set_login, :set_group_type
+  validates_uniqueness_of :name, scope: :group_id
 
 
   serialize :achievement, Hash
@@ -15,7 +16,7 @@ class Student < ActiveRecord::Base
   #Getter für Merkmale:
 
   def get_gender(raw = false)
-    return self[:gender].nil? ? (raw ? "nicht erfasst" : "<i>nicht erfasst</i>") : (self[:gender] ? "männlich" : "weiblich")
+    return self[:gender]
   end
 
   def get_birthdate(raw = false)
@@ -157,7 +158,6 @@ class Student < ActiveRecord::Base
 
   def get_data_ranking()
     potential_group = Student.where(group_id:self.group_id).
-        where.not(id: self.id).
         where.not('points > :max_points', max_points:self.played_questions )
     group_size = potential_group.size
     if(group_size>5)
@@ -183,7 +183,12 @@ class Student < ActiveRecord::Base
         i = i+1
       end
     end
-    return result_group.order(points: :desc)
+    if(result_group.size==0)
+      return result_group
+    else
+      return result_group.order(points: :desc)
+    end
+
   end
 
   #get current result objekt of student
@@ -206,7 +211,7 @@ class Student < ActiveRecord::Base
         testLoginFree=false
       end
     end
-    s = group.students.build(name: cur, group_type: 5, ip: ip, fingerprint: fingerprint, achievement: achievement, points:104, played_questions:105)
+    s = group.students.build(name: cur, group_type: 5, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:104, played_questions:105)
     s.save
     return s
   end
