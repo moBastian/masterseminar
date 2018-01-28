@@ -1,11 +1,19 @@
 /*
 small resolution smartphones, tablets
 */
+.navbar {
+  margin-bottom: 5px;
+}
+.myBadge {
+  width: 50px;
+}
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 991px)  {
   h1{
     font-size: 1.6em;
+    margin-top: 7px;
+    margin-bottom: 0px;
   }
 
   .myImg {
@@ -28,38 +36,7 @@ only screen and (max-width: 760px),
     font-size: 1.3em;
   }
 
-  /* Force table to not be like tables anymore */
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
 
-  /* Hide table headers (but not display: none;, for accessibility) */
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-
-  tr { border: 1px solid #ccc; }
-
-  td {
-    /* Behave  like a "row" */
-    border: none;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    text-align: center;
-  }
-
-  td:before {
-    /* Now like a table header */
-    position: absolute;
-    /* Top/left values mimic padding */
-    top: 6px;
-    left: 6px;
-    width: 45%;
-    padding-right: 10px;
-    white-space: nowrap;
-  }
   p {
     font-size: 1.8em;
   }
@@ -85,6 +62,8 @@ only screen and (max-width: 760px),
 
   h1{
     font-size: 1.6em;
+    margin-top: 7px;
+    margin-bottom: 0px;
   }
 
   .myP{
@@ -101,11 +80,12 @@ only screen and (max-width: 760px),
   }
   table {
     border:1px solid black;
-    font-size: 0.9em;
+    font-size: 12px;
     margin-left: 1px;
     margin-right: 1px;
     width: auto
   }
+
 
   .myImg {
     width: 116px;
@@ -119,6 +99,30 @@ only screen and (max-width: 760px),
 
   .notice{
     font-size: 1.3em;
+  }
+
+  @media (max-height: 500px) {
+    .myImg {
+      width: 67px;
+    }
+    .myP{
+      font-size: 1.2em;
+      text-align: center;
+    }
+    h1{
+      font-size: 1.3em;
+      margin-top: 7px;
+      margin-bottom: 0px;
+    }
+    button {
+      padding: 5px 10px;
+      line-height: 1.5;
+      border-radius: 3px;
+      font-size: 1.1em;
+    }
+    .myBadge {
+      width: 30px;
+    }
   }
 
 
@@ -129,24 +133,17 @@ only screen and (max-width: 760px),
   .tdQuestion {
     text-align: right;
   }
-  h1{
-    font-size: 1.7em;
-  }
+
   p {
     font-size: 1.4em;
   }
-  .myP{
-    font-size: 2.2em;
-    text-align: center;
-  }
+
   .myInput {
     font-size: 1.4em;
     height: 1.6em;
     width: 400px;
   }
-  button {
-    font-size: 1.4em;
-  }
+
   table {
     border:1px solid black;
     font-size: 0.9em;
@@ -154,11 +151,6 @@ only screen and (max-width: 760px),
     margin-right: 1px;
     width: auto
   }
-
-  .myImg {
-    width: 116px;
-  }
-
   .secondColumn{
     margin-top:30px;
     text-align: center;
@@ -169,6 +161,54 @@ only screen and (max-width: 760px),
     font-size: 1.3em;
   }
 
+
+
+
+  @media (max-height: 759px) {
+    .myImg {
+      width: 80px;
+    }
+    .myP{
+      font-size: 1.2em;
+      text-align: center;
+    }
+    h1{
+      font-size: 1.5em;
+      margin-top: 7px;
+      margin-bottom: 0px;
+    }
+    button {
+      padding: 5px 10px;
+      line-height: 1.5;
+      border-radius: 3px;
+      font-size: 1.1em;
+    }
+    .myBadge {
+      width: 30px;
+    }
+  }
+
+  @media (min-height: 760px) and (max-height: 1400px) {
+    .myImg {
+      width: 116px;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.3333333;
+      border-radius: 6px;
+    }
+    .myP{
+      font-size: 1.3em;
+      text-align: center;
+    }
+    h1{
+      font-size: 1.7em;
+    }
+    .myBadge {
+      width: 35px;
+    }
+  }
 }
 
 /*full-HD and 2k resolution*/
@@ -180,7 +220,7 @@ only screen and (max-width: 760px),
     font-size: 1.8em;
   }
   .myP{
-    font-size: 2.2em;
+    font-size: 2.0em;
     text-align: center;
   }
   .myInput {
@@ -189,8 +229,15 @@ only screen and (max-width: 760px),
     width: 550px;
   }
   button {
-    font-size: 1.8em;
+    padding: 10px 16px;
+
+    line-height: 1.3333333;
+    border-radius: 6px;
   }
+  .btn {
+    font-size: 2.0em;
+  }
+
   table {
     border:1px solid black;
     font-size: 1.2em;
@@ -200,7 +247,7 @@ only screen and (max-width: 760px),
   }
 
   .myImg {
-    width: auto;
+    width: 200px;
   }
 
   .secondColumn{
@@ -211,6 +258,31 @@ only screen and (max-width: 760px),
 
   .notice{
     font-size: 1.3em;
+  }
+  h1{
+    font-size: 2.3em;
+  }
+
+  @media (max-height: 1100px) {
+    .myImg {
+      width: 150px;
+    }
+    .myP{
+      font-size: 1.6em;
+      text-align: center;
+    }
+    h1{
+      font-size: 1.8em;
+    }
+    .btn{
+      font-size: 1.7em;
+    }
+    button {
+      padding: 5px 10px;
+      line-height: 1.5;
+      border-radius: 3px;
+      font-size: 1.1em;
+    }
   }
 
 

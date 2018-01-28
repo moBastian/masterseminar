@@ -1,0 +1,111 @@
+/*
+small resolution smartphones, tablets
+*/
+.navbar {
+    margin-bottom: 5px;
+}
+.myBadge {
+    width: 50px;
+}
+.endButton {
+    margin-top: 10px;
+    font-size: 1em;
+
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    line-height: 1.428571429;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 991px)  {
+
+    button {
+        font-size: 2em;
+    }
+
+    .endButton {
+        font-size: 1em;
+    }
+    label{
+        font-size: 1.3em;
+    }
+
+}
+
+/* Large desktop */
+@media (min-width: 992px) and (max-width: 1339px) {
+
+    .endButton {
+        font-size: 1.4em;
+    }
+
+    .questButton {
+        font-size: 1.4em;
+    }
+    label{
+        font-size: 1.5em;
+    }
+
+
+}
+
+/* Large desktop */
+@media (min-width: 1340px) and (max-width: 1899px) {
+
+
+    @media (max-height: 759px) {
+        .endButton {
+            font-size: 1.5em;
+        }
+
+        .questButton {
+            font-size: 1.6em;
+        }
+        label{
+            font-size: 1.7em;
+        }
+
+    }
+
+    @media (min-height: 760px) and (max-height: 1400px) {
+        .endButton {
+            font-size: 1.9em;
+        }
+
+        .questButton {
+            font-size: 1.9em;
+        }
+        label{
+            font-size: 2.0em;
+        }
+    }
+}
+
+/*full-HD and 2k resolution*/
+@media (min-width: 1900px)  {
+    .endButton {
+        font-size: 2.1em;
+    }
+
+    .questButton {
+        font-size: 2.1em;
+    }
+    label{
+        font-size: 2.2em;
+    }
+}

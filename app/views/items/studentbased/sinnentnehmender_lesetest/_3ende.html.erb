@@ -4,15 +4,15 @@
     <%if @student.group_type == 1||@student.group_type == 4||@student.group_type == 5%>
       <div class='row text-center'>
         <div>
-          <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>Du hast&nbsp</label>
-          <label id='score' class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'></label>
-          <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>&nbspFragen richtig beantwortet.</label>
+          <label class='control-label' >Du hast&nbsp</label>
+          <label id='score' class='control-label' ></label>
+          <label class='control-label' >&nbspFragen richtig beantwortet.</label>
         </div>
       </div>
     <%else%>
       <div class='row text-center'>
         <div>
-          <label class='control-label' style='font-size: 60px; font-family: fibel_nordregular;'>Vielen Dank für die Teilnahme.</label>
+          <label class='control-label' >Vielen Dank für die Teilnahme.</label>
         </div>
       </div>
     <%end%>
@@ -22,7 +22,7 @@
 <br><br>
 <div class='row text-center'>
   <div class='col-md-4 col-md-offset-4'>
-    <button id='geschafft' type='button' class='btn btn-lg btn-primary btn-block'><span style='font-size: 40px'>Geschafft</span></button>
+    <button id='geschafft' type='button' class='btn questButton btn-primary btn-block'>Geschafft</button>
   </div>
 </div>
 <script>

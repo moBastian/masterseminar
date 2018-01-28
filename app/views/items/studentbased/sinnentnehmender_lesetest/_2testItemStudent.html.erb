@@ -3,53 +3,53 @@
   alternatives = item.itemtext.split("{")[1].split("}")[0].split(",")
 %>
 <div class="row" style="margin-right: 15px">
-  <button style='font-family: fibel_nordregular; float: right; font-size: 2.2rem;' id="closeTest" class="btn btn-warning" onclick="interruptMeasurement()"><strong>Test beenden</strong></button>
+  <button style='float: right;' id="closeTest" class="endButton btn-warning" onclick="interruptMeasurement()"><strong>Test beenden</strong></button>
 </div>
 
 <br/>
 <div class='row text-center'>
   <div>
-    <label class='control-label' style='font-size: 2.5rem;'><%= question %>&nbsp</label>
+    <label class='control-label'><%= question %>&nbsp</label>
   </div>
 </div>
 <br><br>
 <div class='row' id='rowButtons2' >
-  <div class="col-lg-7 col-md-offset-3">
-    <div class='col-lg-4 col-lg-offset-0' >
+  <div class="col-lg-8 col-md-offset-2">
+    <div class='col-lg-5 col-lg-offset-0' >
       <div class ='row'>
-        <button id='button0' style='font-size: 2.2rem;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[0] %>','#button0')"><%= alternatives[0] %></button>
+        <button id='button0' type='button' class='questButton btn-default btn btn-block' onclick="nextClicked('<%= alternatives[0] %>','#button0')"><%= alternatives[0] %></button>
       </div>
     </div>
-    <div class='col-lg-4 col-lg-offset-2' >
+    <div class='col-lg-5 col-lg-offset-2' >
       <div class ='row'>
-        <button id='button1' style='font-size: 2.2rem;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[1] %>', '#button1')"><%= alternatives[1] %></button>
+        <button id='button1' type='button' class='questButton btn-default btn btn-block' onclick="nextClicked('<%= alternatives[1] %>', '#button1')"><%= alternatives[1] %></button>
       </div>
     </div>
   </div>
 </div>
 <br/>
 <div class='row' id='rowButtons2' >
-  <div class="col-lg-7 col-md-offset-3">
-    <div class='col-lg-4 col-lg-offset-0' >
+  <div class="col-lg-8 col-md-offset-2">
+    <div class='col-lg-5 col-lg-offset-0' >
       <div class ='row'>
-        <button id='button2' style='font-size: 2.2rem;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[2] %>', '#button2')"><%= alternatives[2] %></button>
+        <button id='button2'  type='button' class='questButton btn-default btn btn-block' onclick="nextClicked('<%= alternatives[2] %>', '#button2')"><%= alternatives[2] %></button>
       </div>
     </div>
-    <div class='col-lg-4 col-lg-offset-2' >
+    <div class='col-lg-5 col-lg-offset-2' >
       <div class ='row'>
-        <button id='button3' style='font-size: 2.2rem;' type='button' class='btn btn-default btn-block' onclick="nextClicked('<%= alternatives[3] %>', '#button3')"><%= alternatives[3] %></button>
+        <button id='button3'  type='button' class='questButton btn-default btn btn-block' onclick="nextClicked('<%= alternatives[3] %>', '#button3')"><%= alternatives[3] %></button>
       </div>
     </div>
   </div>
 </div>
 <br/>
 <div class='row' id='rowButtons3' >
-  <div class="col-lg-7 col-md-offset-3">
+  <div class="col-lg-8 col-md-offset-3">
     <div class='col-lg-3 col-lg-offset-0' >
     </div>
     <div class='col-lg-4 col-lg-offset-0' >
       <div class ='row'>
-        <button id='buttonCon' style='font-size: 2.2rem; font-family: fibel_nordregular; visibility: hidden' type='button' class='btn btn-info btn-block' onclick="nextItem()">Nächste Frage</button>
+        <button id='buttonCon' style='visibility: hidden' type='button' class='questButton btn btn-primary btn-block' onclick="nextItem()">Nächste Frage</button>
       </div>
     </div>
     <div class='col-lg-3 col-lg-offset-2' >

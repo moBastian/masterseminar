@@ -1,35 +1,52 @@
-<!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= stylesheet_link_tag '/stylesheets/myStyle.css', media: 'all', 'data-turbolinks-track' => true %>
-</head>
-<body>
+<style>
+  @media
+  only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 991px)  {
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tr { border: 1px solid #ccc; }
+
+    td {
+      /* Behave  like a "row" */
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      text-align: center;
+    }
+
+    td:before {
+      /* Now like a table header */
+      position: absolute;
+      /* Top/left values mimic padding */
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+    }
+  }
+
+</style>
 <div class="container" style="width: auto; height: auto">
-<div class="container-fluid">
-  <div id="content">
-    <div id="alert">
-      <% unless notice.blank? %>
-          <div class="alert alert-info alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div id="notice" class="notice"><%= notice %></div>
-          </div>
-      <% end %>
-    </div>
-    <%= yield %>
-  </div>
-</div>
-
-
 <% content_for :top do%>
     <div class="container-fluid">
       <div>
-        <p style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
+        <p class="myP" style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
         <div align="right" style="padding-right: 15px">
           <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-            <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-lg btn-primary", style:"margin-right:40px;"%>
+            <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary", style:"margin-right:40px;"%>
             <%= token_tag nil %>
-            <button type="submit" class="btn btn-lg btn-primary">Abmelden</button>
+            <button type="submit" class="btn btn-primary">Abmelden</button>
           </form>
         </div>
       </div>
@@ -41,10 +58,9 @@
           </div>
           <input type="checkbox" class="form-check-input" id="emailCheck">
           <label class="form-check-label" for="exampleCheck1">E-Mail speichern</label>
-          <button id="submit" type="submit" class="btn btn-lg btn-default"  onclick="sendMail();return false;">Absenden</button>
+          <button id="submit" type="submit" class="btn btn-default"  onclick="sendMail();return false;">Absenden</button>
         </form>
       </div>
-
     </div>
 <% end %>
 
@@ -78,10 +94,8 @@
       <%end%>
     </table>
 </div>
-<br/>
 <div>
   <h1>Die folgenden Tests stehen für dich zur Verfügung:</h1>
-  <br/>
   <div>
     <% count = 0 %>
     <% if !@assessments.nil?%>
@@ -119,8 +133,6 @@
   </div>
 </div>
 </div>
-</body>
-</html>
 
   <script>
       //possible Hack
