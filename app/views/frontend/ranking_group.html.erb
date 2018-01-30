@@ -46,7 +46,7 @@
           <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
             <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary", style:"margin-right:40px;"%>
             <%= token_tag nil %>
-            <button type="submit" class="btn btn-primary">Abmelden</button>
+            <button type="submit" class="btn btn-warning">Abmelden</button>
           </form>
         </div>
       </div>

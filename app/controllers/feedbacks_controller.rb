@@ -41,6 +41,11 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks.json
   def create
     feedback_params[:feedbacktext] = feedback_params[:feedbacktext].gsub!("\n", "<br/>")
+    if(feedback_params[:feedbacktext]=="")
+      flash[:notice]= 'Feedback sollte nicht leer sein ;)'
+      redirect_to :back
+      return
+    end
     @feedback = @group.feedbacks.new(feedback_params)
 
     respond_to do |format|
@@ -48,7 +53,9 @@ class FeedbacksController < ApplicationController
 
         format.html {
           session[:extraData][1] = true
-          redirect_to '/frontend', notice: 'Vielen Dank für das Feedback :)'
+          flash[:notice]= 'Vielen Dank für das Feedback :)'
+          redirect_to '/frontend'
+
         }
         format.json { render :show, status: :created, location: @feedback }
       else
