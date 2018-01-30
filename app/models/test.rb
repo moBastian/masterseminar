@@ -1,7 +1,5 @@
 # -*- encoding : utf-8 -*-
 
-#TODO-A: Teststruktur überdenken?
-
 require 'spreadsheet'
 
 class Test < ActiveRecord::Base

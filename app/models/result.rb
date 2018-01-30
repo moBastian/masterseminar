@@ -207,7 +207,6 @@ class Result < ActiveRecord::Base
     return file.path
   end
 
-  #TODO: Aus Klasse Export übernommen und angepasst. Geht teilweise vielleicht auch noch kürzer.
   #Creates an XLS file containing a SPSS-friendly spreadsheet representation of a set of results objects. Information about students is also included.
   #To restrict the export to a single test or a single user pass either a test id or user id as parameter. Use nil to indicate every test/every user.
   def self.to_xls(test, user)

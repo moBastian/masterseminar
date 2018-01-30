@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :tests
-  get 'backend' => 'application#welcome'
+  get 'mainapp' => 'application#welcome'
 
   post 'login' => 'application#login'
   post 'logout' => 'application#logout'

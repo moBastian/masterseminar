@@ -59,7 +59,6 @@ class FrontendController < ApplicationController
   end
 
   #get all available measurements
-  # #TODO-A: Das sollte dann evtl. Measurements index übernehmen! Ggf. umbennen
   def index
     @assessments = @student.get_open_assessments
     if @student.group_type == 0 || @student.group_type == 1

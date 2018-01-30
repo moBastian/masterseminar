@@ -1,20 +1,60 @@
 
 <p class="lead text-right">
-  <span class="glyphicon glyphicon-envelope" onclick="notifyALl();return false;"></span>
-  <%= link_to user_group_students_path(@user, @group, :format => :pdf), :title => "Zugangsdaten der Probandengruppe", :target => "blank" do %>
-      <span class="glyphicon glyphicon-print"></span>
-  <% end %>
+  <span class="glyphicon glyphicon-envelope" onclick="notifyALl();return false;" title="Rundmail"></span>
 </p>
 
 
 <%  students = @group.students
     groupsize = students.size
-    controllgroupsize = @group.students.where(group_type: 0).size
-    testgroup1Size = @group.students.where(group_type: 1).size
-    testgroup2Size = @group.students.where(group_type: 2).size
-    testgroup3Size = @group.students.where(group_type: 3).size
-    testgroup4Size = @group.students.where(group_type: 4).size
-    testgroup5Size = @group.students.where(group_type: 5).size%>
+    controllgroupsize = 0
+    testgroup1Size = 0
+    testgroup2Size = 0
+    testgroup3Size = 0
+    testgroup4Size = 0
+    testgroup5Size = 0
+    played_questioncontrollgroup = 0;
+    correct_questioncontrollgroup = 0;
+    played_question1 = 0;
+    correct_question1 = 0;
+    played_question2 = 0;
+    correct_question2 = 0;
+    played_question3 = 0;
+    correct_question3 = 0;
+    played_question4 = 0;
+    correct_question4 = 0;
+    played_question5 = 0;
+    correct_question5 = 0;
+
+  students.each do |student|
+    if(student.group_type==0)
+      controllgroupsize = controllgroupsize +1
+      played_questioncontrollgroup = played_questioncontrollgroup + student.played_questions
+      correct_questioncontrollgroup = correct_questioncontrollgroup + student.points
+    elsif(student.group_type==1)
+      testgroup1Size = testgroup1Size + 1
+      played_question1 = played_question1 + student.played_questions
+      correct_question1 = correct_question1 + student.points
+    elsif(student.group_type==2)
+      testgroup2Size = testgroup2Size +1
+      played_question2 = played_question2 + student.played_questions
+      correct_question2 = correct_question2 + student.points
+    elsif(student.group_type==3)
+      testgroup3Size = testgroup3Size + 1
+      played_question3 = played_question3 + student.played_questions
+      correct_question3 = correct_question3 + student.points
+    elsif(student.group_type==4)
+      testgroup4Size = testgroup4Size + 1
+      played_question4 = played_question4 + student.played_questions
+      correct_question4 = correct_question4 + student.points
+    elsif(student.group_type==5)
+      testgroup5Size = testgroup5Size + 1
+      played_question5 = played_question5 + student.played_questions
+      correct_question5 = correct_question5 + student.points
+    else
+      #do nothing
+    end
+  end
+%>
 <div>
   <table class="table table-striped">
     <thead>
@@ -69,7 +109,7 @@
       </td>
     </tr>
     <tr>
-      <td>Prozentual (in %)</td>
+      <td>Prozentual: Verteilung (in %)</td>
       <td>
         100
       </td>
@@ -90,6 +130,77 @@
       </td>
       <td>
         <%= (testgroup5Size.to_f/groupsize).round(3)*100%>
+      </td>
+    </tr>
+    <tr style="  border-top:2px solid black;width:auto;">
+      <td>Gesehene Fragen</td>
+      <td>
+        <%= played_questioncontrollgroup + played_question1+ played_question2+ played_question3+ played_question4+ played_question5%>
+      </td>
+      <td>
+        <%= played_questioncontrollgroup%>
+      </td>
+      <td>
+        <%= played_question1%>
+      </td>
+      <td>
+        <%= played_question2%>
+      </td>
+      <td>
+        <%= played_question3%>
+      </td>
+      <td>
+        <%= played_question4%>
+      </td>
+      <td>
+        <%= played_question5%>
+      </td>
+    </tr>
+    <tr>
+      <td>richtig beantwortete Fragen</td>
+      <td>
+        <%= correct_questioncontrollgroup+ correct_question1+correct_question2+correct_question3+correct_question4+correct_question5%>
+      </td>
+      <td>
+        <%= correct_questioncontrollgroup%>
+      </td>
+      <td>
+        <%= correct_question1%>
+      </td>
+      <td>
+        <%= correct_question2%>
+      </td>
+      <td>
+        <%= correct_question3%>
+      </td>
+      <td>
+        <%= correct_question4%>
+      </td>
+      <td>
+        <%= correct_question5%>
+      </td>
+    </tr>
+    <tr>
+      <td>Prozentual: Fragen (in %)</td>
+      <td>
+      </td>
+      <td>
+        <%= (correct_questioncontrollgroup.to_f/played_questioncontrollgroup).round(3)*100%>
+      </td>
+      <td>
+        <%= (correct_question1.to_f/played_question1).round(3)*100%>
+      </td>
+      <td>
+        <%= (correct_question2.to_f/played_question2).round(3)*100%>
+      </td>
+      <td>
+        <%= (correct_question3.to_f/played_question3).round(3)*100%>
+      </td>
+      <td>
+        <%= (correct_question4.to_f/played_question4).round(3)*100%>
+      </td>
+      <td>
+        <%= (correct_question5.to_f/played_question5).round(3)*100%>
       </td>
     </tr>
     </tbody>
@@ -115,6 +226,12 @@
     Probandengruppe
   </th>
   <th>
+    Gesehene Fragen
+  </th>
+  <th>
+    richtig beantwortete Fragen
+  </th>
+  <th>
     Geschlecht
   </th>
 
@@ -136,6 +253,12 @@
         </td>
         <td>
           <%= student.group_type %>
+        </td>
+        <td>
+          <%= student.played_questions %>
+        </td>
+        <td>
+          <%= student.points %>
         </td>
         <td>
           <%= raw(student.get_gender) %>
