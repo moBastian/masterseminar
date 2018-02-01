@@ -72,14 +72,14 @@
     });
     if(gender=="keine Angabe"){
         $('#gender_keine_Angabe').prop('checked', true);
-    }else if(gender=="männlich"){
+    }else if(gender=="male"){
         $('#gender_male').prop('checked', true);
     }
     else{
         $('#gender_female').prop('checked', true);
     }
 
-    $('#username').addClass("form-control").addClass("myInput").val("user"+getRndInteger(100, 500)).css('font-size', '1.3em').prop('required',true);
+    $('#username').addClass("form-control").addClass("myInput").css('font-size', '1.3em').prop('required',true);
     $('#email').addClass("form-control").addClass("myInput").css('font-size', '1.3em');
     $('#gender').addClass("form-control").css("width", "auto").css("background-color", "white");
     $('#age').addClass("form-control").css("width", "80px").css('font-size', '1.3em').prop("type", "number").prop("min",14).prop("max",99).prop("max",99).prop('required',true).attr('maxlength','2');

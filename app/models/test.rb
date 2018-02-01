@@ -34,8 +34,8 @@ class Test < ActiveRecord::Base
     else
       newItems = content_items - oldItems
       canidateItems = Array.new
-      if(newItems.size>5)
-        5.times do
+      if(newItems.size>15)
+        15.times do
           canidateItems = canidateItems + [newItems.sample]
           newItems = newItems -canidateItems
         end

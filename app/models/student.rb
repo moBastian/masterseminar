@@ -157,8 +157,7 @@ class Student < ActiveRecord::Base
   end
 
   def get_data_ranking()
-    potential_group = Student.where(group_id:self.group_id).
-        where.not('points > :max_points', max_points:self.played_questions )
+    potential_group = Student.where(group_id:self.group_id)
     group_size = potential_group.size
     if(group_size>5)
       i=0
@@ -211,7 +210,7 @@ class Student < ActiveRecord::Base
         testLoginFree=false
       end
     end
-    s = group.students.build(name: cur, group_type: 5, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
+    s = group.students.build(name: cur, group_type: 0, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
     s.save
     return s
   end
