@@ -153,7 +153,7 @@ class StudentsController < ApplicationController
 
     def is_allowed
       unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i)) || !@login_student.nil? && @login_student.id = @student.id
-        redirect_to '/backend'
+        redirect_to '/mainap'
       end
     end
 end

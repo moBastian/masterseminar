@@ -24,10 +24,10 @@ class ApplicationController < ActionController::Base
           redirect_to edit_user_path(u), notice: "Eingeloggt als #{u.email} <br/> Bitte vervollständigen Sie noch Ihre persönlichen Daten, Sie helfen uns damit bei der wissenschaftlichen Begleitung von Levumi!" +  (news.empty? ? "" : "<br/>" + news.join("<br/><br/>"))
         end
       else
-        redirect_to '/backend', notice: 'Benutzername oder Passwort falsch!'
+        redirect_to '/mainapp', notice: 'Benutzername oder Passwort falsch!'
       end
     else
-      redirect_to '/backend', notice: 'Benutzername oder Passwort falsch!'
+      redirect_to '/mainapp', notice: 'Benutzername oder Passwort falsch!'
     end
   end
 
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
       session[:user_id] = nil
       @login_user = nil
     end
-    redirect_to '/backend'
+    redirect_to '/mainapp'
   end
 
   def welcome
@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
 
   def export
     unless !@login_user.nil? && @login_user.hasCapability?('export')
-      redirect_to '/backend'
+      redirect_to '/mainapp'
     end
     @tests = Test.all
     @users = User.all
@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
   #check if user is logged in
   def check_login
     if session[:user_id].nil? && session[:student_id].nil?
-      redirect_to '/backend', notice: 'Bitte einloggen!'
+      redirect_to '/mainapp', notice: 'Bitte einloggen!'
     elsif !session[:student_id].nil?
       @login_student = Student.find(session[:student_id])
      else

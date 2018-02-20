@@ -116,7 +116,7 @@ class ResultsController < ApplicationController
       #@result exists only before update => student can only update a result
       unless (!@login_user.nil? && @login_user.hasCapability?("admin")) || (!@login_user.nil? && params.has_key?(:user_id) &&
           (@login_user.id == params[:user_id].to_i)) ||((@login_student.id == @result.student.id) && !@login_student.nil?)
-        redirect_to '/backend'
+        redirect_to '/mainapp'
       end
     end
 end
