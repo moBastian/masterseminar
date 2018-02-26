@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   end
 
   def create_test_group
-    self.groups.create(:name => "Test", :export => false, :archive => false, :demo => true)
+    self.groups.create(:name => self.id.to_s + "Test", :export => false, :archive => false, :demo => true)
   end
 
   #Count number of assessments for each user by a direct SQL query, to save time. Returns a hash that maps test ids to counts.

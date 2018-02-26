@@ -5,7 +5,6 @@ class CreateItems < ActiveRecord::Migration
       t.integer :test_id
       t.text :shorthand
       t.text :itemtext
-      t.integer :difficulty
 
       t.timestamps
     end
