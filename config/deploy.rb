@@ -45,3 +45,7 @@ set :keep_releases, 2
     #RAILS_ENV=production rake db:seed:tests
 
     #sowohl dadurch db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1, db:create, db:migrate möglich
+#Server starten/App anbieten:
+  #RAILS_ENV=production bundle exec passenger start (nicht nach außen verfügbar, da nicht als root gestartet)
+  #Root fragen damit er den Befehl:
+    #sudo bundle exec passenger start im current ordner ausführt
