@@ -35,7 +35,13 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log')
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-set :keep_releases, 1
+set :keep_releases, 2
 
-#run with - cap production deploy
+#laufen lassen über: "cap production deploy"
+#Wie seeds laufen lassen:
+  # ssh to server
+  # in projekordner bzw in current:
+    #RAILS_ENV=production rake db:seed:production
+    #RAILS_ENV=production rake db:seed:tests
 
+    #sowohl dadurch db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1, db:create, db:migrate möglich
