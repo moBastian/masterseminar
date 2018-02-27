@@ -137,7 +137,7 @@ class FrontendController < ApplicationController
 
   def check_accept_student
     if !@login_student.nil? && @login_student.first_accept.nil?
-      render 'frontend/accept'
+      render 'frontend/accept', layout: 'empty'
     end
   end
 end
