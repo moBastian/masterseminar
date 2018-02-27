@@ -194,12 +194,15 @@ only screen and (max-width: 760px),
     }
     button {
       padding: 10px 16px;
-      font-size: 18px;
+      font-size: 25px;
       line-height: 1.3333333;
       border-radius: 6px;
     }
+    .btn {
+      font-size: 1.5em;
+    }
     .myP{
-      font-size: 1.3em;
+      font-size: 1.5em;
       text-align: center;
     }
     h1{

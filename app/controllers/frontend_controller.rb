@@ -87,7 +87,7 @@ class FrontendController < ApplicationController
     end
   end
   def accept
-    if(!Student.where(name:params[:username]).blank?&&params[:username]!=""&&params.has_key?(:username))
+    if(!Student.where(name:params[:username]).blank?&&params[:username]!=""&&params.has_key?(:username)||!Fakename.where(name:params[:username]).blank?&&params[:username]!=""&&params.has_key?(:username))
       @login_student.gender = params[:gender]
       @login_student.age = params[:age]
       @login_student.email = params[:email]
@@ -96,11 +96,19 @@ class FrontendController < ApplicationController
       flash.now[:notice] = 'Username bereits vergeben!'
       render "frontend/_secondPage"
     else
-      puts("hallo")
       if(params.has_key?(:username))
         @login_student.name = params[:username]
       else
-        @login_student.name = "user" + @login_student.id.to_s
+        fakename = Fakename.all
+        if fakename.empty?
+          @login_student.name = "user" + @login_student.id.to_s
+        else
+          fakename = fakename.sample
+          Fakename.find(fakename.id).delete
+          @login_student.name = fakename.name
+        end
+
+
       end
       @login_student.gender = params[:gender]
       @login_student.age = params[:age]
