@@ -709,6 +709,6 @@ Iven
 i = 0
 while(i<usernames.size)
   s = Fakename.create(name:usernames[i])
-  s.save
+  puts(s.save)
   i = i+1
 end
