@@ -1,2 +1,2 @@
-class Fakename < ApplicationRecord
+class Fakename < ActiveRecord::Base
 end
