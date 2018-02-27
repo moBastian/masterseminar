@@ -37,7 +37,7 @@ Jarina
 Asa
 Mrmcmayoman
 jasMin
-Maria Andrea
+Maria\ Andrea
 Björn
 user93
 Mathias\ Bodenheimer
@@ -329,7 +329,7 @@ Zcotticus
 Hihin
 Sohban
 Johannes
-Alex David
+Alex\ David
 user25
 Landismaximus
 Kess
@@ -649,7 +649,7 @@ atraXa
 Jonah
 Christopher
 user85
-Josephine\ Hanfstaengl
+Josephine\ Staengl
 Sarah
 Julienne
 Binia
@@ -709,6 +709,6 @@ Iven
 i = 0
 while(i<usernames.size)
   s = Fakename.create(name:usernames[i])
-  puts(s.save)
+  s.save
   i = i+1
 end
