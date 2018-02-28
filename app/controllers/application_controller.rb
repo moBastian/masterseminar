@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
   def accept
     @login_user.tcaccept = DateTime.now
     @login_user.save
-    redirect_to edit_user_path(@login_user), notice: 'Viel Spaß bei der Benutzung von Levumi! <br/> Bitte vervollständigen Sie noch Ihre persönlichen Daten, Sie helfen uns damit bei der wissenschaftlichen Begleitung von Levumi!'
+    redirect_to edit_user_path(@login_user), notice: 'Viel Spaß bei der Benutzung von Quizmos! <br/> Bitte vervollständigen Sie noch Ihre persönlichen Daten, Sie helfen uns damit bei der wissenschaftlichen Begleitung von Quizmos!'
   end
 
   def static
@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
 
   #check if user accepted the letter of agreement
   def check_accept
-    if !@login_user.nil? && !@login_user.tcaccept.nil?
+    if !@login_user.nil? && @login_user.tcaccept.nil?
       render 'accept'
     end
   end

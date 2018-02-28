@@ -29,7 +29,7 @@ class Test < ActiveRecord::Base
   #neues ziehen
   # -> ziehe immer (hier 5) unbekannte Items
   def draw_items(oldItems)
-    if false                          #Nett um zu testen (einfach auf true setzen)
+    if true                          #Nett um zu testen (einfach auf true setzen)
       itemset = content_items
     else
       newItems = content_items - oldItems

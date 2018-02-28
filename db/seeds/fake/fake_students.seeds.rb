@@ -15,7 +15,7 @@ Patrik
 Jan-Hendrik
 user18
 user48
-Erhart Daschner
+Erhart\ Daschner
 Mina
 Hansine
 Alina
@@ -24,7 +24,7 @@ Serhat
 Leon
 Cadrick
 user72
-Nina Busch
+Nina\ Busch
 Ranya
 Jin
 Alisar
@@ -33,7 +33,7 @@ Pia46
 Mark
 Edward
 user96
-Raoul Fisch
+Raoul\ Fisch
 Tama
 Keyla
 Ava

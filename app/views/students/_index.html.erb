@@ -6,6 +6,7 @@
 
 <%  students = @group.students
     groupsize = students.size
+    fakegroupsize = 0
     controllgroupsize = 0
     testgroup1Size = 0
     testgroup2Size = 0
@@ -51,7 +52,7 @@
       played_question5 = played_question5 + student.played_questions
       correct_question5 = correct_question5 + student.points
     else
-      #do nothing
+      fakegroupsize = fakegroupsize+1
     end
   end
 %>
@@ -87,7 +88,7 @@
     <tr>
       <td>Numerisch</td>
       <td>
-        <%= groupsize%>
+        <%= groupsize - fakegroupsize%>
       </td>
       <td>
         <%= controllgroupsize%>
@@ -114,22 +115,22 @@
         100
       </td>
       <td>
-        <%= (controllgroupsize.to_f/groupsize).round(3)*100%>
+        <%= (controllgroupsize.to_f/(groupsize-fakegroupsize)).round(3)*100%>
       </td>
       <td>
-        <%= (testgroup1Size.to_f/groupsize).round(3)*100%>
+        <%= (testgroup1Size.to_f/(groupsize-fakegroupsize)).round(3)*100%>
       </td>
       <td>
-        <%= (testgroup2Size.to_f/groupsize).round(3)*100%>
+        <%= (testgroup2Size.to_f/(groupsize-fakegroupsize)).round(3)*100%>
       </td>
       <td>
-        <%= (testgroup3Size.to_f/groupsize).round(3)*100%>
+        <%= (testgroup3Size.to_f/(groupsize-fakegroupsize)).round(3)*100%>
       </td>
       <td>
-        <%= (testgroup4Size.to_f/groupsize).round(3)*100%>
+        <%= (testgroup4Size.to_f/(groupsize-fakegroupsize)).round(3)*100%>
       </td>
       <td>
-        <%= (testgroup5Size.to_f/groupsize).round(3)*100%>
+        <%= (testgroup5Size.to_f/(groupsize-fakegroupsize)).round(3)*100%>
       </td>
     </tr>
     <tr style="  border-top:2px solid black;width:auto;">
@@ -244,45 +245,45 @@
   </thead>
   <tbody>
   <% students.sort_by { |a| a.id}.each do |student| %>
-      <tr>
-        <td>
-          <%= student.id %>
-        </td>
-        <td>
-          <%= student.login %>
-        </td>
-        <td>
-          <%= student.group_type %>
-        </td>
-        <td>
-          <%= student.played_questions %>
-        </td>
-        <td>
-          <%= student.points %>
-        </td>
-        <td>
-          <%= raw(student.get_gender) %>
-        </td>
-        <td>
-          <%= link_to user_group_student_path(@user, @group, student), :data => {:remote => true} do %>
-            <%= (student.results.map{|x| x.score} - [nil]).size %>
-          <% end %>
-        </td>
-        <td>
-            <%= link_to edit_user_group_student_path(@user, @group, student), :data => {:remote => true} do %>
-                <span class="glyphicon glyphicon-pencil"></span>
-            <% end %>
-            <%= link_to user_group_student_path(@user, @group, student), :method => :delete, :data => {:remote => true, :confirm => "Sind Sie sicher?"} do %>
-                <span class="glyphicon glyphicon-trash"></span>
-            <% end %>
-        </td>
-      </tr>
+      <% if student.group_type = -1%>
+      <%else%>
+          <tr>
+            <td>
+              <%= student.id %>
+            </td>
+            <td>
+              <%= student.login %>
+            </td>
+            <td>
+              <%= student.group_type %>
+            </td>
+            <td>
+              <%= student.played_questions %>
+            </td>
+            <td>
+              <%= student.points %>
+            </td>
+            <td>
+              <%= raw(student.get_gender) %>
+            </td>
+            <td>
+              <%= link_to user_group_student_path(@user, @group, student), :data => {:remote => true} do %>
+                  <%= (student.results.map{|x| x.score} - [nil]).size %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to edit_user_group_student_path(@user, @group, student), :data => {:remote => true} do %>
+                  <span class="glyphicon glyphicon-pencil"></span>
+              <% end %>
+              <%= link_to user_group_student_path(@user, @group, student), :method => :delete, :data => {:remote => true, :confirm => "Sind Sie sicher?"} do %>
+                  <span class="glyphicon glyphicon-trash"></span>
+              <% end %>
+            </td>
+          </tr>
+      <%end%>
   <% end %>
   </tbody>
 </table>
-<div id="studentForm">
-  <%= link_to "Probanden hinzufügen", new_user_group_student_path(@user, @group), :class => "btn btn-default", :data => {:remote => true} %>
-</div>
 
 <script>
   function notifyALl() {

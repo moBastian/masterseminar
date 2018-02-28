@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227100909) do
+ActiveRecord::Schema.define(version: 20180228112113) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer  "group_id"
@@ -23,13 +23,6 @@ ActiveRecord::Schema.define(version: 20180227100909) do
     t.text     "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "faqs", force: :cascade do |t|
-    t.text     "question"
-    t.text     "response"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -53,7 +46,6 @@ ActiveRecord::Schema.define(version: 20180227100909) do
     t.integer  "test_id"
     t.text     "shorthand"
     t.text     "itemtext"
-    t.integer  "difficulty"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "mediapath"
@@ -118,7 +110,6 @@ ActiveRecord::Schema.define(version: 20180227100909) do
     t.text     "answers"
     t.boolean  "student_access"
     t.boolean  "archive"
-    t.text     "type_info"
     t.text     "picture"
   end
 
