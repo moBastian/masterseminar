@@ -173,7 +173,7 @@ item_alternatives_n4 = [
 
 ]
 
-t = Test.create(name: "Geographie",  info: "Geographietest", short_info: "Geographietest",len: 1, time: 900, subject: "Erdkunde", picture: "/images/Logos/welt.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Geographie",  info: "Geographietest", short_info: "Geographietest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/welt.png", construct: "Probe", student_access:true, archive: false)
 
 i= 0
 while i<items_n4.size do

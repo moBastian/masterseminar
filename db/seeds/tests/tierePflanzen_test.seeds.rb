@@ -161,7 +161,7 @@ item_alternatives_n4 = [
 
 ]
 
-t = Test.create(name: "Tiere&Pflanzen",  info: "Tiere&Pflanzen-Test", short_info: "Tiere&Pflanzen-Test",len: 1, time: 900, subject: "Biologie", picture: "/images/Logos/tier_pflanze.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Tiere&Pflanzen",  info: "Tiere&Pflanzen-Test", short_info: "Tiere&Pflanzen-Test",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/tier_pflanze.png", construct: "Probe", student_access:true, archive: false)
 
 i= 0
 while i<items_n4.size do

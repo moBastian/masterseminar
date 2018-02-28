@@ -144,6 +144,8 @@ de:
       create: "%{model} erstellen"
       submit: "%{model} speichern"
       update: "%{model} aktualisieren"
+      assessment:
+       create: "Test freigeben"
   number:
     currency:
       format:
