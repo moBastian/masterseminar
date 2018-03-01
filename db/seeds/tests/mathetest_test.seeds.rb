@@ -3,6 +3,7 @@
 # Neue Elemente mit der festen Reihenfolge
 
 items_n4 = %w{
+Pi
 9
 45
 81
@@ -105,6 +106,7 @@ Rechter\ Winkel
 360
 }
 question_n4 = [
+		"Welche Konstante beschreibt das Verhältnis von Durchmesser zu Umfang eines Kreises?",
 		"Welche dieser Zahlen ist keine Primzahl?",
 		"Welche dieser Zahlen ist keine Primzahl?",
 		"Welche dieser Zahlen ist keine Primzahl?",
@@ -210,6 +212,7 @@ question_n4 = [
 
 
 item_alternatives_n4 = [
+		%w{Pi Eulersche\ Zahl 0 1},
 		%w{3 5 7 9},
 		%w{41 43 45 47},
 		%w{79 81 83 89},

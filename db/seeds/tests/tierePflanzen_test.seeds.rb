@@ -3,6 +3,7 @@
 # Neue Elemente mit der festen Reihenfolge
 
 items_n4 = %w{
+Fliegenpilz
 Ahorn
 Buche
 Linde
@@ -43,7 +44,6 @@ Minnesota
 Birne
 Mirabelle
 Dattel
-Fliegenpilz
 Gifthäubling
 Erlenkrempling
 Satansröhrling
@@ -65,7 +65,7 @@ Pinguin
 Strauß
 Laich
 Schwimmblase
-
+Schuppen
 Regenbogenforelle
 Brustflosse
 Hecht
@@ -104,7 +104,9 @@ Facettenauge
 8
 Metamorphose
 }
+
 question_n4 = [
+		"Welcher dieser Pilze ist giftig?",
 		"Welcher dieser Bäume ist ein Laubbaum?",
 		"Welcher dieser Bäume ist ein Laubbaum?",
 		"Welcher dieser Bäume ist ein Laubbaum?",
@@ -145,7 +147,6 @@ question_n4 = [
 		"Welche dieser Obstsorten ist kein Steinobst?",
 		"Welche dieser Obstsorten ist kein Kernobst?",
 		"Welche dieser Obstsorten ist Beerenobst?",
-		"Welcher dieser Pilze ist giftig?",
 		"Welcher dieser Pilze ist giftig?",
 		"Welcher dieser Pilze ist giftig?",
 		"Welcher dieser Pilze ist giftig?",
@@ -204,12 +205,13 @@ question_n4 = [
 		"Wieviele Beine sind charakteristisch für Insekten?",
 		"Wie bezeichnet man die für Insekten charakteristischen Augen?",
 		"Wieviele Beine haben Spinnen?",
-		"Wie nennt man die Entwicklung eines Schmetterlings vom Ei bis zur Fluggestalt?",
+		"Wie nennt man die Entwicklung eines Schmetterlings vom Ei bis zur Fluggestalt?"
 ]
 
 
 
 item_alternatives_n4 = [
+		%w{Frostrasling Eselsohr Fliegenpilz Birkenpilz},
 		%w{Ahorn Fichte Zeder Kiefer},
 		%w{Eibe Buche Lärche Kiefer},
 		%w{Zeder Zypresse Linde Lärche},
@@ -250,7 +252,6 @@ item_alternatives_n4 = [
 		%w{Aprikose Pflaume Kirsche Birne},
 		%w{Mirabelle Birne Olive Quitte},
 		%w{Apfel Dattel Kirsche Nektarine},
-		%w{Frostrasling Eselsohr Fliegenpilz Birkenpilz},
 		%w{Gifthäubling Herbstlorchel Habichtspilz Judasohr},
 		%w{Birkenpilz Erlenkrempling Eichenrotkappe Buchenrasling},
 		%w{Butterpilz Pfifferling Riesenbovist Satansröhrling},

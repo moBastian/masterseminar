@@ -140,7 +140,7 @@ question_n4 = [
 		"Die Rocky Mountains sind ein Gebirge auf welchem Kontinent?",
 		"Die Anden sind ein Gebirge auf welchem Kontinent?",
 		"Die Appalachen sind ein Gebirge auf welchem Kontinent?",
-		"Die Sierra Madre des Sur ein Gebirge auf welchem Kontinent?",
+		"Die Sierra Madre des Sur ist ein Gebirge auf welchem Kontinent?",
 		"Der Himalaya ist ein Gebirge auf welchem Kontinent?",
 		"Der Hindukusch ist ein Gebirge auf welchem Kontinent?",
 		"Der Altai ist ein Gebirge auf welchem Kontinent?",
@@ -321,7 +321,8 @@ item_alternatives_n4 = [
 		%w{Amsterdam Brüssel London Paris},
 		%w{Barcelona Lissabon Madrid Mailand},
 		%w{London\ Ear London\ Egg London\ Eye London\ Spinner},
-		%w{2 4 6 8},
+		%w{2 4 6 8}
+
 ]
 
 t = Test.create(name: "Geographie",  info: "Geographietest", short_info: "Geographietest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/welt.png", construct: "Probe", student_access:true, archive: false)

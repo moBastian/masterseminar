@@ -27,22 +27,26 @@ class Test < ActiveRecord::Base
     self.items.where("itemtype > ?", 0).order(:itemtype)
   end
   #neues ziehen
-  # -> ziehe immer (hier 5) unbekannte Items
+
   def draw_items(oldItems)
-    if true                          #Nett um zu testen (einfach auf true setzen)
+    minNewItems = 20
+    # -> ziehe immer (hier 15) unbekannte Items
+    if false                          #Nett um zu testen (einfach auf true setzen)
       itemset = content_items
     else
       newItems = content_items - oldItems
+      puts(newItems.size)
       canidateItems = Array.new
-      if(newItems.size>15)
-        15.times do
+      if(newItems.size>minNewItems)
+        minNewItems.times do
           canidateItems = canidateItems + [newItems.sample]
           newItems = newItems -canidateItems
+
         end
       else
         canidateItems = newItems
       end
-      if(!canidateItems.size ==0)
+      if(canidateItems.size >= 0)
         (20-canidateItems.size).times do
           remaining = content_items - canidateItems
           canidateItems = canidateItems + [remaining.sample]

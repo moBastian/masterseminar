@@ -34,37 +34,34 @@
   if(lastResults[currentStudent] == -1) {
       if(groupNumber=="2"||groupNumber=="4"){
           switch (testName) {
-
-              case "Tiere&Pflanzen":
+              case "Geographie":
                   if(achievementHash["a1"][0]!= "true") {
                       showBadge("a1");
-                      achievementHash["a1"][0] =true;
+                      achievementHash["a1"][0] = true;
                   }
                   break;
-              case "Geographie":
+              case "Mathe":
                   if(achievementHash["a4"][0]!= "true") {
                       showBadge("a4");
                       achievementHash["a4"][0] = true;
                   }
                   break;
-              case "Geschichts":
-                  break;
-              case "Mathe":
+              case "Politik":
                   if(achievementHash["a11"][0]!= "true") {
                       showBadge("a11");
                       achievementHash["a11"][0] = true;
                   }
                   break;
               case "Sport":
-                  if(achievementHash["a24"][0]!= "true") {
-                      showBadge("a24");
-                      achievementHash["a24"][0] = true;
+                  if(achievementHash["a14"][0]!= "true") {
+                      showBadge("a13");
+                      achievementHash["a14"][0] = true;
                   }
                   break;
-              case "Politik":
+              case "Tiere&Pflanzen":
                   if(achievementHash["a21"][0]!= "true") {
                       showBadge("a21");
-                      achievementHash["a21"][0] = true;
+                      achievementHash["a21"][0] =true;
                   }
                   break;
               default:

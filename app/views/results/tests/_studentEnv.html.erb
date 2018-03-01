@@ -73,7 +73,7 @@
 
     function checkBadges() {
         switch (testName) {
-            case "Tiere&Pflanzen":
+            case "Geographie":
                 if(achievementHash["a2"][0]!= "true") {
                     checkProgress("a2", 50);
                 }
@@ -82,7 +82,7 @@
                     checkAll();
                 }
                 break;
-            case "Geographie":
+            case "Mathe":
                 if(achievementHash["a5"][0]!= "true") {
                     checkProgress("a5", 50);
                 }
@@ -91,9 +91,7 @@
                     checkAll();
                 }
                 break;
-            case "Geschichtstest":
-                break;
-            case "Mathe":
+            case "Politik":
                 if(achievementHash["a12"][0]!= "true") {
                     checkProgress("a12", 50);
                 }
@@ -103,29 +101,29 @@
                 }
                 break;
             case "Sport":
-                if(achievementHash["a13"][0]!= "true") {
-                    checkProgress("a13", 50);
+                if(achievementHash["a15"][0]!= "true") {
+                    checkProgress("a15", 50);
                 }
-                if(achievementHash["a13"][0]== "true"&&achievementHash["a14"][0]!= "true") {
-                    checkProgress("a14", 90);
+                if(achievementHash["a15"][0]== "true"&&achievementHash["a16"][0]!= "true") {
+                    checkProgress("a16", 90);
                     checkAll();
                 }
                 break;
-            case "Politik":
-                if(achievementHash["a18"][0]!= "true") {
-                    checkProgress("a18", 50);
+            case "Tiere&Pflanzen":
+                if(achievementHash["a22"][0]!= "true") {
+                    checkProgress("a22", 50);
                 }
-                if(achievementHash["a18"][0]== "true"&&achievementHash["a19"][0]!= "true") {
-                    checkProgress("a19", 90);
+                if(achievementHash["a22"][0]== "true"&&achievementHash["a23"][0]!= "true") {
+                    checkProgress("a23", 90);
                     checkAll();
                 }
                 break;
             default:
-                if(achievementHash["a21"][0]!= "true") {
-                    checkProgress("a21", 50);
+                if(achievementHash["a25"][0]!= "true") {
+                    checkProgress("a25", 50);
                 }
-                if(achievementHash["a21"][0]== "true"&&achievementHash["a8"][0]!= "true") {
-                    checkProgress("a22", 90);
+                if(achievementHash["a25"][0]== "true"&&achievementHash["a26"][0]!= "true") {
+                    checkProgress("a26", 90);
                     checkAll();
                 }
                 break;
@@ -137,8 +135,8 @@
         $("#exampleModal").modal();
     }
     function checkAll() {
-        if(achievementHash["a3"][0]== "true"&&achievementHash["a6"][0]== "true"&&achievementHash["a11"][0]== "true"
-            &&achievementHash["a14"][0]== "true"&&achievementHash["a21"][0]== "true"&&achievementHash["a24"][0]== "true"
+        if(achievementHash["a3"][0]== "true"&&achievementHash["a6"][0]== "true"&&achievementHash["a13"][0]== "true"
+            &&achievementHash["a16"][0]== "true"&&achievementHash["a23"][0]== "true"&&achievementHash["a26"][0]== "true"
             &&achievementHash["a9"][0]== "true"&&achievementHash["a10"][0]== "true"&&achievementHash["a19"][0]== "true"
             &&achievementHash["a20"][0]== "true"&&achievementHash["a29"][0]== "true"&&achievementHash["a30"][0]== "true"){
             showBadge("a27");

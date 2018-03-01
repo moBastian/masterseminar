@@ -3,8 +3,8 @@
 # Neue Elemente mit der festen Reihenfolge
 
 items_n4 = %w{
-Olympiade
 fünf\ Ringe
+Olympiade
 Kontinente
 Violett
 1936
@@ -105,8 +105,8 @@ Deutschland
 253,5
 }
 question_n4 = [
-		"Wie nennt man die 4jährige Zeitspanne zwischen Olympischen Spielen in der Antike?",
 		"Was befindet sich auf der Olympischen Flagge?",
+		"Wie nennt man die 4jährige Zeitspanne zwischen Olympischen Spielen in der Antike?",
 		"Wofür stehen die 5 Ringe der Olympischen Flagge?",
 		"Mit welcher dieser Farben ist kein olympischer Ring eingefärbt?",
 		"Wann fanden die ersten olympischen Spiele auf deutschem Boden statt?",
@@ -170,11 +170,11 @@ question_n4 = [
 		"Was unterscheidet Skifliegen vom Skispringen?",
 		"Wieviele Meter ist eine Shorttrack-Runde lang?",
 		"Wieviele Punkte kann man mit einem Dartwurf maximal erreichen?",
-		'Trifft man beim Dartspiel das "Bull", so erhält man wieviele Punkte?',
-    "Wieviele Meter ist die Dartscheibe von der Wurflinie (horizontal) entfernt?",
-    "Wieviele Punkte hat der Sieger einer Dartpartie am Ende seines letzten Wurfs?",
-    "Wieviele Bälle gibt es inklusive weißem Spielball beim Poolbillard?",
-    'Welche Kugel muss bei der Billard-Variante "8-Ball" als letzte gelocht werden?',
+		"Trifft man beim Dartspiel das Bull, so erhält man wieviele Punkte?",
+		"Wieviele Meter ist die Dartscheibe von der Wurflinie (horizontal) entfernt?",
+		"Wieviele Punkte hat der Sieger einer Dartpartie am Ende seines letzten Wurfs?",
+		"Wieviele Bälle gibt es inklusive weißem Spielball beim Poolbillard?",
+		"Welche Kugel muss bei der Billard-Variante 8-Ball als letzte gelocht werden?",
 		"Wie heißt der Stab, mit dem Spieler im Billard den Spielball anstoßen?",
 		"Wie bezeichnet man den Drall einer Kugel beim Billardspiel?",
 		"Wieviele rote Kugeln befinden sich zu Beginn einer Snookerpartie auf dem Tisch?",
@@ -204,14 +204,14 @@ question_n4 = [
 		"Wer hält den Ruder-Weltrekord im Frauen-Einer von 2002?",
 		"Welches Land hält den Ruder-Weltrekord im Frauen-Achter von 2013?",
 		"Welches Land hält den Ruder-Weltrekord im Herren-Achter von 2017?",
-		"Wie weit flog der Österreicher Stefan Kraft im Skifliegen als er 2017 einen neuen Weltrekord aufstellte?",
+		"Wie weit flog der Österreicher Stefan Kraft im Skifliegen als er 2017 einen neuen Weltrekord aufstellte?"
 ]
 
 
 
 item_alternatives_n4 = [
+		%w{ein\ Stern fünf\ Sterne ein\ Ring fünf\ Ringe},
 		%w{Dekade Hexade Olympiade Nonade},
-		%w{ein \Stern fünf\ Sterne ein\ Ring fünf\ Ringe},
 		%w{Grundfarben Kontinente Stadtstaaten Sportarten},
 		%w{Violett Blau Grün Rot},
 		%w{1910 1936 1948 1998},
