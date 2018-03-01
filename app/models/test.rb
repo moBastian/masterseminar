@@ -29,7 +29,7 @@ class Test < ActiveRecord::Base
   #neues ziehen
 
   def draw_items(oldItems)
-    minNewItems = 20
+    minNewItems = 15
     # -> ziehe immer (hier 15) unbekannte Items
     if false                          #Nett um zu testen (einfach auf true setzen)
       itemset = content_items

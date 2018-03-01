@@ -245,7 +245,7 @@
   </thead>
   <tbody>
   <% students.sort_by { |a| a.id}.each do |student| %>
-      <% if student.group_type = -1%>
+      <% if student.group_type == -1%>
       <%else%>
           <tr>
             <td>

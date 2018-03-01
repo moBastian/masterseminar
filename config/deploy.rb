@@ -43,8 +43,14 @@ set :keep_releases, 2
   # in projekordner bzw in current:
     #RAILS_ENV=production rake db:seed:production
     #RAILS_ENV=production rake db:seed:tests
+  #Datenbank erneuern:
+    #ssh zum Server
+    #Navigieren in current
+    #RAILS_ENV=production rake db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+    #RAILS_ENV=production rake db:create
+    #RAILS_ENV=production rake db:migrate
 
-    #sowohl dadurch db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1, db:create, db:migrate möglich
+    #sowohl dadurch RAILS_ENV=production rake db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1, db:create, db:migrate möglich
 #Server starten/App anbieten:
   #RAILS_ENV=production bundle exec passenger start (nicht nach außen verfügbar, da nicht als root gestartet)
   #Root fragen damit er den Befehl:
