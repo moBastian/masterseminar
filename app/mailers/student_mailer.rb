@@ -2,7 +2,7 @@ class StudentMailer < ApplicationMailer
 
   def edited(email, code)
     @code = code
-    mail(to: email, subject: 'Ihre Zugangsdaten für Probename')
+    mail(to: email, subject: 'Ihre Zugangsdaten für Quizmos')
   end
 
   def notifyAll(email, code)
