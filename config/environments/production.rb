@@ -46,11 +46,11 @@ Rails.application.configure do
   # Defaults to:
   config.action_mailer.sendmail_settings = {
       location: '/usr/sbin/sendmail',
-      arguments: '-i -f noreply@quizmos.de'
+      arguments: '-i -f stu114712@mail.uni-kiel.de'
   }
   config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.default_options = {from: 'noreply@quizmos.de'}
+  config.action_mailer.default_options = {from: 'stu114712@mail.uni-kiel.de'}
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

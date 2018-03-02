@@ -3,7 +3,7 @@ class FeedbacksController < ApplicationController
   before_action :set_group
   before_action :convertFeedback, only: [:create]
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
-  layout 'plainStudent'
+  layout 'empty'
   # GET /feedbacks
   # GET /feedbacks.json
   def index
