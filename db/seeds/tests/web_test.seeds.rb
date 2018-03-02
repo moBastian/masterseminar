@@ -54,13 +54,13 @@ BibisBeautyPalace
 2015
 Ethernet
 Router
-
+Browser
 Hyper
 Text
 Transfer
 Protocol
 Altavista
-
+AOL
 HTML
 Darstellung
 WorldWideWeb
@@ -90,7 +90,7 @@ FTP
 Internet
 Deep\ Web
 Cookie
-
+DNS
 IPv6
 404
 Plattformunabhängigkeit
