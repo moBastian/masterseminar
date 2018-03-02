@@ -17,7 +17,19 @@ class StudentsController < ApplicationController
         template: "students/index.pdf.erb"
       }
       format.text {
-        render 'index', :formats => [:js], content_type: 'text/javascript'
+        puts(params[:email]=="allInGroup")
+        if params.has_key?(:email) && params[:email]=="allInGroup"
+          Student.where(:group_id => @group.id).where.not(:email => "").each do |s|
+            puts("hallo")
+            puts(s.email)
+            puts(s.login)
+            puts("Hallo")
+            StudentMailer.notifyAll(s.email,s.login).deliver_later
+          end
+          head :ok
+        else
+          render 'index', :formats => [:js], content_type: 'text/javascript'
+        end
       }
     end
   end
@@ -38,12 +50,7 @@ class StudentsController < ApplicationController
         render pdf: @student.name, template: "students/show.pdf.erb"
         }
       format.text {
-        if params.has_key?(:email) && params[:email]=="allInGroup"
-          Student.where(:group_id => @group.id).where.not(:email => "").each do |s|
-            StudentMailer.notifyAll(s.email,s.login).deliver_later
-          end
-          head :ok
-        elsif params.has_key?(:email)
+        if params.has_key?(:email)
           emailArray = params[:email].split("/")
           if(emailArray[1]=="true")
             @student.email = emailArray[0]

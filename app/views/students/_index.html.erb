@@ -1,6 +1,6 @@
 
 <p class="lead text-right">
-  <span class="glyphicon glyphicon-envelope" onclick="notifyALl();return false;" title="Rundmail"></span>
+  <span class="glyphicon glyphicon-envelope" onclick="notifyAll();return false;" title="Rundmail"></span>
 </p>
 
 
@@ -286,7 +286,7 @@
 </table>
 
 <script>
-  function notifyALl() {
+  function notifyAll() {
       $.ajax({url: '<%= user_group_students_path(@user,@group, @students, format: :text)%>' + '?email=allInGroup' });
       alert("E-Mails wurden versandt.")
   }
