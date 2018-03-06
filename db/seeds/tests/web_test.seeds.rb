@@ -312,7 +312,7 @@ item_alternatives_n4 = [
 		%w{LaTeX Alexa Bixby Nina}
 ]
 
-t = Test.create(name: "Web1",  info: "Web-Test", short_info: "Web-Test",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/social_media.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Web",  info: "Web-Test", short_info: "Web-Test",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/social_media.png", construct: "Probe", student_access:true, archive: false)
 
 i= 0
 while i<items_n4.size do
