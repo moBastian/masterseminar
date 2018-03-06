@@ -1,5 +1,5 @@
 #hier passende Mail eingeben
-user = User.find_by_email("test@test.com")
+user = User.find_by_email("stu114712@mail.uni-kiel.de")
 #hier passenden Namen der Gruppe angeben
 group = Group.where(user_id: user, name:"1Test").first
 
