@@ -147,6 +147,12 @@
           }, 5000);
       });
 
+      var email = "<%= @student.email%>";
+
+      if(email!=""){
+          $('#email').val(email);
+      }
+
       function sendMail() {
           $('#emailgroup').removeClass('has-error');
           $('#emailgroup').removeClass('has-success');

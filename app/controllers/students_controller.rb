@@ -20,10 +20,8 @@ class StudentsController < ApplicationController
         puts(params[:email]=="allInGroup")
         if params.has_key?(:email) && params[:email]=="allInGroup"
           Student.where(:group_id => @group.id).where.not(:email => "").each do |s|
-            puts("hallo")
             puts(s.email)
             puts(s.login)
-            puts("Hallo")
             StudentMailer.notifyAll(s.email,s.login).deliver_later
           end
           head :ok

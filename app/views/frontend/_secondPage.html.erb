@@ -82,7 +82,7 @@
     }
 
     $('#username').addClass("form-control").addClass("myInput").prop('required',true);
-    $('#email').addClass("form-control").addClass("myInput");
+    $('#email').addClass("form-control").addClass("myInput").attr("placeholder", "optional");
     $('#gender').addClass("form-control").css("width", "auto").css("background-color", "white");
     $('#age').addClass("form-control").css("width", "80px").prop("type", "number").prop("min",14).prop("max",99).prop("max",99).prop('required',true).attr('maxlength','2');
     $('#age').get(0).type = 'number';

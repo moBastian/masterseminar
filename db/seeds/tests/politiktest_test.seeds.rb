@@ -309,7 +309,7 @@ item_alternatives_n4 = [
 		%w{1492 1648 1776 1815},
 		%w{13 15 17 19},
 		%w{Argentinien Bolivien Brasilien Chile},
-		%w{1492 1507 1515 1524}
+		%w{1492 1507 1515 1524},
 ]
 
 t = Test.create(name: "Politik",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/politik.png", construct: "Probe", student_access:true, archive: false)

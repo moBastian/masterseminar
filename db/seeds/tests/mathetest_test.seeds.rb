@@ -13,7 +13,7 @@ Pi
 11
 97
 -1
-0,0001
+0.0001
 1/20
 1/2
 26
@@ -221,7 +221,7 @@ item_alternatives_n4 = [
 		%w{21 23 25 27},
 		%w{9 10 11 12},
 		%w{91 93 95 97},
-		%w{0,1 -1 0 1},
+		%w{0.1 -1 0 1},
 		%w{0.1 0.01 0.001 0.0001},
 		%w{1/3 1/7 1/20 1/2},
 		%w{1/2 3/4 20/35 14/15},
@@ -265,7 +265,7 @@ item_alternatives_n4 = [
 		%w{0 1 -1 2},
 		%w{0 1 -1 2},
 		%w{10 11 100 110},
-		%w{3 3,5 4 5},
+		%w{3 3.5 4 5},
 		%w{1 2 3 4},
 		%w{0 1 2 3},
 		%w{-3 -1 1 3},
@@ -312,7 +312,7 @@ item_alternatives_n4 = [
 		%w{8 10 12 14},
 		%w{8 12 24 48},
 		%w{0 1 2 6},
-		%w{90 180 360 720}
+		%w{90 180 360 720},
 ]
 
 t = Test.create(name: "Mathe",  info: "Mathetest", short_info: "Mathetest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/mathe.png", construct: "Probe", student_access:true, archive: false)

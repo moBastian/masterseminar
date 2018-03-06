@@ -22,7 +22,7 @@ Russland
 2006
 1974
 1934
-2010
+1950
 Brasilien
 12
 20
@@ -38,13 +38,13 @@ Gerd\ Müller
 Toronto\ Raptors
 Dallas\ Mavericks
 Chicago\ Bulls
-3,05
+3.05
 12
 1
 28x15
 Viertel
 Handicap
-45,93
+45.93
 Par
 Grün
 60
@@ -57,7 +57,7 @@ dreimal
 Aufschlag
 11
 16
-Pingpong
+Ping\ Pong\ Ball
 England
 Rudern
 Skilanglauf
@@ -66,10 +66,10 @@ Skilanglauf
 Skispringen
 Hockey
 größere\ Schanze
-111,12
+111.12
 60
 25
-2,37
+2.37
 0
 16
 die\ Schwarze
@@ -80,7 +80,7 @@ Effet
 Blau
 2:1
 10
-19,2
+19.2
 Kegeln
 Strike
 Stabweitsprung
@@ -102,7 +102,7 @@ Kanada
 Rumjana\ Nejkowa
 USA
 Deutschland
-253,5
+253.5
 }
 question_n4 = [
 		"Was befindet sich auf der Olympischen Flagge?",
@@ -149,7 +149,7 @@ question_n4 = [
 		"Wieviel Gramm darf ein Golfball höchstens wiegen?",
 		"Wie bezeichnet man im Golfsport die Anzahl von Schlägen für ein Loch, die ein sehr guter Spieler im Durchschnitt dafür benötigt?",
 		"Wie nennt man den Zielbereich um ein Loch beim Golf?",
-		"Wieviele Millionen Menschen ungefähr spielen weltweit Golf?",
+		"Ungefähr wieviele Millionen Menschen spielen weltweit Golf?",
 		"Welches dieser Turniere gehört nicht zu den Golf Majors?",
 		"Welcher Golfspieler gewann 2000 drei der vier großen Golfturniere?",
 		"Welches der vier großen Golfturniere fand bereits 1860 zum ersten Mal statt?",
@@ -245,13 +245,13 @@ item_alternatives_n4 = [
 		%w{Toronto\ Raptors Ottawa\ Otters Vancouver\ Vipers Montreal\ Monarchs},
 		%w{Houston\ Rockets Dallas\ Mavericks Boston\ Celtics Los\ Angeles\ Lakers},
 		%w{Houston\ Rockets Los\ Angeles\ Lakers Chicago\ Bulls Washington\ Wizards},
-		%w{2,75 2,85 2,95 3,05},
+		%w{2.75 2.85 2.95 3.05},
 		%w{5 7 10 12},
 		%w{1 2 3 4},
 		%w{18x9 23x8 28x15 120x90},
 		%w{Halbzeiten Viertel Drittel Sechstel},
 		%w{Par Ace Eagle Handicap},
-		%w{35,21 45,93 47,13 54,65},
+		%w{35.21 45.93 47.13 54.65},
 		%w{Par Ace Eagle Handicap},
 		%w{Loch Nah Grün Rasen},
 		%w{6 16 60 600},
@@ -273,10 +273,10 @@ item_alternatives_n4 = [
 		%w{Schießen Skispringen Riesenslalom Abfahrtslauf},
 		%w{Shorttrack Eisschnelllauf Eiskunstlauf Hockey},
 		%w{größere\ Schanze spezielle\ Anzüge Motorisierung Schlittennutzung},
-		%w{30,37 61,30 111,12 398,77},
+		%w{30.37 61.30 111.12 398.77},
 		%w{20 25 50 60},
 		%w{1 20 25 50},
-		%w{1,73 2,37 2,67 3,03},
+		%w{1.73 2.37 2.67 3.03},
 		%w{0 1 301 501},
 		%w{8 9 15 16},
 		%w{die\ Weiße die\ höchste\ Volle die\ Schwarze die\ höchste\ Halbe},
@@ -287,7 +287,7 @@ item_alternatives_n4 = [
 		%w{Pink Blau Braun Grün},
 		%w{4:1 3:1 2:1 1:1},
 		%w{3 6 10 15},
-		%w{4,2 9,2 14,2 19,2},
+		%w{4.2 9.2 14.2 19.2},
 		%w{Dart Kegeln Billard Bogenschießen},
 		%w{Strike Birdy Split Brooklyn},
 		%w{Weitsprung Dreisprung Hochsprung Stabweitsprung},
@@ -309,7 +309,7 @@ item_alternatives_n4 = [
 		%w{Rumjana\ Nejkowa Julia\ Lier Kayla\ Pratt Kerry\ Simmonds},
 		%w{Deutschland Neuseeland USA Niederlande},
 		%w{USA Deutschland Südafrika Italien},
-		%w{147,5m 199,5m 222m 253,5m}
+		%w{147.5m 199.5m 222m 253.5m}
 ]
 
 t = Test.create(name: "Sport",  info: "Sporttest", short_info: "Sporttest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/sport.png", construct: "Probe", student_access:true, archive: false)

@@ -51,7 +51,7 @@ Südamerika
 21.6.
 23.9.
 21.12.
-11000
+11.000
 Pazifik
 1957
 2000
@@ -72,7 +72,7 @@ Grönland
 Russland
 Kanada
 Kleine\ Eiszeit
-100000
+100.000
 Hamburg
 0°C
 Straße\ von\ Gibraltar
@@ -97,7 +97,7 @@ Mond
 Watt
 Luxemburg
 Finnland
-Großbritannien
+Vereinigtes\ Königreich
 Norwegen
 Teutoburger\ Wald
 Erzgebirge
@@ -140,7 +140,7 @@ question_n4 = [
 		"Die Rocky Mountains sind ein Gebirge auf welchem Kontinent?",
 		"Die Anden sind ein Gebirge auf welchem Kontinent?",
 		"Die Appalachen sind ein Gebirge auf welchem Kontinent?",
-		"Die Sierra Madre des Sur ist ein Gebirge auf welchem Kontinent?",
+		"Die Sierra Madre del Sur ist ein Gebirge auf welchem Kontinent?",
 		"Der Himalaya ist ein Gebirge auf welchem Kontinent?",
 		"Der Hindukusch ist ein Gebirge auf welchem Kontinent?",
 		"Der Altai ist ein Gebirge auf welchem Kontinent?",
@@ -158,7 +158,7 @@ question_n4 = [
 		"Wann beginnt der Frühling auf der Südhalbkugel?",
 		"Wann beginnt der Sommer auf der Südhalbkugel?",
 		"Wieviele Meter tief ist die tiefste Stelle am Meeresgrund (im Marianengraben) ungefähr?",
-		"In welchem (Welt-)Meer liegt der Mariannengraben?",
+		"In welchem (Welt-)Meer liegt der Marianengraben?",
 		"In welchem Jahr wurde die Messung der tiefsten Stelle im Marianengraben durchgeführt?",
 		"Wieviele Inseln umfasst das westpazifische Inselgebiet Mikronesien ungefähr?",
 		"Wie heißen die Ureinwohner Australiens?",
@@ -212,7 +212,7 @@ question_n4 = [
 		"Wo befindet sich der Eiffelturm?",
 		"In welcher Stadt steht die Sagrada Familia?",
 		"Wie heißt das 2000 erbaute Riesenrad in London?",
-		"Wieviele Pferde zieren die Quadriga auf dem Brandenburger Tor?"
+		"Wieviele Pferde zieren die Quadriga auf dem Brandenburger Tor?",
 ]
 
 
@@ -281,7 +281,7 @@ item_alternatives_n4 = [
 		%w{Atlantik Indischer\ Ozean Pazifik Arktischer\ Ozean},
 		%w{Golf\ von\ Aden  Golfball Golfplatz Golf\ von\ Mexiko},
 		%w{Spielmodus\ im\ Golfspiel Wolkenformation Meeresströmung Gewitterfront},
-		%w{kein\ Einfluss sehr\gering groß entscheidend},
+		%w{kein\ Einfluss sehr\ gering groß entscheidend},
 		%w{Permafrostboden Permaeisboden Permakaltboden Permaschneeboden},
 		%w{Südafrika Grönland Indien Brasilien},
 		%w{Deutschland Kroatien Russland Ukraine},

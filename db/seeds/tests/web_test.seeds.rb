@@ -281,7 +281,7 @@ item_alternatives_n4 = [
 		%w{Alphabet Einmaleins Zed\ Inc. Time\ Warner\ Inc.},
 		%w{Anaheim Mountain\ View Redmond Cupertino},
 		%w{Bill\ Gates Tim\ Berners-Lee Sergey\ Brin Steve\ Jobs},
-		%w{Steve\ Ballmer Ian\ Thorpe Linus\ Torvalds \Larry\ Page},
+		%w{Steve\ Ballmer Ian\ Thorpe Linus\ Torvalds Larry\ Page},
 		%w{PageRank Bubblesort PageSort Pager},
 		%w{3G VoIP Edge WLAN},
 		%w{Kill\ Hub Grill\ Hub Kill\ Switch Grill\ Switch},
@@ -289,7 +289,7 @@ item_alternatives_n4 = [
 		%w{Lurker Overlord Devourer Overmind},
 		%w{White\ Walker Silver\ Surfer Millenials Generation\ Y},
 		%w{Server-Client Master-Slave Peer-to-Peer Torrent},
-		%w{MIX\ (Mailand) NIX\ (Oslo) NYIIX\ (New\ York) DE-CIX (Frankfurt\ a.M.)},
+		%w{MIX\ (Mailand) NIX\ (Oslo) NYIIX\ (New\ York) DE-CIX\ (Frankfurt\ a.M.)},
 		%w{SMTP TCP IP FTP},
 		%w{SMTP TCP IP FTP},
 		%w{SMTP TCP IP FTP},
@@ -309,8 +309,7 @@ item_alternatives_n4 = [
 		%w{Firefox\ OS Windows\ Mobil Symbian Android},
 		%w{Firefox\ OS Windows\ Mobil iOS Symbian},
 		%w{Siri MS\ Word Cortana Google\ Assistent},
-		%w{LaTeX Alexa Bixby Nina},
-
+		%w{LaTeX Alexa Bixby Nina}
 ]
 
 t = Test.create(name: "Web1",  info: "Web-Test", short_info: "Web-Test",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/social_media.png", construct: "Probe", student_access:true, archive: false)

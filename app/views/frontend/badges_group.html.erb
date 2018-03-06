@@ -120,10 +120,13 @@
         window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
         window.onhashchange=function(){window.location.hash="no-back-button";};
 
-        var email = "<%= @student.email%>"
+        var email = "<%= @student.email%>";
         if(email!=""){
             $('#email').val(email);
         }
+
+
+
         var achievementHash = {
         <% @student.achievement.each do |a| %>
         <%= a[0]%>: <%=raw a[1]%>,
@@ -193,6 +196,7 @@
                 $('#alert').remove();
             }, 5000);
         })
+
 
 
     </script>
