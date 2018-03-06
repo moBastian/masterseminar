@@ -67,7 +67,7 @@
 <% ranking_info =@student.get_data_ranking() %>
 <% points = ranking_info.pluck(:points).uniq%>
 <div class="container" style="width: auto;">
-    <table>
+    <table style="empty-cells: show">
       <% points.each do |p|%>
           <tr>
             <td style="padding-left: 1px;" class="tdQuestion">
@@ -81,7 +81,7 @@
                 <%if s==@student%>
                 <%elsif(count<5)%>
                     <%nextStudent = ranking_info.where(points: p)[i+1]%>
-                    <%if nextStudent.nil? || count==4%>
+                    <%if nextStudent.nil? || count==4 || nextStudent==@student%>
                         <td>&nbsp;<%= s.name%>&nbsp;</td>
                         <%count = count+1%>
                     <%else%>
@@ -90,6 +90,18 @@
                     <%end%>
                 <%end%>
             <%end%>
+            <%if @student.points == p%>
+                <% while count<5%>
+                    <td width="1px"></td>
+                    <%count = count+1%>
+                <%end%>
+            <%else%>
+                <% while count<6%>
+                    <td width="1px"></td>
+                    <%count = count+1%>
+                <%end%>
+            <%end%>
+
           </tr>
       <%end%>
     </table>

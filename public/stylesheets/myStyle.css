@@ -123,8 +123,8 @@ only screen and (max-width: 760px),
     .myBadge {
       width: 30px;
     }
-  }
 
+  }
 
 }
 
@@ -210,6 +210,11 @@ only screen and (max-width: 760px),
     }
     .myBadge {
       width: 35px;
+    }
+    .secondColumn{
+      margin-top:30px;
+      text-align: center;
+      background-color:lavender
     }
   }
 }
