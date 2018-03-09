@@ -46,7 +46,7 @@
         <p class="myP" style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
         <div align="right" style="padding-right: 15px">
           <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-            <%if @student.survey_done=="true%>
+            <%if @student.survey_done%>
             <%else%>
                 <%puts(@assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
                 <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id), class:"btn survey btnSpace" do%>Umfrage<% end %>
