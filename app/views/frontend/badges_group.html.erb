@@ -1,3 +1,4 @@
+<%survey = Test.where(name:"BFI")%>
 <div class="container" style="width: auto; height: auto">
   <% content_for :top do%>
       <div class="container-fluid">
@@ -5,9 +6,14 @@
           <p class="myP" style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
           <div align="right" style="padding-right: 15px">
             <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-              <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary", style:"margin-right:40px;"%>
+              <%if @student.survey_done=="true"%>
+              <%else%>
+                  <%puts(@assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
+                  <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id), class:"btn survey btnSpace" do%>Umfrage<% end %>
+              <%end%>
+              <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace"%>
               <%= token_tag nil %>
-              <button type="submit" class="btn btn-warning">Abmelden</button>
+              <button type="submit" class="btn btn-warning btnSpace">Abmelden</button>
             </form>
           </div>
         </div>
@@ -26,7 +32,7 @@
   <% end %>
 
 
-  <div style="overflow-x:auto;">
+  <div style="overflow-x:auto;" align="center">
     <table style="border:1px solid black ;margin-left: 1px;width: 70%">
       <tr>
         <% count = 0%>
@@ -63,8 +69,9 @@
     <h1>Die folgenden Tests stehen für dich zur Verfügung:</h1>
     <div>
       <% count = 0 %>
-      <% if !@assessments.nil?%>
-          <% assessment_size = @assessments.size%>
+      <% tests = @assessments.where.not(group_id:@student.group, test_id:survey)%>
+      <% if !tests.nil?%>
+          <% assessment_size = tests.size%>
       <%else %>
           <%assessment_size=0%>
       <%end%>
@@ -73,19 +80,19 @@
           <div class="row">
             <%while count < assessment_size%>
                 <% if(count<3)%>
-                    <div class='col-lg-3 col-md-4 col-lg-offset-1' style="text-align: center;background-color:lavender">
+                    <div class='col-lg-3 col-md-4 col-lg-offset-1' style="text-align: center;">
                       <div class="myP" >
-                        <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img class="myImg" src=<%= @assessments[count].test.picture%>><% end %>
+                        <%= link_to url_for(controller: 'frontend', action: 'start', id: tests[count].id) do%><img class="myImg" src=<%= tests[count].test.picture%>><% end %>
                         <br/>
-                        <%= @assessments[count].test.name %>
+                        <%= tests[count].test.name %>
                       </div>
                     </div>
                 <%else%>
                     <div class='col-lg-3 col-md-4 col-lg-offset-1 secondColumn'>
                       <div class="myP">
-                        <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img class="myImg" src=<%= @assessments[count].test.picture%>><% end %>
+                        <%= link_to url_for(controller: 'frontend', action: 'start', id: tests[count].id) do%><img class="myImg" src=<%= tests[count].test.picture%>><% end %>
                         <br/>
-                        <%= @assessments[count].test.name %>
+                        <%= tests[count].test.name %>
                         <br/>
                       </div>
                     </div>

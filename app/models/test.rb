@@ -31,7 +31,7 @@ class Test < ActiveRecord::Base
   def draw_items(oldItems)
     minNewItems = 15
     # -> ziehe immer (hier 15) unbekannte Items
-    if false                          #Nett um zu testen (einfach auf true setzen)
+    if false || self.name == "BFI"                          #Nett um zu testen (einfach auf true setzen)
       itemset = content_items
     else
       newItems = content_items - oldItems

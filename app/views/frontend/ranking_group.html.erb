@@ -22,6 +22,7 @@
       border-bottom: 1px solid #eee;
       position: relative;
       text-align: center;
+      font-size: 1.3em;
     }
 
     td:before {
@@ -37,6 +38,7 @@
   }
 
 </style>
+<%survey = Test.where(name:"BFI")%>
 <div class="container" style="width: auto; height: auto">
 <% content_for :top do%>
     <div class="container-fluid">
@@ -44,9 +46,14 @@
         <p class="myP" style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
         <div align="right" style="padding-right: 15px">
           <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-            <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary", style:"margin-right:40px;"%>
+            <%if @student.survey_done=="true%>
+            <%else%>
+                <%puts(@assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
+                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id), class:"btn survey btnSpace" do%>Umfrage<% end %>
+            <%end%>
+            <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace"%>
             <%= token_tag nil %>
-            <button type="submit" class="btn btn-warning">Abmelden</button>
+            <button type="submit" class="btn btn-warning btnSpace">Abmelden</button>
           </form>
         </div>
       </div>
@@ -66,26 +73,26 @@
 
 <% ranking_info =@student.get_data_ranking() %>
 <% points = ranking_info.pluck(:points).uniq%>
-<div class="container" style="width: auto;">
+<div class="container" style="width: auto;" align="center">
     <table style="empty-cells: show">
       <% points.each do |p|%>
           <tr>
-            <td style="padding-left: 1px;" class="tdQuestion">
+            <td style="padding-left: 10px;" class="tdQuestion myTd">
               <%=p%> Fragen richtig beantwortet:&nbsp;
             </td>
             <%count=0%>
             <%if @student.points==p%>
-                <td><b>--><%=@student.name%><--</b>, </td>
+                <td class="myTd"><b>--><%=@student.name%><--</b>, </td>
             <%end%>
             <%ranking_info.where(points: p).each_with_index do |s, i|%>
                 <%if s==@student%>
                 <%elsif(count<5)%>
                     <%nextStudent = ranking_info.where(points: p)[i+1]%>
                     <%if nextStudent.nil? || count==4 || nextStudent==@student%>
-                        <td>&nbsp;<%= s.name%>&nbsp;</td>
+                        <td class="myTd" style="padding-right: 10px">&nbsp;<%= s.name%>&nbsp;</td>
                         <%count = count+1%>
                     <%else%>
-                        <td>&nbsp;<%= s.name%>, </td>
+                        <td class="myTd">&nbsp;<%= s.name%>, </td>
                         <%count = count+1%>
                     <%end%>
                 <%end%>
@@ -110,8 +117,9 @@
   <h1>Die folgenden Tests stehen für dich zur Verfügung:</h1>
   <div>
     <% count = 0 %>
-    <% if !@assessments.nil?%>
-        <% assessment_size = @assessments.size%>
+    <% tests = @assessments.where.not(group_id:@student.group, test_id:survey)%>
+    <% if !tests.nil?%>
+        <% assessment_size = tests.size%>
     <%else %>
         <%assessment_size=0%>
     <%end%>
@@ -120,19 +128,19 @@
         <div class="row">
           <%while count < assessment_size%>
               <% if(count<3)%>
-                  <div class='col-lg-3 col-md-4 col-lg-offset-1' style="text-align: center;background-color:lavender">
+                  <div class='col-lg-3 col-md-4 col-lg-offset-1' style="text-align: center;">
                     <div class="myP" >
-                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img class="myImg" src=<%= @assessments[count].test.picture%>><% end %>
+                      <%= link_to url_for(controller: 'frontend', action: 'start', id: tests[count].id) do%><img class="myImg" src=<%= tests[count].test.picture%>><% end %>
                       <br/>
-                      <%= @assessments[count].test.name %>
+                      <%= tests[count].test.name %>
                     </div>
                   </div>
               <%else%>
                   <div class='col-lg-3 col-md-4 col-lg-offset-1 secondColumn'>
                     <div class="myP">
-                      <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments[count].id) do%><img class="myImg" src=<%= @assessments[count].test.picture%>><% end %>
+                      <%= link_to url_for(controller: 'frontend', action: 'start', id: tests[count].id) do%><img class="myImg" src=<%= tests[count].test.picture%>><% end %>
                       <br/>
-                      <%= @assessments[count].test.name %>
+                      <%= tests[count].test.name %>
                       <br/>
                     </div>
                   </div>
@@ -142,8 +150,6 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
 </div>
 
   <script>
