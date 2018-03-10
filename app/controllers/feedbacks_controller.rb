@@ -52,7 +52,9 @@ class FeedbacksController < ApplicationController
       if @feedback.save
 
         format.html {
-          session[:extraData][1] = true
+          @student = Student.find_by_id(session[:student_id])
+          @student.feedback_send = true
+          @student.save
           flash[:notice]= 'Vielen Dank für das Feedback :)'
           redirect_to '/frontend'
 

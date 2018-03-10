@@ -216,7 +216,7 @@ class Student < ActiveRecord::Base
         testLoginFree=false
       end
     end
-    s = group.students.build(name: cur, group_type: Random.rand(6),survey_done:false, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
+    s = group.students.build(name: cur, group_type: Random.rand(6),feedback_send:false,survey_done:false, login_times:0, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
     s.save
     return s
   end

@@ -6,9 +6,8 @@
           <p class="myP" style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
           <div align="right" style="padding-right: 15px">
             <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-              <%if @student.survey_done%>
+              <%if @student.survey_done||@assessments.where(group_id:@student.group, test_id:survey).first.nil?%>
               <%else%>
-                  <%puts(@assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
                   <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id), class:"btn survey btnSpace" do%>Umfrage<% end %>
               <%end%>
               <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace"%>
@@ -47,6 +46,7 @@
                 </td>
             <% else %>
                 <td style="padding-top: 1%;padding-left: 2%">
+                  <%puts(achievementInfos[4])%>
                   <img class="myBadge" src=<%= achievementInfos[2]%> id="a<%= count%>" title="<%= achievementInfos[4]%>">
                 </td>
             <% end%>
@@ -145,27 +145,29 @@
             $('#emailgroup').removeClass('has-success');
             $('#submit').removeClass('btn-danger');
             $('#submit').removeClass('btn-success');
-            if(achievementHash["a8"][0]!= "true") {
-                showBadge("a8");
-                achievementHash["a8"][0] = "true";
-                sendAchievement("a8","#a7");
-            }
-
 
             if ($('#email').is(':valid') && $('#email').val() != '') {
                 $.ajax({url: '<%= user_group_student_path(@student.group.user,@student.group,@student, format: :text)%>' + '?email=' + $('#email').val()+  '/' + $('#emailCheck').prop( "checked" )});
                 $('#submit').addClass('btn-success');
                 $('#emailgroup').addClass('has-success');
+                if(achievementHash["a8"][0]!= "true") {
+                    showBadge("a8");
+                    achievementHash["a8"][0] = "true";
+                    sendAchievement("a8","#a7");
+                }
                 if(!$('#emailCheck').prop( "checked" )){
                     $('#email').val("")
-                }            }
+                }
+            }
             else {
                 $('#submit').addClass('btn-danger');
                 $('#emailgroup').addClass('has-error');
             }
+            setTimeout(resetEmailButton, 3000);
         }
-        var not_first = "<%= @not_first%>";
-        if(achievementHash["a17"][0]!= "true" && not_first=="true") {
+
+        var login_times = "<%= @student.login_times%>";
+        if(achievementHash["a17"][0]!= "true" && login_times>1) {
             showBadge("a17");
             achievementHash["a17"][0] = "true";
             sendAchievement("a17", "#a16");
@@ -173,13 +175,23 @@
 
         }
 
-        var send_first = "<%= @sendFeedback%>";
-        if(achievementHash["a28"][0]!= "true" && send_first=="true") {
+
+
+        var send_first = <%= @student.feedback_send%>;
+        if(achievementHash["a28"][0]!= "true" && send_first) {
             showBadge("a28");
             achievementHash["a28"][0] = "true";
             sendAchievement("a28", "#a27");
 
 
+        }
+        function resetEmailButton() {
+            $('#emailgroup').removeClass('has-error');
+            $('#emailgroup').removeClass('has-success');
+            $('#submit').removeClass('btn-danger');
+            $('#submit').removeClass('btn-success');
+            $('#submit').addClass('btn-default');
+            $('#emailgroup').addClass('has-default');
         }
 
         function sendAchievement(key, keyForJQ) {
@@ -191,6 +203,7 @@
             });
 
             $(keyForJQ).attr("src", achievementHash[key][2]);
+            $(keyForJQ).attr("title", achievementHash[key][4]);
         }
 
         function showBadge(key) {

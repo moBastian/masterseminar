@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
       if u.authenticate(params[:password])
         session[:user_id] = u.id
         session[:student_id] = nil
-        session[:extraData] = nil
         @login_student = nil
         @login_user = u
         news = News.new_items(u)

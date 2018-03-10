@@ -25,11 +25,8 @@ class FrontendController < ApplicationController
       session[:student_id] = s.id
       session[:user_id] = nil
       @login_user = nil
-
-
-      #not a good pratice but a solution
-      session[:extraData] = [true, false]
-
+      @student.login_times = s.login_times + 1
+      @student.save
 
       redirect_to '/frontend'
     elsif g != nil
@@ -39,8 +36,9 @@ class FrontendController < ApplicationController
       session[:student_id] = s.id
       session[:user_id] = nil
       @login_user = nil
-      #not a good pratice but a solution
-      session[:extraData] = [false, false]
+      @student.login_times = s.login_times + 1
+      @student.save
+
       redirect_to '/frontend'
     else
       redirect_to root_url, notice: "Der Code ist falsch! Bitte prüfe genau, ob du alles richtig eingegeben hast."
@@ -52,7 +50,6 @@ class FrontendController < ApplicationController
     if(!session[:student_id].nil?)
 
       session[:student_id] = nil
-      session[:extraData] = nil
       @login_student = nil
     end
     redirect_to root_url
@@ -129,8 +126,6 @@ class FrontendController < ApplicationController
       @login_student = Student.find(session[:student_id])
       @group = @student.group
       @user =@student.group.user
-      @not_first = session[:extraData][0]
-      @sendFeedback = session[:extraData][1]
 
     end
   end

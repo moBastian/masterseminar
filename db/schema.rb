@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309185914) do
+ActiveRecord::Schema.define(version: 20180310203016) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer  "group_id"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(version: 20180309185914) do
     t.integer  "points"
     t.integer  "played_questions"
     t.text     "first_accept"
+    t.integer  "login_times"
+    t.boolean  "feedback_send"
     t.boolean  "survey_done"
   end
 

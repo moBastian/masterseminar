@@ -54,7 +54,6 @@ class StudentsController < ApplicationController
             @student.email = emailArray[0]
             @student.save
           end
-          session[:extraData][0] = true
           StudentMailer.edited(emailArray[0], @student.login).deliver_later
           head :ok
         end
