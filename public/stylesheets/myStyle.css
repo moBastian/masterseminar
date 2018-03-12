@@ -4,13 +4,20 @@ small resolution smartphones, tablets
 .navbar {
   margin-bottom: 5px;
 }
+.confirm{}
 .myBadge {
   width: 50px;
 }
 
 .survey{
   background-color:#6ab24c;
-  color:white
+  color: #fff;
+  border-color: #6ab24c;
+
+}
+.survey:hover{
+  color: #fff;
+  background-color: #63a547;
 }
 
 .btnSpace{

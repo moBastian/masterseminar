@@ -39,41 +39,46 @@
 
 </style>
 <%survey = Test.where(name:"BFI")%>
+<%surveyLink = url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
 <div class="container" style="width: auto; height: auto">
-<% content_for :top do%>
-    <div class="container-fluid">
-      <div>
-        <p class="myP" style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
-        <div align="right" style="padding-right: 15px">
-          <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-            <%if @student.survey_done%>
+  <% content_for :top do%>
+      <div class="container-fluid">
+        <div>
+          <p class="myP" style="float: left"><b title="Mit diesem Code kannst du dich erneut anmelden.">Angemeldet als: <%= @student.login %></b></p>
+          <div align="right" style="padding-right: 15px">
+            <%if @student.survey_done||@assessments.where(group_id:@student.group, test_id:survey).first.nil?%>
+                <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" >
+                  <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
+                  <%= token_tag nil %>
+                  <button id ="logOutButton" type="submit" class="btn btn-warning btnSpace">Abmelden</button>
+                </form>
             <%else%>
-                <%puts(@assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
-                <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id), class:"btn survey btnSpace" do%>Umfrage<% end %>
+                <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" data-confirm="bla" >
+                  <%= link_to surveyLink, class:"btn survey btnSpace", title: "Kurzer Fragebogen (Persönlichkeitstest)" do%>Fragebogen<% end %>
+                  <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
+                  <%= token_tag nil %>
+                  <button id ="logOutButton" type="submit" class="btn btn-warning btnSpace">Abmelden</button>
+                </form>
             <%end%>
-            <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace"%>
-            <%= token_tag nil %>
-            <button type="submit" class="btn btn-warning btnSpace">Abmelden</button>
+          </div>
+        </div>
+        <div>
+          <form class="navbar-form navbar-left">
+            <p class = "form-group">Anmeldecode per E-mail zusenden:</p>
+            <div id="emailgroup" class="form-group">
+              <input id="email" type="email" class="myInput" placeholder="E-Mail Adresse">
+            </div>
+            <input type="checkbox"  title="Speichern der E-Mail-Adresse, zum senden Studienbezogener Nachrichten an die Teilnehmer." class="form-check-input" id="emailCheck" style="height: 20px;width: 20px">
+            <label class="form-check-label" for="exampleCheck1" title="Speichern der E-Mail-Adresse, zum senden Studienbezogener Nachrichten an die Teilnehmer.">E-Mail-Adresse speichern</label>
+            <button id="submit" type="submit" class="btn btn-default"  onclick="sendMail();return false;">Absenden</button>
           </form>
         </div>
       </div>
-      <div>
-        <form class="navbar-form navbar-left">
-          <p class = "form-group">Anmeldecode per E-mail zusenden:</p>
-          <div id="emailgroup" class="form-group">
-            <input id="email" type="email" class="myInput" placeholder="E-Mail Adresse">
-          </div>
-          <input type="checkbox" class="form-check-input" id="emailCheck">
-          <label class="form-check-label" for="exampleCheck1">E-Mail speichern</label>
-          <button id="submit" type="submit" class="btn btn-default"  onclick="sendMail();return false;">Absenden</button>
-        </form>
-      </div>
-    </div>
-<% end %>
+  <% end %>
 
-<% ranking_info =@student.get_data_ranking() %>
-<% points = ranking_info.pluck(:points).uniq%>
-<div class="container" style="width: auto;" align="center">
+  <% ranking_info =@student.get_data_ranking() %>
+  <% points = ranking_info.pluck(:points).uniq%>
+  <div class="container" style="width: auto;" align="center">
     <table style="empty-cells: show">
       <% points.each do |p|%>
           <tr>
@@ -112,44 +117,64 @@
           </tr>
       <%end%>
     </table>
-</div>
-<div>
-  <h1>Die folgenden Tests stehen für dich zur Verfügung:</h1>
+  </div>
   <div>
-    <% count = 0 %>
-    <% tests = @assessments.where.not(group_id:@student.group, test_id:survey)%>
-    <% if !tests.nil?%>
-        <% assessment_size = tests.size%>
-    <%else %>
-        <%assessment_size=0%>
-    <%end%>
-    <div class="row">
-      <div class="col-lg-11">
-        <div class="row">
-          <%while count < assessment_size%>
-              <% if(count<3)%>
-                  <div class='col-lg-3 col-md-4 col-lg-offset-1' style="text-align: center;">
-                    <div class="myP" >
-                      <%= link_to url_for(controller: 'frontend', action: 'start', id: tests[count].id) do%><img class="myImg" src=<%= tests[count].test.picture%>><% end %>
-                      <br/>
-                      <%= tests[count].test.name %>
+    <h1>Die folgenden Tests stehen für dich zur Verfügung:</h1>
+    <div>
+      <% count = 0 %>
+      <% tests = @assessments.where(group_id:@student.group).where.not(test_id:survey)%>
+      <% if !tests.nil?%>
+          <% assessment_size = tests.size%>
+      <%else %>
+          <%assessment_size=0%>
+      <%end%>
+      <div class="row">
+        <div class="col-lg-11">
+          <div class="row">
+            <%while count < assessment_size%>
+                <% if(count<3)%>
+                    <div class='col-lg-3 col-md-4 col-lg-offset-1' style="text-align: center;">
+                      <div class="myP" >
+                        <%= link_to url_for(controller: 'frontend', action: 'start', id: tests[count].id) do%><img class="myImg" src=<%= tests[count].test.picture%>><% end %>
+                        <br/>
+                        <%= tests[count].test.name %>
+                      </div>
                     </div>
-                  </div>
-              <%else%>
-                  <div class='col-lg-3 col-md-4 col-lg-offset-1 secondColumn'>
-                    <div class="myP">
-                      <%= link_to url_for(controller: 'frontend', action: 'start', id: tests[count].id) do%><img class="myImg" src=<%= tests[count].test.picture%>><% end %>
-                      <br/>
-                      <%= tests[count].test.name %>
-                      <br/>
+                <%else%>
+                    <div class='col-lg-3 col-md-4 col-lg-offset-1 secondColumn'>
+                      <div class="myP">
+                        <%= link_to url_for(controller: 'frontend', action: 'start', id: tests[count].id) do%><img class="myImg" src=<%= tests[count].test.picture%>><% end %>
+                        <br/>
+                        <%= tests[count].test.name %>
+                        <br/>
+                      </div>
                     </div>
-                  </div>
-              <%end%>
-              <% count = count + 1%>
-          <%end%>
+                <%end%>
+                <% count = count + 1%>
+            <%end%>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="font-size: 2.2rem">Neues Abzeichen erhalten</h5>
+        </div>
+        <div class="modal-body" id="modalContent">
+          <div>Würdest du noch einen kurzen, einmaligen Fragebogen (10 Fragen) ausfüllen?</div>
+
+        </div>
+        <div class="modal-footer">
+          <button id="unconfirmButton" class="btn btn-warning" style="margin-right: 30px">Nein</button>
+          <button id="confirmButton" class="btn btn-primary">Ja</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
   <script>
@@ -158,6 +183,7 @@
       window.location.hash="no-back-button";
       window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
       window.onhashchange=function(){window.location.hash="no-back-button";}
+      surveyLink = "<%=surveyLink%>"
 
       $(document).ready(function(){
           setTimeout(function(){
@@ -191,4 +217,36 @@
               $('#emailgroup').addClass('has-error');
           }
       }
+
+      //Override the default confirm dialog by rails
+      $.rails.allowAction = function(link){
+          if (link.data("confirm") == undefined){
+              return true;
+          }
+          $.rails.showConfirmationDialog(link);
+          return false;
+      };
+      //User click confirm button
+      $.rails.confirmed = function(link){
+          link.data("confirm", null);
+          link.trigger("click.rails");
+          $('#logOutButton').click();
+
+      };
+      localStorage.setItem("logout",false);
+      //Display the confirmation dialog
+      $.rails.showConfirmationDialog = function(link){
+          $('#testModal').modal('show');
+          $('#confirmButton').on('click',(function(){
+              localStorage.setItem("logout", true);
+              window.location.replace(surveyLink);
+          }));
+          $('#unconfirmButton').on('click',(function(){
+              $.rails.confirmed(link);
+              $('#testModal').modal('hide');
+
+          }))
+      };
+
+
   </script>

@@ -1,20 +1,25 @@
 <%survey = Test.where(name:"BFI")%>
+<%surveyLink = url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
 <div class="container" style="width: auto; height: auto">
   <% content_for :top do%>
       <div class="container-fluid">
         <div>
-          <p class="myP" style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
+          <p class="myP" style="float: left"><b title="Mit diesem Code kannst du dich erneut anmelden.">Angemeldet als: <%= @student.login %></b></p>
           <div align="right" style="padding-right: 15px">
-            <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-              <%if @student.survey_done%>
-              <%else%>
-                  <%puts(@assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
-                  <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id), class:"btn survey btnSpace" do%>Umfrage<% end %>
-              <%end%>
-              <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace"%>
-              <%= token_tag nil %>
-              <button type="submit" class="btn btn-warning btnSpace">Abmelden</button>
-            </form>
+            <%if @student.survey_done||@assessments.where(group_id:@student.group, test_id:survey).first.nil?%>
+                <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" >
+                  <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
+                  <%= token_tag nil %>
+                  <button id ="logOutButton" type="submit" class="btn btn-warning btnSpace">Abmelden</button>
+                </form>
+            <%else%>
+                <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" data-confirm="bla" >
+                  <%= link_to surveyLink, class:"btn survey btnSpace", title: "Kurzer Fragebogen (Persönlichkeitstest)" do%>Fragebogen<% end %>
+                  <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
+                  <%= token_tag nil %>
+                  <button id ="logOutButton" type="submit" class="btn btn-warning btnSpace">Abmelden</button>
+                </form>
+            <%end%>
           </div>
         </div>
         <div>
@@ -23,8 +28,8 @@
             <div id="emailgroup" class="form-group">
               <input id="email" type="email" class="myInput" placeholder="E-Mail Adresse">
             </div>
-            <input type="checkbox" class="form-check-input" id="emailCheck">
-            <label class="form-check-label" for="exampleCheck1">E-Mail speichern</label>
+            <input type="checkbox"  title="Speichern der E-Mail-Adresse, zum senden Studienbezogener Nachrichten an die Teilnehmer." class="form-check-input" id="emailCheck" style="height: 20px;width: 20px">
+            <label class="form-check-label" for="exampleCheck1" title="Speichern der E-Mail-Adresse, zum senden Studienbezogener Nachrichten an die Teilnehmer.">E-Mail-Adresse speichern</label>
             <button id="submit" type="submit" class="btn btn-default"  onclick="sendMail();return false;">Absenden</button>
           </form>
         </div>
@@ -67,6 +72,7 @@
             <%end%>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
@@ -77,6 +83,7 @@
         window.location.hash="no-back-button";
         window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
         window.onhashchange=function(){window.location.hash="no-back-button";}
+        surveyLink = "<%=surveyLink%>"
 
         var email = "<%= @student.email%>";
         if(email!=""){
@@ -109,6 +116,36 @@
                 $('#alert').remove();
             }, 5000);
         })
+
+        //Override the default confirm dialog by rails
+        $.rails.allowAction = function(link){
+            if (link.data("confirm") == undefined){
+                return true;
+            }
+            $.rails.showConfirmationDialog(link);
+            return false;
+        };
+        //User click confirm button
+        $.rails.confirmed = function(link){
+            link.data("confirm", null);
+            link.trigger("click.rails");
+            $('#logOutButton').click();
+
+        };
+        localStorage.setItem("logout",false);
+        //Display the confirmation dialog
+        $.rails.showConfirmationDialog = function(link){
+            $('#testModal').modal('show');
+            $('#confirmButton').on('click',(function(){
+                localStorage.setItem("logout", true);
+                window.location.replace(surveyLink);
+            }));
+            $('#unconfirmButton').on('click',(function(){
+                $.rails.confirmed(link);
+                $('#testModal').modal('hide');
+
+            }))
+        };
 
 
     </script>

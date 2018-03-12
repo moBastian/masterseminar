@@ -1,19 +1,25 @@
 <%survey = Test.where(name:"BFI")%>
+<%surveyLink = url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
 <div class="container" style="width: auto; height: auto">
   <% content_for :top do%>
       <div class="container-fluid">
         <div>
-          <p class="myP" style="float: left"><b>Angemeldet als: <%= @student.login %></b></p>
+          <p class="myP" style="float: left"><b title="Mit diesem Code kannst du dich erneut anmelden.">Angemeldet als: <%= @student.login %></b></p>
           <div align="right" style="padding-right: 15px">
-            <form class="form-group" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>">
-              <%if @student.survey_done||@assessments.where(group_id:@student.group, test_id:survey).first.nil?%>
-              <%else%>
-                  <%= link_to url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id), class:"btn survey btnSpace" do%>Umfrage<% end %>
-              <%end%>
-              <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace"%>
-              <%= token_tag nil %>
-              <button type="submit" class="btn btn-warning btnSpace">Abmelden</button>
-            </form>
+            <%if @student.survey_done||@assessments.where(group_id:@student.group, test_id:survey).first.nil?%>
+                <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" >
+                  <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
+                  <%= token_tag nil %>
+                  <button id ="logOutButton" type="submit" class="btn btn-warning btnSpace">Abmelden</button>
+                </form>
+            <%else%>
+                <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" data-confirm="bla" >
+                  <%= link_to surveyLink, class:"btn survey btnSpace", title: "Kurzer Fragebogen (Persönlichkeitstest)" do%>Fragebogen<% end %>
+                  <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
+                  <%= token_tag nil %>
+                  <button id ="logOutButton" type="submit" class="btn btn-warning btnSpace">Abmelden</button>
+                </form>
+            <%end%>
           </div>
         </div>
         <div>
@@ -22,8 +28,8 @@
             <div id="emailgroup" class="form-group">
               <input id="email" type="email" class="myInput" placeholder="E-Mail Adresse">
             </div>
-            <input type="checkbox" class="form-check-input" id="emailCheck">
-            <label class="form-check-label" for="exampleCheck1">E-Mail speichern</label>
+            <input type="checkbox"  title="Speichern der E-Mail-Adresse, zum senden Studienbezogener Nachrichten an die Teilnehmer." class="form-check-input" id="emailCheck" style="height: 20px;width: 20px">
+            <label class="form-check-label" for="exampleCheck1" title="Speichern der E-Mail-Adresse, zum senden Studienbezogener Nachrichten an die Teilnehmer.">E-Mail-Adresse speichern</label>
             <button id="submit" type="submit" class="btn btn-default"  onclick="sendMail();return false;">Absenden</button>
           </form>
         </div>
@@ -104,119 +110,153 @@
       </div>
     </div>
   </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" style="font-size: 2.2rem">Neues Abzeichen erhalten</h5>
-          </div>
-          <div class="modal-body" id="modalContent">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 2.2rem">Schließen</button>
-          </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="font-size: 2.2rem">Neues Abzeichen erhalten</h5>
+        </div>
+        <div class="modal-body" id="modalContent">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 2.2rem">Schließen</button>
         </div>
       </div>
     </div>
+  </div>
 </div>
-    <script>
-        //possible Hack
-        //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
-        window.location.hash="no-back-button";
-        window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
-        window.onhashchange=function(){window.location.hash="no-back-button";};
+<script>
+    //possible Hack
+    //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
+    window.location.hash="no-back-button";
+    window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+    window.onhashchange=function(){window.location.hash="no-back-button";};
+    surveyLink = <%=surveyLink%>
 
-        var email = "<%= @student.email%>";
-        if(email!=""){
-            $('#email').val(email);
-        }
+    var email = "<%= @student.email%>";
+    if(email!=""){
+        $('#email').val(email);
+    }
 
 
 
-        var achievementHash = {
-        <% @student.achievement.each do |a| %>
-        <%= a[0]%>: <%=raw a[1]%>,
-        <% end %>
-        };
+    var achievementHash = {
+    <% @student.achievement.each do |a| %>
+    <%= a[0]%>: <%=raw a[1]%>,
+    <% end %>
+    };
 
-        function sendMail() {
-            $('#emailgroup').removeClass('has-error');
-            $('#emailgroup').removeClass('has-success');
-            $('#submit').removeClass('btn-danger');
-            $('#submit').removeClass('btn-success');
+    function sendMail() {
+        $('#emailgroup').removeClass('has-error');
+        $('#emailgroup').removeClass('has-success');
+        $('#submit').removeClass('btn-danger');
+        $('#submit').removeClass('btn-success');
 
-            if ($('#email').is(':valid') && $('#email').val() != '') {
-                $.ajax({url: '<%= user_group_student_path(@student.group.user,@student.group,@student, format: :text)%>' + '?email=' + $('#email').val()+  '/' + $('#emailCheck').prop( "checked" )});
-                $('#submit').addClass('btn-success');
-                $('#emailgroup').addClass('has-success');
-                if(achievementHash["a8"][0]!= "true") {
-                    showBadge("a8");
-                    achievementHash["a8"][0] = "true";
-                    sendAchievement("a8","#a7");
-                }
-                if(!$('#emailCheck').prop( "checked" )){
-                    $('#email').val("")
-                }
+        if ($('#email').is(':valid') && $('#email').val() != '') {
+            $.ajax({url: '<%= user_group_student_path(@student.group.user,@student.group,@student, format: :text)%>' + '?email=' + $('#email').val()+  '/' + $('#emailCheck').prop( "checked" )});
+            $('#submit').addClass('btn-success');
+            $('#emailgroup').addClass('has-success');
+            if(achievementHash["a8"][0]!= "true") {
+                showBadge("a8");
+                achievementHash["a8"][0] = "true";
+                sendAchievement("a8","#a7");
             }
-            else {
-                $('#submit').addClass('btn-danger');
-                $('#emailgroup').addClass('has-error');
+            if(!$('#emailCheck').prop( "checked" )){
+                $('#email').val("")
             }
-            setTimeout(resetEmailButton, 3000);
         }
-
-        var login_times = "<%= @student.login_times%>";
-        if(achievementHash["a17"][0]!= "true" && login_times>1) {
-            showBadge("a17");
-            achievementHash["a17"][0] = "true";
-            sendAchievement("a17", "#a16");
-
-
+        else {
+            $('#submit').addClass('btn-danger');
+            $('#emailgroup').addClass('has-error');
         }
+        setTimeout(resetEmailButton, 3000);
+    }
+
+    var survey_done = <%= @student.survey_done%>;
+    var login_times = "<%= @student.login_times%>";
+    if(achievementHash["a17"][0]!= "true" && login_times>1) {
+        showBadge("a17");
+        achievementHash["a17"][0] = "true";
+        sendAchievement("a17", "#a16");
+
+
+    }
 
 
 
-        var send_first = <%= @student.feedback_send%>;
-        if(achievementHash["a28"][0]!= "true" && send_first) {
-            showBadge("a28");
-            achievementHash["a28"][0] = "true";
-            sendAchievement("a28", "#a27");
+    var send_first = <%= @student.feedback_send%>;
+    if(achievementHash["a28"][0]!= "true" && send_first) {
+        showBadge("a28");
+        achievementHash["a28"][0] = "true";
+        sendAchievement("a28", "#a27");
 
 
+    }
+    function resetEmailButton() {
+        $('#emailgroup').removeClass('has-error');
+        $('#emailgroup').removeClass('has-success');
+        $('#submit').removeClass('btn-danger');
+        $('#submit').removeClass('btn-success');
+        $('#submit').addClass('btn-default');
+        $('#emailgroup').addClass('has-default');
+    }
+
+    function sendAchievement(key, keyForJQ) {
+        var test = {"student": {"achievement": achievementHash}};
+        $.ajax({
+            method: 'PUT',
+            url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
+            data: test,
+        });
+
+        $(keyForJQ).attr("src", achievementHash[key][2]);
+        $(keyForJQ).attr("title", achievementHash[key][4]);
+    }
+
+    function showBadge(key) {
+        $("#modalContent").html("<div class='text-center' style='font-size: 2.2rem'><img src=" + achievementHash[key][2] + " style='width:40%'><br/>" + achievementHash[key][4]+ "</div>");
+        $("#exampleModal").modal();
+    }
+
+    $(document).ready(function(){
+        setTimeout(function(){
+            $('#alert').remove();
+        }, 5000);
+    })
+
+    $('#emailCheck').prop('checked', true);
+
+    //Override the default confirm dialog by rails
+    $.rails.allowAction = function(link){
+        if (link.data("confirm") == undefined){
+            return true;
         }
-        function resetEmailButton() {
-            $('#emailgroup').removeClass('has-error');
-            $('#emailgroup').removeClass('has-success');
-            $('#submit').removeClass('btn-danger');
-            $('#submit').removeClass('btn-success');
-            $('#submit').addClass('btn-default');
-            $('#emailgroup').addClass('has-default');
-        }
+        $.rails.showConfirmationDialog(link);
+        return false;
+    };
+    //User click confirm button
+    $.rails.confirmed = function(link){
+        link.data("confirm", null);
+        link.trigger("click.rails");
+        $('#logOutButton').click();
 
-        function sendAchievement(key, keyForJQ) {
-            var test = {"student": {"achievement": achievementHash}};
-            $.ajax({
-                method: 'PUT',
-                url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
-                data: test,
-            });
+    };
+    localStorage.setItem("logout",false);
+    //Display the confirmation dialog
+    $.rails.showConfirmationDialog = function(link){
+        $('#testModal').modal('show');
+        $('#confirmButton').on('click',(function(){
+            localStorage.setItem("logout", true);
+            window.location.replace(surveyLink);
+        }));
+        $('#unconfirmButton').on('click',(function(){
+            $.rails.confirmed(link);
+            $('#testModal').modal('hide');
 
-            $(keyForJQ).attr("src", achievementHash[key][2]);
-            $(keyForJQ).attr("title", achievementHash[key][4]);
-        }
-
-        function showBadge(key) {
-            $("#modalContent").html("<div class='text-center' style='font-size: 2.2rem'><img src=" + achievementHash[key][2] + " style='width:40%'><br/>" + achievementHash[key][4]+ "</div>");
-            $("#exampleModal").modal();
-        }
-
-        $(document).ready(function(){
-            setTimeout(function(){
-                $('#alert').remove();
-            }, 5000);
-        })
+        }))
+    };
 
 
 
-    </script>
+</script>

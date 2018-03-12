@@ -2,15 +2,25 @@
 <div style="font-size:2.2em" align="center">Vielen Dank für deine Teilnahme an der Umfrage!</div>
 <br><br>
 <br><br>
-<div class='row text-center'>
-  <div class='col-md-4 col-md-offset-4'>
-    <button id='geschafft' type='button' class='btn questButton btn-primary btn-block'>Zur Übersichtsseite</button>
-  </div>
-</div>
+<div id="directButton"></div>
 <script>
-  $('#geschafft').click(function(){
-    window.location.replace(pathMainPage);
-  });
+
+    if(localStorage.getItem("logout")=="true"){
+
+        $('#directButton').html('<form class="form-group" method="post" ' +
+            'action="<%=url_for(:controller => "frontend", :action => "logout")%>"><%= token_tag nil %> <div class="row text-center">'  +
+            '<div class="col-md-4 col-md-offset-4"><button id ="logOutButton" type="submit" class="btn questButton btn-warning btn-block">' +
+            'Abmelden</button></div></div> </form>')
+    }
+    else{
+
+        $('#directButton').html("<div class='row text-center'><div class='col-md-4 col-md-offset-4'>" +
+            "<button id='geschafft' type='button' class='btn questButton btn-primary btn-block'>Zur Übersichtsseite</button></div></div>")
+    }
+    $('#geschafft').click(function(){
+        if(localStorage.getItem("logout")=="false")
+            window.location.replace(pathMainPage);
+    });
 
   var survey_done = {"student": {"survey_done": "true"}};
   $.ajax({
