@@ -78,9 +78,7 @@
   <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-body" id="modalContent">
-          <div id="textContent"></div>
-
+        <div class="modal-body" id="modalContent" style="font-size: 1.5em">
         </div>
         <div class="modal-footer">
           <button id="unconfirmButton" class="btn btn-warning" style="margin-right: 30px">Nein</button>
@@ -150,7 +148,7 @@
         //Display the confirmation dialog
         $.rails.showConfirmationDialog = function(link){
             $('#testModal').modal('show');
-            $('#textContent').html("Würdest du noch einen kurzen, einmaligen Fragebogen (10 Fragen) ausfüllen?");
+            $('#modalContent').html("Hast du Zeit und Lust uns noch zehn kurze Multiple-Choice Fragen zu beantworten?");
             $('#confirmButton').on('click',(function(){
                 localStorage.setItem("logout", true);
                 window.location.replace(surveyLink);
@@ -163,9 +161,9 @@
         };
 
         if(login_times==2&&!survey_done&&localStorage.getItem("reminderSeen")=="false"){
-            localStorage.removeItem("reminderSeen")
+            localStorage.removeItem("reminderSeen");
             $('#testModal').modal('show');
-            $('#textContent').html("Bla");
+            $('#modalContent').html("Hast du Zeit und Lust uns zehn kurze Multiple-Choice Fragen zu beantworten?");
             $('#confirmButton').on('click',(function(){
                 $('#testModal').modal('hide');
                 window.location.replace(surveyLink);
