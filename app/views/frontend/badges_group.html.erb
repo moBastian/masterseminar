@@ -75,7 +75,7 @@
     <h1>Die folgenden Tests stehen für dich zur Verfügung:</h1>
     <div>
       <% count = 0 %>
-      <% tests = @assessments.where.not(group_id:@student.group, test_id:survey)%>
+      <% tests = @assessments.where(group_id:@student.group).where.not(test_id:survey)%>
       <% if !tests.nil?%>
           <% assessment_size = tests.size%>
       <%else %>
