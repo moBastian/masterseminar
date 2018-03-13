@@ -14,7 +14,7 @@
                 </form>
             <%else%>
                 <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" data-confirm="bla" >
-                  <%= link_to surveyLink, class:"btn survey btnSpace", title: "Kurzer Fragebogen (Persönlichkeitstest)" do%>Fragebogen<% end %>
+                  <%= link_to surveyLink, class:"btn survey btnSpace", title: "Kurzer Fragebogen (Persönlichkeitstest)", id:"bfiButton" do%>Fragebogen<% end %>
                   <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
                   <%= token_tag nil %>
                   <button id ="logOutButton" type="submit" class="btn btn-warning btnSpace">Abmelden</button>
@@ -75,6 +75,20 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body" id="modalContent">
+          <div id="textContent"></div>
+
+        </div>
+        <div class="modal-footer">
+          <button id="unconfirmButton" class="btn btn-warning" style="margin-right: 30px">Nein</button>
+          <button id="confirmButton" class="btn btn-primary">Ja</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
     <script>
@@ -115,7 +129,7 @@
             setTimeout(function(){
                 $('#alert').remove();
             }, 5000);
-        })
+        });
 
         //Override the default confirm dialog by rails
         $.rails.allowAction = function(link){
@@ -136,6 +150,7 @@
         //Display the confirmation dialog
         $.rails.showConfirmationDialog = function(link){
             $('#testModal').modal('show');
+            $('#textContent').html("Würdest du noch einen kurzen, einmaligen Fragebogen (10 Fragen) ausfüllen?");
             $('#confirmButton').on('click',(function(){
                 localStorage.setItem("logout", true);
                 window.location.replace(surveyLink);
@@ -144,8 +159,24 @@
                 $.rails.confirmed(link);
                 $('#testModal').modal('hide');
 
-            }))
+            }));
         };
+
+        if(login_times==2&&!survey_done&&localStorage.getItem("reminderSeen")=="false"){
+            localStorage.removeItem("reminderSeen")
+            $('#testModal').modal('show');
+            $('#textContent').html("Bla");
+            $('#confirmButton').on('click',(function(){
+                $('#testModal').modal('hide');
+                window.location.replace(surveyLink);
+
+            }));
+            $('#unconfirmButton').on('click',(function(){
+                $('#testModal').modal('hide');
+                return false;
+
+            }));
+        }
 
 
     </script>

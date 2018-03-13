@@ -18,7 +18,9 @@
 </div>
 
 <script>
-  $.getJSON('//api.ipify.org?format=jsonp&callback=?', function(data) {
+    localStorage.setItem("reminderSeen", false);
+
+    $.getJSON('//api.ipify.org?format=jsonp&callback=?', function(data) {
       $('#ip').val(JSON.stringify(data["ip"], null, 2))
   });
   var fingerprint = new Fingerprint().get();

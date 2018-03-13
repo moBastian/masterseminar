@@ -54,7 +54,7 @@
                 </form>
             <%else%>
                 <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" data-confirm="bla" >
-                  <%= link_to surveyLink, class:"btn survey btnSpace", title: "Kurzer Fragebogen (Persönlichkeitstest)" do%>Fragebogen<% end %>
+                  <%= link_to surveyLink, class:"btn survey btnSpace", title: "Kurzer Fragebogen (Persönlichkeitstest)", id:"bfiButton" do%>Fragebogen<% end %>
                   <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
                   <%= token_tag nil %>
                   <button id ="logOutButton" type="submit" class="btn btn-warning btnSpace">Abmelden</button>
@@ -161,11 +161,8 @@
   <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" style="font-size: 2.2rem">Neues Abzeichen erhalten</h5>
-        </div>
         <div class="modal-body" id="modalContent">
-          <div>Würdest du noch einen kurzen, einmaligen Fragebogen (10 Fragen) ausfüllen?</div>
+          <div id="textContent"></div>
 
         </div>
         <div class="modal-footer">
@@ -183,7 +180,9 @@
       window.location.hash="no-back-button";
       window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
       window.onhashchange=function(){window.location.hash="no-back-button";}
-      surveyLink = "<%=surveyLink%>"
+      surveyLink = "<%=surveyLink%>";
+      login_times = "<%= @student.login_times%>";
+      survey_done = <%= @student.survey_done%>;
 
       $(document).ready(function(){
           setTimeout(function(){
@@ -237,6 +236,7 @@
       //Display the confirmation dialog
       $.rails.showConfirmationDialog = function(link){
           $('#testModal').modal('show');
+          $('#textContent').html("Würdest du noch einen kurzen, einmaligen Fragebogen (10 Fragen) ausfüllen?");
           $('#confirmButton').on('click',(function(){
               localStorage.setItem("logout", true);
               window.location.replace(surveyLink);
@@ -245,8 +245,25 @@
               $.rails.confirmed(link);
               $('#testModal').modal('hide');
 
-          }))
+          }));
       };
+
+
+      if(login_times==2&&!survey_done&&localStorage.getItem("reminderSeen")=="false"){
+          localStorage.removeItem("reminderSeen")
+          $('#testModal').modal('show');
+          $('#textContent').html("Bla");
+          $('#confirmButton').on('click',(function(){
+              $('#testModal').modal('hide');
+              window.location.replace(surveyLink);
+
+          }));
+          $('#unconfirmButton').on('click',(function(){
+              $('#testModal').modal('hide');
+              return false;
+
+          }));
+      }
 
 
   </script>
