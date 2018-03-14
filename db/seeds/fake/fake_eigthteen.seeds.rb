@@ -64,8 +64,5 @@ while(i<logins.size)
   end
   s.save
 
-
-
-
   i = i+1
 end
