@@ -165,7 +165,7 @@ class Student < ActiveRecord::Base
       check_diff_point_group = 0
       while result_group.size < 5  do
         result_group = potential_group.
-            where('played_questions< :max_played AND played_questions > :min_played',max_played:self.played_questions+i, min_played:self.played_questions-i)
+            where('points< :max_points AND points > :min_points',max_points:self.points+i, min_points:self.points-i)
         check_diff_point_group = result_group.pluck(:points).uniq.size
         if(check_diff_point_group<5 && result_group.size!=potential_group.size)
           result_group = []
@@ -206,7 +206,7 @@ class Student < ActiveRecord::Base
                    "a17"=>[false, "/images/Badges/haus.png", "/images/Badges/haus_silber.png", "noch nicht erreicht: Erfolgreich erneut eingeloggt.","Erfolgreich erneut eingeloggt."],"a18"=>[false, "/images/Badges/kiel.png", "/images/Badges/kiel_silber.png", "noch nicht erreicht: Kiel-Frage richtig beantwortet.","Kiel-Frage richtig beantwortet."],
                    "a19"=>[false, "/images/Badges/empty.png", "/images/Badges/politikCor_silber.png","","Karlsruhe-Frage richtig beantwortet."], "a20"=>[false, "/images/Badges/empty.png", "/images/Badges/sportCor_silber.png","","Olympia-Frage richtig beantwortet."],
                    "a21" => [false, "/images/Badges/empty.png", "/images/Badges/tier_pflanze_bronze.png", "", "Erstes Tiere&Pflanzen-Quiz durchgeführt."], "a22"=>[false, "/images/Badges/empty.png", "/images/Badges/tier_pflanze_silber.png", "", "50% der Tiere&Pflanzen-Fragen kennengelernt."],"a23"=>[false, "/images/Badges/empty.png", "/images/Badges/tier_pflanze_gold.png","","90% der Tiere&Pflanzen-Fragen kennengelernt."],
-                   "a24"=>[false, "/images/Badges/empty.png", "/images/Badges/social_media_bronze.png","","Erstes Social-Media-Quiz durchgeführt."], "a25"=>[false, "/images/Badges/empty.png", "/images/Badges/social_media_silber.png","","50% der Social-Media-Fragen kennengelernt."], "a26"=>[false, "/images/Badges/empty.png", "/images/Badges/social_media_gold.png","","90% der Social-Media-Fragen kennengelernt."],
+                   "a24"=>[false, "/images/Badges/empty.png", "/images/Badges/social_media_bronze.png","","Erstes Web-Quiz durchgeführt."], "a25"=>[false, "/images/Badges/empty.png", "/images/Badges/social_media_silber.png","","50% der Web-Fragen kennengelernt."], "a26"=>[false, "/images/Badges/empty.png", "/images/Badges/social_media_gold.png","","90% der Web-Fragen kennengelernt."],
                    "a27"=>[false, "/images/Badges/quizmaster.png", "/images/Badges/quizmaster_gold.png","noch nicht erreicht: Quizmaster! Alle versteckten Abzeichen erhalten.","Quizmaster! Alle versteckten Abzeichen erhalten."],"a28"=>[false, "/images/Badges/fragebogen.png", "/images/Badges/fragebogen_gold.png", "noch nicht erreicht: Feedback abgeschickt.", "Feedback abgeschickt."],
                    "a29"=>[false, "/images/Badges/empty.png", "/images/Badges/tierPflanzenCor_silber.png","","Fliegenpilz-Frage richtig beantwortet."], "a30"=>[false, "/images/Badges/empty.png", "/images/Badges/socialMediaCor_silber.png", "", "WLAN-Frage richtig beantwortet."]}
     testLoginFree = true

@@ -8,11 +8,10 @@
 <div class="container-fluid">
   <div id="content">
     <div class="jumbotron" style="padding-bottom: 10px">
-      <%= form_for([@user, @group, @feedback]) do |f| %>
+      <%= form_for([@user, @group, @feedback], :html => { :onsubmit => "return validateForm()"}) do |f| %>
           <% if @feedback.errors.any? %>
               <div id="error_explanation">
-                <h2><%= pluralize(@feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
-
+                <h2><%= pluralize(@feedback.errors.count, "error") %> Feedback wurde nicht gespeichert!</h2>
                 <ul>
                   <% @feedback.errors.full_messages.each do |message| %>
                       <li><%= message %></li>
@@ -34,12 +33,37 @@
           <div class="actions">
             <%= link_to 'Zurück', frontend_path, class:"btn btn-lg btn-warning"%>
 
-            <%= f.submit "Feedback abschicken",  class: "btn btn-lg btn-primary", data: { confirm: 'Feedback speichern?' }%>
+            <%= f.submit "Feedback abschicken", id:"submitButton",  class: "btn btn-lg btn-primary", data: {disable_with: false, confirm: 'Feedback speichern?' }%>
           </div>
           <div>
           </div>
       <% end %>
     </div>
-
+  </div>
+  <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="font-size: 2.2rem">Fehlermeldung</h5>
+        </div>
+        <div class="modal-body" id="modalContent" style="font-size: 1.5em">
+          Das Feedback darf nicht leer sein ;)
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 2.2rem">Ok</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<script>
+    function validateForm() {
+        if ($('#feedback_feedbacktext').val().trim()=="") {
+            $('#failModal').modal('show');
+            return false;
+        }
+        else
+            return true;
+    }
+</script>

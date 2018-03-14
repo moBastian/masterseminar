@@ -19,6 +19,12 @@ logins = %w{
 #10
 #11
 #12
+#13
+#14
+#15
+#16
+#17
+#18
 }
 
 i = 0
@@ -43,15 +49,15 @@ while(i<logins.size)
       testLoginFree=false
     end
   end
-  if(i<2)
+  if(i<3)
   s = group.students.build(name: cur, group_type: 0,feedback_send:false,survey_done:false, login_times:0, ip: "pretest", fingerprint: "pretest", gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
-  elsif(i<4)
-    s = group.students.build(name: cur, group_type: 1,feedback_send:false,survey_done:false, login_times:0, ip: "pretest", fingerprint: "pretest", gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
   elsif(i<6)
+    s = group.students.build(name: cur, group_type: 1,feedback_send:false,survey_done:false, login_times:0, ip: "pretest", fingerprint: "pretest", gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
+  elsif(i<9)
     s = group.students.build(name: cur, group_type: 2,feedback_send:false,survey_done:false, login_times:0, ip: "pretest", fingerprint: "pretest", gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
-  elsif(i<8)
+  elsif(i<12)
     s = group.students.build(name: cur, group_type: 3,feedback_send:false,survey_done:false, login_times:0, ip: "pretest", fingerprint: "pretest", gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
-  elsif(i<10)
+  elsif(i<15)
     s = group.students.build(name: cur, group_type: 4,feedback_send:false,survey_done:false, login_times:0, ip: "pretest", fingerprint: "pretest", gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
   else
     s = group.students.build(name: cur, group_type: 5,feedback_send:false,survey_done:false, login_times:0, ip: "pretest", fingerprint: "pretest", gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)

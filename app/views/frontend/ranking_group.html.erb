@@ -1,4 +1,7 @@
 <style>
+  td{
+    white-space: nowrap;
+  }
   @media
   only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 991px)  {
@@ -23,6 +26,7 @@
       position: relative;
       text-align: center;
       font-size: 1.3em;
+      white-space: normal;
     }
 
     td:before {
@@ -182,7 +186,7 @@
       surveyLink = "<%=surveyLink%>";
       login_times = "<%= @student.login_times%>";
       survey_done = <%= @student.survey_done%>;
-
+      $('#emailCheck').prop('checked', true);
       $(document).ready(function(){
           setTimeout(function(){
               $('#alert').remove();
