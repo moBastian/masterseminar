@@ -80,7 +80,7 @@ Schimmel
 Zebra
 Sporen
 5
-Windhund
+Englischer\ Windhund
 Welpe
 Rüde
 Mähne
