@@ -1,4 +1,8 @@
 <style>
+  .myRadio{
+    width: 25px;
+    height: 25px;
+  }
   @media
   only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 991px)  {
@@ -59,11 +63,11 @@
           <form>
             <tr >
               <td style="font-size: 2.1em"><%="("+(count+1).to_s+") "+item.itemtext%></td>
-              <td style="text-align: center" ><div class="radio"><label><input type="radio" id="<%="1"+ count.to_s %>" name="<%=count%>">1</label></div></td>
-              <td style="text-align: center" ><div class="radio"><label><input type="radio" id="<%="2"+ count.to_s %>" name="<%=count%>">2</label></div></td>
-              <td style="text-align: center" ><div class="radio"><label><input type="radio" id="<%="3"+ count.to_s %>" name="<%=count%>">3</label></div></td>
-              <td style="text-align: center" ><div class="radio"><label><input type="radio" id="<%="4"+ count.to_s %>" name="<%=count%>">4</label></div></td>
-              <td style="text-align: center" ><div class="radio"><label><input type="radio" id="<%="5"+ count.to_s %>" name="<%=count%>">5</label></div></td>
+              <td style="text-align: center" ><div class="radio"><label><input class="myRadio" type="radio" id="<%="1"+ count.to_s %>" name="<%=count%>">1</label></div></td>
+              <td style="text-align: center" ><div class="radio"><label><input class="myRadio" type="radio" id="<%="2"+ count.to_s %>" name="<%=count%>">2</label></div></td>
+              <td style="text-align: center" ><div class="radio"><label><input class="myRadio" type="radio" id="<%="3"+ count.to_s %>" name="<%=count%>">3</label></div></td>
+              <td style="text-align: center" ><div class="radio"><label><input class="myRadio" type="radio" id="<%="4"+ count.to_s %>" name="<%=count%>">4</label></div></td>
+              <td style="text-align: center" ><div class="radio"><label><input class="myRadio" type="radio" id="<%="5"+ count.to_s %>" name="<%=count%>">5</label></div></td>
             </tr>
           </form>
           <%count = count+1%>
