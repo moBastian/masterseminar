@@ -23,9 +23,20 @@
     var actualAnswers = "";
     var workTime = -1;
 
+
+
+
     <% if !@measurement.assessment.test.time.nil? %>
-      workTime = <%= @measurement.assessment.test.time * 1000 %> + 500;
+      workTime = <%=@measurement.assessment.test.time * 1000 %> + 500;
     <% end %>
+
+    if (timeoutId != -1) {
+        window.clearTimeout(timeoutId);
+    }
+    if(workTime!=-1) {
+        timeoutId = window.setTimeout(timedOut, workTime);
+        stopwatch = new Date();
+    }
 
     //Mediapath for displayed Items for preload
     var itemDataSound = {
@@ -87,14 +98,11 @@
       dict["authenticty_token"] = "<%= Rails.configuration.secret_token%>";
       //send data
       <%if @measurement.assessment.test.student_access == true%>
-      $('#state').html("Speichern...");
       dict["results"] = currentStudent + ",times,answers#" + currentResult.substr(0, currentResult.length-1) + "#" + currentTimes.substr(0, currentTimes.length-1)+ "#"+ actualAnswers.substr(0, actualAnswers.length-1).replace(/#/g, "~"); //replace all "#" to keep sure the parsing still works.
       $.ajax({
           type: "PUT",
           url: "<%= user_group_assessment_measurement_results_path(@student.group.user, @student.group, @measurement.assessment, @measurement)%>",
           data: dict,
-          error: $('#state').html("Speichern fehlgeschlagen!"),
-          success: $('#state').html("Speichern erfolgreich!")
       });
       <%else%>
       dict["results"] = currentStudent + ",times#" + currentResult.substr(0, currentResult.length-1) + "#" + currentTimes.substr(0, currentTimes.length-1);
