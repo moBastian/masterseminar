@@ -67,11 +67,13 @@
     function nextClicked(answer, buttonId) {
 
         if(!toggle){
+            actualAnswers = actualAnswers + answer + ",";
 
             if(answer=='<%=raw item.shorthand%>'){
 
                 score = score +1;
                 currentResult = currentResult + '1,';
+
                 if(groupNumber == "2"||groupNumber == "4"){
                     checkFirst();
                 }

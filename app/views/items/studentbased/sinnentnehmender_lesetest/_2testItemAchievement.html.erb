@@ -65,6 +65,7 @@
 
   function nextClicked(answer, buttonId) {
       if(!toggle){
+          actualAnswers = actualAnswers + answer + ",";
           if(answer==currentItemanswer){
 
               score = score +1;
