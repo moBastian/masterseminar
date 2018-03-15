@@ -3,9 +3,15 @@
     width: 20px;
     height: 20px;
   }
+  .radio input[type="radio"]{
+    margin-top: 12px;
+  }
   @media
   only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 991px)  {
+    .radio input[type="radio"]{
+      margin-top: 5px;
+    }
     /* Force table to not be like tables anymore */
     table, thead, tbody, th, td, tr {
       display: block;
@@ -42,15 +48,16 @@
   }
 
 </style>
+<div style="font-size: 1.7em;">Inwieweit treffen die folgenden Aussagen auf dich zu? (1: "trifft überhaupt nicht zu" bis 5: "trifft voll und ganz zu")</div>
 <table align="center" style="margin-top: 10px" >
   <thead style="border-bottom: solid orange 2px; border-top: solid orange 4px;background-color: lightgray">
   <tr>
     <th></th>
-    <th style="text-align: center; font-size: 2.1em">trifft überhaupt nicht zu</th>
-    <th style="text-align: center;font-size: 2.1em;padding-left: 15px">trifft eher nicht zu</th>
-    <th style="text-align: center;font-size: 2.1em;padding-left: 15px">weder noch</th>
-    <th style="text-align: center;font-size: 2.1em;padding-left: 15px">eher zutreffend</th>
-    <th style="text-align: center;font-size: 2.1em;padding-left: 15px">trifft voll und ganz zu</th>
+    <th style="text-align: center; font-size: 1.7em">trifft überhaupt nicht zu</th>
+    <th style="text-align: center;font-size: 1.7em;padding-left: 15px">trifft eher nicht zu</th>
+    <th style="text-align: center;font-size: 1.7em;padding-left: 15px">weder noch</th>
+    <th style="text-align: center;font-size: 1.7em;padding-left: 15px">eher zutreffend</th>
+    <th style="text-align: center;font-size: 1.7em;padding-left: 15px">trifft voll und ganz zu</th>
   </tr>
 
   </thead>
@@ -77,7 +84,7 @@
 </table>
 
 <div align="center" style="margin-top: 60px">
-  <button class="btn btn-primary" style="font-size: 2.0em" onclick="endSurvey()"> Fragebogen abschicken</button>
+  <button class="btn btn-primary" style="font-size: 2.0em" onclick="endSurvey()"> Abschicken</button>
 </div>
 
 

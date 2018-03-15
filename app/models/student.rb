@@ -165,7 +165,7 @@ class Student < ActiveRecord::Base
       check_diff_point_group = 0
       while result_group.size < 5  do
         result_group = potential_group.
-            where('points< :max_points AND points > :min_points',max_points:self.points+i, min_points:self.points-i)
+            where('played_questions< :max_played AND played_questions > :min_played',max_played:self.played_questions+i, min_played:self.played_questions-i)
         check_diff_point_group = result_group.pluck(:points).uniq.size
         if(check_diff_point_group<5 && result_group.size!=potential_group.size)
           result_group = []
