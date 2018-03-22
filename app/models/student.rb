@@ -165,29 +165,37 @@ class Student < ActiveRecord::Base
       check_diff_point_group = 0
       while result_group.size < 5  do
         result_group = potential_group.
-            where('played_questions< :max_played AND played_questions > :min_played',max_played:self.played_questions+i, min_played:self.played_questions-i)
+            where('points< :max_points AND points > :min_points',max_points:self.points+i, min_points:self.points-i)
         check_diff_point_group = result_group.pluck(:points).uniq.size
         if(check_diff_point_group<5 && result_group.size!=potential_group.size)
           result_group = []
         end
         i = i+1
       end
-    else
-      i=0
-      result_group= []
-      while result_group.size < group_size do
-        result_group =
-            potential_group.
-                where('played_questions< :max_played AND played_questions > :min_played',max_played:self.played_questions+i, min_played:self.played_questions-i)
-        i = i+1
+      result_group= result_group.order(points: :desc)
+      if(result_group.first.points == self.points)
+        group_before_me = potential_group.where('points> :my_points', my_points:self.points).order(points: :asc)
+        if(group_before_me.size ==0)
+        else
+          result_group = result_group.where.not(points:result_group.last.points)
+          group_before_me = potential_group.where(points: group_before_me.first.points).order(points: :desc)
+          result_group = result_group.or(group_before_me)
+        end
+      elsif(result_group.last.points == self.points)
+        group_after_me = potential_group.where('points< :my_points', my_points:self.points).order(points: :desc)
+        if(group_after_me.size ==0)
+        else
+          result_group = result_group.where.not(points:result_group.first.points)
+          group_after_me = potential_group.where(points: group_after_me.first.points).order(points: :desc)
+          result_group = result_group.or(group_after_me)
+        end
+      else
+        #everything perfect
       end
-    end
-    if(result_group.size==0)
-      return result_group
     else
-      return result_group.order(points: :desc)
+      result_group = potential_group
     end
-
+    return result_group
   end
 
   #get current result objekt of student
@@ -216,7 +224,7 @@ class Student < ActiveRecord::Base
         testLoginFree=false
       end
     end
-    s = group.students.build(name: cur, group_type: Random.rand(6),feedback_send:false,survey_done:false, login_times:0, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
+    s = group.students.build(name: cur, group_type: 5,feedback_send:false,survey_done:false, login_times:0, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
     s.save
     return s
   end
