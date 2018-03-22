@@ -162,7 +162,7 @@
             }));
         };
 
-        if(login_times==2&&!survey_done&&localStorage.getItem("reminderSeen")=="false"){
+        if(login_times>1&&!survey_done&&localStorage.getItem("reminderSeen")=="false"){
             localStorage.removeItem("reminderSeen");
             $('#testModal').modal('show');
             $('#modalContent').html("Hast du Zeit und Lust uns zehn kurze Multiple-Choice Fragen zu beantworten?");
