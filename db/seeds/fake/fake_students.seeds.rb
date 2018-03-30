@@ -3,7 +3,7 @@
 user = User.find_by_email("stu114712@mail.uni-kiel.de")
 #hier passenden Namen der Gruppe angeben
 #group = Group.where(user_id: user, name:"1Test").first
-group = Group.where(user_id: user, name:"1MaSem1718").first
+group = Group.where(user_id: user, name:"1quiz").first
 
 #Array für Usernamen
 usernames = %w{
