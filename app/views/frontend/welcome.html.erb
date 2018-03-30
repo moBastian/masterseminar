@@ -21,6 +21,7 @@
     localStorage.setItem("reminderSeen", false);
     $(document).ready(function () {
         $.getJSON('//api.ipify.org?format=jsonp&callback=?', function(data) {
+            alert(data.ip)
             $('#ip').val(data.ip)
         });
         var fingerprint = new Fingerprint().get();
