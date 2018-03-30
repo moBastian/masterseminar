@@ -286,7 +286,7 @@ question_n4 = [
 		"Wieviele Blüten werden mindestens benötigt um ein Kilogramm Safran zu gewinnen?",
 		"Wieviel Gramm Safran kann ein Pflücker am Tag erbringen?",
 		"Safran gehört zu den..?",
-		"Wie nennt man den Zeitpunkt ab dem durch Laubbildung der Bäume keine direkte Sonneneinstrahlung mehr auf dne Boden fällt?",
+		"Wie nennt man den Zeitpunkt ab dem durch Laubbildung der Bäume keine direkte Sonneneinstrahlung mehr auf den Boden fällt?",
 		"Was ist ein Hain?",
 		"Unter Nutzung von Lichtenergie betreiben Pflanzen was?",
 		"Wo findet Photosynthese bei Landpflanzen statt?",

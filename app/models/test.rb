@@ -35,7 +35,6 @@ class Test < ActiveRecord::Base
       itemset = content_items
     else
       newItems = content_items - oldItems
-      puts(newItems.size)
       canidateItems = Array.new
       if(newItems.size>minNewItems)
         minNewItems.times do

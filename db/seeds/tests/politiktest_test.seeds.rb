@@ -151,6 +151,7 @@ Bildung\ und\ Forschung
 Steuer
 1918
 1939
+
 }
 question_n4 = [
 		"Wo befindet sich der Hauptsitz des Bundesverfassungsgerichts?",

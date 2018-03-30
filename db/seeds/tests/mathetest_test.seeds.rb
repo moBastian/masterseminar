@@ -148,7 +148,7 @@ Rechter\ Winkel
 891
 -975
 267
-0
+120
 -56
 1
 }
@@ -226,10 +226,10 @@ question_n4 = [
 		"Wieviel ist 2*5 + 3?",
 		"Wieviel ist 2*(5 + 3)?",
 		"Wieviel ist 15 - 5 + 3*2?",
-		"Welche ist die nächste Zahl in dieser Folge: 0 1 1 2 3 5 8 13 (Fibonacci-Folge)",
-		"Welche ist die nächste Zahl in dieser Folge: 0 1 1 2 3 5  (Fibonacci-Folge)",
-		"Welche ist die nächste Zahl in dieser Folge: 0 1 1 2 3 5 8 (Fibonacci-Folge)",
-		"Welche ist die nächste Zahl in dieser Folge: 0 1 1 (Fibonacci-Folge)",
+		"Welche ist die nächste Zahl in dieser Folge: 0 1 1 2 3 5 8 13 (Fibonacci-Folge)?",
+		"Welche ist die nächste Zahl in dieser Folge: 0 1 1 2 3 5  (Fibonacci-Folge)?",
+		"Welche ist die nächste Zahl in dieser Folge: 0 1 1 2 3 5 8 (Fibonacci-Folge)?",
+		"Welche ist die nächste Zahl in dieser Folge: 0 1 1 (Fibonacci-Folge)?",
 		"Wieviel ist 3 + 5?",
 		"Wieviel ist 24 / 8?",
 		"Wieviel ist 12 * 3?",
@@ -246,7 +246,7 @@ question_n4 = [
 		"Welche dieser Zahlen ist ungerade?",
 		"Welche dieser Zahlen ist ungerade?",
 		"Welche dieser Zahlen ist ungerade?",
-		"Die Winkelsumme im Dreieck beträgt?",
+		"Wieviel Grad beträgt die Winkelsumme im Dreieck?",
 		"Wieviele Innenwinkel hat ein Dreieck?",
 		"Ein 90°-Winkel heißt auch?",
 		"Wieviel Grad hat ein rechter Winkel?",
@@ -269,7 +269,7 @@ question_n4 = [
 		"712 - (342 - 688) = ?",
 		"(1000 - 45) - 118 = ?",
 		"812 - 24 - 768 = ?",
-		"447 - 137 - 257",
+		"447 - 137 - 257 = ?",
 		"145 * 32 = ?",
 		"27 * 24 = ?",
 		"197 * 18 = ?",
@@ -296,8 +296,8 @@ question_n4 = [
 		"13 + 4 * (27 + 96) = ?",
 		"24 - 14 + 23 * 27 = ?",
 		"(24 - 14 + 23) * 27 = ?",
-		"24 - (14 + 23) * 27",
-		"24 - (14 - 23) * 27",
+		"24 - (14 + 23) * 27 = ?",
+		"24 - (14 - 23) * 27 = ?",
 		"5! = ?",
 		"8! / -(6!) = ?",
 		"|-1| = ?"

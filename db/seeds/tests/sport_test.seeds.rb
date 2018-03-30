@@ -47,7 +47,7 @@ Handicap
 45.93
 Par
 Grün
-0
+60
 Wimbledon
 Tiger\ Woods
 Open\ Championship
@@ -151,7 +151,6 @@ Los
 China
 Go
 2
-
 }
 question_n4 = [
 		"Was befindet sich auf der Olympischen Flagge?",
@@ -351,7 +350,7 @@ item_alternatives_n4 = [
 		%w{35.21 45.93 47.13 54.65},
 		%w{Par Ace Eagle Handicap},
 		%w{Loch Nah Grün Rasen},
-		%w{60},
+		%w{15 30 45 60},
 		%w{US\ Masters Open\ Championship PGA\ Championship Wimbledon},
 		%w{Mike\ Weir Tiger\ Woods Martin\ Kaymer Curtis\ Strange},
 		%w{Open\ Championship Masters\ Tournament US\ Open PGA\ Championship},

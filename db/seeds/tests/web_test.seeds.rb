@@ -140,7 +140,7 @@ Blizzard
 MMORPG
 Diablo\ 3
 For\ Honor
-dLan
+dLAN
 300
 2000
 KappaKappa
