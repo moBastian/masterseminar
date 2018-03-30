@@ -47,7 +47,7 @@ Handicap
 45.93
 Par
 Grün
-60
+0
 Wimbledon
 Tiger\ Woods
 Open\ Championship
@@ -103,6 +103,55 @@ Rumjana\ Nejkowa
 USA
 Deutschland
 253.5
+Jamaika
+leere\ Hand
+Judo
+Dadaismus
+Kublai
+weiß
+rot
+Kata
+Iaito
+Pferd
+1912
+Valegro
+Deutschland
+Kublai
+Weiß
+8
+Dame
+Bauer
+König
+Läufer
+immer\ schwarz
+Pirouette
+Martin
+Gauss
+4
+Schottland
+5
+1511
+1880
+Offiziersskat
+3
+Altenburg
+Karo
+Daus
+Ober
+gereizt
+Unter\ (Bube)
+Elisabeth\ II.
+Braemar
+Balmoral
+Stierwrestling
+Schlossallee
+4
+12
+Los
+China
+Go
+2
+
 }
 question_n4 = [
 		"Was befindet sich auf der Olympischen Flagge?",
@@ -149,7 +198,7 @@ question_n4 = [
 		"Wieviel Gramm darf ein Golfball höchstens wiegen?",
 		"Wie bezeichnet man im Golfsport die Anzahl von Schlägen für ein Loch, die ein sehr guter Spieler im Durchschnitt dafür benötigt?",
 		"Wie nennt man den Zielbereich um ein Loch beim Golf?",
-		"Ungefähr wieviele Millionen Menschen spielen weltweit Golf?",
+		"Ungefähr wieviele Millionen Menschen  spielen weltweit Golf?",
 		"Welches dieser Turniere gehört nicht zu den Golf Majors?",
 		"Welcher Golfspieler gewann 2000 drei der vier großen Golfturniere?",
 		"Welches der vier großen Golfturniere fand bereits 1860 zum ersten Mal statt?",
@@ -204,7 +253,55 @@ question_n4 = [
 		"Wer hält den Ruder-Weltrekord im Frauen-Einer von 2002?",
 		"Welches Land hält den Ruder-Weltrekord im Frauen-Achter von 2013?",
 		"Welches Land hält den Ruder-Weltrekord im Herren-Achter von 2017?",
-		"Wie weit flog der Österreicher Stefan Kraft im Skifliegen als er 2017 einen neuen Weltrekord aufstellte?"
+		"Wie weit flog der Österreicher Stefan Kraft im Skifliegen als er 2017 einen neuen Weltrekord aufstellte?",
+		"Welches Leichtathletik-Herrenteam stellte die letzten 3 Rekorde in der Disziplin 4x100m Staffel auf?",
+		"Was bedeutet der Name der Kampfkunstart Karate ins Deutsche übersetzt in etwa?",
+		"Aus den Verbänden welcher Sportart entwickelten sich Vereine für Karate in Deutschland?",
+		"Welche dieser Strömungen hatte keinen Einfluss auf die Entwicklung von Karate?",
+		"Welcher dieser Begriffe bezeichnet nicht eine Rolle / einen Rang im Karatetraining?",
+		"Welche dieser Gürtelfarben beschreibt den niedrigsten Schülergrad im Karate?",
+		"Welche dieser Gürtelfarben beschreibt den höchsten Grad im Judo?",
+		"Wie heißt der choreographierte Kampf gegen imaginäre Gegner in Karate?",
+		"Wie werden die stumpfen Schwerter im Training des Iaido genannt?",
+		"Mit welchen Tieren wird normalerweise Dressurreiten als Sportart betrieben?",
+		"Seit wann ist Dressurreiten (im Einzel) olympische Disziplin?",
+		"Welches Pferd verhalf Charlotte Dujardin 2012 und 2016 zum Einzel-Olympiasieg im Dressurreiten?",
+		"Die Mannschaft welchen Landes gewann 2016 im Dressurreiten olympisches Gold?",
+		"Welcher dieser Begriffe bezeichnet nicht eine Rolle / einen Rang im Karatetraining?",
+		"Welche Farbe beginnt beim Schach?",
+		"Wieviele Bauern hat jeder Schachspieler zu Beginn auf dem Feld?",
+		"Welche Schachfigur hat die meisten Bewegungsmöglichkeiten?",
+		"Von welcher dieser Schachfiguren hat ein Spieler zu Beginn einer Partie nicht genau 2 zur Verfügung?",
+		"Ist ein Spieler schachmatt, so kann er welche Figur nicht mehr regelkonform bewegen?",
+		"Welche Schachfigur kann sich nur diagonal über das Spielfeld bewegen?",
+		"Der weiße König steht zu Beginn einer Schachpartie auf einem Feld welcher Farbe?",
+		"Dreht sich ein Eiskunstläufer auf der Stelle, spricht man von einer?",
+		"Welcher der folgenden Begriffe bezeichnet kein Element beim Eiskunstlauf?",
+		"Welcher der folgenden Begriffe bezeichnet kein Element beim Eiskunstlauf?",
+		"Bis zu wieviele Millimeter breit sind Kufen beim Eiskunstlauf?",
+		"Wo bildete sich Anfang des 18. Jahrhunderts der erste Curlingclub?",
+		"Wieviele Spieler einer Curlingmannschaft sind inklusive Ersatzspieler in der Regel an einem Spiel beteiligt?",
+		"Der älteste erhaltene Curlingstein stammt aus welchem Jahr?",
+		"Wann fand das erste internationale Curlingturnier statt?",
+		"Wie heißt eine an die Regeln des Skat angelehnte Variante für zwei Spieler?",
+		"Wieviele Spieler nehmen mindestens an einer Skatpartie teil?",
+		"Anfang des 19. Jahrhunderts wurde in welcher Stadt das Skatspiel entwickelt?",
+		"Beim deutschen Blatt eines Skatblattes entsprechen die Schellen welchem Pendant des französischen Blattes?",
+		"Im Kontext des Skatspiels heißt ein Ass auch wie?",
+		"Im Kontext des Skatspiels heißt eine Dame auch wie?",
+		"Um zu bestimmen wer in der nächsten Runde was spielt, wird im Skat..?",
+		"Spielt man in einer Skatrunde einen Grand, so sind welche Karten alleiniger Trumpf?",
+		"Wer ist Schirmherrin der schottischen Highland Games in Braemar?",
+		"Wo finden die bekanntesten schottischen Highland Games statt?",
+		"Welcher Sommersitz der englischen Königin liegt nahe Braemar, einem der Austragungsorte der Highland Games?",
+		"Welche dieser Aktivitäten gehört nicht zu den Highland Games?",
+		"In der deutschen Grundversion von Monopoly ist welche Straße die teuerste?",
+		"Wieviele Bahnhöfe gibt es bei Monopoly?",
+		"Wieviele Felder eines Monopolyspielfelds kann man nicht kaufen?",
+		"Um beim Monopoly mit einem Geldeingang rechnen zu können, muss man über welches Feld gehen?",
+		"Aus welchen Land stammt das Spiel Go?",
+		"Bei welchem dieser Spiele ist es das Ziel der Spieler durch legen von Spielsteinen ein möglichst großes Gebiet einzunehmen?",
+		"Wieviele Spieler spielen bei einer Partie Go gegeneinander?"
 ]
 
 
@@ -254,7 +351,7 @@ item_alternatives_n4 = [
 		%w{35.21 45.93 47.13 54.65},
 		%w{Par Ace Eagle Handicap},
 		%w{Loch Nah Grün Rasen},
-		%w{6 16 60 600},
+		%w{60},
 		%w{US\ Masters Open\ Championship PGA\ Championship Wimbledon},
 		%w{Mike\ Weir Tiger\ Woods Martin\ Kaymer Curtis\ Strange},
 		%w{Open\ Championship Masters\ Tournament US\ Open PGA\ Championship},
@@ -309,7 +406,55 @@ item_alternatives_n4 = [
 		%w{Rumjana\ Nejkowa Julia\ Lier Kayla\ Pratt Kerry\ Simmonds},
 		%w{Deutschland Neuseeland USA Niederlande},
 		%w{USA Deutschland Südafrika Italien},
-		%w{147.5m 199.5m 222m 253.5m}
+		%w{147.5m 199.5m 222m 253.5m},
+		%w{Jamaika USA Kuba Frankreich},
+		%w{leere\ Hand leeres\ Glas leerer\ Raum leerer\ Kopf},
+		%w{Taekwondo Judo Boxen Bouldern},
+		%w{Daoismus Shintoismus Dadaismus Buddhismus},
+		%w{Sensei Senpai Kohei Kublai},
+		%w{weiß gelb orange grün},
+		%w{blau rot braun schwarz},
+		%w{Taka Tiki Kata Kiti},
+		%w{Katana Wakame Shinto Iaito},
+		%w{Pferd Kuh Wildschwein Zebra},
+		%w{1908 1912 1928 1952},
+		%w{Umberto Antonio Valegro Allegra},
+		%w{Großbritannien Russland Schweden Deutschland},
+		%w{Sensei Senpai Kohei Kublai},
+		%w{Schwarz Weiß Grün Rot},
+		%w{4 6 8 10},
+		%w{Läufer Turm Springer Dame},
+		%w{Bauer Läufer Springer Turm},
+		%w{Turm König Dame Läufer},
+		%w{Springer Turm Läufer Bauer},
+		%w{immer\ abwechselnd immer\ zufällig immer\ weiß immer\ schwarz},
+		%w{Pirouette Arabeske Butterfly Spirale},
+		%w{Axel Martin Lutz Flip},
+		%w{Ina\ Bauer Rittberger Gauss Euler},
+		%w{1 2 2.5 4},
+		%w{Schottland England Dänemark Norwegen},
+		%w{6 5 4 3},
+		%w{1711 1611 1511 1411},
+		%w{1980 1930 1920 1880},
+		%w{Offiziersskat Admiralsskat Spießskat Generalsskat},
+		%w{2 3 4 5},
+		%w{Ravensburg Rothenburg Altenburg Augsburg},
+		%w{Kreuz Pik Herz Karo},
+		%w{Daus Ober Unter Zehn},
+		%w{Daus Ober Unter Zehn},
+		%w{gewürfelt gezogen gereizt gehobelt},
+		%w{Herz Ober\ (Dame) Ass Unter\ (Bube)},
+		%w{Elisabeth\ II. Elisabeth\ I. Victoria\ I. Victoria\ II.},
+		%w{Balmoral Braemar York Stirling},
+		%w{Braemar York Balmoral Stirling},
+		%w{Hammerwerfen Dudelsackspielen Baumstammwerfen Stierwrestling},
+		%w{Schlossallee Bahnhofstraße Parkstraße Goethestraße},
+		%w{2 4 8 16},
+		%w{8 10 12 16},
+		%w{Gefängnis Frei\ Parken Zusatzsteuer Los},
+		%w{China USA Japan Vietnam},
+		%w{Skat Go Schach Walk},
+		%w{4 1 2 3}
 ]
 
 t = Test.create(name: "Sport",  info: "Sporttest", short_info: "Sporttest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/sport.png", construct: "Probe", student_access:true, archive: false)

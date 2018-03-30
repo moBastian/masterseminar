@@ -103,6 +103,54 @@ Inka
 13
 Chile
 1507
+24.09.
+14.03.2018
+2017
+709
+FDP
+15
+6
+9
+Bildung
+Finanzen
+Heiko\ Maas
+Andreas\ Scheuer
+35
+AfD
+Katarina\ Barley
+600
+besondere\ Aufgaben
+Svenja\ Schulze
+Ursula\ von\ der\ Leyen
+Gerd\ Müller
+Hegemonie
+Monarchie
+Oligarchie
+Aristokratie
+Souverän
+Anarchie
+Theokratie
+Totalitarismus
+aktives
+passives
+18
+61
+FDP
+Merkel
+Herrmann
+Schulz
+Weidel
+Lindner
+Özdemir
+Bartsch
+63
+Physik
+1991
+18
+Bildung\ und\ Forschung
+Steuer
+1918
+1939
 }
 question_n4 = [
 		"Wo befindet sich der Hauptsitz des Bundesverfassungsgerichts?",
@@ -204,7 +252,55 @@ question_n4 = [
 		"In welchem Jahr wurden die USA gegründet?",
 		"Wieviele Kolonien unterzeichneten die Unabhängigkeitserklärung und gründeten so die USA?",
 		"In welchem Land befinden sich die Observatorien der Europäischen Südsternwarte?",
-		"Wann erkannte Amerigo Vespucci das nach ihm benannte Amerika als eigenständigen Kontinent?"
+		"Wann erkannte Amerigo Vespucci das nach ihm benannte Amerika als eigenständigen Kontinent?",
+		"Wann fand die Bundestagswahl 2017 statt?",
+		"Wann wurde Angela Merkel zum 4. Mal zur Kanzlerin gewählt?",
+		"Nach der Bundestagswahl welchen Jahres dauerte die anschließende Regierungsbildung am längsten?",
+		"Der Bundestag ohne Überhang- und Ausgleichsmandate hat 598 Sitze, wieviele Sitze hat der aktuelle Bundestag?",
+		"Welche dieser Parteien ist nicht an der aktuellen Bundesregierung beteiligt?",
+		"Wieviele Ministerposten umfasst die aktuelle Bundesregierung?",
+		"Wieviele Minister stellt die SPD in der aktuellen Bundesregierung?",
+		"Wieviele Minister stellen CDU und CSU zusammen in der aktuellen Bundesregierung ohne Kanzlerin?",
+		"Horst Seehofer ist für welches dieser Politikfelder nicht als Minister zuständig?",
+		"Olaf Scholz ist Vizekanzler der aktuellen Bundesregierung und außerdem Minister für?",
+		"Minister für Auswärtiges in der aktuellen Bundesregierung ist wer?",
+		"Wer ist aktuell Minister für Verkehr und digitale Infrastruktur?",
+		"Wieviele Staatssekretäre umfasst die aktuelle Bundesregierung?",
+		"Welcher Partei fällt im aktuellen Bundestag die Rolle der Oppositionsführung zu?",
+		"Wer ist aktuell Minister für Justiz und Verbraucherschutz?",
+		"Wieviele Mitarbeiter arbeiten im Bundeskanzleramt etwa?",
+		"Helge Braun ist aktuell Chef des Bundeskanzleramtes und außerdem Minister für?",
+		"In der aktuellen Bundesregierung wird das Ministerium für Umwelt, Naturschutz und nukleare Sicherheit von wem geleitet?",
+		"Welche dieser Personen ist aktuell Minister und war es bereits in der letzten Bundesregierung?",
+		"Welche dieser Personen ist aktuell Minister und war es bereits in der letzten Bundesregierung?",
+		"Ein anderes Wort für wirtschaftliche oder Gesellschaftliche Vorherrschaft ist?",
+		"Die Herrschaft eines einzelnen wie z.B. im Königtum oder Kaisertum nennt man?",
+		"Die Herrschaft einer kleinen Gruppe von einflussreichen Personen nennt man?",
+		"Welches dieser Worte bezeichnet die adlige Oberschicht einer Gesellschaft?",
+		"In einer Demokratie sind die stimmberechtigten Bürger der..?",
+		"Einen Zustand der Abwesenheit von Herrschaft bezeichnet man als..?",
+		"Wird die Herrschaft in einer Gesellschaft allein religiös legitimiert, so handelt es sich um eine..?",
+		"Wird die Bevölkerung durch Massenorganisationen dauerhaft für einen Herrschaftsapparat mobilisiert, spricht man von?",
+		"Gibt man bei einer Wahl seine Stimme ab, so übt man welches Wahlrecht aus?",
+		"Tritt man zu einer Wahl an, so übt man welches Wahlrecht aus?",
+		"Ab welchem Alter ist man bei Bundestagswahlen stimmberechtigt?",
+		"Wieviele Millionen Stimmberechtigte gab es bei der Bundestagswahl 2017 ungefähr?",
+		"Wer ist im aktuellen Bundestag zweitstärkste Oppositionsfraktion nach der AfD?",
+		"Wer bekleidete bei der Bundestagswahl 2017 die Spitzenkandidatur der CDU?",
+		"Wer bekleidete bei der Bundestagswahl 2017 die Spitzenkandidatur der CSU?",
+		"Wer bekleidete bei der Bundestagswahl 2017 die Spitzenkandidatur der SPD?",
+		"Wer bekleidete bei der Bundestagswahl 2017 die Spitzenkandidatur der AfD neben Gauland?",
+		"Wer bekleidete bei der Bundestagswahl 2017 die Spitzenkandidatur der FDP?",
+		"Wer bekleidete bei der Bundestagswahl 2017 die Spitzenkandidatur der Grünen neben Göring-Eckardt?",
+		"Wer bekleidete bei der Bundestagswahl 2017 die Spitzenkandidatur für die Linke neben Wagenknecht?",
+		"Wie alt wird Angela Merkel 2018?",
+		"Welches Fach hat Angela Merkel studiert?",
+		"Wann wurde Angela Merkel erstmals Bundesministerin?",
+		"Mitte April 2018 wird Angela Merkel wieviele Jahre Bundesvorsitzende der CDU sein?",
+		"Bevor Annette Schavan aufgrund von Plagiatsvorwürfen ihren Doktortitel verlor, war sie Bundesministerin für was?",
+		"Wie nennt man eine Geldleistung an den Staat der kein Anspruch auf individuelle Gegenleistung folgt?",
+		"Wann endete der erste Weltkrieg?",
+		"Wann begann der zweite Weltkrieg?"
 ]
 
 
@@ -310,6 +406,54 @@ item_alternatives_n4 = [
 		%w{13 15 17 19},
 		%w{Argentinien Bolivien Brasilien Chile},
 		%w{1492 1507 1515 1524},
+		%w{24.07. 24.08. 24.09. 24.10.},
+		%w{19.12.2017 25.01.2018 16.02.2018 14.03.2018},
+		%w{2017 1990 1969 1949 },
+		%w{599 709 634 686},
+		%w{FDP CDU CSU SPD},
+		%w{10 12 14 15},
+		%w{2 4 6 16},
+		%w{6 9 12 13},
+		%w{Inneres Bau Heimat Bildung},
+		%w{Auswärtiges Wirtschaft Finanzen Justiz},
+		%w{Peter\ Altmaier Heiko\ Maas Hubertus\ Heil Julia\ Klöckner},
+		%w{Andreas\ Scheuer Franziska\ Giffey Gerd\ Müller Helge\ Braun},
+		%w{5 15 25 35},
+		%w{AfD FDP Grüne Linke},
+		%w{Julia\ Klöckner Katarina\ Barley Horst\ Seehofer Heiko\ Maas},
+		%w{50 200 600 1000},
+		%w{besondere\ Aufgaben Heimat Inneres Justiz},
+		%w{Heiko\ Maas Svenja\ Schulze Katarina\ Barley Franziska\ Giffey},
+		%w{Andreas\ Scheuer Svenja\ Schulze Hubertus\ Heil Ursula\ von\ der\ Leyen},
+		%w{Anja\ Karliczek Helge\ Braun Gerd\ Müller Peter\ Altmaier},
+		%w{Hegemonie Monarchie Oligarchie Aristokratie},
+		%w{Hegemonie Monarchie Oligarchie Aristokratie},
+		%w{Hegemonie Monarchie Oligarchie Aristokratie},
+		%w{Hegemonie Monarchie Oligarchie Aristokratie},
+		%w{Souverän König Platzhalter Wegweiser},
+		%w{Autokratie Anarchie Oligarchie Technokratie},
+		%w{Plutokratie Xenokratie Theokratie Deokratie},
+		%w{Kommunismus Sozialismus Individualismus Totalitarismus},
+		%w{aktives individuelles passives temporäres},
+		%w{aktives individuelles passives temporäres},
+		%w{16 18 19 21},
+		%w{31 41 51 61},
+		%w{FDP Linke Grüne Die\ Partei},
+		%w{Klöckner Merkel Kramp-Karrenbauer von\ der\ Leyen},
+		%w{Scheuer Söder Herrmann Seehofer},
+		%w{Nahlen Scholz Heil Schulz},
+		%w{Weidel Höcke Maier Storch},
+		%w{Kubicki Lindner Lambsdorff Solms},
+		%w{Kretschmann Trittin Özdemir Habeck},
+		%w{Riexinger Gysi Kipping Bartsch},
+		%w{59 61 63 65},
+		%w{Musik Deutsch Chemie Physik},
+		%w{1989 1991 1993 1998},
+		%w{18 16 12 8},
+		%w{Bildung\ und\ Forschung Inneres Justiz Auswärtiges},
+		%w{Gebühr Beitrag Steuer Entgelt},
+		%w{1910 1912 1914 1918},
+		%w{1933 1939 1941 1945}
 ]
 
 t = Test.create(name: "Politik",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/politik.png", construct: "Probe", student_access:true, archive: false)

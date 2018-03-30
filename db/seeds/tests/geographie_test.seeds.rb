@@ -107,6 +107,50 @@ Paris
 Barcelona
 London\ Eye
 4
+Istanbul
+England
+Alhambra
+Westminster
+Moldau
+Campanile
+Ponte\ Vecchio
+Brüssel
+Südbayern
+Trier
+Potsdam
+Gotik
+Speicherstadt
+2017
+16
+unter\ 1
+Angkor\ Wat
+Peking
+Petra
+Cristo\ Redentor
+Bodensee
+251\ m
+Sachsen-Anhalt
+Obersee
+Rhein
+Donau
+Donau
+Weser
+Wald
+76
+Fichte
+Schleswig-Holstein
+römisch-katholisch
+Saarland
+Rom
+1931
+537
+Menora
+Mekka
+9.
+11
+2020
+Schaltjahr
+orthodox
 }
 question_n4 = [
 		"Auf welchem Himmelskörper befindet sich Olympus Mons, der höchste bisher bekannte Vulkan des Sonnensystems?",
@@ -213,6 +257,50 @@ question_n4 = [
 		"In welcher Stadt steht die Sagrada Familia?",
 		"Wie heißt das 2000 erbaute Riesenrad in London?",
 		"Wieviele Pferde zieren die Quadriga auf dem Brandenburger Tor?",
+		"Wo befindet sich die Hagia Sophia?",
+		"Um Stonehenge zu besuchen, reist man nach?",
+		"Im spanischen Granada befindet sich welches bedeutende Beispiel einer Festungsanlage maurischen Baustils?",
+		"Londons Sehenswürdigkeit Big Ben findet sich neben dem Palace of..?",
+		"Geht man über die Karlsbrücke in Prag, so überquert man welchen Fluss?",
+		"Wie nennt man einen Glockenturm, der freistehend neben einem Kirchengebäude errichtet wurde?",
+		"Wie heißt die älteste Brücke über den Arno im italienischen Florenz?",
+		"Wo befindet sich das Atomium?",
+		"Will man Schloss Neuschwanstein einen Besuch abstatten, fährt man dazu in welche Region Deutschlands?",
+		"Welche dieser deutschen Städte beansprucht für sich älteste Stadt Deutschlands zu sein?",
+		"Wo befindet sich Schloss Sanssouci?",
+		"Der Kölner Dom zählt zu den bedeutendsten Bauwerken welches Baustils?",
+		"Wie heißt der in Hamburg gelegene, weltgrößte historische Lagerhauskomplex?",
+		"Wann wurde die für 2010 geplante Fertigstellung der Hamburger Elbphilharmonie Wirklichkeit?",
+		"Wieviele Nationalparks gibt es in Deutschland?",
+		"Welchen Prozentanteil an der Landfläche Deutschlands nehmen Nationalparks ein?",
+		"Wie heißt die bekannteste kambodschanische Tempelanlage?",
+		"Im Zentrum welcher Stadt befindet sich die Verbotene Stadt?",
+		"In Jordanien kann man welche Stadt mit in den Fels gehauenen Gebäuden besuchen?",
+		"Die monumentale Christus-Statue im Süden Rio de Janeiros trägt welchen Namen?",
+		"Der flächenmäßig größte See Deutschlands ist welcher?",
+		"Welche Tiefe erreicht der Bodensee an seiner tiefsten Stelle?",
+		"Wo liegt der Geiseltalsee?",
+		"Vom Konstanzer Münster aus blickt man auf welchen See?",
+		"Welcher dieser Flüsse fließt aus dem Bodensee?",
+		"Nach dem Rhein ist welcher Fluss der wasserreichste Deutschlands?",
+		"Welcher dieser ganz oder teilweise durch Deutschland fließenden Flüsse hat die größte Gesamtlänge?",
+		"Die Hansestadt Bremen liegt an der..?",
+		"Womit ist ein Drittel der Fläche Deutschlands bedeckt?",
+		"Auf wieviele Baumarten stößt man in den Wäldern Deutschlands ungefähr?",
+		"In den Wäldern Deutschlands bedeckt mit 26% der Fläche welcher Baum den größten Teil?",
+		"Welches deutsche Flächenland hat den geringsten Waldanteil an seiner Fläche?",
+		"Nach der konfessionslosen Bevölkerung bildet (2016) welche Konfession die größte Gruppe in Deutschland?",
+		"Die Bevölkerung welches deutschen Bundeslands hat den höchsten Anteil an Katholiken?",
+		"Wo steht der größte Dom nach Innenlänge des Kirchenschiffs?",
+		"Seit wann wird die Hagia Sophia als Museum genutzt?",
+		"Wann wurde die Hagia Sophia eröffnet?",
+		"Wie nennt man die siebenarmigen Leuchter, die ein wichtiges religiöses Symbol des Judentums sind?",
+		"Wohin führt die Pilgerreise Haddsch, die jeder Muslim nach Möglichkeit einmal im Leben antreten sollte?",
+		"Der islamische Fastenmonat Ramadan ist der wievielte Monat des islamischen Mondkalenders?",
+		"Um wieviele Tage kürzer ist das Jahr des islamischen Mondkalenders gegenüber dem Sonnenjahr der christlichen Zeitrechnung?",
+		"Wann tritt der 29. Februar nächstes Mal auf?",
+		"Wie heißen Jahre, die 366 Tage lang sind?",
+		"Welche Konfession arbeitet teilweise noch mit dem julianischen Kalender?"
 ]
 
 
@@ -320,8 +408,52 @@ item_alternatives_n4 = [
 		%w{Harz Oberpfälzer\ Wald Eifel Fichtelgebirge},
 		%w{Amsterdam Brüssel London Paris},
 		%w{Barcelona Lissabon Madrid Mailand},
-		%w{London\ Ear London\ Egg London\ Eye London\ Spinner},
-		%w{2 4 6 8}
+		%w{London\ Ear London\ Eye London\ Egg London\ Spinner},
+		%w{2 3 4 6},
+		%w{Istanbul Ankara Athen Knossos},
+		%w{Wales England Schottland Nordirland},
+		%w{Alcazar Sagrada\ Familia Alhambra Giralda},
+		%w{Westershire Rochester Wincester Westminster},
+		%w{Moldau Weichsel Donau Lech},
+		%w{Capo Campanile Campa Calabro},
+		%w{Ponte\ Arno Ponte\ Alto Ponte\ Vecchio Ponte\ Florentino},
+		%w{Paris London Berlin Brüssel},
+		%w{Südbayern Baden-Württemberg Nordbayern Hessen},
+		%w{Leipzig Trier Hamburg Bielefeld},
+		%w{Berlin Venedig Potsdam Versailles},
+		%w{Romanik Rokoko Klassizismus Gotik},
+		%w{Speicherstadt Kontordorf Fischhallen Scheunenbrache},
+		%w{2011 2013 2015 2017},
+		%w{4 8 16 26},
+		%w{12 5 3 unter\ 1},
+		%w{Angkor\ Wat Taj\ Mahal Phnom\ Penh Teotihuacan},
+		%w{Tokio Peking Seoul Kyoto},
+		%w{Alina Sanaa Petra Siwa},
+		%w{Christo Angelos Cristo\ Pretendor Cristo\ Redentor},
+		%w{Bodensee Müritz Chiemsee Schweriner\ See},
+		%w{83\ m 189\ m 190\ m 251\ m},
+		%w{Baden-Württemberg Sachsen-Anhalt Rheinland-Pfalz Mecklenburg-Vorpommern},
+		%w{Untersee Westensee Obersee Ostensee},
+		%w{Rhein Main Mosel Weichsel},
+		%w{Elbe Donau Inn Oder},
+		%w{Oder Rhein Donau Elbe},
+		%w{Donau Oder Elbe Weser},
+		%w{Wald Asphalt Fließgewässer Schrebergärten},
+		%w{11 27 54 76},
+		%w{Buche Fichte Eiche Tanne},
+		%w{Sachsen Bayern Schleswig-Holstein Saarland},
+		%w{römisch-katholisch evangelisch jüdisch sunnitisch},
+		%w{Bayern Saarland Rheinland-Pfalz Nordrhein-Westfalen},
+		%w{London Mailand Rom Florenz},
+		%w{1848 1911 1918 1931},
+		%w{537 1054 1453 1931},
+		%w{Menhir Menora Mendel Menetekel},
+		%w{Santiago\ de\ Compostela Sanaa Mekka Jerusalem},
+		%w{3. 6. 8. 9.},
+		%w{11 18 23 31},
+		%w{2019 2020 2021 2022},
+		%w{Kippjahr Schalljahr Schaltjahr Langjahr},
+		%w{katholisch evangelisch anglikanisch orthodox}
 
 ]
 

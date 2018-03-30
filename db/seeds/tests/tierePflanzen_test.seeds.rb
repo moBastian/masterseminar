@@ -51,7 +51,7 @@ Frostrasling
 Eselsohr
 Brätling
 Birkenpilz
-6,4°C
+6.4°C
 Baumgrenze
 Melanismus
 Albinismus
@@ -103,6 +103,54 @@ Arktis
 Facettenauge
 8
 Metamorphose
+Schwalbe
+vom\ Eis
+Frühling\ bringen
+Winter\ nicht\ bange
+Nutztier
+4
+2012
+4
+9
+vegetarisch
+vegan
+frugan
+Kreuzotter
+Aspisviper
+Schlingnatter
+Ringelnatter
+Insekten
+Wüsten
+200
+Rot
+Rheingau
+Hasen
+Kreuzotter
+Aspisviper
+Echsen
+Ringelnatter
+20
+Schmetterlinge
+Narbe
+150.000
+80
+Krokussen
+Kronenschluss
+kleiner\ Wald
+Photosynthese
+Chloroplasten
+Chlorophyll
+Wildschweine
+aerob
+anaerob
+Mitochondrium
+Säure
+Eukaryoten
+Lipide
+hydrophob
+hydrophil
+Osmose
+Brasilien
 }
 
 question_n4 = [
@@ -205,7 +253,55 @@ question_n4 = [
 		"Wieviele Beine sind charakteristisch für Insekten?",
 		"Wie bezeichnet man die für Insekten charakteristischen Augen?",
 		"Wieviele Beine haben Spinnen?",
-		"Wie nennt man die Entwicklung eines Schmetterlings vom Ei bis zur Fluggestalt?"
+		"Wie nennt man die Entwicklung eines Schmetterlings vom Ei bis zur Fluggestalt?",
+		"Der Tiefflug welches Vogels kündigt laut einer Bauernregel Unwetter an?",
+		"Löst man eine schwierige Situation auf, so holt man die Kuh..?",
+		"Hasen, die springen, werden sicher den..?",
+		"Bleiben die Schwalben lange, sei vor dem..?",
+		"Wird ein Tier vom Menschen wirtschaftlich genutzt, spricht man von?",
+		"Wie viele Quadratmeter Auslauffläche muss pro Henne zur Verfügung stehen damit diese in Freilandhaltung leben?",
+		"Wann wurde die Käfighaltung in der EU als Haltungsform verboten?",
+		"Wieviele Ebenen von Haltungseinrichtungen dürfen in der Bodenhaltung von Hühnern übereinander gestapelt werden?",
+		"In der Bodenhaltung von Hühnern dürfen nicht mehr als wieviele Hennen pro Quadratmeter gehalten werden?",
+		"Verzichtet man auf Fleisch, nicht aber auf andere tierische Produkte, ernährt man sich wie?",
+		"Verzichtet man auf sämtliche tierische Produkte, so ernährt man sich wie?",
+		"Ernährt man sich ausschließlich von pflanzlichen Produkten, ohne die Herkunftspflanze dabei zu schädigen, nennt man dies?",
+		"Welche dieser Schlangen ist in Deutschland heimisch?",
+		"Welche dieser Schlangen ist in Deutschland heimisch?",
+		"Welche dieser Schlangen ist in Deutschland heimisch?",
+		"Welche dieser Schlangen ist in Deutschland heimisch?",
+		"Wovon ernährt sich die in Deutschland heimische Kreuzotter nicht?",
+		"In welchen Gegenden sind Kreuzottern nicht anzutreffen?",
+		"Wieviele Zentimeter kann eine Ringelnatter lang werden?",
+		"Welche Farbschattierung tritt bei Ringelnattern nicht auf?",
+		"Wo unter anderem sind heute noch Äskulapnattern anzutreffen?",
+		"Wovon ernähren sich Äskulapnattern nicht?",
+		"Welche dieser Schlangen ist giftig?",
+		"Welche dieser Schlangen ist giftig?",
+		"Die Blindschleiche gehört zu den?",
+		"Welche dieser Schlangenarten legen Eier?",
+		"Bis zu wieviele Junge gebärt eine Kreuzotter?",
+		"Wovon ernährt sich eine Blindschleiche nicht?",
+		"Aus welchem Teil des Safrans wird das gleichnamige Gewürz gewonnen?",
+		"Wieviele Blüten werden mindestens benötigt um ein Kilogramm Safran zu gewinnen?",
+		"Wieviel Gramm Safran kann ein Pflücker am Tag erbringen?",
+		"Safran gehört zu den..?",
+		"Wie nennt man den Zeitpunkt ab dem durch Laubbildung der Bäume keine direkte Sonneneinstrahlung mehr auf dne Boden fällt?",
+		"Was ist ein Hain?",
+		"Unter Nutzung von Lichtenergie betreiben Pflanzen was?",
+		"Wo findet Photosynthese bei Landpflanzen statt?",
+		"Wie heißt der Blattfarbstoff durch den Pflanzen ihr typisches Grün erhalten?",
+		"Welche dieser Lebewesen verfügen nicht über Chlorophyll?",
+		"Wie nennt man Zellatmungsprozesse unter Verwendung von Sauerstoff als Oxidationsmittel?",
+		"Wie nennt man eine Atmung unter Verwendung von anderen Stoffen statt Sauerstoff als Oxidationsmittel?",
+		"Welches Zellorganell findet sich bei Eukaryoten, nicht aber bei Prokaryoten?",
+		"Wofür steht das S in DNS?",
+		"Wie nennt man diejenigen Lebewesen, deren Zellen einen echten Zellkern aufweisen?",
+		"Welche Stoff- bzw. Molekülart bildet die Zellmembran eukaryoter Zellen wie sie in komplexeren Lebewesen vorkommen?",
+		"Perlt Wasser auf einer Oberfläche ab, so ist diese Oberfläche was?",
+		"Stoffe, die mit Wasser stark wechselwirken, nennt man?",
+		"Wie nennt sich der Prozess durch den molekulare Teilchen in Pflanzenwurzeln aufgenommen werden?",
+		"Welches dieser Länder gehört nicht zu den 3 wichtigsten Hauptanbauländern von Zuckerrüben?"
 ]
 
 
@@ -259,7 +355,7 @@ item_alternatives_n4 = [
 		%w{Nebelkappe Eselsohr Fliegenpilz Gifthäubling},
 		%w{Graukappe Feldtrichterling Brätling Lila\ Dickfuß},
 		%w{Pantherpilz Fliegenpilz Riesenrötling Birkenpilz},
-		%w{0,6°C 4,1°C 6,4°C 10,8°C},
+		%w{0.6°C 4.1°C 6.4°C 10.8°C},
 		%w{Baumgrenze Grüngrenze Wachstumsgrenze Waldgrenze },
 		%w{Albinismus Melanismus Kannibalismus Apfelmus},
 		%w{Melanismus Kannibalismus Apfelmus Albinismus},
@@ -310,7 +406,55 @@ item_alternatives_n4 = [
 		%w{2 4 6 8},
 		%w{Fassadenauge Facettenauge Vielauge Einauge},
 		%w{8 12 4 6},
-		%w{Die\ Verwandlung Phasenübergang Flexing Metamorphose}
+		%w{Die\ Verwandlung Phasenübergang Flexing Metamorphose},
+		%w{Schwalbe Möwe Rabe Elster},
+		%w{aus\ dem\ Stall vom\ Eis auf\ die\ Weide aus\ dem\ Fluss},
+		%w{Herbst\ ersingen Winter\ ranbringen Frühling\ bringen Sommer\ verbringen},
+		%w{Frühling\ bange Sommer\ bange Herbst\ nicht\ bange Winter\ nicht\ bange},
+		%w{Nutztier Ökotier Wildtier Zuchttier},
+		%w{2 4 6 8},
+		%w{2010 2011 2012 2014},
+		%w{1 2 3 4},
+		%w{3 5 7 9},
+		%w{vegan vegetarisch frugan low\ carb},
+		%w{vegan vegetarisch frugan low\ carb},
+		%w{vegan vegetarisch frugan low\ carb},
+		%w{Kreuzotter Netzpython Baumschnüffler Schmuckbaumnatter},
+		%w{Strahlennatter Aspisviper Schmuckbaumnatter Wolfszahnnatter},
+		%w{Rattenschlange Fischnatter Schlingnatter Grubenotter},
+		%w{Bambusotter Tigerpython Schmuckbaumnatter Ringelnatter},
+		%w{Insekten Eidechsen Kleinvögel Frösche},
+		%w{Moore Wüsten Wälder Wiesen},
+		%w{100 50 200 150},
+		%w{Blaugrau Grüngrau Braun Rot},
+		%w{Rheingau Bodensee Chiemgau Saaletal},
+		%w{Eidechsen Hasen Vögel Kleinsäugetiere},
+		%w{Ringelnatter Äskulapnatter Kreuzotter Schlingnatter},
+		%w{Ringelnatter Äskulapnatter Schlingnatter Aspisviper},
+		%w{Echsen Schlangen Kröten Olmen},
+		%w{Kreuzotter Ringelnatter Aspisviper Schlingnatter},
+		%w{5 10 20 15},
+		%w{Nacktschnecken Ameisen Regenwürmer Schmetterlinge},
+		%w{Narbe Blütenblatt Wurzel Stiel},
+		%w{1.500 150.000 15.000 150},
+		%w{8 800 80 8000},
+		%w{Kokospalmen Steinfrüchten Hafergewächsen Krokussen},
+		%w{Kronenschluss Laubdicht Laubschatten Kronendicht},
+		%w{kleiner\ Wald Leichtmatrose Hopfenart Ostseeinsel},
+		%w{Kaffeeklatsch Photosymbiose Photosynthese Ablichtung},
+		%w{Chromoplasten Leukoplasten Mitochondrien Chloroplasten},
+		%w{Chlorophyll Chromosom Chloroform Chlondensat},
+		%w{Pflanzen Wildschweine Algen Cyanobakterien},
+		%w{anaerob inaerob aerob subaerob},
+		%w{inaerob aerob subaerob anaerob },
+		%w{Mitochondrium Metachondrium Chloroplast Chloroform},
+		%w{Silbe Säure Silber Säugetier},
+		%w{Prokaryoten Eukaryaten Eukaryoten Prokaryaten},
+		%w{Proteine Kohlenhydrate Hydrate Lipide},
+		%w{hydrophob hydrophil prototon hydratil},
+		%w{hydrophob hydrophil prototon hydratil},
+		%w{Osmose Adhäsion Kohäsion Laktose},
+		%w{Russland Frankreich USA Brasilien}
 ]
 
 t = Test.create(name: "Tiere&Pflanzen",  info: "Tiere&Pflanzen-Test", short_info: "Tiere&Pflanzen-Test",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/tier_pflanze.png", construct: "Probe", student_access:true, archive: false)

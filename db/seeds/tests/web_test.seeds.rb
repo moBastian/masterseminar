@@ -9,7 +9,7 @@ Wireless
 58
 USA
 2
-1,4
+1.4
 300
 20
 800
@@ -21,7 +21,7 @@ USA
 Nordamerika
 44
 48
-3,5
+3.5
 Island
 China
 100
@@ -103,6 +103,54 @@ Android
 iOS
 MS\ Word
 LaTeX
+Digitalwährung
+Bitcoin
+2009
+Dezember\ 2017
+-50%
+Taka
+Kryptographie
+Venezuela
+Petro
+eSports
+Space\ Invaders
+1.000.000
+Turtle\ Entertainment
+2000
+Starcraft
+Counter-Strike
+Alternate\ Attax
+Einheitenbau
+Fortnite
+PUBG
+Epic\ Games
+Mojang
+Persson
+Notch
+2500
+Allianz
+Horde
+Paladin
+Schamane
+Burning\ Crusade
+Warlords\ of\ Draenor
+Barde
+Blutelfen
+Blizzard
+MMORPG
+Diablo\ 3
+For\ Honor
+dLan
+300
+2000
+KappaKappa
+Laughing\ my\ ass\ off
+Justin.tv
+Amazon
+Creative
+IRL
+Fortnite
+Nightbot
 }
 question_n4 = [
 		"Wofür steht das W in WLAN?",
@@ -204,7 +252,55 @@ question_n4 = [
 		"Welches dieser Smartphone-Betriebssysteme wird noch weiterentwickelt?",
 		"Welches dieser Smartphone-Betriebssysteme wird noch weiterentwickelt?",
 		"Welches dieser Programme dient nicht der Spracherkennung  oder als persönlicher Assistent?",
-		"Welches dieser Programme dient nicht der Spracherkennung  oder als persönlicher Assistent?"
+		"Welches dieser Programme dient nicht der Spracherkennung  oder als persönlicher Assistent?",
+		"Was ist Bitcoin?",
+		"Welche dieser Währungen hat keine zentralen Abwicklungsstellen für Geldtransfers?",
+		"Wann erschien Bitcoin?",
+		"Wann erreichte die Währung Bitcoin mit über 16000 Euro pro Einheit ihren bisherigen Höchststand?",
+		"Wie sah die Wertentwicklung von Bitcoin zu Euro zwischen Dezember 2017 und März 2018 aus?",
+		"Welche dieser Währungen ist keine Cryptowährung?",
+		"Welcher dieser Begriffe spielt eine zentrale Rolle bei den aktuell bekannter werdenden Digitalwährungen?",
+		"Welches südamerikanische Land führte Anfang 2018 seine eigene Kryptowährung ein?",
+		"Wie heißt die von Venezuela eingeführte Kryptowährung?",
+		"Tragen Menschen mit Hilfe von Computerspielen Wettkämpfe aus, so nennt man dies?",
+		"Mit welchem Computerspiel veranstaltete Atari 1980 eines der ersten großen eSports-Events?",
+		"Mit einem Dollar-Preisgeld in welcher Höhe war 2007 die CGS World Championship das höchst dotierte Turnier im eSports-Bereich?",
+		"Die Electronic Sports League (ESL) ist eine Marke welches Unternehmens?",
+		"Wann wurde die Electronic Sports League (ESL) eingeführt?",
+		"Welches dieser Games ist kein MOBA?",
+		"Welches dieser Spiele jedes Jahr von 2002 bis 2017 bei ESL-Meisterschaften dabei?",
+		"Wie heißt das eSports-Team von Alternate heute?",
+		"Welches dieser Elemente gehört nicht zum Kern eines Online-Spiels im Stil eines battle royal?",
+		"Welches dieser vier Battle Royale Spiele ist Anfang 2018 das erfolgreichste?",
+		"Welches dieser vier Battle Royale Spiele ist Anfang 2018 das erfolgreichste?",
+		"Welches Studio entwickelte das Battle Royale Spiel Fortnite?",
+		"Welches Entwicklerstudio steht hinter Minecraft?",
+		"Die Entwicklung von Minecraft startete als Ein-Mann-Projekt, wie hieß der ursprüngliche Entwickler?",
+		"Wie lautet der Künstlername des ursprünglichen Minecraftentwicklers?",
+		"Wieviele Millionen US-Dollar zahlte Microsoft für die Übernahme des Minecraft-Entwicklerstudios Mojang im Jahr 2014?",
+		"Welche dieser Fraktionen steht der Horde in World of Warcraft gegenüber?",
+		"Welche dieser Fraktionen steht der Allianz in World of Warcraft gegenüber?",
+		"Welche dieser Charakterklassen war in der Urpsrungsversion allein Allianz-Spielern vorbehalten?",
+		"Welche dieser Charakterklassen war in der Urpsrungsversion von World of Warcraft (Vanilla) allein Horde-Spielern vorbehalten?",
+		"Welches dieser World of Warcraft Addons ist das älteste?",
+		"Welches dieser World of Warcraft Addons ist das jüngste?",
+		"Welche dieser Rollen kann ein World-of-Warcraft-Charakter in einem Raid nicht einnehmen?",
+		"Welches dieser Völker wurde im World-of-Warcraft-Addon Burning Crusade als spielbar eingeführt?",
+		"Welches Entwicklerstudio steht hinter World of Warcraft?",
+		"Welchem Genre ist World of Warcraft zuzuordnen?",
+		"Welches dieser Spiele ist kein MMO(RPG)?",
+		"Welches dieser Spiele ist kein MMO(RPG)?",
+		"Wird ein lokales Netzwerk über ein vor Ort vorhandenes Niederspannungsnetz, also über die Steckdose, aufgebaut, so spricht man von?",
+		"Wie viele Meter lassen sich Daten über Adapter eines PowerLAN / dLAN-Netzwerks übertragen?",
+		"Wie hoch ist die theoretisch erreichbare Datenübertragungsrate für dLAN in Mbit/s ungefähr?",
+		"Welches dieser Twitch Emoticons gibt es nicht?",
+		"Wenn jemand im Internet LMAO schreibt, was ist dann meist gemeint?",
+		"Auf welcher Plattform bildete sich Twitch.tv als eigene Sektion heraus?",
+		"Welches Unternehmen hat Twitch.tv 2014 gekauft?",
+		"Welche Kategorie wählen Künstler auf Twitch um ihre Schaffensprozesse zu streamen?",
+		"Welche Kategorie wählen Streamer auf Twitch um Reallife-Inhalte zu streamen?",
+		"Welches dieser Spiele ist Anfang 2018 das erfolgreichste auf Twitch, hat also die meisten Zuschauer?",
+		"Welcher chatbot gehört neben moobot zu den ältesten auf Twitch?"
 ]
 
 
@@ -216,7 +312,7 @@ item_alternatives_n4 = [
 		%w{28 38 48 58},
 		%w{Deutschland USA China Indien},
 		%w{1 2 3 4},
-		%w{0,4 1 1,4 2},
+		%w{0.4 1 1.4 2},
 		%w{50 100 200 300 },
 		%w{20 30 40 50},
 		%w{600 700 800 900},
@@ -228,7 +324,7 @@ item_alternatives_n4 = [
 		%w{Nordamerika Europa Asien Afrika},
 		%w{14 24 34 44},
 		%w{28 48 68 88},
-		%w{1,5 2,5 3,5 4,5},
+		%w{1.5 2.5 3.5 4.5},
 		%w{China Deutschland Indien Island},
 		%w{China Indien Russland USA},
 		%w{10 50 100 150},
@@ -309,7 +405,55 @@ item_alternatives_n4 = [
 		%w{Firefox\ OS Windows\ Mobil Symbian Android},
 		%w{Firefox\ OS Windows\ Mobil iOS Symbian},
 		%w{Siri MS\ Word Cortana Google\ Assistent},
-		%w{LaTeX Alexa Bixby Nina}
+		%w{LaTeX Alexa Bixby Nina},
+		%w{Geldmenge Bisswunde Münzbruchstück Digitalwährung},
+		%w{Bitcoin Dollar Yuan Euro},
+		%w{2003 2009 2012 2014},
+		%w{Dezember\ 2016 August\ 2017 Dezember\ 2017 Februar\ 2018},
+		%w{gleichbleibend +50% -10% -50%},
+		%w{Taka Bitcoin Ripple Ethereum},
+		%w{Kleptomanie Kryptographie Kalligraphie Plutokratie},
+		%w{Kolumbien Ecuador Venezuela Bolivien},
+		%w{Petronas Petro-Dollar Petra Petro},
+		%w{eSports eCommerce eBusiness eGal},
+		%w{Pong Space\ Invaders Alley\ Cat Pac-Man},
+		%w{10.000 100.000 1.000.000 500.000},
+		%w{Activision Bullfrog Paradox Turtle\ Entertainment},
+		%w{2000 2001 2002 2004},
+		%w{League\ of\ Legends Starcraft DotA\ 2 Paragon},
+		%w{Battlefield FIFA Counter-Strike Warcraft\ 3},
+		%w{Team\ Alternate Alternate Alternate\ Offense Alternate\ Attax},
+		%w{Einheitenbau Survival Auskundschaften Looten},
+		%w{H1Z1 Fortnite The\ Culling Day\ Z},
+		%w{H1Z1 Arma\ 3 PUBG Darwin\ Experiment},
+		%w{Blizzard Paradox Lionhead Epic\ Games},
+		%w{Mojang Sega Dice Bungie},
+		%w{Magnusson Persson Hendriksson Wulfsson},
+		%w{Ditch Butch Notch Betch},
+		%w{150 250 1000 2500},
+		%w{Allianz Konföderation Bund Union},
+		%w{Rudel Horde Herde Rotte},
+		%w{Druide Magier Paladin Priester},
+		%w{Paladin Magier Jäger Schamane},
+		%w{Burning\ Crusade Cataclysm Wrath\ of\ the\ Lich\ King Mists\ of\ Pandaria},
+		%w{Cataclysm Warlords\ of\ Draenor Burning\ Crusade Mists\ of\ Pandaria},
+		%w{Tank Heiler Barde Damage\ Dealer},
+		%w{Nachtelfen Worgen Goblins Blutelfen},
+		%w{Blizzard Paradox Lionhead Epic\ Games},
+		%w{MOBA MMORPG Hack\ and\ Slay Jump\ n\ Run},
+		%w{Age\ of\ Conan World\ of\ Warcraft Diablo\ 3 Elder\ Scrolls\ Online},
+		%w{Guildwars EVE\ Online Destiny For\ Honor},
+		%w{dLAN WLAN Elan Elon},
+		%w{100 300 200 50},
+		%w{50 100 200 2000},
+		%w{Kappa PogChamp FailFish KappaKappa},
+		%w{Laughing\ my\ ass\ off Leave\ me\ alone\ okay Land\ Mail\ Art\ Objects Let\ Me\ Ask\ Obama},
+		%w{Hitbox Justin.tv Youtube MyVideo},
+		%w{Google Microsoft Amazon Yahoo},
+		%w{IRL Games Art Creative},
+		%w{IRL Games Art Creative},
+		%w{Fortnite PUBG CSGO World\ of\ Warcraft},
+		%w{Daybot Textbot Nightbot BotBot}
 ]
 
 t = Test.create(name: "Web",  info: "Web-Test", short_info: "Web-Test",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/social_media.png", construct: "Probe", student_access:true, archive: false)
