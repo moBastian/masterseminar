@@ -31,7 +31,9 @@ class FrontendController < ApplicationController
       redirect_to '/frontend'
     elsif g != nil
       @group = g
+      puts("hallo")
       puts(params[:ip])
+      puts("du")
       s = Student.prepare_new_student(@group, params[:ip], params[:fingerprint])
       @student = s
       session[:student_id] = s.id
