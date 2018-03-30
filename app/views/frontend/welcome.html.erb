@@ -20,7 +20,7 @@
 <script>
     localStorage.setItem("reminderSeen", false);
     $(document).ready(function () {
-        $.getJSON('//api.ipify.org?format=jsonp&callback=?', function(data) {
+        $.getJSON('https://ipapi.co/json/', function(data) {
             $('#ip').val(data.ip)
         });
         var fingerprint = new Fingerprint().get();
