@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class AssessmentsController < ApplicationController
+  #führe die Methden/Funktionen immer aus bevor eine andere Methode/Funktion ausgeführt wird
   before_action :set_assessment, only: [:show, :edit, :update, :destroy]
   before_action :set_user
   before_action :set_group
@@ -7,16 +8,19 @@ class AssessmentsController < ApplicationController
 
   # GET /assessments
   # GET /assessments.json
+  #Laden der Indexseite der assessments(Standardfunktion)
   def index
     @assessments = Assessment.all
   end
 
   # GET /assessments/1
   # GET /assessments/1.json
+  #laden der showseite für ein assessment
   def show
     respond_to do |format|
       format.html
       format.js
+      #Erzeugen eines PDfs
       format.pdf do 
         render pdf: @group.name + "-" + @assessment.test.name, template: "assessments/show.pdf.erb", orientation: "landscape"
       end
@@ -24,6 +28,7 @@ class AssessmentsController < ApplicationController
   end
 
   # GET /assessments/new
+  #laden der new-Seite für assessements
   def new
     @assessment = Assessment.new
     existing = @group.assessments.map{|x| x.test}
@@ -31,16 +36,19 @@ class AssessmentsController < ApplicationController
   end
 
   # GET /assessments/1/edit
+  #Laden der editseite
   def edit
   end
 
   # POST /assessments
   # POST /assessments.json
+  #Erzeugen eines Assessements
   def create
     @assessment = nil?
     unless params[:test].nil?
       test = params[:test].to_i
       if Test.find(test)
+        #Verknüpfung schaffen Assesment/Test
         @assessment = @group.assessments.build(:test_id => test)
         @assessment.save
       end
@@ -51,11 +59,13 @@ class AssessmentsController < ApplicationController
 
   # PATCH/PUT /assessments/1
   # PATCH/PUT /assessments/1.json
+  #assessment updaten(Standardfunktion)
   def update
   end
 
   # DELETE /assessments/1
   # DELETE /assessments/1.json
+  #assessment zerstören(Standardfunktion)
   def destroy
     @assessment.destroy
     respond_to do |format|
@@ -82,6 +92,7 @@ class AssessmentsController < ApplicationController
       params[:assessment]
     end
 
+    #darf der nutzer die Methoden/Funktionen ausführen
     def is_allowed
       unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i))
         redirect_to '/mainapp'

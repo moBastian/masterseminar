@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class MeasurementsController < ApplicationController
+  #Führe diese methoden vor jeder aktion aus
+      #führe diese methode nur vor show, edit, updat eund destroy aus
   before_action :set_measurement, only: [:show, :edit, :update, :destroy]
   before_action :set_assessment
   before_action :set_user
@@ -8,26 +10,31 @@ class MeasurementsController < ApplicationController
 
   # GET /measurements
   # GET /measurements.json
+  #Bekommen aller Messzeitpunkte + laden der Indexseite(Standard)
   def index
     @measurements = Measurement.all
   end
 
   # GET /measurements/1
   # GET /measurements/1.json
+  #Anzeigen eines Messzeitpunktes(Standard)
   def show
   end
 
   # GET /measurements/new
+  #Erzeugen eines Messzeitpunktes(Standard)
   def new
     @measurement = @assessment.measurements.new
   end
 
   # GET /measurements/1/edit
+  #Editieren eines Messzeitpunktes(Standard)
   def edit
   end
 
   # POST /measurements
   # POST /measurements.json
+
   def create
     @measurement = @assessment.measurements.new(measurement_params)
 

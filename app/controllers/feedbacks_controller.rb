@@ -1,11 +1,15 @@
 class FeedbacksController < ApplicationController
+  #führe die Methoden/Funktionen immer aus bevor eine andere Methode/Funktion ausgeführt wird
   before_action :set_user
   before_action :set_group
+  #nur vor create
   before_action :convertFeedback, only: [:create]
+  #nur vor show, edit, update, destroy
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
   layout 'empty'
   # GET /feedbacks
   # GET /feedbacks.json
+  #laden aller Feedbacks, der zugehörigen gruppe + Aufrufen JS-template
   def index
     @feedbacks = Feedback.where(group_id: @group.id)
 
@@ -25,26 +29,31 @@ class FeedbacksController < ApplicationController
 
   # GET /feedbacks/1
   # GET /feedbacks/1.json
+  #anzeigen eines Feedbacks
   def show
   end
 
   # GET /feedbacks/new
+  #erzeugen eines neuen Feedbacks
   def new
     @feedback = Feedback.new
   end
 
   # GET /feedbacks/1/edit
+  #Verändern eines Feedbacks (Standardfunktion)
   def edit
   end
 
   # POST /feedbacks
   # POST /feedbacks.json
+  #speichern eines Feedbacks
   def create
     feedback_params[:feedbacktext] = feedback_params[:feedbacktext].gsub!("\n", "<br/>")
 
     @feedback = @group.feedbacks.new(feedback_params)
 
     respond_to do |format|
+      #Wenn gespeichert -> weiterladen auf frontendseite und bedanken
       if @feedback.save
 
         format.html {
@@ -57,6 +66,7 @@ class FeedbacksController < ApplicationController
         }
         format.json { render :show, status: :created, location: @feedback }
       else
+        #wenn Feedback sollte nicht leer sein
         format.html {
           render :new
           flash[:notice]= 'Feedback sollte nicht leer sein ;)'
@@ -68,6 +78,7 @@ class FeedbacksController < ApplicationController
 
   # PATCH/PUT /feedbacks/1
   # PATCH/PUT /feedbacks/1.json
+  #Updaten von feedback (Standardfunktion)
   def update
     respond_to do |format|
       if @feedback.update(feedback_params)
@@ -82,6 +93,7 @@ class FeedbacksController < ApplicationController
 
   # DELETE /feedbacks/1
   # DELETE /feedbacks/1.json
+  #Updaten von feedback (Standardfunktion)
   def destroy
     @feedback.destroy
     respond_to do |format|
@@ -90,6 +102,7 @@ class FeedbacksController < ApplicationController
     end
   end
 
+  #Anpassen des Feedbacktexts auf html (Zeilenumbruch parsen)
   def convertFeedback
     feedback_params[:feedbacktext] = feedback_params[:feedbacktext].gsub!("\n", "<br/>")
   end
