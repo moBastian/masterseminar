@@ -26,6 +26,10 @@ class FrontendController < ApplicationController
     #Wenn der Proband gefunden wurde
     if s != nil
       #belegen der Variablen, beschreiben des Seessionhash, hochzählen seiner Loginvariablen, weiterleiten zur Frontendseite
+      if s.group.name=="1quiz"||s.group.name=="1Test"
+        redirect_to root_url, notice: "Die Studie wurde beendet. Hiermit bedanken wir uns nochmal herzlich für deine Teilnahme :)"
+        return
+      end
       @student = s
       session[:student_id] = s.id
       session[:user_id] = nil
@@ -35,6 +39,10 @@ class FrontendController < ApplicationController
       redirect_to '/frontend'
     #Wenn die Gruppe gefunden wurde
     elsif g != nil
+      if g.name=="1quiz"||g.name=="1Test"
+        redirect_to root_url, notice: "Die Studie wurde beendet. Wir wollen uns trotzdem herzlich für dein Interesse bedanken :)"
+        return
+      end
       #belegen der Variablen, Erstellen des Probanden und initialisieren (übergeben der Ip und des Browserhash, da beides clientseitig), Login von 0 auf 1 zählen,
       #weiterleiten zur Frontendseite
       @group = g
