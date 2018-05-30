@@ -74,12 +74,27 @@ class FrontendController < ApplicationController
   #Rendern der unterschiedlichen Seiten je nach Gruppe
   def index
     @assessments = @student.get_open_assessments
-    if @student.group_type == 0 || @student.group_type == 1
-      render 'control_and_feedback_group'
-    elsif @student.group_type == 2 || @student.group_type == 4
-      render 'badges_group'
+    if @assessments.length !=0
+      #Etwas unschöne Lösung aber der ZWeck heiligt die Mittel^^
+      if @assessments.first.test.subject== "MasterSem17-18"
+        if @student.group_type == 0 || @student.group_type == 1
+          render 'control_and_feedback_group'
+        elsif @student.group_type == 2 || @student.group_type == 4
+          render 'badges_group'
+        else
+          render 'ranking_group'
+        end
+        #weitere Fälle möglich über elsif/else
+      end
     else
-      render 'ranking_group'
+      #Seiten des MasterSem17-18 als Default
+      if @student.group_type == 0 || @student.group_type == 1
+        render 'control_and_feedback_group'
+      elsif @student.group_type == 2 || @student.group_type == 4
+        render 'badges_group'
+      else
+        render 'ranking_group'
+      end
     end
   end
 
@@ -131,7 +146,7 @@ class FrontendController < ApplicationController
 
 
       end
-      #SPeichern der angegebenen Daten vom Steckblatt
+      #Speichern der angegebenen Daten vom Steckblatt
       @login_student.gender = params[:gender]
       @login_student.age = params[:age]
       @login_student.email = params[:email]
