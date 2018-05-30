@@ -149,7 +149,7 @@ class Student < ActiveRecord::Base
 
   #Only get measurement which are available
   def get_open_assessments
-    t = Test.where(:student_access => true)
+    t = Test.all
     a = Assessment.where(:group => self.group.id).
                    where(:test => t)
 

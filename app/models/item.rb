@@ -5,8 +5,6 @@ class Item < ActiveRecord::Base
   validates_presence_of :itemtext
 
   before_save :check_shorthand
-  before_create :initialize_mediapath
-  serialize :mediapath, Hash
 
   def self.table_headings
     return %w{ID Kurztext}
@@ -24,10 +22,5 @@ class Item < ActiveRecord::Base
     end
   end
 
-  def initialize_mediapath
-    if mediapath["audios"].nil?
-      mediapath["audios"] = [""]
-    end
-  end
 
 end

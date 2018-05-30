@@ -94,11 +94,7 @@ class FrontendController < ApplicationController
     @test = @assessment.test
     @result = @student.getCurrentResult(@measurement.id)
     #laden der Seite für einen Testablauf
-    if (@test.student_access) #...ggf mehr Tests
-      render "results/tests/#{@test.view_info}", layout: 'empty'
-    else
-      redirect_to '/schueler'
-    end
+    render "results/tests/Generisch", layout: 'empty'
   end
 
   #Einverständniserklärung der Probanden laden/abfragen

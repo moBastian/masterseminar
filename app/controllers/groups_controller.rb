@@ -39,7 +39,6 @@ class GroupsController < ApplicationController
     #erstellen der gruppe
     @group = @user.groups.build(name:newName, archive:group_params[:archive])
     @group.demo = false
-    @group.export = true
     #führe die Dateien aus je nachdem, ob die gruppe abgespeichert wurde
     respond_to do |format|
       if @group.save

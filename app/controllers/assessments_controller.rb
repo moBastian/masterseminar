@@ -32,7 +32,6 @@ class AssessmentsController < ApplicationController
   def new
     @assessment = Assessment.new
     existing = @group.assessments.map{|x| x.test}
-    @tests = Test.where(:archive => false).order(:subject, :construct, :name) - existing
   end
 
   # GET /assessments/1/edit

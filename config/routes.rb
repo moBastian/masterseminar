@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   post 'accept' => 'application#accept'
   post 'signup' => 'application#signup'
   get 'static' => 'application#static'
-  get 'export' => 'application#export'
 
   post 'frontend/login' => 'frontend#login'
   post 'frontend/logout' => 'frontend#logout'

@@ -15,7 +15,7 @@ questions = [
 ]
 
 
-t = Test.create(name: "BFI",  info: "BFI", short_info: "BFI",len: 1, subject: "MasterSem17-18", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "BFI",  info: "BFI", short_info: "BFI",len: 1, subject: "MasterSem17-18", construct: "Probe")
 
 i= 0
 while i<questions.size do

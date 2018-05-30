@@ -87,13 +87,7 @@ class ApplicationController < ActionController::Base
     render params[:page]
   end
 
-  def export
-    unless !@login_user.nil? && @login_user.hasCapability?('export')
-      redirect_to '/mainapp'
-    end
-    @tests = Test.all
-    @users = User.all
-  end
+
 
   private
   #check if user is logged in

@@ -457,7 +457,7 @@ item_alternatives_n4 = [
 		%w{1933 1939 1941 1945}
 ]
 
-t = Test.create(name: "Politik",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/politik.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Politik",  info: "Politiktest", short_info: "Politiktest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/politik.png", construct: "Probe")
 
 i= 0
 while i<items_n4.size do

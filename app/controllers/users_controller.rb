@@ -18,20 +18,6 @@ class UsersController < ApplicationController
           redirect_to '/mainapp'
         end
       }
-      format.xml {
-        if @login_user.nil? || (!@login_user.hasCapability?("export") && (@user.id != @login_user.id))
-          redirect_to '/mainapp'
-        else
-          send_file Result.to_xls(nil, @user.id), filename: @user.name + " - Export.csv", type: "application/vnd.ms-excel"
-        end
-      }
-      format.text {
-        if @login_user.nil? || (!@login_user.hasCapability?("export") && (@user.id != @login_user.id))
-          redirect_to '/mainapp'
-        else
-          send_file Result.to_csv(nil, @user.id), filename: @user.name + " - Export.csv", type: "text/csv"
-        end
-      }
     end
   end
 

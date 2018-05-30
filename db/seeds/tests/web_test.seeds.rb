@@ -456,7 +456,7 @@ item_alternatives_n4 = [
 		%w{Daybot Textbot Nightbot BotBot}
 ]
 
-t = Test.create(name: "Web",  info: "Web-Test", short_info: "Web-Test",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/social_media.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Web",  info: "Web-Test", short_info: "Web-Test",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/social_media.png", construct: "Probe")
 
 i= 0
 while i<items_n4.size do

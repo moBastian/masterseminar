@@ -456,7 +456,7 @@ item_alternatives_n4 = [
 		%w{-1 0 0.1 1}
 ]
 
-t = Test.create(name: "Mathe",  info: "Mathetest", short_info: "Mathetest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/mathe.png", construct: "Probe", student_access:true, archive: false)
+t = Test.create(name: "Mathe",  info: "Mathetest", short_info: "Mathetest",len: 1, time: 900, subject: "MasterSem17-18", picture: "/images/Logos/mathe.png", construct: "Probe")
 
 i= 0
 while i<items_n4.size do

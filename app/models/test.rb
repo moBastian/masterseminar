@@ -9,11 +9,8 @@ class Test < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :subject
   validates_presence_of :construct
-  after_create :set_defaults
 
-  def set_defaults
-    self.archive ||= false
-  end
+
 
   def content_items
     self.items.where(itemtype: 0).order(:id)
@@ -76,11 +73,11 @@ class Test < ActiveRecord::Base
   end
 
   def long_name
-    return name + ' - ' +  ' (' + subject + ' - ' + construct + ')' + (archive ? ' - veraltet':'')
+    return name + ' - ' +  ' (' + subject + ' - ' + construct + ')'
   end
 
   def short_name
-    return name + ' - '  + (archive ? ' (veraltet)':'')
+    return name + ' - '
   end
 
   def code
