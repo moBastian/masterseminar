@@ -56,9 +56,6 @@
               <% if @login_user.hasCapability?("user") %>
                   <li><%= link_to("Benutzerverwaltung", users_path)%></li>
               <% end %>
-              <% if @login_user.hasCapability?("export") %>
-                  <li><%= link_to("Datenexport",  url_for(:controller => "application", :action => "export"))%></li>
-              <% end %>
             </ul>
           </li>
         <% end %>

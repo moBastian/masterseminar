@@ -1,8 +1,3 @@
-<%if @assessment.test.student_access%>
-    <div class="alert alert-warning">
-      <p>Achtung: Für diesen Test muss der Schülerzugang verwendet werden!</p>
-    </div>
-<% end %>
 <table class="table table-striped">
   <thead>
   <th>
@@ -45,9 +40,6 @@
           <% end %>
         </td>
         <td>
-          <%= link_to edit_user_group_assessment_measurement_path(@user, @group, @assessment, test[count]), :title => "Messung bearbeiten", :data => {:remote => true} do %>
-              <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
           <%= link_to user_group_assessment_measurement_path(@user, @group, @assessment, test[count]), :title => "Löschen", :method => :delete, :data => {:remote => true, :confirm => "Damit gehen alle Ergebnisse dieser Messung verloren!\n\nSind Sie sicher?"} do %>
               <span class="glyphicon glyphicon-trash"></span>
           <% end %>
@@ -64,9 +56,6 @@
               <% end %>
             </td>
             <td>
-              <%= link_to edit_user_group_assessment_measurement_path(@user, @group, @assessment, test[count+1]), :title => "Messung bearbeiten", :data => {:remote => true} do %>
-                  <span class="glyphicon glyphicon-pencil"></span>
-              <% end %>
               <%= link_to user_group_assessment_measurement_path(@user, @group, @assessment, test[count+1]), :title => "Löschen", :method => :delete, :data => {:remote => true, :confirm => "Damit gehen alle Ergebnisse dieser Messung verloren!\n\nSind Sie sicher?"} do %>
                   <span class="glyphicon glyphicon-trash"></span>
               <% end %>
@@ -85,9 +74,6 @@
               <% end %>
             </td>
             <td>
-              <%= link_to edit_user_group_assessment_measurement_path(@user, @group, @assessment, test[count+2]), :title => "Messung bearbeiten", :data => {:remote => true} do %>
-                  <span class="glyphicon glyphicon-pencil"></span>
-              <% end %>
               <%= link_to user_group_assessment_measurement_path(@user, @group, @assessment, test[count+2]), :title => "Löschen", :method => :delete, :data => {:remote => true, :confirm => "Damit gehen alle Ergebnisse dieser Messung verloren!\n\nSind Sie sicher?"} do %>
                   <span class="glyphicon glyphicon-trash"></span>
               <% end %>
@@ -102,12 +88,3 @@
 
   </tbody>
 </table>
-<div id="measurementForm">
-  <%if @assessment.test.archive %>
-    <button class=" btn btn-default btn-disabled">Test ist nicht mehr aktuell! Bitte neuen Test verwenden.</button>
-  <% else %>
-    <%= link_to @assessment.test.student_access ? "Neuer Messzeitraum" : "Neuer Messzeitpunkt", new_user_group_assessment_measurement_path(@user, @group, @assessment), :class => "btn btn-default", :data => {:remote => true} %>
-    <%= link_to @assessment.test.student_access ? "Neuer Messzeitraum in sieben Tagen" : "Neuer Messzeitpunkt bis in sieben Tagen", {:controller => "measurements", :action => "create", :assessment_id => @assessment, :measurement =>{:date =>Date.today+7}}, method: :post, :class => "btn btn-default", :data => {:remote => true}%>
-  <% end %>
-</div>
-
