@@ -63,7 +63,7 @@ class FrontendController < ApplicationController
 
   #Logout des Probaden
   def logout
-    if(!session[:student_id].nil?)
+    if !session[:student_id].nil?
       #leeren der Seesionvariablen und der instanzvariablen
       session[:student_id] = nil
       @login_student = nil
@@ -116,7 +116,7 @@ class FrontendController < ApplicationController
   def accept
     #Spezeille abfragen. Relevanz:Rankinggruppe
     #Username vergeben
-    if(!Student.where(name:params[:username]).blank?&&params[:username]!=""&&params.has_key?(:username)||!Fakename.where(name:params[:username]).blank?&&params[:username]!=""&&params.has_key?(:username))
+    if !Student.where(name:params[:username]).blank?&&params[:username]!=""&&params.has_key?(:username)||!Fakename.where(name:params[:username]).blank?&&params[:username]!=""&&params.has_key?(:username)
       #Daten vom Steckblatt beim Probanden abspeichern
       @login_student.gender = params[:gender]
       @login_student.age = params[:age]

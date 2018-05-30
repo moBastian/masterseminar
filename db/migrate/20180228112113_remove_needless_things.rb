@@ -3,6 +3,7 @@ class RemoveNeedlessThings < ActiveRecord::Migration[5.0]
     remove_column :tests, :level
     remove_column :tests, :type_info
     remove_column :tests, :type
+    remove_column :tests, :answers
     remove_column :tests, :student_access
     remove_column :tests, :archive
     remove_column :groups, :export
