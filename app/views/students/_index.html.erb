@@ -2,7 +2,11 @@
 <p class="lead text-right">
   <span class="glyphicon glyphicon-envelope" onclick="notifyAll();return false;" title="Rundmail"></span>
 </p>
-
+<div>
+  <div class="alert alert-warning">
+    <p>Achtung: Es werden nur bis zu sechs verschiedene Versuchsbedingungen unterstützt!</p>
+  </div>
+</div>
 
 <%  students = @group.students
     groupsize = students.size
@@ -186,22 +190,46 @@
       <td>
       </td>
       <td>
+        <%if played_questioncontrollgroup == 0%>
+            <%= (correct_questioncontrollgroup.to_f/1).round(3)*100%>
+      <%else%>
         <%= (correct_questioncontrollgroup.to_f/played_questioncontrollgroup).round(3)*100%>
+        <%end%>
       </td>
       <td>
-        <%= (correct_question1.to_f/played_question1).round(3)*100%>
+        <%if played_question1==0%>
+            <%= (correct_question1.to_f/1).round(3)*100%>
+        <%else%>
+            <%= (correct_question1.to_f/played_question1).round(3)*100%>
+        <%end%>
       </td>
       <td>
-        <%= (correct_question2.to_f/played_question2).round(3)*100%>
+        <%if played_question2==0%>
+            <%= (correct_question2.to_f/1).round(3)*100%>
+        <%else%>
+            <%= (correct_question2.to_f/played_question2).round(3)*100%>
+        <%end%>
       </td>
       <td>
-        <%= (correct_question3.to_f/played_question3).round(3)*100%>
+        <%if played_question3==0%>
+            <%= (correct_question3.to_f/1).round(3)*100%>
+        <%else%>
+            <%= (correct_question3.to_f/played_question3).round(3)*100%>
+        <%end%>
       </td>
       <td>
-        <%= (correct_question4.to_f/played_question4).round(3)*100%>
+        <%if played_question4==0%>
+            <%= (correct_question4.to_f/1).round(3)*100%>
+        <%else%>
+            <%= (correct_question4.to_f/played_question4).round(3)*100%>
+        <%end%>
       </td>
       <td>
-        <%= (correct_question5.to_f/played_question5).round(3)*100%>
+        <%if played_question5==0%>
+            <%= (correct_question5.to_f/1).round(3)*100%>
+        <%else%>
+            <%= (correct_question5.to_f/played_question5).round(3)*100%>
+        <%end%>
       </td>
     </tr>
     </tbody>

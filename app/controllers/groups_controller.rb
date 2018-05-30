@@ -37,7 +37,7 @@ class GroupsController < ApplicationController
     @groups = @user.groups
     newName = @user.id.to_s + group_params[:name]
     #erstellen der gruppe
-    @group = @user.groups.build(name:newName, archive:group_params[:archive])
+    @group = @user.groups.build(name:newName, archive:group_params[:archive], test_condition_count:group_params[:test_condition_count] )
     @group.demo = false
     #führe die Dateien aus je nachdem, ob die gruppe abgespeichert wurde
     respond_to do |format|
@@ -96,7 +96,7 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :archive)
+      params.require(:group).permit(:name, :archive, :test_condition_count)
     end
 
     #überprüfen ob eine Nutzer die Berechtigungen besitzt die aktionen auszuführen
