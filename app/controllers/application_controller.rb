@@ -18,11 +18,10 @@ class ApplicationController < ActionController::Base
         session[:student_id] = nil
         @login_student = nil
         @login_user = u
-        news = News.new_items(u)
         u.last_login = Time.now
         u.save
         #User hat schon seine Daten ausgefüllt
-        redirect_to user_groups_path(u), notice: news.empty? ? "Eingeloggt als #{u.email}" : news.join("<br/><br/>")
+        redirect_to user_groups_path(u), notice: "Eingeloggt als #{u.email}"
 
         #User nicht gefunden/Passwort stimmt nichtz -> redirect
       else

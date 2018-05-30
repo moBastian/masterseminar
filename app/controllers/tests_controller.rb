@@ -5,6 +5,7 @@ class TestsController < ApplicationController
 
   # GET /tests
   def index
+    @tests = Test.all
     respond_to do |format|
       format.html {}
     end

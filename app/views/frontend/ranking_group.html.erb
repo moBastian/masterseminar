@@ -43,14 +43,18 @@
 
 </style>
 <%survey = Test.where(name:"BFI")%>
-<%surveyLink = url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
+<%exists = @assessments.where(group_id:@student.group, test_id:survey).length%>
+
+<%if exists!=0%>
+    <%surveyLink = url_for(controller: 'frontend', action: 'start', id: @assessments.where(group_id:@student.group, test_id:survey).order(created_at: :desc).first.id)%>
+<%end%>
 <div class="container" style="width: auto; height: auto">
   <% content_for :top do%>
       <div class="container-fluid">
         <div>
           <p class="myP" style="float: left"><b title="Mit diesem Code kannst du dich erneut anmelden.">Angemeldet als: <%= @student.login %></b></p>
           <div align="right" style="padding-right: 15px">
-            <%if @student.survey_done||@assessments.where(group_id:@student.group, test_id:survey).first.nil?%>
+            <%if exists==0||@student.survey_done||@assessments.where(group_id:@student.group, test_id:survey).first.nil?%>
                 <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" >
                   <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
                   <%= token_tag nil %>

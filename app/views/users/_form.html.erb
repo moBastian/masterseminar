@@ -40,11 +40,9 @@
     <% if @login_user.hasCapability?("user") %>
       <div class="form-group">
         <%= f.radio_button :account_type, 0 %>
-        <%= f.label :account_type, "Lehrkraft", value: 0 %><br>
+        <%= f.label :account_type, "Forscher", value: 0 %><br>
         <%= f.radio_button :account_type, 1 %>
-        <%= f.label :account_type, "Forscher", value: 1 %><br>
-        <%= f.radio_button :account_type, 2 %>
-        <%= f.label :account_type, "Sonstiges (Privat/System/...)", value: 2 %><br>
+        <%= f.label :account_type, "Sonstiges (Privat/System/...)", value: 1 %><br>
       </div>
     <% end %>
     <div class="form-group">
