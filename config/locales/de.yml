@@ -212,7 +212,7 @@ de:
     pm: nachmittags
   activerecord:
     models:
-      group: Probandengruppe
+      group: Studie
       student: Probanden
       user: Benutzer
       measurement: Messzeitpunkt

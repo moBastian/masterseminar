@@ -78,7 +78,7 @@ class GroupsController < ApplicationController
       @group.destroy
     end
     respond_to do |format|
-      format.html { redirect_to user_groups_url(@user), notice: 'Probandengruppe wurde gelöscht.' }
+      format.html { redirect_to user_groups_url(@user), notice: 'Studie wurde gelöscht.' }
     end
   end
 

@@ -31,42 +31,7 @@
 
       <div id="table<%=key%>">
 
-        <p>
-          <b>Höchste Lösungswahrscheinlichkeit (viertes Quartil):</b>
-          <% if val.size < 3 %>
-              -
-          <% else %>
-              <% first = true %>
-              <% test.items.each do |i| %>
-                  <% if items["data"].has_key?(i.id.to_s) && items["data"][i.id.to_s]["prob"] > items["4th"] %>
-                      <% unless first %>
-                          <%= ", " %>
-                      <% end %>
-                      <% first = false %>
-                      <%= i.shorthand %>
-                  <% end %>
-              <% end %>
-              <% if first %> - <% end %>
-          <% end %>
-        </p>
-        <p>
-          <b>Geringste Lösungswahrscheinlichkeit (erstes Quartil):</b>
-          <% if val.size < 3 %>
-              -
-          <% else %>
-              <% first = true %>
-              <% test.items.each do |i| %>
-                  <% if items["data"].has_key?(i.id.to_s) && items["data"][i.id.to_s]["prob"] < items["1st"] %>
-                      <% unless first %>
-                          <%= ", " %>
-                      <% end %>
-                      <% first = false %>
-                      <%= i.shorthand %>
-                  <% end %>
-              <% end %>
-              <% if first %> - <% end %>
-          <% end %>
-        </p>
+
 
         <% unless without_table %>
           <table class="table table-striped">

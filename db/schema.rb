@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20180310203016) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "archive"
-    t.boolean  "export"
     t.boolean  "demo"
   end
 
@@ -48,7 +47,6 @@ ActiveRecord::Schema.define(version: 20180310203016) do
     t.text     "itemtext"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "mediapath"
     t.text     "itemview"
     t.integer  "itemtype"
   end
@@ -59,12 +57,6 @@ ActiveRecord::Schema.define(version: 20180310203016) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "stuId"
-  end
-
-  create_table "news", force: :cascade do |t|
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "results", force: :cascade do |t|
@@ -105,14 +97,11 @@ ActiveRecord::Schema.define(version: 20180310203016) do
     t.integer  "len"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "type"
     t.integer  "time"
     t.text     "short_info"
     t.text     "subject"
     t.text     "construct"
     t.text     "answers"
-    t.boolean  "student_access"
-    t.boolean  "archive"
     t.text     "picture"
   end
 
@@ -120,7 +109,6 @@ ActiveRecord::Schema.define(version: 20180310203016) do
     t.text     "email"
     t.text     "password_digest"
     t.text     "name"
-    t.text     "school"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "capabilities"
@@ -128,7 +116,6 @@ ActiveRecord::Schema.define(version: 20180310203016) do
     t.datetime "last_login"
     t.integer  "account_type"
     t.integer  "state"
-    t.integer  "occupation"
   end
 
 end

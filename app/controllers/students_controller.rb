@@ -13,7 +13,7 @@ class StudentsController < ApplicationController
       format.html {}
       @students = Student.where(:group_id => @group.id)
       format.pdf {
-        render pdf: "Zugangsdaten der Probandengruppe #{@group.name}",
+        render pdf: "Zugangsdaten der Studie #{@group.name}",
         template: "students/index.pdf.erb"
       }
       format.text {

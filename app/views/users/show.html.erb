@@ -12,10 +12,7 @@
             E-Mail
           </th>
           <th>
-            Schule
-          </th>
-          <th>
-            Probandengruppen
+            Studien
           </th>
           </thead>
           <tbody>
@@ -25,9 +22,6 @@
             </td>
             <td>
               <%= @user.email%>
-            </td>
-            <td>
-              <%= @user.school%>
             </td>
             <td>
               <%= link_to @user.groups.size, user_groups_path(@user)%>
