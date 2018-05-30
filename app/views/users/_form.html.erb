@@ -15,16 +15,6 @@
       <%= f.label :email, class: "control-label" %><br>
       <%= f.text_field :email, class: "form-control" %>
     </div>
-    <% if @user.account_type != 2 %>
-      <div class="form-group">
-        <%= f.label :school, class: "control-label" %><br>
-        <%= f.text_field :school, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :occupation, class: "control-label" %><br>
-        <%= f.select(:occupation, occupation, {}, {class: "form-control"}) %>
-      </div>
-    <% end %>
     <div class="form-group">
       <%= f.label :state, class: "control-label" %><br>
       <%= f.select(:state, federal_states, {}, {class: "form-control"}) %>

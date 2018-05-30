@@ -16,9 +16,6 @@
         Kontotyp
       </th>
       <th>
-        Schule/Institution
-      </th>
-      <th>
         Aktion
       </th>
       </thead>
@@ -37,9 +34,6 @@
             </td>
             <td>
               <%= user.account_type == 0 ? "Lehrkraft" : user.account_type == 1 ? "Forscher" : "Sonstiges (Privat/System/...)" %>
-            </td>
-            <td>
-              <%= user.school %>
             </td>
             <td>
               <%= link_to edit_user_path(user) do %>

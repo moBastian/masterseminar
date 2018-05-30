@@ -53,27 +53,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #Registrieren eines neuen Nutzers (ohne organisatorischen Aufwand für Betreiber)
-  def signup
-    password = Digest::SHA1.hexdigest(rand(36**8).to_s(36))[1..6]
-    @user = User.new(email: params[:email], name: params[:name], account_type: params[:account_type], password: password, password_confirmation: password)
-    #Speichern des Nutzers
-    if @user.save
-      UserMailer.registered(@user.email, @user.name, password).deliver_later
-      render 'registered', layout: 'bare'
-    else
-      #Fehlerausgabe
-      error = ''
-      unless @user.errors['name'].blank?
-        error = "Name darf nicht leer sein!"
-      end
-      unless @user.errors['email'].blank?
-        error = 'E-Mail Adresse ungültig oder bereits registriert!'
-      end
-      flash['notice'] = error
-      render 'signup', layout: 'bare'
-    end
-  end
+
 
   #Einverständniserklärung angenommen und weiterleiten
   def accept

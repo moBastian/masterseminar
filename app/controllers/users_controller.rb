@@ -47,26 +47,6 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if params.has_key?('text') && @login_user.id == @user.id       #Send mail to all users
-        format.html {
-          if params.has_key?('teacher')
-            User.where(account_type: 0).each do |u|
-              UserMailer.notify(u.email, u.name, params['text']).deliver_later
-            end
-          end
-          if params.has_key?('researcher')
-            User.where(account_type: 1).each do |u|
-              UserMailer.notify(u.email, u.name, params['text']).deliver_later
-            end
-          end
-          if params.has_key?('other')
-            User.where(account_type: 2).each do |u|
-              UserMailer.notify(u.email, u.name, params['text']).deliver_later
-            end
-          end
-          redirect_to users_url, notice: 'Nachricht wurde verschickt.'
-        }
-      else
         if @user.update(user_params)
           format.html {
             if @login_user.id != @user.id
@@ -78,7 +58,6 @@ class UsersController < ApplicationController
         else
           format.html { render :edit }
         end
-      end
     end
   end
 
@@ -99,7 +78,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :name, :school, :password, :password_confirmation, :account_type, :state, :occupation)
+      params.require(:user).permit(:email, :name, :password, :password_confirmation, :account_type, :state)
     end
 
   def is_allowed

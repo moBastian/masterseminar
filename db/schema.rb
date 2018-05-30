@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310203016) do
+ActiveRecord::Schema.define(version: 20180530144657) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer  "group_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20180310203016) do
     t.datetime "updated_at"
     t.boolean  "archive"
     t.boolean  "demo"
+    t.integer  "test_condition_count"
   end
 
   create_table "items", force: :cascade do |t|

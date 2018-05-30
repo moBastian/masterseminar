@@ -219,13 +219,11 @@ de:
       feedback: Kommentar
     attributes:
       user:
-        school: Schule/Institution
         email: E-Mail
         password: Passwort
         password_confirmation: Passwort-Bestätigung
         account_type: Kontotyp
         state: Bundesland
-        occupation: Angestellt als
       student:
         name: Name/Code
         birthdate: Geburtsdatum
