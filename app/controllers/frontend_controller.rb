@@ -26,7 +26,7 @@ class FrontendController < ApplicationController
     #Wenn der Proband gefunden wurde
     if s != nil
       #belegen der Variablen, beschreiben des Seessionhash, hochzählen seiner Loginvariablen, weiterleiten zur Frontendseite
-      if s.group.archive||s.group.name=="1Test"
+      if s.group.archive
         redirect_to root_url, notice: "Die Studie wurde beendet. Hiermit bedanken wir uns nochmal herzlich für deine Teilnahme :)"
         return
       end
@@ -39,7 +39,7 @@ class FrontendController < ApplicationController
       redirect_to '/frontend'
     #Wenn die Gruppe gefunden wurde
     elsif g != nil
-      if g.archive||g.name=="1Test"
+      if g.archive
         redirect_to root_url, notice: "Die Studie wurde beendet. Wir wollen uns trotzdem herzlich für dein Interesse bedanken :)"
         return
       end

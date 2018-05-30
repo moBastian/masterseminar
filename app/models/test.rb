@@ -77,7 +77,7 @@ class Test < ActiveRecord::Base
   end
 
   def short_name
-    return name + ' - '
+    return name
   end
 
   def code
