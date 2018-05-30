@@ -1,95 +1,29 @@
 # -*- encoding : utf-8 -*-
+#Klasse für die Probanden
 class Student < ActiveRecord::Base
-  #Connections with other model classes:
+  #Jeder gehört zu einer Studie
   belongs_to :group
+  #Zerstöre alle zugehörigen Ergebnisse, wenn der Proband zerstört wird
   has_many :results, :dependent => :destroy
 
-  #Validations:
+  #Mindestens der Name und das Geschlecht müssen vorhanden sein
   validates_presence_of :name, :gender
-  after_create :set_login, :set_group_type
+
+  #Jeder Name muss eindeutig sein innerhalb einer Gruppe <-z.B. Username eindeutig
   validates_uniqueness_of :name, scope: :group_id
 
-
+  #Hash für die Badges
   serialize :achievement, Hash
 
 
-  #Getter für Merkmale:
-
+  #Zurückgeben des Geschlechts
   def get_gender(raw = false)
     return self[:gender]
   end
 
-  def get_birthdate(raw = false)
-    if self[:birthdate].nil?
-      return raw ? "nicht erfasst" : "<i>nicht erfasst</i>"
-    else
-      return I18n.l(self[:birthdate].to_date, format: "%b %Y")
-    end
-  end
-
-  def get_specific_needs(raw = false)
-    if self[:specific_needs].nil?
-      return raw ? "nicht erfasst" : "<i>nicht erfasst</i>"
-    else
-      return case self[:specific_needs]
-        when 0 then "Keinen"
-        when 1 then "Lernen"
-        when 2 then "Geistige Entwicklung"
-        when 3 then "Anderer Förderbedarf"
-        when 4 then "Deutsch"
-      end
-    end
-  end
-
-  def get_migration(raw = false)
-    return self[:migration].nil? ? (raw ? "nicht erfasst" : "<i>nicht erfasst</i>") : (self[:migration] ? "Ja" : "Nein")
-  end
-
-
-  #####################
-
-  #Generate random login code
-  def set_login
-    while self.login.nil? | self.login.blank?
-      self.login = self.name
-      self.save
-    end
-  end
-
-  def set_group_type
-    if self.group_type.nil? |self.group_type.blank?
-      self.group_type = 0
-      self.save
-    end
-  end
-
-  def self.table_headings
-    return %w{ID Code Studien-Id Studien-Name Benutzer-Id Geschlecht Geburtsdatum Förderbedarf Migrationshintergrund}
-  end
-
-  def to_a
-    return [id.to_s, name, group.id, group.name, group.user.id, get_gender(true), get_birthdate(true), get_specific_needs(true), get_migration(true)]
-  end
-
-  def self.import(file, group)
-    spreadsheet = open_spreadsheet(file)
-    header = spreadsheet.row(1)
-    header.each{|h| h.downcase!}
-    (2..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose]
-      student = group.students.build(name: row["name"])
-      student.save!
-    end
-  end
-
-  def self.open_spreadsheet(file)
-    case File.extname(file.original_filename)
-      when ".csv" then Roo::CSV.new(file.path)
-      when ".xls" then Roo::Excel.new(file.path, file_warning: :ignore)
-      else raise "Unknown file type: #{file.original_filename}"
-    end
-  end
-
+  #Zurückgeben aller Ergebnisse
+  #nötig um den graphen richtig anzuzeigen und
+  # auf der stundentshow-Seite alle daten richtig anzuzeigen
   def getResults
     tests = Hash.new()
     items = Hash.new()
@@ -120,6 +54,9 @@ class Student < ActiveRecord::Base
     return tests
   end
 
+  #Zurückgeben der Ergebnisse füe einen Test
+  #nötig um den graphen richtig anzuzeigen und
+  # auf der stundentshow-Seite alle daten richtig anzuzeigen
   def getTestResults(test_id)
     items = Hash.new()
     results.each do |r|
@@ -147,7 +84,7 @@ class Student < ActiveRecord::Base
     return {"1st" => probs[probs.size/4], "4th" => probs[3*probs.size/4], "data" => items}
   end
 
-  #Only get measurement which are available
+  #Zurückgeben aler verfügbaren assessments
   def get_open_assessments
     t = Test.all
     a = Assessment.where(:group => self.group.id).
@@ -156,13 +93,17 @@ class Student < ActiveRecord::Base
 	return a
   end
 
+  #Erhalten der benötigten Daten fürs Ranking
+  #Erhalten von 5-6 "Punktegruppen"
   def get_data_ranking()
     potential_group = Student.where(group_id:self.group_id)
     group_size = potential_group.size
+    #Wenn die Gruppengröße kleiner als 5 ist direkt zurückgeben<-es kann nur max. 5 Punktegruppen geben
     if(group_size>5)
       i=0
       result_group= []
       check_diff_point_group = 0
+      #Erzeugen eines Array mit 5-6 verschiedenen Gruppen
       while result_group.size < 5  do
         result_group = potential_group.
             where('points< :max_points AND points > :min_points',max_points:self.points+i, min_points:self.points-i)
@@ -173,7 +114,10 @@ class Student < ActiveRecord::Base
         i = i+1
       end
       result_group= result_group.order(points: :desc)
+      #Man selber soll nie in der ersten oder letzten Gruppe sein, welche angezeigt wird.
+      #Außnahme: Man ist auf dem ersten oder letzten "Platz"
       if(result_group.first.points == self.points)
+        #erster Platz?
         group_before_me = potential_group.where('points> :my_points', my_points:self.points).order(points: :asc)
         if(group_before_me.size ==0)
         else
@@ -181,6 +125,7 @@ class Student < ActiveRecord::Base
           group_before_me = potential_group.where(points: group_before_me.first.points).order(points: :desc)
           result_group = result_group.or(group_before_me)
         end
+        #letzter Platz?
       elsif(result_group.last.points == self.points)
         group_after_me = potential_group.where('points< :my_points', my_points:self.points).order(points: :desc)
         if(group_after_me.size ==0)
@@ -204,7 +149,10 @@ class Student < ActiveRecord::Base
     return r.nil? ? [] : r
   end
 
+  #Initialisieren eines Probanden
+  #Eingabe Studie (Group-Objekt), Ip-Adresse, Browserhash
   def self.prepare_new_student(group, ip, fingerprint)
+    #Initialisieren des Hash für die Badges
     achievement = {"a1"=>[false, "/images/Badges/empty.png", "/images/Badges/welt_bronze.png","","Erstes Geographie-Quiz durchgeführt."], "a2"=>[false, "/images/Badges/empty.png", "/images/Badges/welt_silber.png","","50% der Geographie-Fragen kennengelernt."],"a3"=>[false, "/images/Badges/empty.png", "/images/Badges/welt_gold.png","" ,"90% der Geographie-Fragen kennengelernt."],
                    "a4"=>[false, "/images/Badges/empty.png", "/images/Badges/mathe_bronze.png","","Erstes Mathe-Quiz durchgeführt."],"a5"=>[false, "/images/Badges/empty.png", "/images/Badges/mathe_silber.png","","50% der Mathe-Fragen kennengelernt."], "a6"=>[false, "/images/Badges/empty.png", "/images/Badges/mathe_gold.png","","90% der Mathe-Fragen kennengelernt."],
                    "a7"=>[false, "/images/Badges/erste_frage.png", "/images/Badges/erste_frage_bronze.png","noch nicht erreicht: Erste Frage richtig beantwortet.","Erste Frage richtig beantwortet."], "a8"=>[false, "/images/Badges/email.png", "/images/Badges/email_bronze.png","noch nicht erreicht: Logincode per Email zugeschickt.","Logincode per Email zugeschickt."],
@@ -217,6 +165,7 @@ class Student < ActiveRecord::Base
                    "a24"=>[false, "/images/Badges/empty.png", "/images/Badges/social_media_bronze.png","","Erstes Web-Quiz durchgeführt."], "a25"=>[false, "/images/Badges/empty.png", "/images/Badges/social_media_silber.png","","50% der Web-Fragen kennengelernt."], "a26"=>[false, "/images/Badges/empty.png", "/images/Badges/social_media_gold.png","","90% der Web-Fragen kennengelernt."],
                    "a27"=>[false, "/images/Badges/quizmaster.png", "/images/Badges/quizmaster_gold.png","noch nicht erreicht: Quizmaster! Alle versteckten Abzeichen erhalten.","Quizmaster! Alle versteckten Abzeichen erhalten."],"a28"=>[false, "/images/Badges/fragebogen.png", "/images/Badges/fragebogen_gold.png", "noch nicht erreicht: Feedback abgeschickt.", "Feedback abgeschickt."],
                    "a29"=>[false, "/images/Badges/empty.png", "/images/Badges/tierPflanzenCor_silber.png","","Fliegenpilz-Frage richtig beantwortet."], "a30"=>[false, "/images/Badges/empty.png", "/images/Badges/socialMediaCor_silber.png", "", "WLAN-Frage richtig beantwortet."]}
+    #Zuweisen eines individuellen Logins
     testLoginFree = true
     while testLoginFree
       cur = (('0'..'9').to_a + ('a'..'z').to_a).shuffle.first(6).join
@@ -224,11 +173,9 @@ class Student < ActiveRecord::Base
         testLoginFree=false
       end
     end
+    #Erzeugen des Probanden
     s = group.students.build(name: cur, group_type: Random.rand(group.test_condition_count),feedback_send:false,survey_done:false, login_times:0, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
     s.save
     return s
   end
-
-
-
 end

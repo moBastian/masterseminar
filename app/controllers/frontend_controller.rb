@@ -20,12 +20,13 @@ class FrontendController < ApplicationController
 
   #Login eines Probanden
   def login
-    #Suchen des Probanden oder seiner Gruppe anhand des eingegebenen Codes
+    #Suchen des Probanden oder seiner Studie anhand des eingegebenen Codes
     s = Student.find_by_login(params[:login])
     g = Group.find_by_name(params[:login])
     #Wenn der Proband gefunden wurde
     if s != nil
       #belegen der Variablen, beschreiben des Seessionhash, hochzählen seiner Loginvariablen, weiterleiten zur Frontendseite
+      #Außer die Studie wurde beendet
       if s.group.archive
         redirect_to root_url, notice: "Die Studie wurde beendet. Hiermit bedanken wir uns nochmal herzlich für deine Teilnahme :)"
         return
@@ -38,6 +39,8 @@ class FrontendController < ApplicationController
       @student.save
       redirect_to '/frontend'
     #Wenn die Gruppe gefunden wurde
+      #Erstellen eines neuen Probanden und initialisieren dieses Probanden
+      #Außer wenn die Studie beendet wurde
     elsif g != nil
       if g.archive
         redirect_to root_url, notice: "Die Studie wurde beendet. Wir wollen uns trotzdem herzlich für dein Interesse bedanken :)"
@@ -46,7 +49,6 @@ class FrontendController < ApplicationController
       #belegen der Variablen, Erstellen des Probanden und initialisieren (übergeben der Ip und des Browserhash, da beides clientseitig), Login von 0 auf 1 zählen,
       #weiterleiten zur Frontendseite
       @group = g
-      puts(params[:ip])
       s = Student.prepare_new_student(@group, params[:ip], params[:fingerprint])
       @student = s
       session[:student_id] = s.id
@@ -114,7 +116,7 @@ class FrontendController < ApplicationController
 
   #Einverständniserklärung der Probanden laden/abfragen
   def accept
-    #Spezeille abfragen. Relevanz:Rankinggruppe
+    #Spezielle abfragen. Relevanz:Rankinggruppe
     #Username vergeben
     if !Student.where(name:params[:username]).blank?&&params[:username]!=""&&params.has_key?(:username)||!Fakename.where(name:params[:username]).blank?&&params[:username]!=""&&params.has_key?(:username)
       #Daten vom Steckblatt beim Probanden abspeichern
@@ -128,7 +130,7 @@ class FrontendController < ApplicationController
       render "frontend/_secondPage"
     else
       #username ist ok (bei allen außer Ranking immer leer)
-      if(params.has_key?(:username))
+      if params.has_key?(:username)
         #speichern des selber angegebenen usernamen
         @login_student.name = params[:username]
       else
@@ -158,7 +160,7 @@ class FrontendController < ApplicationController
   end
 
   private
-  #Überprüfen, ob eine Proband angemeldet ist und ggf. belegen von isntanzvariablen
+  #Überprüfen, ob eine Proband angemeldet ist und ggf. belegen von instanzvariablen
   def check_student
     if session[:student_id].nil?
       redirect_to root_url, notice: "Bitte einloggen!"

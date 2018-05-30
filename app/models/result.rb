@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+#Klasse für die Ergebnisse
 class Result < ActiveRecord::Base
 
   belongs_to :student
@@ -74,28 +75,8 @@ class Result < ActiveRecord::Base
     update_total
   end
 
-  #Create a string in the form of "0,1,0,1,..." that denotes the result for each item in the respective order. If includeNA is false, every NA response will be transformed to 0 in the result.
-  #Used for exporting the results.
-  def to_csv(includeNA)
-    responses.map{|x| (x == nil && includeNA)  ? 'NA': (x == nil ? 0 : x.to_s) }.join(",")
-  end
 
-  #Create an array representation of the results.
-  #If extra_data contain "times" then export the times instead of the 1/0 values.
-  #Used for exporting to XLS
-  def to_a(itemset)
-    res = []
-    itemset.each do |i|
-      val = responses[items.index(i)]
-      if extra_data.has_key?('times')
-        time = extra_data['times'][items.index(i)].nil? ? nil : extra_data['times'][items.index(i)].to_i
-        res = res + [time.nil? ? '' : (val == 1 ? time : -1*time)]
-      else
-        res = res + [val.nil? ? '' :val]
-      end
-    end
-    return res
-  end
+
 
   #Calculate the number of correct items.
   #Used for displaying the results
@@ -130,27 +111,33 @@ class Result < ActiveRecord::Base
   def getPriorResult()
     measurements = Measurement.where("assessment_id = ? AND created_at < ?", measurement.assessment, measurement.created_at)
     res = Result.where(:measurement => measurements, :student => student).order(created_at: :desc).first
+    #kein Ergebnis vorhanden
     if res.nil?
       return -1
+      #zurückgeben des Scores für letztes Ergebnis
     else
       t = res.score
       return t.nil? ? 0 : t
     end
   end
 
+  #Erhalten der ehemaligen gezogenen Items
+  #Benötigt um nur Items zu ziehen, welche noch nicht gezogen wurden
   def getPriorResultsItem(measurement, student)
     measurements = Measurement.where("assessment_id = ? AND created_at < ?", measurement.assessment, measurement.created_at)
     res = Result.where(:measurement => measurements, :student => student)
     items =[]
+    #Aufbauen eines Arrays mit allen Items
     for r in res
       count = 0
       for respond in r.responses
-        if(!respond.nil?)
+        if !respond.nil?
           items = items + Item.where(id:r.items[count])
         end
         count= count +1
       end
     end
+    #Zurückgeben eines Array in welchem jeder Eintrag einzigartig ist
     return items.uniq
   end
 

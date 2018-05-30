@@ -1,22 +1,23 @@
 # -*- encoding : utf-8 -*-
+#Klasse eines Nutzers
 class User < ActiveRecord::Base
+  #Kann viele Gruppen haben, welche zerstört werden, wenn der Nutzer zerstört wird
   has_many :groups, :dependent => :destroy
 
+  #Hat ein sicheres Passwort(Nutzen BCrypt)
   has_secure_password
-
+  #Besitzt mindestens eine einzigartige Email, einen Namen und einen Accounttyp, welcher zwischen 0 und 1 ist
   validates_presence_of :email
   validates_uniqueness_of :email
-
   validates_presence_of :name
+  validates_numericality_of :account_type, greater_than_or_equal_to: 0, less_than_or_equal_to: 1
 
-  validates_numericality_of :account_type, greater_than_or_equal_to: 0, less_than_or_equal_to: 2
-
+  #Führe die Methdoe create_test_group nach der Erzeugung aus
   after_create :create_test_group
 
   #Liste aktuell verwendeter Capabilities:
   #admin -> darf/sieht alles
   #user -> Sieht "Benutzerverwaltung"
-  #export -> Sieht "Datenexport"
   def hasCapability?(cap)
     return !isRegularUser? && (capabilities.include?(cap) || capabilities.include?("admin"))
   end
@@ -27,9 +28,8 @@ class User < ActiveRecord::Base
   end
 
   #Festlegung:
-  #0 -> Lehrkraft (=> Daten werden exportiert)
-  #1 -> Forscher (=> Kann eigene Daten exportieren)
-  #2 -> Privat/System
+  #0 -> Forscher
+  #1 -> Privat/System
   def isResearcher?
     return account_type == 1
   end
@@ -50,10 +50,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  #Alle Daten ausgefüllt
   def complete?
-    return !state.nil? && (account_type == 2 || (!school.nil? && !school.blank?)) && (account_type > 0 || !occupation.nil?)
+    return !state.nil?
   end
 
+  #Erzeugen der eigenen Test/Spielstudie
   def create_test_group
     self.groups.create(:name => self.id.to_s + "Test", :archive => false, :demo => true, :test_condition_count => "6")
   end

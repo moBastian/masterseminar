@@ -1,37 +1,36 @@
 # -*- encoding : utf-8 -*-
 class GroupsController < ApplicationController
-  # Führe den Login- und Accept-check vom user nicht für einen Probanden aus
   before_action :set_user
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :is_allowed
 
   # GET /groups
   # GET /groups.json
-  #anzeigen der indexseite für die Probandengruppe(Standard)
+  #anzeigen der indexseite für die Studien(Standard)
   def index
     @groups = @user.groups
   end
 
   # GET /groups/1
   # GET /groups/1.json
-  #anzeigen der Seite füer eine Probandengruppe (Standard)
+  #anzeigen der Seite für eine Studie (Standard)
   def show
   end
 
   # GET /groups/new
-  #Erzeugen eines neuen Probanden(Standard)
+  #Erzeugen einer neuen Studie(Standard)
   def new
     @group = Group.new
   end
 
   # GET /groups/1/edit
-  #verändern einer Gruppe(Standard)
+  #verändern einer Studie(Standard)
   def edit
   end
 
   # POST /groups
   # POST /groups.json
-  #Erstellen + Speichenr einer Probandengruppe
+  #Erstellen + Speichenr einer Studie
   def create
     #erhalten der bezeichnung für die gruppe
     @groups = @user.groups
@@ -51,7 +50,7 @@ class GroupsController < ApplicationController
 
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
-  #updaten einer Gruppe
+  #updaten einer Studie
   def update
     respond_to do |format|
       #funktioniert update
@@ -72,7 +71,7 @@ class GroupsController < ApplicationController
 
   # DELETE /groups/1
   # DELETE /groups/1.json
-  #zerstören einer probandengruppe(Standard)
+  #zerstören einer Studie(Standard)
   def destroy
     unless @group.demo
       @group.destroy

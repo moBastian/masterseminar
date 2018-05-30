@@ -5,12 +5,15 @@ class UsersController < ApplicationController
 
   # GET /users
   # GET /users.json
+  #Erhalten aller Nutzer und anzeigen auf der index.html.erb
   def index
     @users = User.all
   end
 
   # GET /users/1
   # GET /users/1.json
+  #Anzeigen eines speziellen Nutzers
+    #wenn die Berechtigungen nicht existieren zurück zur Hauptseite
   def show
     respond_to do |format|
       format.html {
@@ -22,16 +25,19 @@ class UsersController < ApplicationController
   end
 
   # GET /users/new
+  #Einen neuen Nutzer anlegen
   def new
     @user = User.new
   end
 
   # GET /users/1/edit
+  #Bearbeiten eines Nutzers
   def edit
   end
 
   # POST /users
   # POST /users.json
+  #Erzeugen eines Nutzers
   def create
     @user = User.new(user_params)
     respond_to do |format|
@@ -45,13 +51,16 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
+  #Updaten eines Nutzers
   def update
     respond_to do |format|
         if @user.update(user_params)
           format.html {
+            #Zurück auf die Seite des Nutzers, wenn ich es nicht selber bin (nur Admin)
             if @login_user.id != @user.id
               redirect_to users_path
             else
+              #Zurück auf meine Seite
               redirect_to @user
             end
           }
@@ -63,6 +72,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   # DELETE /users/1.json
+  #zerstören eines Nutzers (nur Admin)
   def destroy
     @user.destroy
     respond_to do |format|
@@ -81,6 +91,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:email, :name, :password, :password_confirmation, :account_type, :state)
     end
 
+  #überprüfen ob eine Nutzer die Berechtigungen besitzt die aktionen auszuführen
   def is_allowed
     unless !@login_user.nil? && @login_user.hasCapability?("user") ||!@login_user.nil? && (params.has_key?(:id) && (@login_user.id == params[:id].to_i))
       redirect_to '/mainapp'

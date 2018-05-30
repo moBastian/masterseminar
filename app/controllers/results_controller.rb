@@ -9,16 +9,19 @@ class ResultsController < ApplicationController
 
   # GET /results
   # GET /results.json
+  #Erhalten aller Ergebnisse + Anzeigen dieser per index.html.erb
   def index
     @results = Result.all
   end
 
   # GET /results/1
   # GET /results/1.json
+  #Anzeigen eines Ergebnises
   def show
   end
 
   # GET /results/new
+  #Erzeugen eines neuen Ergebnis
   def new
     @test = @measurement.assessment.test
 
@@ -31,47 +34,26 @@ class ResultsController < ApplicationController
   end
 
   # GET /results/1/edit
+  #Bearbeiten eines Ergebnis
   def edit
   end
 
   # PATCH/PUT /results/1
   # PATCH/PUT /results/1.json
+  #Updaten eines Ergebnis
   def update
     results = result_params
     unless results.nil?
       stay = true
-      if results.is_a?(String)   #Update comes from online testing
+      #Update comes from online testing
+      if results.is_a?(String)
         parts = results.split("#")
         labels = parts[0].split(",")
         unless @result.nil?
+          #Gesendeten Ergebnisstring in die passende Form bringen
           @result.parse_csv(parts[1])
           @result.parse_data(labels[1, labels.length-1], parts[2, parts.length-1]) if parts.length > 2
           render nothing: true
-        end
-      else
-        if results.has_key?("students")       #Update comes from editing form
-          @measurement.update_students(results["students"])
-        else
-          results.each do |id, val|
-            r = @measurement.results.find_by_student_id(id)
-            unless r.nil?
-              if val.is_a?(String)
-                r.parse_csv(val)
-                stay = false
-              else
-                r.parse_Hash(val)
-              end
-            end
-          end
-        end
-        respond_to do |format|
-          format.js {
-            unless stay
-              render 'assessments/show'
-            else
-              render :edit
-            end
-          }
         end
       end
     end
@@ -111,7 +93,8 @@ class ResultsController < ApplicationController
       params[:results]
     end
 
-    def is_allowed
+  #darf der nutzer die Methoden/Funktionen ausführen
+  def is_allowed
       #check if user is allowed
       #@result exists only before update => student can only update a result
       unless (!@login_user.nil? && @login_user.hasCapability?("admin")) || (!@login_user.nil? && params.has_key?(:user_id) &&

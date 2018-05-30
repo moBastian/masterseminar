@@ -10,7 +10,7 @@ class MeasurementsController < ApplicationController
 
   # GET /measurements
   # GET /measurements.json
-  #Bekommen aller Messzeitpunkte + laden der Indexseite(Standard)
+  #Erhalten aller Messzeitpunkte + laden der Indexseite(Standard)
   def index
     @measurements = Measurement.all
   end
@@ -34,7 +34,7 @@ class MeasurementsController < ApplicationController
 
   # POST /measurements
   # POST /measurements.json
-
+  #Erzeugen eines neuen Messzeitpunktes
   def create
     @measurement = @assessment.measurements.new(measurement_params)
 
@@ -49,6 +49,7 @@ class MeasurementsController < ApplicationController
 
   # PATCH/PUT /measurements/1
   # PATCH/PUT /measurements/1.json
+  #Updaten eines Messzeitpunktes
   def update
     respond_to do |format|
       if @measurement.update(measurement_params)
@@ -61,6 +62,7 @@ class MeasurementsController < ApplicationController
 
   # DELETE /measurements/1
   # DELETE /measurements/1.json
+  #Zerstören eines Messzeitpunktes
   def destroy
     @measurement.destroy
     respond_to do |format|
@@ -91,6 +93,7 @@ class MeasurementsController < ApplicationController
       params.require(:measurement).permit(:date)
     end
 
+  #darf der nutzer die Methoden/Funktionen ausführen
     def is_allowed
       unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i))
         redirect_to '/mainapp'

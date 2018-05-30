@@ -4,8 +4,8 @@ class FeedbacksController < ApplicationController
   before_action :set_group
   #nur vor create
   before_action :convertFeedback, only: [:create]
-  #nur vor show, edit, update, destroy
-  before_action :set_feedback, only: [:show, :edit, :update, :destroy]
+  #nur vor show, edit
+  before_action :set_feedback, only: [:show, :edit]
   layout 'empty'
   # GET /feedbacks
   # GET /feedbacks.json
@@ -66,7 +66,7 @@ class FeedbacksController < ApplicationController
         }
         format.json { render :show, status: :created, location: @feedback }
       else
-        #wenn Feedback sollte nicht leer sein
+        #Feedback sollte nicht leer sein
         format.html {
           render :new
           flash[:notice]= 'Feedback sollte nicht leer sein ;)'
@@ -76,31 +76,6 @@ class FeedbacksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /feedbacks/1
-  # PATCH/PUT /feedbacks/1.json
-  #Updaten von feedback (Standardfunktion)
-  def update
-    respond_to do |format|
-      if @feedback.update(feedback_params)
-        format.html { redirect_to @feedback, notice: 'Feedback was successfully updated.' }
-        format.json { render :show, status: :ok, location: @feedback }
-      else
-        format.html { render :edit }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /feedbacks/1
-  # DELETE /feedbacks/1.json
-  #Updaten von feedback (Standardfunktion)
-  def destroy
-    @feedback.destroy
-    respond_to do |format|
-      format.html { redirect_to feedbacks_url, notice: 'Feedback was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   #Anpassen des Feedbacktexts auf html (Zeilenumbruch parsen)
   def convertFeedback
@@ -127,10 +102,9 @@ class FeedbacksController < ApplicationController
       params.require(:feedback).permit(:feedbacktext)
     end
 
-
+  #darf der nutzer die Methoden/Funktionen ausführen
     def is_allowed
       #check if user is allowed
-      #@result exists only before update => student can only update a result
       unless (!@login_user.nil? && @login_user.hasCapability?("admin")) || (!@login_user.nil? && params.has_key?(:user_id) &&
           (@login_user.id == params[:user_id].to_i)) ||((@login_student.id == @result.student.id) && !@login_student.nil?)
         redirect_to '/mainapp'

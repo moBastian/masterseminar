@@ -7,17 +7,20 @@ class StudentsController < ApplicationController
 
   # GET /students
   # GET /students.json
+  #Erhalten aller Probanden für eine Studie und anzeigen
+  #Spezialfälle: Ausdrucken per PDF, Rundmail senden
   def index
     respond_to do |format|
       format.js {}
       format.html {}
       @students = Student.where(:group_id => @group.id)
+      #PDF rendern
       format.pdf {
         render pdf: "Zugangsdaten der Studie #{@group.name}",
         template: "students/index.pdf.erb"
       }
+      #Senden einer Rundmail
       format.text {
-        puts(params[:email]=="allInGroup")
         if params.has_key?(:email) && params[:email]=="allInGroup"
           Student.where(:group_id => @group.id).where.not(:email => "").each do |s|
             puts(s.email)
@@ -34,23 +37,24 @@ class StudentsController < ApplicationController
 
   # GET /students/1
   # GET /students/1.json
+  #Anzeigen eines Probanden
   def show
-    if params.has_key?(:email) && params[:email]=="allInGroup"
-    else
-      @results = @student.getResults
-    end
+    @results = @student.getResults
+    #Anpassen der Ergebnisse
     if params.has_key?(:test)
       @results = {params[:test].to_i => @results[params[:test].to_i]}
     end
     respond_to do |format|
       format.js {}
+      #Erzeugen des PDFs
       format.pdf { 
         render pdf: @student.name, template: "students/show.pdf.erb"
         }
+      #Zusenden des Logincodes
       format.text {
         if params.has_key?(:email)
           emailArray = params[:email].split("/")
-          if(emailArray[1]=="true")
+          if emailArray[1]=="true"
             @student.email = emailArray[0]
             @student.save
           end
@@ -66,31 +70,18 @@ class StudentsController < ApplicationController
     @student = Student.new
   end
 
-  # GET /students/1/edit
-  def edit
-
-  end
 
   # POST /students
   # POST /students.json
+  #Erzeugen eines Probanden
   def create
     @student = Student.new
-    if student_params.has_key?(:file)
-      begin
-        success = true
-        Student.import(student_params[:file], @group)
-        flash.now[:notice] = "Schülerdaten erfolgreich importiert."
-      rescue
-        success = false
-        flash.now[:notice] = "Fehler beim Importieren der Schülerdaten!"
-      end
-    else
-      @student = @group.students.new(student_params)
-      success = @student.save
-      unless success
-        @student.destroy
-        @group.reload
-      end
+    @student = @group.students.new(student_params)
+    success = @student.save
+    #Wenn der Proband nicht erfolgreich erzeugt werden konnte, lösche diesen
+    unless success
+      @student.destroy
+      @group.reload
     end
 
     respond_to do |format|
@@ -108,8 +99,10 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1
   # PATCH/PUT /students/1.json
+  #Updaten eines Probanden
   def update
     respond_to do |format|
+      #Wenn das updaten erfolgreich war edit.js (Studienleiterseitig) oder nicht laden(Probandenseitig)
       if @student.update(student_params)
         format.html{
           render :nothing => true, :status => 200, :content_type => 'text/html'
@@ -122,6 +115,7 @@ class StudentsController < ApplicationController
 
   # DELETE /students/1
   # DELETE /students/1.json
+  #Zerstören eines Probanden
   def destroy
     @student.destroy
     respond_to do |format|
@@ -155,7 +149,8 @@ class StudentsController < ApplicationController
                                                       :a23=>[], :a24=>[], :a25=>[], :a26=>[], :a27=>[], :a28=>[], :a29=>[], :a30=>[]})
     end
 
-    def is_allowed
+  #darf der nutzer die Methoden/Funktionen ausführen
+  def is_allowed
       unless !@login_user.nil? && @login_user.hasCapability?("admin") || !@login_user.nil? && (params.has_key?(:user_id) && (@login_user.id == params[:user_id].to_i)) || !@login_student.nil? && @login_student.id = @student.id
         redirect_to '/mainap'
       end

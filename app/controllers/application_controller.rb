@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   # - Session zurücksetzen
   # - variable zurücksetzen
   def logout
-    if(!session[:user_id].nil?)
+    if !session[:user_id].nil?
       session[:user_id] = nil
       @login_user = nil
     end

@@ -1,22 +1,28 @@
 # -*- encoding : utf-8 -*-
+#Klasse für die Messzeitpunkte
 class Measurement < ActiveRecord::Base
-  #Connections with other model classes:
+  #Jedes gehört genau zu einen Assessment
   belongs_to :assessment
+  #Kann viele Ergebnisse und Probanden haben
+  #Zerstöre das Ergebnis, wenn der Messzeitpunkt zerstört wird
   has_many :results, :dependent => :destroy
   has_many :students, through: :results
 
-  #Validations:
+  #Mindestens das Datum muss vorhanden sein
   validates_presence_of :date
 
 
   #Default model order: By (due) date.
   default_scope {order('date DESC')}
 
+  #Vorbereiten eines Messzeitpunkt
+    #Erzeugen eines Ergebnisobjektes für den übergebenen Probanden
   def prepare_test(currentStudent)
     r = results.build(student: currentStudent)
     r.initialize_results()
   end
 
+  #Updaten
   def update_students(hash)
     hash.each do  |name, id|
       s = Student.find(id.to_i)
@@ -35,43 +41,25 @@ class Measurement < ActiveRecord::Base
     end
   end
 
+  #Wieviele Ergebnisse wurden bis jetzt bearbeitet
   def real_results
     x = results.map{|f| f.score} - [nil]
     return x.count
   end
 
+  #Durchschnittliche Lösungswahrscheinlichkeit
   def average
     return ((results.map{|f| f.score.nil? ? 0 : f.score}.sum).to_f/real_results).round(1)
   end
 
+  #Geringste Lösungsanzahl
   def min
     return results.map{|f| f.score.nil? ? 0 : f.score}.min
   end
 
+  #Größte Lösungsanzahl
   def max
     return results.map{|f| f.score.nil? ? 0 : f.score}.max
   end
 
-  def first_quart
-    x = results.map{|f| f.score.nil? ? 0 : f.score}.sort
-    return x[x.size/4]
-  end
-
-  def third_quart
-    x = results.map{|f| f.score.nil? ? 0 : f.score}.sort
-    return x[3*x.size/4]
-  end
-
-  def median
-    x = results.map{|f| f.score.nil? ? 0 : f.score}.sort
-    return x[x.size/2]
-  end
-
-  def self.xls_headings
-    return %w{Student}
-  end
-
-  def to_a
-    return [id.to_s, get_gender(true), get_birthdate(true), get_specific_needs(true), get_migration(true)]
-  end
 end
