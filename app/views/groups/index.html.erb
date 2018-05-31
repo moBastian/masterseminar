@@ -1,10 +1,15 @@
+<!--
+Zeige aller Studien in der Form von Buttons
+-->
+<!--Erstellen der Tabs für Aktuell und Archive-->
   <ul id="tabs" class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#active" aria-controls="active" role="tab" data-toggle="tab">Aktuell</a></li>
     <li role="presentation"><a href="#archive" aria-controls="archive" role="tab" data-toggle="tab">Archiv</a></li>
   </ul>
 
+<!--Tabinhalt-->
   <div class="tab-content" style="border-left: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; border-radius: 0 0 4px 4px; padding: 19px;">
-
+    <!---Akteuelle Studien anzeigen-->
     <div role="tabpanel" class="tab-pane active" id="active">
         <div class="row">
 
@@ -31,7 +36,7 @@
 
         </div>
     </div>
-
+    <!---Archivierte Studien anzeigen-->
     <div role="tabpanel" class="tab-pane" id="archive">
       <div class="row">
         <% @groups.each do |group| %>

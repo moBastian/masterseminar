@@ -1,3 +1,7 @@
+//Erzeugen des Graphen der auf der Show-Seite eines Probanden angezeigt wird
+//Laden in das HTML-Elements mit der id "chart<=test%> (ohne % damit es ein kommentar ist)"
+//Punkte sind Messzeitpunkt + Ergebnis zu dem Messzeitpunkt
+//x-Achse: Datum y-Achse: Anzahl korrekter Fragen
 var chart<%=test%> = c3.generate({
     bindto: '#chart<%=test%>',
     data: {

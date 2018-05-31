@@ -1,3 +1,4 @@
+<!--Seite in dem die Items geladen werden-->
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
@@ -5,13 +6,14 @@
 </head>
 <body style="background-color: #FFFFFF">
 
-
+<!--Element in dem die Itemview gerendert werden-->
 <div id="testEnviroment">
 </div>
 <div id="myProgress" style="width: 100%;height: 90px; background-color: #dddd" >
   <div id="myBar" style="width: 0%; background-color: #4cae4c; height: 90px"></div>
 </div>
 
+<!-- Dialogbox zum anzeigen von erungen Abzeichen -->
 <div class="modal fade" id="specialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -27,7 +29,8 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Dialogbox zum anzeigen von erungen Abzeichen
+ Doppelt, da zwei Abzeichen gleichzeitig erungen werden können-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -45,12 +48,12 @@
 </body>
 
 <script>
-    //possible Hack
+    //possible Hack:  Verbieten vom Zurückbutton
     //setting anchor to page. Jump to anchor when backspace pressed
     window.location.hash="no-back-button";
     window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
     window.onhashchange=function(){window.location.hash="no-back-button";};
-
+    //Variablen, welche nötig sind für den Testablauf und zum Laden der Übersichtsseite nach Beenden eines Testablaufes
     var pathMainPage = '<%= request.base_url + url_for(controller: 'frontend')%>';
     var currentItemIndex = -1;
     var currentStudent = -1;
@@ -58,21 +61,21 @@
     var played_questions = 0;
     currentStudent = <%=@result.id%>;
     var testName = "<%= raw @measurement.assessment.test.name%>";
-    <% Item.where(test_id:@measurement.assessment.test.id)%>;
 
+    //Laden aller schon gesehner Items
     var oldItems = [<% @result.getPriorResultsItem(@measurement, @student).each do |i|%>
                     "<%= raw i.itemtext %>",
                     <% end%>
     ];
-
+    //Laden des Hash für Abzeichen anhand des Probanden (Student-Objekts)
     var achievementHash = {
     <% @student.achievement.each do |a| %>
     <%= a[0]%>: <%=raw a[1]%>,
     <% end %>
     };
-
+    //Laden der Versuchsbedingung anhand des Probanden (Student-Objekts)
     var groupNumber = "<%= @student.group_type%>";
-
+    //Laden der Ergebnisobjekte und Items für einen Probanden
     var studentData = {
         <%=@result.id%>: [
         <%@result.extra_data["intro"].each do |i|%>
@@ -85,58 +88,70 @@
         <%=i%>,
         <%end%>
     ]};
-
+    //Überprüfen ob Testbedingte Abzeichen errungen wurde ggf. Hash updaten und zur datenbank senden
     function checkBadges() {
         switch (testName) {
             case "Geographie":
+                //50% für "Geographie-Test"
                 if(achievementHash["a2"][0]!= "true") {
                     checkProgress("a2", 74);
                 }
+                //90% für "Geographie-Test"
                 if(achievementHash["a2"][0]== "true"&&achievementHash["a3"][0]!= "true") {
                     checkProgress("a3", 133);
                     checkAll();
                 }
                 break;
             case "Mathe":
+                //50% für "Mathe-test"
                 if(achievementHash["a5"][0]!= "true") {
                     checkProgress("a5", 74);
                 }
+                //90% für "Mathe-test"
                 if(achievementHash["a5"][0]== "true"&&achievementHash["a6"][0]!= "true") {
                     checkProgress("a6", 133);
                     checkAll();
                 }
                 break;
             case "Politik":
+                //50% für "Politik-Test"
                 if(achievementHash["a12"][0]!= "true") {
                     checkProgress("a12", 74);
                 }
+                //90% für "Politik-Test"
                 if(achievementHash["a12"][0]== "true"&&achievementHash["a13"][0]!= "true") {
                     checkProgress("a13", 133);
                     checkAll();
                 }
                 break;
             case "Sport":
+                //50% für "Sport-Test"
                 if(achievementHash["a15"][0]!= "true") {
                     checkProgress("a15", 74);
                 }
+                //90% für "Sport-Test"
                 if(achievementHash["a15"][0]== "true"&&achievementHash["a16"][0]!= "true") {
                     checkProgress("a16", 133);
                     checkAll();
                 }
                 break;
             case "Tiere&Pflanzen":
+                //50% für "Tiere&Pflanzen-Test"
                 if(achievementHash["a22"][0]!= "true") {
                     checkProgress("a22", 74);
                 }
+                //90% für "Tiere&Pflanzen-Test"
                 if(achievementHash["a22"][0]== "true"&&achievementHash["a23"][0]!= "true") {
                     checkProgress("a23", 133);
                     checkAll();
                 }
                 break;
             default:
+                //50% für "Web-Test"
                 if(achievementHash["a25"][0]!= "true") {
                     checkProgress("a25", 74);
                 }
+                //90% für "Web-Test"
                 if(achievementHash["a25"][0]== "true"&&achievementHash["a26"][0]!= "true") {
                     checkProgress("a26", 133);
                     checkAll();
@@ -144,17 +159,21 @@
                 break;
         }
     }
-    
+    //Anzeigen der errungenen Abzeichen
     function showBadge(key) {
+        //erhalten von Abzeichen bzgl. spezieller Fragen
         if(key=="a9"||key=="a10"||key==18||key=="a19"||key=="a20"||key=="a27"||key=="a29"||key=="a30"){
             $("#modalContent2").html("<div class='text-center' style='font-size: 2.2rem'><img src=" + achievementHash[key][2] + " style='width:40%'><br/>" + achievementHash[key][4]+ "</div>");
             $("#specialModal").modal();
         }
+        //erhalten von Abzeichen bzgl. z.B. 50%, 90%, ...
         else{
             $("#modalContent").html("<div class='text-center' style='font-size: 2.2rem'><img src=" + achievementHash[key][2] + " style='width:40%'><br/>" + achievementHash[key][4]+ "</div>");
             $("#exampleModal").modal();
         }
     }
+    //Überprüfen, ob alle Testabhängigen Abzeichen erhalten wurden
+    //Vergeben des Abzeichen "Quizmaster" und anzeigen des Abzeichens
     function checkAll() {
         if(achievementHash["a3"][0]== "true"&&achievementHash["a6"][0]== "true"&&achievementHash["a13"][0]== "true"
             &&achievementHash["a16"][0]== "true"&&achievementHash["a23"][0]== "true"&&achievementHash["a26"][0]== "true"
@@ -165,9 +184,7 @@
             sendAchievements()
         }
     }
-
-
-
+    //Senden des aktualisierten Abzeichenhash
     function sendAchievements() {
         var test = {"student": {"achievement": achievementHash}};
         $.ajax({

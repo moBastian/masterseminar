@@ -1,3 +1,6 @@
+<!--
+Show einer Studie
+-->
 <div class="well groupCard" id="group">
 
   <div class="row">
@@ -8,6 +11,7 @@
         </p>
       </div>
     </div>
+    <!--Links für Bearbeiten/Löschen, Archivieren/Aktualisieren-->
     <div class="col-sm-1">
       <p class="lead text-right">
         <% unless @group.demo %>
@@ -29,13 +33,17 @@
       </p>
     </div>
   </div>
-
+  <!--Tabulatoren für Tests, Probanden und Feedback -->
   <ul id="tabs" class="nav nav-pills" role="tablist">
     <li role="presentation" class="active" ><%= link_to "Tests", user_group_assessments_path(@user, @group), :data => {:remote => true, :target => "#tests"} %></li>
     <li role="presentation" id="b"><%= link_to "Probanden", user_group_students_path(@user, @group), :data => {:remote => true, :target => "#students"} %></li>
     <li role="presentation"><%= link_to "Feedback", user_group_feedbacks_path(@user, @group), :data => {:remote => true, :target => "#feedbacks"} %></li>
   </ul>
-
+  <!-- Tabinhalt
+      in Tab Test:      index der assessments
+      in Tab probanden: index der Probanden
+      in Tab Feedback:  Temporär leer/wird später belegt
+  -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="tests">
       <%= render 'assessments/index' %>
@@ -52,6 +60,7 @@
 </div>
 
 <script>
+  //Beim aufrufen der Seite Anzeigen des Tabs Tests
     $('#tabs a:first').tab('show');
 </script>
 

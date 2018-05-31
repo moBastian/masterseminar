@@ -1,3 +1,4 @@
+<!--Erhalten der Frage und der Auswahlmöglichkeiten-->
 <%
   question = item.itemtext.split("{")[0]
   alternatives = item.itemtext.split("{")[1].split("}")[0].split(",")
@@ -8,18 +9,22 @@
 
 <br/>
 <div class='row text-center'>
+  <!--Anzeigen der Frage-->
   <div>
     <label class='control-label'><%= question %>&nbsp</label>
   </div>
 </div>
 <br><br>
+<!--erst Zeile-->
 <div class='row' id='rowButtons2' >
   <div class="col-lg-8 col-md-offset-2">
     <div class='col-lg-5 col-lg-offset-0' >
+      <!--erste Auswahlmöglichkeit als Button (oben links)-->
       <div class ='row'>
         <button id='button0' type='button' class='questButton btn-default btn btn-block' onclick="nextClicked('<%= alternatives[0] %>','#button0')"><%= alternatives[0] %></button>
       </div>
     </div>
+    <!--zweite Auswahlmöglichkeit als Button (oben rechts)-->
     <div class='col-lg-5 col-lg-offset-2' >
       <div class ='row'>
         <button id='button1' type='button' class='questButton btn-default btn btn-block' onclick="nextClicked('<%= alternatives[1] %>', '#button1')"><%= alternatives[1] %></button>
@@ -28,13 +33,16 @@
   </div>
 </div>
 <br/>
+<!--zweite zeile-->
 <div class='row' id='rowButtons2' >
   <div class="col-lg-8 col-md-offset-2">
     <div class='col-lg-5 col-lg-offset-0' >
+      <!--dritte Auswahlmöglichkeit als Button (unten links)-->
       <div class ='row'>
         <button id='button2'  type='button' class='questButton btn-default btn btn-block' onclick="nextClicked('<%= alternatives[2] %>', '#button2')"><%= alternatives[2] %></button>
       </div>
     </div>
+    <!--vierte Auswahlmöglichkeit als Button (unten rechts)-->
     <div class='col-lg-5 col-lg-offset-2' >
       <div class ='row'>
         <button id='button3'  type='button' class='questButton btn-default btn btn-block' onclick="nextClicked('<%= alternatives[3] %>', '#button3')"><%= alternatives[3] %></button>
@@ -43,6 +51,7 @@
   </div>
 </div>
 <br/>
+<!--Button um zur nächsten Frage zu gelangen (nextItem definiert auf results/tests/Generisch)-->
 <div class='row' id='rowButtons3' >
   <div class="col-lg-8 col-md-offset-3">
     <div class='col-lg-3 col-lg-offset-0' >
@@ -62,42 +71,51 @@
   var currentItemanswer = "<%= item.shorthand%>";
   var toggle = false;
   played_questions = played_questions +1;
-
+  //Proband hat eine Antwort ausgewählt
   function nextClicked(answer, buttonId) {
+      //Antwort nur einmalig speichern (toggle)
       if(!toggle){
           actualAnswers = actualAnswers + answer + ",";
+          //Wenn Antwort richtig
           if(answer==currentItemanswer){
-
+              //Anzahl der korrekten fragen für den testablauf erhöhen
+              //Speichern, dass die frage richtig beantwortet wurde
+              //Wenn Abzeichengruppe: Überprüfen, ob die erste Frage richtig beantwortet wurde und
+              //ob da es eine spezielle Frage ist auch das Abzeichen anzeigen
               score = score +1;
               currentResult = currentResult + '1,';
               if(groupNumber == "2"||groupNumber == "4"){
                   checkFirstAndCorrectness();
               }
+              //Wenn der Proband in der Feedbackgruppe ist, Feedback anzeigen
               if(groupNumber == "1"||groupNumber == "4" ||groupNumber == "5" ){
                   giveFeedback(true, buttonId);
               }
           }
           else {
-
+              //Ausgewählt Antwort ist falsch
               currentResult = currentResult + '0,';
-
+              //Wenn der Proband in der Feedbackgruppe ist Feedback anzeigen
               if(groupNumber == "1"||groupNumber == "4" ||groupNumber == "5" ){
                   giveFeedback(false, buttonId);
               }
 
           }
+          //Speichern, wie lange gebraucht wurde für die Frage
           currentTimes = currentTimes + (new Date() - stopwatch) + ',';
           stopwatch = new Date();
-
+          //Anzeigen des Buttons um zur nächsten Frage zu gelangen
           $('#buttonCon').css('visibility', 'visible');
       }
       toggle = true;
   };
-
+  //Funktion um eine Messung abzubrechen
+  //Für die aktuelle Frage "falsch" speichen, da die Frage gesehen aber nicht beantwortet wurde
   function interruptMeasurement () {
       if(!toggle){
           currentResult = currentResult + '0,';
       }
+      //Testablauf beenden definiert auf results/tests/Generisch
       stopTest();
       $(window).unbind('keyup');
   }
@@ -108,17 +126,20 @@
           event.preventDefault();
       }});
 
-
+  //Überprüfen ob andere Abzeichen erreicht wurden 50%, 90% oder Quizmaster definiert auf results/tests/_student_env
   if(groupNumber == "2"||groupNumber == "4"){
       checkBadges()
   }
-
+  //Funktion um Feedback anzuzeigen
+  //Wenn richtige Antwort = Angezeigter Button CSS-Klasse sucess hinzufügen, sonst danger und richtige Antwort anzeigen
   function giveFeedback(answeredCorrect, buttonId) {
+      //Angeklickter Button = richtige Antwort
       if(answeredCorrect){
           $(buttonId).removeClass('btn-default');
           $(buttonId).addClass('btn-success');
       }
       else{
+          //Angeklickter Button = falsche Antwort => richtige Antwort "suchen" und anzeigen
           $(buttonId).removeClass('btn-default');
           $(buttonId).addClass('btn-danger');
           if($('#button0').html() == '<%= item.shorthand%>') {
@@ -140,47 +161,55 @@
       }
   }
 
+  //Überprüfen ob 50%, 90% Hürde genommen wurde
+  //aufgerufen in results/tests/_student_env
   function checkProgress(key, seenItemNumber) {
       var currentItemtext = "<%= raw item.itemtext%>";
       var toggle2 = true;
+      //Aktuelles Item = Bekanntes Item?
       for(i=0; i<oldItems.length;i++){
           if(currentItemtext==oldItems[i]){
               toggle2 = false;
           }
       }
-
+      //Wenn aktuelles Item nicht bekannt aufnehmen im Array
       if(toggle2){
           oldItems.push(currentItemtext)
       }
-
+      //Wenn 50%, 90% Hürde genommen wurde entsprechendes Abzeichen vergeben
       if(oldItems.length == seenItemNumber){
           showBadge(key);
           achievementHash[key][0] = "true";
           sendAchievements()
       }
   }
-
+  //Überprüfen ob die erste Frage richtig beantwortet wurde und Abzeichenhash senden
+  //definiert auf results/tests/_student_env
   function checkFirstAndCorrectness() {
       if(achievementHash["a7"][0]!= "true") {
           showBadge("a7");
           achievementHash["a7"][0] = "true";
           sendAchievements();
       }
-
+      //Überprüfen, welche speziele frage zu dem aktuellen testablauf gehört und
+      //Abzeichen vergeben + Abzeichenhash updaten definiert auf results/tests/_student_env
       switch (testName) {
           case "Geographie":
               specialQuest = $('#question').html();
+              //Spezielle Frage "Kiel-Frage"
               if(achievementHash["a18"][0]!= "true" && ("Kieler Woche"==currentItemanswer) ) {
                   showBadge("a18");
                   achievementHash["a18"][0]= "true";
                   sendAchievements();
               }
+              //Spezielle Frage "Mars-Frage"
               else if(achievementHash["a9"][0]!= "true") {
                   showBadge("a9");
                   achievementHash["a9"][0]= "true";
                   sendAchievements();
               }
               break;
+          //Spezielle Frage "PI-Frage"
           case "Mathe":
               if(achievementHash["a10"][0]!= "true") {
                   showBadge("a10");
@@ -188,6 +217,7 @@
                   sendAchievements();
               }
               break;
+          //Spezielle Frage "Karlsruhe-Frage"
           case "Politik":
               if(achievementHash["a19"][0]!= "true") {
                   showBadge("a19");
@@ -195,6 +225,7 @@
                   sendAchievements();
               }
               break;
+          //Spezielle Frage "Olympia-Frage"
           case "Sport":
               if(achievementHash["a20"][0]!= "true") {
                   showBadge("a20");
@@ -202,6 +233,7 @@
                   sendAchievements();
               }
               break;
+          //Spezielle Frage: "Fliegenpilz-Frage"
           case "Tiere&Pflanzen":
               if(achievementHash["a29"][0]!= "true") {
                   showBadge("a29");
@@ -209,6 +241,7 @@
                   sendAchievements();
               }
               break;
+          //Spezielle Frage: "W-Lan-Frage"
           default:
               if(achievementHash["a30"][0]!= "true") {
                   showBadge("a30");

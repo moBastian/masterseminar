@@ -1,10 +1,13 @@
+<!--Leeres Loyout ohne unnötige Elemente-->
 <!DOCTYPE html>
 <html>
 <head>
   <title>Quizmos</title>
+  <!--CSS und JS einbinden externe Bibliotheken minifiziert von Rails-->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!--Styles fürs Quiz einbinden-->
   <%= stylesheet_link_tag '/stylesheets/quiz.css', media: 'all', 'data-turbolinks-track' => true %>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +15,7 @@
 
 <body>
 
+<!--Element für das Laden der Seiten-->
 <div class="container-fluid">
   <div id="content">
     <%= yield %>

@@ -80,22 +80,22 @@ class FrontendController < ApplicationController
       #Etwas unschöne Lösung aber der ZWeck heiligt die Mittel^^
       if @assessments.first.test.subject== "MasterSem17-18"
         if @student.group_type == 0 || @student.group_type == 1
-          render 'control_and_feedback_group'
+          render 'frontend/ws17_18/control_and_feedback_group'
         elsif @student.group_type == 2 || @student.group_type == 4
-          render 'badges_group'
+          render 'frontend/ws17_18/badges_group'
         else
-          render 'ranking_group'
+          render 'frontend/ws17_18/ranking_group'
         end
         #weitere Fälle möglich über elsif/else
       end
     else
       #Seiten des MasterSem17-18 als Default
       if @student.group_type == 0 || @student.group_type == 1
-        render 'control_and_feedback_group'
+        render 'frontend/ws17_18/control_and_feedback_group'
       elsif @student.group_type == 2 || @student.group_type == 4
-        render 'badges_group'
+        render 'frontend/ws17_18/badges_group'
       else
-        render 'ranking_group'
+        render 'frontend/ws17_18/ranking_group'
       end
     end
   end

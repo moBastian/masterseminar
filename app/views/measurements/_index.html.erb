@@ -1,4 +1,6 @@
+<!--Indexseite für die Messzeitpunkte-->
 <table class="table table-striped">
+  <!--Header-->
   <thead>
   <th>
     Testung am
@@ -24,6 +26,7 @@
   </thead>
   <tbody>
   <th>
+    <!--Erzeuge für jeden Messzeitpunkt ein tr-Element bis zu drei Messzeitpunkte auf einer höhe -->
     <% test = @assessment.measurements.sort_by { |a| a.date} %>
     <%count =0%>
     <%while count < test.size%>
@@ -40,6 +43,7 @@
           <% end %>
         </td>
         <td>
+          <!--Link zum löschen des Messzeitpunktes-->
           <%= link_to user_group_assessment_measurement_path(@user, @group, @assessment, test[count]), :title => "Löschen", :method => :delete, :data => {:remote => true, :confirm => "Damit gehen alle Ergebnisse dieser Messung verloren!\n\nSind Sie sicher?"} do %>
               <span class="glyphicon glyphicon-trash"></span>
           <% end %>
@@ -56,6 +60,7 @@
               <% end %>
             </td>
             <td>
+              <!--Link zum löschen des Messzeitpunktes-->
               <%= link_to user_group_assessment_measurement_path(@user, @group, @assessment, test[count+1]), :title => "Löschen", :method => :delete, :data => {:remote => true, :confirm => "Damit gehen alle Ergebnisse dieser Messung verloren!\n\nSind Sie sicher?"} do %>
                   <span class="glyphicon glyphicon-trash"></span>
               <% end %>
@@ -74,6 +79,7 @@
               <% end %>
             </td>
             <td>
+              <!--Link zum löschen des Messzeitpunktes-->
               <%= link_to user_group_assessment_measurement_path(@user, @group, @assessment, test[count+2]), :title => "Löschen", :method => :delete, :data => {:remote => true, :confirm => "Damit gehen alle Ergebnisse dieser Messung verloren!\n\nSind Sie sicher?"} do %>
                   <span class="glyphicon glyphicon-trash"></span>
               <% end %>

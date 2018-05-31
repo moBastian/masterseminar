@@ -1,3 +1,4 @@
+<!--Anzeigen eines Nutzers-->
 <div class="well userCard" id="group">
 
   <div class="row">
@@ -23,6 +24,7 @@
             <td>
               <%= @user.email%>
             </td>
+            <!--Direktlinkt zu den Gruppen des Nutzers-->
             <td>
               <%= link_to @user.groups.size, user_groups_path(@user)%>
             </td>
@@ -31,6 +33,7 @@
         </table>
       </div>
     </div>
+    <!--Nutzer bearbeiten-->
     <div class="col-sm-2">
       <p class="lead text-right">
         <%= link_to edit_user_path(@user) do %>

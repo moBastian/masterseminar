@@ -1,21 +1,24 @@
+<!--Layout mit weniger Elementen-->
 <!DOCTYPE html>
 <html>
 <head>
   <title>Quizmos</title>
+  <!--CSS und JS einbinden externe Bibliotheken minifiziert von Rails-->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!--Sytle für die Übersichtsseiten einbinden-->
   <%= stylesheet_link_tag '/stylesheets/myStyle.css', media: 'all', 'data-turbolinks-track' => true %>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-
+<!--Platz für die Navigationsbar-->
 <nav class="navbar">
   <%= yield :top %>
 </nav>
-
+<!--Element für die Inhalte der Seiten-->
 <div class="container-fluid">
   <div id="content">
     <div id="alert">

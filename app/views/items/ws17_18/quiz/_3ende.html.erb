@@ -1,6 +1,8 @@
+<!--Letzte Seite eines Testablaufes-->
 </br></br></br></br></br></br>
 <div class='text-center'>
   <p class='text-center'>
+    <!--Wenn Feedbackgruppe: Anzeigen wieviel korrekt beantwortet wurde-->
     <%if @student.group_type == 1||@student.group_type == 4||@student.group_type == 5%>
       <div class='row text-center'>
         <div>
@@ -11,6 +13,7 @@
         </div>
       </div>
     <%else%>
+      <!--Sonst: einfach Danke-->
       <div class='row text-center'>
         <div>
           <label class='control-label' >Vielen Dank!<br/>Weiterquizzen oder Abmelden über die Übersichtsseite.</label>
@@ -30,40 +33,47 @@
   $('#geschafft').click(function(){
     window.location.replace(pathMainPage);
   });
-
+  //Überprüfen, ob dies der erste durchlauf für diesen Test war
+  //Wenn Ja lastResult für den Probanden = -1
   if(lastResults[currentStudent] == -1) {
       if(groupNumber=="2"||groupNumber=="4"){
           switch (testName) {
+              //Freischalten erster Testdurchlauf "Geographie"
               case "Geographie":
                   if(achievementHash["a1"][0]!= "true") {
                       showBadge("a1");
                       achievementHash["a1"][0] = true;
                   }
                   break;
+              //Freischalten erster Testdurchlauf "Mathe"
               case "Mathe":
                   if(achievementHash["a4"][0]!= "true") {
                       showBadge("a4");
                       achievementHash["a4"][0] = true;
                   }
                   break;
+              //Freischalten erster Testdurchlauf "Politik"
               case "Politik":
                   if(achievementHash["a11"][0]!= "true") {
                       showBadge("a11");
                       achievementHash["a11"][0] = true;
                   }
                   break;
+              //Freischalten erster Testdurchlauf "Sport"
               case "Sport":
                   if(achievementHash["a14"][0]!= "true") {
                       showBadge("a14");
                       achievementHash["a14"][0] = true;
                   }
                   break;
+              //Freischalten erster Testdurchlauf "Tiere&Pflanzen"
               case "Tiere&Pflanzen":
                   if(achievementHash["a21"][0]!= "true") {
                       showBadge("a21");
                       achievementHash["a21"][0] =true;
                   }
                   break;
+              //Freischalten erster Testdurchlauf "Web"
               default:
                   if(achievementHash["a24"][0]!= "true") {
                       showBadge("a24");
@@ -72,7 +82,7 @@
                   break;
           }
       }
-
+      //Updaten des Abzeichenhash
       var test = {"student": {"achievement": achievementHash}};
       $.ajax({
           method: 'PUT',
@@ -89,7 +99,7 @@
       }});
   $('#score').html(score);
 
-
+  //Updaten der korrekt beantwortetend und der gesehenden Fragen
   var mypoints = <%= raw @student.points%>
   var saved_played_questions = <%= raw @student.played_questions%>;
 

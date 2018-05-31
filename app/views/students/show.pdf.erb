@@ -2,6 +2,7 @@
   Schüleransicht <%= @student.name%>
 <% end %>
 
+<!--Style für den Graphen und die Tabelle im PDF-Druck-->
 <style type="text/css">
   td{
     font-size: 10px;
@@ -23,12 +24,13 @@
   }
 
 </style>
-
+<!--Rendern der Tabelle und des HTML-Element für den Graphen-->
 <% @results.each do |key, val| %>
     <%= render partial: 'students/overview', formats: ['html'], locals: {:key => key, :val => val, :online => false, :without_table => params.has_key?(:without_table)}%>
 <% end %>
 
 <script>
+  //Malen des Graphen
   <% @results.each do |key, val| %>
     <% test = Test.find(key) %>
     <%= render file: 'students/_draw_graph.js.erb', locals: {:student => @student, :test => test.id, :results => val}%>

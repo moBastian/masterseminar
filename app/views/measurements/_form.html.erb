@@ -1,5 +1,7 @@
+<!--Form für das (anlegen) und bearbeiten von Messzeitpunkten-->
 <%= form_for([@user, @group, @assessment, @measurement], :html => {:class => "form-inline"}, :data => {:remote => true}) do |f| %>
 
+    <!--Ändern des Datum-->
     <div class="form-group">
       <%= f.label :date, :class => "control-label" %>
       <%= f.date_select :date, {}, {:class => "form-control"}%>
@@ -14,6 +16,7 @@
 <% end %>
 
 <script>
+  //Abrechen der Form
     function cancelForm() {
         $('#measurementForm').html("<%= escape_javascript(raw(link_to 'Neue Messung', new_user_group_assessment_measurement_path(@user, @group, @assessment), :class => "btn btn-default", :data => {:remote => true})) %>"+
             "<%=escape_javascript(raw(link_to "Neuer Messzeitpunkt in sieben Tagen", {:controller => "measurements", :action => "create", :assessment_id => @assessment, :measurement =>{:date =>Date.today+7}}, method: :post, :class => "btn btn-default", :data => {:remote => true}))%>");

@@ -1,4 +1,6 @@
+<!--Anzeigen aller Nutzer, die die Plattform benutzen als Studienleiter-->
 <div class="well userCard" id="group">
+  <!--Neuen Benutzer anlegen-->
   <%= link_to "Benutzer hinzufügen", new_user_path, :class => "btn btn-default" %>
 
     <table class="table">
@@ -20,6 +22,7 @@
       </th>
       </thead>
       <tbody>
+      <!--Anzeigen einiger Daten bzgl. des Nutzers z.B. Aktivitätsstatus, E-mail, ... -->
       <% @users.sort{|a,b| if a.status == b.status then b.id <=> a.id else a.status == 1 ? -1 : b.status == 1 ? 1 : a.status <=> b.status end}.each do |user| %>
       <% status = user.status %>
           <tr <% if status == 1 %> class="bg-success" <% end %> <% if status == 2 %> class="bg-danger" <% end %> >

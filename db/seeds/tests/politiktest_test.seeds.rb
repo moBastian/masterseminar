@@ -462,14 +462,14 @@ t = Test.create(name: "Politik",  info: "Politiktest", short_info: "Politiktest"
 i= 0
 while i<items_n4.size do
   if i == 0
-		it = t.items.build(itemtext: question_n4[i] + "{" + item_alternatives_n4[i].join(",") + "}", shorthand: items_n4[i], itemtype: 0, itemview: "items/studentbased/sinnentnehmender_lesetest/2testItemAchievement")
+		it = t.items.build(itemtext: question_n4[i] + "{" + item_alternatives_n4[i].join(",") + "}", shorthand: items_n4[i], itemtype: 0, itemview: "items/ws17_18/quiz/2testItemAchievement")
 	else
-		it = t.items.build(itemtext: question_n4[i] + "{" + item_alternatives_n4[i].join(",") + "}", shorthand: items_n4[i], itemtype: 0, itemview: "items/studentbased/sinnentnehmender_lesetest/2testItemStudent")
+		it = t.items.build(itemtext: question_n4[i] + "{" + item_alternatives_n4[i].join(",") + "}", shorthand: items_n4[i], itemtype: 0, itemview: "items/ws17_18/quiz/2testItemStudent")
 	end
 	it.save
 	i = i+1
 end
 
-it = t.items.build(itemtext: "Ende", itemtype:1, itemview:"items/studentbased/sinnentnehmender_lesetest/3ende")
+it = t.items.build(itemtext: "Ende", itemtype:1, itemview:"items/studentbased/quiz/3ende")
 it.save
 t.save

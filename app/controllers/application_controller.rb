@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   #führe die Methoden/Funktionen immer aus bevor eine andere Methode/Funktion ausgeführt wird
-  before_action :check_login, except: [:welcome, :login, :signup]
-  before_action :check_accept, except: [:welcome, :login, :signup, :accept, :static, :logout]
+  before_action :check_login, except: [:welcome, :login]
+  before_action :check_accept, except: [:welcome, :login, :accept, :static, :logout]
 
   #Login des Benutzers/Studienleiters
   def login

@@ -1,3 +1,4 @@
+<!--Link für den BFI erzeugen-->
 <%survey = Test.where(name:"BFI")%>
 <%exists = @assessments.where(group_id:@student.group, test_id:survey).length%>
 
@@ -9,6 +10,7 @@
       <div class="container-fluid">
         <div>
           <p class="myP" style="float: left"><b title="Mit diesem Code kannst du dich erneut anmelden.">Angemeldet als: <%= @student.login %></b></p>
+          <!--Button für den BFI nur anzeigen, wenn er noch nicht gemacht wurde und wenn es ihn gibt + Logoutbutton und Feedbackbutton-->
           <div align="right" style="padding-right: 15px">
             <%if exists==0||@student.survey_done||@assessments.where(group_id:@student.group, test_id:survey).first.nil?%>
                 <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" >
@@ -26,6 +28,7 @@
             <%end%>
           </div>
         </div>
+        <!--Form um sich den Logincode zuzusenden-->
         <div>
           <form class="navbar-form navbar-left">
             <p class = "form-group">Anmeldecode per E-mail zusenden:</p>
@@ -40,7 +43,7 @@
       </div>
   <% end %>
 
-
+  <!--Anzeigen der Tabelle für die Abzeichen-->
   <div style="overflow-x:auto;" align="center">
     <table style="border:1px solid black ;margin-left: 1px;width: 70%">
       <tr>
@@ -50,10 +53,12 @@
         <% keys = @student.achievement.keys %>
         <%while count<@student.achievement.size%>
             <% achievementInfos = @student.achievement[keys[count]]%>
+            <!--Abzeichen erhalten-->
             <% if(!(achievementInfos[0] == "true"))%>
                 <td style="padding-top: 1%; padding-left: 2%">
                   <img class="myBadge" src=<%= achievementInfos[1]%> id="a<%= count%>" title="<%=achievementInfos[3]%>">
                 </td>
+            <!--Abzeichen noch nicht erhalten-->
             <% else %>
                 <td style="padding-top: 1%;padding-left: 2%">
                   <img class="myBadge" src=<%= achievementInfos[2]%> id="a<%= count%>" title="<%= achievementInfos[4]%>">
@@ -74,6 +79,7 @@
         </tr>
         </table>
   </div>
+  <!--Anzeigen der Test, welche verfügbar sind-->
   <div>
     <h1>Die folgenden Tests stehen für dich zur Verfügung:</h1>
     <div>
@@ -87,6 +93,7 @@
       <div class="row">
         <div class="col-lg-11">
           <div class="row">
+            <!--Erzeugen der Link per Schleife mit 3 Test pro Ebene-->
             <%while count < assessment_size%>
                 <% if(count<3)%>
                     <div class='col-lg-3 col-md-4 col-lg-offset-1' style="text-align: center;">
@@ -113,7 +120,7 @@
       </div>
     </div>
   </div>
-
+  <!--Custom Bestätigungdialog-->
   <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -127,7 +134,7 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Dialogbox um erhaltene Abzeichen anzuzeigen-->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -146,26 +153,29 @@
 
 </div>
 <script>
-    //possible Hack
+    //possible Hack: Verbieten vom Zurückbutton
     //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
     window.location.hash="no-back-button";
     window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
     window.onhashchange=function(){window.location.hash="no-back-button";};
     surveyLink = "<%=surveyLink%>"
 
+    //Wenn eine E-mail gespeichert ist diese im Inputfeld anzeigen
+    $('#emailCheck').prop('checked', true);
     var email = "<%= @student.email%>";
     if(email!=""){
         $('#email').val(email);
     }
 
 
-
+    //erhalten des gespeicherten Abzeichenhash aus der Datenbank
     var achievementHash = {
     <% @student.achievement.each do |a| %>
     <%= a[0]%>: <%=raw a[1]%>,
     <% end %>
     };
 
+    //Senden der E-Mail an den Probanden (enthält kleinen Text, Link zur Seite und Logincode
     function sendMail() {
         $('#emailgroup').removeClass('has-error');
         $('#emailgroup').removeClass('has-success');
@@ -192,6 +202,13 @@
         setTimeout(resetEmailButton, 3000);
     }
 
+    //Mitteilung nach 5 Sekunden ausblenden
+    $(document).ready(function(){
+        setTimeout(function(){
+            $('#alert').remove();
+        }, 5000);
+    })
+    //Proband erhält das Abzeichen für die zweite Anmeldung
     var survey_done = <%= @student.survey_done%>;
     var login_times = "<%= @student.login_times%>";
     if(achievementHash["a17"][0]!= "true" && login_times>1) {
@@ -199,11 +216,8 @@
         achievementHash["a17"][0] = "true";
         sendAchievement("a17", "#a16");
 
-
     }
-
-
-
+    //Proband erhält das Abzeichen für das erste gesendete Feedback
     var send_first = <%= @student.feedback_send%>;
     if(achievementHash["a28"][0]!= "true" && send_first) {
         showBadge("a28");
@@ -212,6 +226,7 @@
 
 
     }
+    //Zurücksetzen der Email-button
     function resetEmailButton() {
         $('#emailgroup').removeClass('has-error');
         $('#emailgroup').removeClass('has-success');
@@ -220,7 +235,7 @@
         $('#submit').addClass('btn-default');
         $('#emailgroup').addClass('has-default');
     }
-
+    //Absenden des aktualisierten Abzeichenhash damit es in der Datenbank gespeichert wird (nach erreichen eines Abzeichen)
     function sendAchievement(key, keyForJQ) {
         var test = {"student": {"achievement": achievementHash}};
         $.ajax({
@@ -228,23 +243,18 @@
             url: "<%= user_group_student_path(@student.group.user, @student.group, @student)%>",
             data: test,
         });
-
+        //richtige Bild anzeigen und richtigen Titel nach erhalt des Abzeichen
         $(keyForJQ).attr("src", achievementHash[key][2]);
         $(keyForJQ).attr("title", achievementHash[key][4]);
     }
-
+    //Dialogbox anzeigen für das erhalten eines Abzeichens
+    //mit Info welches Abzeichen/wofür es das Abzeichen gab
     function showBadge(key) {
         $("#modalContent").html("<div class='text-center' style='font-size: 2.2rem'><img src=" + achievementHash[key][2] + " style='width:40%'><br/>" + achievementHash[key][4]+ "</div>");
         $("#exampleModal").modal();
     }
 
-    $(document).ready(function(){
-        setTimeout(function(){
-            $('#alert').remove();
-        }, 5000);
-    })
 
-    $('#emailCheck').prop('checked', true);
 
     //Override the default confirm dialog by rails
     $.rails.allowAction = function(link){
@@ -277,7 +287,7 @@
         }));
     };
 
-
+    //Reminder bzgl. des BFI-Tests anzeigen, wenn dieser noch nicht gesehen wurde/der BFI noch nicht gemacht wurde, ab dem zweiten Login
     if(login_times>1&&!survey_done&&localStorage.getItem("reminderSeen")=="false"){
         localStorage.removeItem("reminderSeen");
         $('#testModal').modal('show');

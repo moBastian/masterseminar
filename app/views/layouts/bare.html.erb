@@ -1,19 +1,23 @@
+<!--Layout für Loginseite der Studienleiter-->
 <!DOCTYPE html>
 <html>
 <head>
   <title>Quizmos</title>
+  <!--CSS und JS einbinden externe Bibliotheken minifiziert von Rails-->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 
 <body>
-
+<!--Leere Navbar <- künstlich abstand schaffen-->
 <nav class="navbar">
 </nav>
 
+<!--Element in dem die Seiten geladen werden-->
 <div class="container-fluid">
   <div id="content">
+    <!--Element zum anzeigen von Meldungen z.B. "Angemeldet als ...", Fehlermeldungen vom Server -->
     <div id="alert">
       <% unless notice.blank? %>
           <div class="alert alert-info alert-dismissible">
@@ -27,6 +31,7 @@
   </div>
 </div>
 
+<!--Links für die Login-, About- und die Impressumseite-->
 <p class="lead text-center">
   <mark>
     <%= link_to "Login", url_for(:controller => "application", :action => "welcome")%>

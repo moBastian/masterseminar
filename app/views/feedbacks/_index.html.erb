@@ -1,7 +1,8 @@
+<!--Anzeigen der Kommetare bei dem Studienleiter-->
 <p id="notice"><%= notice %></p>
 
 <h2>Kommentare:</h2>
-
+<!--Schleife über alle Kommentare-->
 <% @feedbacks.each do |f|%>
     <div class="well groupCard">
       <div style="font-size: 1.8rem"><%=raw f.feedbacktext%></div>

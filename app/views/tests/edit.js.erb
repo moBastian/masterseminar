@@ -1,1 +1,3 @@
+//Rendern der Form der Test in dem HTML-Element mit der id 't<=@test.id%>' (vorheriges Prozent weg damit es ein zulässiger Kommentar ist)
+//nach der ausführung vom edit des Tests
 $('#t<%=@test.id%>').html("<%= escape_javascript(render 'form') %>");

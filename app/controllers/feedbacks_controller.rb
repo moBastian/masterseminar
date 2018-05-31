@@ -27,22 +27,13 @@ class FeedbacksController < ApplicationController
     end
   end
 
-  # GET /feedbacks/1
-  # GET /feedbacks/1.json
-  #anzeigen eines Feedbacks
-  def show
-  end
-
   # GET /feedbacks/new
   #erzeugen eines neuen Feedbacks
   def new
     @feedback = Feedback.new
   end
 
-  # GET /feedbacks/1/edit
-  #Verändern eines Feedbacks (Standardfunktion)
-  def edit
-  end
+
 
   # POST /feedbacks
   # POST /feedbacks.json
@@ -64,14 +55,12 @@ class FeedbacksController < ApplicationController
           redirect_to '/frontend'
 
         }
-        format.json { render :show, status: :created, location: @feedback }
       else
         #Feedback sollte nicht leer sein
         format.html {
           render :new
           flash[:notice]= 'Feedback sollte nicht leer sein ;)'
         }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
       end
     end
   end

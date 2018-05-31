@@ -1,3 +1,6 @@
+<!--
+Form für das Erstellen einer Studien
+-->
 <%= form_for([@user, @group], :html => {:class => "form"}, :data => {:remote => true}) do |f| %>
     <% if @group.errors.any? %>
         <div class="alert alert-danger">
@@ -12,6 +15,7 @@
     <% else %>
         <div class="form-group">
     <% end %>
+    <!--Erzeugen von Inputfeldern-->
     <%= f.label :name, :class => "sr-only" %>
     <%= f.text_field :name, :class => "form-control", :placeholder => "Bezeichnung der Studie"%>
     <%= f.label :test_condition_count, :class => "sr-only" %>
@@ -24,14 +28,16 @@
 <% end %>
 
 <script>
+  //Abbrechen der Form
     function cancelForm() {
         $('#newGroup').html("<%= escape_javascript(link_to(raw("<div class='btn btn-default groupButton'>Neue Studie anlegen</div>"), new_user_group_path(@user), :data => {:remote => true})) %>");
     }
+    //Extra optionen für weite, eigenschaften der Inputfelder
     $('#group_test_condition_count').prop("type", "number").css("width", "250px").prop("min",0).prop("max",10).prop('required',true).attr('maxlength','2');
     $('#group_name').css("width", "250px").prop('required',true);
 
 </script>
-
+<!--Extra styles to turn of arrows on input field-->
 <style>
   /* Hide HTML5 Up and Down arrows. */
   input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {

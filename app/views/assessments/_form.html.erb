@@ -1,5 +1,6 @@
+<!-- Form für das freischalten eines neuen Test (Studienleiter)-->
 
-
+<!--Zeige das Gebiet als erste Tabebene-->
 <% subjects = @tests.collect{|t| t.subject}.uniq %>
 <ul id="tabs" class="nav nav-tabs" role="tablist">
   <% first = true %>
@@ -8,9 +9,11 @@
       <% first = false %>
   <% end %>
 </ul>
+<!--Inhalt für die erste Tabebene-->
 <div class="tab-content" style="border-left: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; border-radius: 0 0 4px 4px; padding: 19px;">
   <% first = true %>
   <% subjects.sort.each do |s| %>
+      <!--Benutze den Schwerpunkt, als zweite Tabebene-->
       <div role="tabpanel" class="tab-pane <% if first %>active<% end %>" id="<%= s.parameterize%>">
         <% categories = @tests.select{|t| t.subject == s}.collect { |t| t.construct }.uniq %>
         <ul id="tabs" class="nav nav-pills" role="tablist">
@@ -20,6 +23,7 @@
               <% first = false %>
           <% end %>
         </ul>
+        <!--Inhalt der zweiten Tabebene-->
         <div class="tab-content" style="border-left: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; border-radius: 0 0 4px 4px; padding: 19px;">
           <% first = true %>
           <% categories.sort.each do |c| %>
@@ -27,9 +31,11 @@
                 <%= form_for([@user, @group, @assessment], :html => {:class => "form"}, :data => {:remote => true}) do |f| %>
                     <div class="form-group">
                       <br/>
+                      <!--Zeige alle Tests in einen Dropdown-menü-->
                       <%= label_tag "test", "Verfügbare Tests" %>
                       <%= select_tag "test", options_from_collection_for_select(@tests.select{|t| t.subject == s && t.construct ==c}, "id", "long_name"), {:class => "form-control", :onchange => "selectChanged()"}%>
                     </div>
+                    <!--Zeige zusätzliche Infpormationen für die Tests an-->
                     <div class="form-group">
                       <%= label_tag "", "Information" %>
                       <p class="form-control-static" id="info"><%= @tests.select{|t| t.subject == s && t.construct ==c}.first.short_info if @tests.select{|t| t.subject == s && t.construct ==c}.size > 0%></p>
@@ -51,10 +57,12 @@
 
 
 <script>
+  //Abbrechen der Form
     function cancelForm() {
         $('#newAssessment').html("<%= escape_javascript(link_to(raw("<div class='btn btn-default groupButton'><i>Neuer Test</i></div>"), new_user_group_assessment_path(@user, @group), :data => {:remote => true}))%>");
     }
 
+    //Laden und auswechseln der Informationen fpr einen Test
     var infos = {
     <% @tests.each do |t| %>
     <%= t.id%>: "<%= raw(t.short_info)%>",

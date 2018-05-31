@@ -1,6 +1,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
+<!--Laden der Testseiten-->
 <div>
   <%= render 'results/tests/studentEnv'%>
 </div>
@@ -8,8 +9,6 @@
 <script>
 
     //variable for testsequence
-
-
     var currentResult ="";
     //data for timeout
     var timeoutId = -1;
@@ -21,14 +20,15 @@
 
 
 
-
+    //Zeit, welche zum beenden des Testablaufes zur Verfügung steht, wenn eingestellt
     <% if !@measurement.assessment.test.time.nil? %>
       workTime = <%=@measurement.assessment.test.time * 1000 %> + 500;
     <% end %>
-
+    //Timeout zurücksetzen
     if (timeoutId != -1) {
         window.clearTimeout(timeoutId);
     }
+    //Timeout setzen
     if(workTime!=-1) {
         timeoutId = window.setTimeout(timedOut, workTime);
         stopwatch = new Date();
@@ -60,6 +60,7 @@
   function nextItem() {
       currentItemIndex++;
       if (currentItemIndex+1 < studentData[currentStudent].length) {
+          //Beim timeout test beenden
           if(timedout){
               stopTest()
           }
@@ -68,6 +69,7 @@
           }
       }
       else
+          //benden eines Testablaufes
           stopTest();
   }
 
@@ -94,7 +96,6 @@
           data: dict,
       });
   }
-
 
     nextItem()
     $('#myProgress').hide();

@@ -1,3 +1,4 @@
+<!--Form eines Studienleiter zum Erstellen dieses oder zum Bearbeiten der Daten-->
 <%= form_for(@user, html: {class: "form"}) do |f| %>
     <% if @user.errors.any? %>
         <div class="alert alert-danger">
@@ -6,27 +7,32 @@
             <% end %>
         </div>
     <% end %>
-
+    <!--Input für den Namen-->
     <div class="form-group">
       <%= f.label :name, class: "control-label" %><br>
       <%= f.text_field :name, class: "form-control" %>
     </div>
+    <!--Input für die E-Mail-Adresse-->
     <div class="form-group">
       <%= f.label :email, class: "control-label" %><br>
       <%= f.text_field :email, class: "form-control" %>
     </div>
+    <!--Dropbox für die Auswahl des Bundeslandes-->
     <div class="form-group">
       <%= f.label :state, class: "control-label" %><br>
       <%= f.select(:state, federal_states, {}, {class: "form-control"}) %>
     </div>
+    <!--Input für das Passwort-->
     <div class="form-group">
       <%= f.label :password, class: "control-label" %><br>
       <%= f.password_field :password, class: "form-control" %>
     </div>
+    <!--Input für die richtige eingabe des ersten Passwortes (nötig BCrypt)-->
     <div class="form-group">
       <%= f.label :password_confirmation, class: "control-label" %><br>
       <%= f.password_field :password_confirmation, class: "form-control" %>
     </div>
+    <!--Tätigkeit angeben-->
     <% if @login_user.hasCapability?("user") %>
       <div class="form-group">
         <%= f.radio_button :account_type, 0 %>

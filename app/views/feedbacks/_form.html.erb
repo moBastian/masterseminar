@@ -1,3 +1,4 @@
+<!--Form um einen Kommentar an den Studienleiter zu senden-->
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
@@ -9,6 +10,7 @@
   <div id="content">
     <div class="jumbotron" style="padding-bottom: 10px">
       <%= form_for([@user, @group, @feedback], :html => { :onsubmit => "return validateForm()"}) do |f| %>
+          <!--Fehlerbehandlung-->
           <% if @feedback.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(@feedback.errors.count, "error") %> Feedback wurde nicht gespeichert!</h2>
@@ -19,8 +21,8 @@
                 </ul>
               </div>
           <% end %>
+          <!--Feld im dem der Kommentar geschrieben werden kann-->
           <div class="row">
-
           <div class="col-xs-2" style="width: 100%">
             <div class="form-group">
               <label for=:feedbacktext >Feedback:</label><br/>
@@ -40,6 +42,7 @@
       <% end %>
     </div>
   </div>
+  <!--Anzeigen des Fehlers, wenn vorhanden-->
   <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -58,6 +61,7 @@
 </div>
 
 <script>
+  //Überprüfen ob das Textfeld leer ist und dann ggf. den fehler anzeigen
     function validateForm() {
         if ($('#feedback_feedbacktext').val().trim()=="") {
             $('#failModal').modal('show');

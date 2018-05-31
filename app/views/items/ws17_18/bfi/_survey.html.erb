@@ -1,3 +1,6 @@
+<!--Extra Style für eine Responsive Rankingtabelle
+Tabelle sieht nicht aus wie eine mehrspaltige Tabelle sondern wie eine einspaltige tabelle
+-->
 <style>
   .myRadio{
     width: 20px;
@@ -48,6 +51,7 @@
   }
 
 </style>
+<!--BFI-Test -->
 <div style="font-size: 1.7em;">Inwieweit treffen die folgenden Aussagen auf dich zu? (1: "trifft überhaupt nicht zu" bis 5: "trifft voll und ganz zu")</div>
 <table align="center" style="margin-top: 10px" >
   <thead style="border-bottom: solid orange 2px; border-top: solid orange 4px;background-color: lightgray">
@@ -61,8 +65,10 @@
   </tr>
 
   </thead>
+  <!--Jede frage des BFI-Tests als auswahl von Radiobutton -->
   <tbody style="border-bottom: solid orange  4px">
   <%count =0%>
+  <!--Schleife über jede Frage mit fünf Auswahlmöglichkeiten-->
   <%@measurement.assessment.test.items.each_with_index do |item, i|%>
       <%nextItem = @measurement.assessment.test.items[i+1]%>
       <%if(nextItem.nil?)%>
@@ -89,6 +95,7 @@
 
 
 <script>
+  //Parsen der Ergebnisse des BFI-Test in das Format, welches ein Resultobjekt benötigt
   function endSurvey() {
       currentResult = currentResult + '1,1,1,1,1,1,1,1,1,1,';
       i = 0;
@@ -96,6 +103,7 @@
       while(i<10){
           j = 1;
           while(j<6){
+              //Wenn der Radiobutton ausgewählt wurde die Buttonzahl speichern
               if($('#'+j+i).prop("checked")){
                   count = count +1;
                   actualAnswers =actualAnswers + j +",";
@@ -108,6 +116,7 @@
           i= i+1
 
       }
+      //Fehlerbehandlung, wenn nicht alles ausgewählt wurde
       if(count<9){
           alert("In jeder Reihe muss ein Häckchen gesetzt werden.");
       }else{

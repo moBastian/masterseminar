@@ -2,7 +2,7 @@
 class StudentsController < ApplicationController
   before_action :set_user
   before_action :set_group
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :set_student, only: [:show, :update, :destroy]
   before_action :is_allowed
 
   # GET /students
@@ -107,8 +107,6 @@ class StudentsController < ApplicationController
         format.html{
           render :nothing => true, :status => 200, :content_type => 'text/html'
         }
-      else
-        format.js { render :edit }
       end
     end
   end

@@ -19,11 +19,11 @@ t = Test.create(name: "BFI",  info: "BFI", short_info: "BFI",len: 1, subject: "M
 
 i= 0
 while i<questions.size do
-	it = t.items.build(itemtext: questions[i], shorthand: questions[i], itemtype: 0, itemview: "items/studentbased/bfi/survey")
+	it = t.items.build(itemtext: questions[i], shorthand: questions[i], itemtype: 0, itemview: "items/ws17_18/bfi/survey")
 	it.save
 	i = i+1
 end
 
-it = t.items.build(itemtext: "Ende", itemtype:1, itemview:"items/studentbased/bfi/3ende")
+it = t.items.build(itemtext: "Ende", itemtype:1, itemview:"items/ws17_18/bfi/3ende")
 it.save
 t.save

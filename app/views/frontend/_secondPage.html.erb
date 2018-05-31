@@ -1,6 +1,8 @@
+<!--Steckbrief für die Probanden-->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--Laden von extra Style für Responsive-Design-->
   <%= stylesheet_link_tag '/stylesheets/myStyle.css', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag '/stylesheets/introduction.css', media: 'all', 'data-turbolinks-track' => true %>
 </head>
@@ -13,6 +15,7 @@
             <hr style="border: none; height: 2px; color: #3c3c3c; background-color: #3c3c3c;"/>
           </div>
 
+          <!--Input für den Usernamen (nur Ranking)-->
           <div class="col-xs-12" id="userName">
             <div class="form-group">
               <label for="usr">Username:</label><br/>
@@ -20,6 +23,7 @@
             </div>
           </div>
 
+          <!--Input für das Alter-->
           <div class="col-xs-12">
             <div class="form-group">
               <label for="age" >Alter:</label><br/>
@@ -27,7 +31,7 @@
             </div>
           </div>
 
-
+          <!--Auswahl des Geschlechts-->
           <div class="col-xs-12">
             <div class="form-group">
               <label for="gender">Geschlecht:</label><br/>
@@ -40,7 +44,7 @@
             </div>
           </div>
 
-
+          <!--Input für das angeben der E-Mail-->
           <div class="col-xs-12">
             <div class="form-group">
               <label for="email" style="width: auto">E-Mail-Adresse:</label><br/>
@@ -63,15 +67,19 @@
 </div>
 
 <script>
+    //Laden der Daten, wenn schon vorhanden (varibalen sonst leer-> "")
+    //Daten schon speichern, wenn z.B. der Username falsch angegeben wurde
     var groupNum = "<%= @student.group_type%>";
     var age = "<%= @student.age%>";
     var gender = "<%= @student.gender%>";
     var email = "<%= @student.email%>";
+    //Fehlermeldung nach 5 Sekunden ausblenden
     $(document).ready(function(){
         setTimeout(function(){
             $('#alert').remove();
         }, 5000);
     });
+    //Wenn Geschlecht schon angeben war, richtigen Radiobutton auswählen
     if(gender=="keine Angabe"){
         $('#gender_keine_Angabe').prop('checked', true);
     }else if(gender=="male"){
@@ -80,32 +88,32 @@
     else{
         $('#gender_female').prop('checked', true);
     }
-
+    //Anpassen der Inputfelder z.B. weite, nur Alter zwischen 14 und 99, ....
     $('#username').addClass("form-control").addClass("myInput").prop('required',true);
     $('#email').addClass("form-control").addClass("myInput").attr("placeholder", "optional");
     $('#gender').addClass("form-control").css("width", "auto").css("background-color", "white");
-    $('#age').addClass("form-control").css("width", "80px").prop("type", "number").prop("min",14).prop("max",99).prop("max",99).prop('required',true).attr('maxlength','2');
+    $('#age').addClass("form-control").css("width", "80px").prop("type", "number").prop("min",14).prop("max",99).prop('required',true).attr('maxlength','2');
     $('#age').get(0).type = 'number';
+    //Abschalten von Buchstaben und Sonderzeichen im Feld fürs Alter
     $('#age').on('keypress', function(key) {
         if(key.charCode==8 && key.charCode < 48 || key.charCode > 57) return false;
     });
+    //Schon gespeicherte Daten einfügen
     if(!age==""){
         $('#age').val(age)
     }
     if(!email==""){
         $('#email').val(email)
     }
-
+    //Abschalten des Inputfeldes für den Usernamen, außer bei Rankinggruppen
     if(!(groupNum=="3" || groupNum=="5")){
         $('#userName').removeClass("col-xs-2").html("");
     }
-
-    function getRndInteger(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) ) + min;
-    }
+    //Nach oben auf die Seite scrollen
     window.scrollTo(0,0);
 </script>
 
+<!--Extra style für das Inputfeld Age <-Abschalten von Pfeilen am Feld-->
 <style>
   /* Hide HTML5 Up and Down arrows. */
   input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {

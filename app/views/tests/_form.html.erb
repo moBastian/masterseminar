@@ -1,3 +1,4 @@
+<!--Fornm zum (Erzeugen) und Bearbeiten eines Tests-->
 <% if @test.errors.any? %>
     <div class="alert alert-danger">
       <% @test.errors.full_messages.each do |message| %>
@@ -7,7 +8,7 @@
 <% end %>
 
 <%= form_for(@test.becomes(Test), :html => {:class => "form"}, :data => {:remote => true}) do |f| %>
-
+    <!--Feld für den Namen-->
     <% if @test.errors[:name].any? %>
         <div class="form-group has-error">
     <% else %>
@@ -16,14 +17,17 @@
         <%= f.label :name, :class => "control-label" %>
         <%= f.text_field :name, :class => "form-control" %>
     </div>
+    <!--Feld für die Shortinfo-->
     <div class="form-group">
       <%= f.label :short_info, :class => "control-label" %>
       <%= f.text_field :short_info, :class => "form-control" %>
     </div>
+    <!--Feld für die Info-->
     <div class="form-group">
         <%= f.label :info, :class => "control-label" %>
         <%= f.text_area :info, :class => "form-control" %>
     </div>
+    <!--Feld für das Gebiet-->
     <% if @test.errors[:subject].any? %>
         <div class="form-group has-error">
     <% else %>
@@ -32,6 +36,7 @@
         <%= f.label :subject, :class => "control-label" %>
         <%= f.text_field :subject, :class => "form-control" %>
     </div>
+    <!--Feld für den "Schwerpunk"-->
     <% if @test.errors[:construct].any? %>
         <div class="form-group has-error">
     <% else %>
@@ -50,6 +55,7 @@
 <% end %>
 
 <script>
+  //Abbrechen der Form
     function cancelForm() {
         $('#t<%=@test.id%>').html("<%= escape_javascript(render(file: 'tests/_show', :locals =>  {:test => @test})) %>");
     }

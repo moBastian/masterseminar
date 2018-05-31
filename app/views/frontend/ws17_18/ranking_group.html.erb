@@ -1,3 +1,6 @@
+<!--Extra Style für eine Responsive Rankingtabelle
+Tabelle sieht nicht aus wie eine mehrspaltige Tabelle sondern wie eine einspaltige tabelle
+-->
 <style>
   td{
     white-space: nowrap;
@@ -42,6 +45,7 @@
   }
 
 </style>
+<!--Link für den BFI erzeugen-->
 <%survey = Test.where(name:"BFI")%>
 <%exists = @assessments.where(group_id:@student.group, test_id:survey).length%>
 
@@ -54,6 +58,7 @@
         <div>
           <p class="myP" style="float: left"><b title="Mit diesem Code kannst du dich erneut anmelden.">Angemeldet als: <%= @student.login %></b></p>
           <div align="right" style="padding-right: 15px">
+            <!--Button für den BFI nur anzeigen, wenn er noch nicht gemacht wurde und wenn es ihn gibt + Logoutbutton und Feedbackbutton-->
             <%if exists==0||@student.survey_done||@assessments.where(group_id:@student.group, test_id:survey).first.nil?%>
                 <form class="form-group confirm" method="post" action="<%=url_for(:controller => "frontend", :action => "logout")%>" >
                   <%= link_to 'Feedback', new_user_group_feedback_path(@user, @group), class:"btn btn-primary btnSpace", title: "Hierrüber kannst du uns deine Anmerkungen zusenden."%>
@@ -70,6 +75,7 @@
             <%end%>
           </div>
         </div>
+        <!--Form um sich den Logincode zuzusenden-->
         <div>
           <form class="navbar-form navbar-left">
             <p class = "form-group">Anmeldecode per E-mail zusenden:</p>
@@ -83,22 +89,28 @@
         </div>
       </div>
   <% end %>
-
+  <!--Anzeigen des Ranking
+      1. Erhalten relevanter Rankingdaten(Gruppen)
+  -->
   <% ranking_info =@student.get_data_ranking() %>
   <% points = ranking_info.pluck(:points).uniq%>
   <div class="container" style="width: auto;" align="center">
     <table style="empty-cells: show">
+      <!--Für jede Punktegruppen eine Zeile in Tabelle erzeugen und in der Spalte die Namen eintragen-->
       <% points.each do |p|%>
           <tr>
             <td style="padding-left: 10px;" class="tdQuestion myTd">
               <%=p%> Fragen richtig beantwortet:&nbsp;
             </td>
             <%count=0%>
+            <!--Proband gehört selber in die Gruppe-->
             <%if @student.points==p%>
                 <td class="myTd"><b>--><%=@student.name%><--</b>, </td>
             <%end%>
+            <!--Alle anderen relevanten Gruppen-->
             <%ranking_info.where(points: p).each_with_index do |s, i|%>
                 <%if s==@student%>
+                <!--Maximal 5 andere Nutzer pro Gruppe anzeigen-->
                 <%elsif(count<5)%>
                     <%nextStudent = ranking_info.where(points: p)[i+1]%>
                     <%if nextStudent.nil? || count==4 || nextStudent==@student%>
@@ -110,6 +122,7 @@
                     <%end%>
                 <%end%>
             <%end%>
+            <!--Wenn es keine 5 Probanden in der gruppe gitb leere Felder erzeugen <- sonst Fehler bzgl der Border in Chrome-->
             <%if @student.points == p%>
                 <% while count<5%>
                     <td width="1px"></td>
@@ -126,6 +139,7 @@
       <%end%>
     </table>
   </div>
+  <!--Anzeigen der Test, welche verfügbar sind-->
   <div>
     <h1>Die folgenden Tests stehen für dich zur Verfügung:</h1>
     <div>
@@ -139,6 +153,7 @@
       <div class="row">
         <div class="col-lg-11">
           <div class="row">
+            <!--Erzeugen der Link per Schleife mit 3 Test pro Ebene-->
             <%while count < assessment_size%>
                 <% if(count<3)%>
                     <div class='col-lg-3 col-md-4 col-lg-offset-1' style="text-align: center;">
@@ -165,7 +180,7 @@
       </div>
     </div>
   </div>
-
+  <!--Custom Bestätigungdialog-->
   <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -182,7 +197,7 @@
 </div>
 
   <script>
-      //possible Hack
+      //possible Hack: Verbieten vom Zurückbutton
       //=> Alternative: from login (welcome-view) until frontend Indexpage with window.location.replace();
       window.location.hash="no-back-button";
       window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
@@ -190,19 +205,14 @@
       surveyLink = "<%=surveyLink%>";
       login_times = "<%= @student.login_times%>";
       survey_done = <%= @student.survey_done%>;
+      //Wenn eine E-mail gespeichert ist diese im Inputfeld anzeigen
       $('#emailCheck').prop('checked', true);
-      $(document).ready(function(){
-          setTimeout(function(){
-              $('#alert').remove();
-          }, 5000);
-      });
-
       var email = "<%= @student.email%>";
-
       if(email!=""){
           $('#email').val(email);
       }
 
+      //Senden der E-Mail an den Probanden (enthält kleinen Text, Link zur Seite und Logincode
       function sendMail() {
           $('#emailgroup').removeClass('has-error');
           $('#emailgroup').removeClass('has-success');
@@ -215,13 +225,30 @@
               if(!$('#emailCheck').prop( "checked" )){
                   $('#email').val("")
               }
-
-
           }
           else {
               $('#submit').addClass('btn-danger');
               $('#emailgroup').addClass('has-error');
           }
+          //Zurücksetzen der Emailbutton nach 3 sek
+          setTimeout(resetEmailButton, 3000);
+      }
+
+      //Mitteilung nach 5 Sekunden ausblenden
+      $(document).ready(function(){
+          setTimeout(function(){
+              $('#alert').remove();
+          }, 5000);
+      })
+
+      //Zurücksetzen der Email-button
+      function resetEmailButton() {
+          $('#emailgroup').removeClass('has-error');
+          $('#emailgroup').removeClass('has-success');
+          $('#submit').removeClass('btn-danger');
+          $('#submit').removeClass('btn-success');
+          $('#submit').addClass('btn-default');
+          $('#emailgroup').addClass('has-default');
       }
 
       //Override the default confirm dialog by rails
@@ -255,7 +282,7 @@
           }));
       };
 
-
+      //Reminder bzgl. des BFI-Tests anzeigen, wenn dieser noch nicht gesehen wurde/der BFI noch nicht gemacht wurde, ab dem zweiten Login
       if(login_times>1&&!survey_done&&localStorage.getItem("reminderSeen")=="false"){
           localStorage.removeItem("reminderSeen");
           $('#testModal').modal('show');

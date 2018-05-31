@@ -20,10 +20,6 @@ class AssessmentsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-      #Erzeugen eines PDfs
-      format.pdf do 
-        render pdf: @group.name + "-" + @assessment.test.name, template: "assessments/show.pdf.erb", orientation: "landscape"
-      end
     end
   end
 

@@ -1,5 +1,7 @@
+<!--Test für den dieses partial geladen wird-->
 <% test =Test.find(key) %>
 <% items = @student.getTestResults(key) %>
+
 
 <div class="panel panel-default">
   <div class="panel-heading" role="tab" id="h<%=key%>">
@@ -12,7 +14,7 @@
 
   <div id="c<%=key%>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h<%=key%>">
     <div class="panel-body" <% unless online %>style="width: 790px"<% end %>>
-
+      <!--Elemente zum Drucken-->
       <% if online %>
         <div class="dropdown text-right" id="p<%=key%>">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuPrint" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -25,14 +27,12 @@
           </ul>
         </div>
       <% end %>
-
+      <!--Element zum laden des Graphen für den Test-->
       <div id="chart<%=key%>" style="width: 100%" >
       </div>
-
+      <!--Tabelle für den Test-->
       <div id="table<%=key%>">
-
-
-
+        <!--Beim Durck ggf. ohne Tabelle-->
         <% unless without_table %>
           <table class="table table-striped">
             <thead>
@@ -56,12 +56,15 @@
             </th>
             </thead>
             <tbody>
+            <!--Anzeigen der jeweiligen Zelleninhalte-->
             <% val.sort_by {|x| x.measurement.date}.each do |r| %>
                 <% unless r.score.nil? %>
                     <tr>
+                      <!--Datum-->
                       <td>
                         <%= r.measurement.date.to_date.strftime("%d.%m.%Y")%>
                       </td>
+                      <!--Richtig gelöste Items-->
                       <td>
                         <% first = true %>
                         <% for i in 0..r.items.size-1 do %>
@@ -74,6 +77,7 @@
                             <% end %>
                         <% end %>
                       </td>
+                      <!--Falsch gelöste Items-->
                       <td>
                         <% first = true %>
                         <% for i in 0..r.items.size-1 do%>
@@ -86,12 +90,15 @@
                             <% end %>
                         <% end %>
                       </td>
+                      <!--Anzahl richtig gelöster Items-->
                       <td>
                         <%= r.count_1 %>
                       </td>
+                      <!--Anzahl falsch gelöster Items-->
                       <td>
                         <%= r.count_0 %>
                       </td>
+                      <!--Prozentualer Anteil richtig gelöster Items-->
                       <td>
                         <%= (r.total * 100).round(1)%>
                       </td>

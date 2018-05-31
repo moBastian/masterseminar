@@ -1,3 +1,6 @@
+<!--
+Loginseite f+ür die Probanden anzeigen
+-->
 <div class="jumbotron">
   <h1>Quizmos</h1>
   <br/>
@@ -6,6 +9,7 @@
       <p>
         Gib hier bitte deinen Zugangscode ein:
       </p>
+      <!--Geheim Ip und Browserhash abfangen-->
       <div class="form-group">
         <label class="sr-only" for="login">Code</label>
         <%= text_field_tag "login", nil, type: "text",:autocomplete => :off , class: "form-control", placeholder: "Zugangscode"%>
@@ -18,7 +22,9 @@
 </div>
 
 <script>
+    //reminder bzgl Bfi gesehen zurücksetzen
     localStorage.setItem("reminderSeen", false);
+    //erhalten der IP und des Browserhash
     $(document).ready(function () {
         $.getJSON('https://ipapi.co/json/', function(data) {
             $('#ip').val(data.ip)

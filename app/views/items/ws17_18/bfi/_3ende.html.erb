@@ -1,10 +1,11 @@
+<!--Letzte Itemview für den BFI-Test-->
 </br></br></br></br></br></br>
 <div style="font-size:2.2em" align="center">Vielen Dank für das Beantworten der Fragen!</div>
 <br><br>
 <br><br>
 <div id="directButton"></div>
 <script>
-
+  //Button erzeugen um Probanden auf die Loginseite zu leiten, wenn er im Ausloggen war
     if(localStorage.getItem("logout")=="true"){
         localStorage.removeItem("logout");
         $('#directButton').html('<form class="form-group" method="post" ' +
@@ -13,7 +14,7 @@
             'Abmelden</button></div></div> </form>')
     }
     else{
-
+        //Button erzeugen um Probanden zurück auf seine Übersichtsseite leiten
         $('#directButton').html("<div class='row text-center'><div class='col-md-4 col-md-offset-4'>" +
             "<button id='geschafft' type='button' class='btn questButton btn-primary btn-block'>Zur Übersichtsseite</button></div></div>")
     }
@@ -21,7 +22,7 @@
         if(localStorage.getItem("logout")=="false")
             window.location.replace(pathMainPage);
     });
-
+    //Speichern, dass der Proband den BFI-Test gemacht hat
   var survey_done = {"student": {"survey_done": "true"}};
   $.ajax({
       method: 'PUT',

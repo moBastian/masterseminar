@@ -7,8 +7,14 @@
     <p>Achtung: Es werden nur bis zu sechs verschiedene Versuchsbedingungen unterstützt!</p>
   </div>
 </div>
+<!--Initialisieren der Daten, welche zum Auswerten benötigt werden
+Anzahl Probanden (insgesamt und pro Versuchsbedingung)
+Anzahl richtig beantwortert Fragen (insgesamt und pro Versuchsbedingung)
+Anzahl der gesehenen Fragen (insgesamt und pro Versuchsbedingung)
+-->
 
-<%  students = @group.students
+<%  #initialisieren
+    students = @group.students
     groupsize = students.size
     fakegroupsize = 0
     controllgroupsize = 0
@@ -29,7 +35,7 @@
     correct_question4 = 0;
     played_question5 = 0;
     correct_question5 = 0;
-
+  #gesehne + richtig beantwortete fragen für jede Versuchsbedingung
   students.each do |student|
     if(student.group_type==0)
       controllgroupsize = controllgroupsize +1
@@ -60,6 +66,7 @@
     end
   end
 %>
+<!--Tabelle zum ersten Auswerten der Daten-->
 <div>
   <table class="table table-striped">
     <thead>
@@ -243,6 +250,7 @@
 
 </div>
 <br/>
+<!--Tabelle um die daten der Probanden für eine Studie anzuzeigen-->
 <table class="table table-striped">
   <thead>
   <th>
@@ -311,6 +319,7 @@
 </table>
 
 <script>
+  //Rundmail an alle Probanden der Studie zusenden
   function notifyAll() {
       $.ajax({url: '<%= user_group_students_path(@user,@group, @students, format: :text)%>' + '?email=allInGroup' });
       alert("E-Mails wurden versandt.")
