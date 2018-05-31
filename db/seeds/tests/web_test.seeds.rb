@@ -189,7 +189,7 @@ question_n4 = [
 		"Wieviel Prozent aller geschauten Videos auf Youtube werden nach 10 Sekunden geschlossen?",
 		"Wie heißt die 2001 gegründete Online-Enzyklopädie, die von vielen Menschen weltweit als Nachschlagewerk genutzt wird?",
 		"Seit wann gibt es Wikipedia?",
-		"Wieviele Artikel umfasst Wikipedia ungefähr?",
+		"Wieviele Artikel umfasst Wikipedia ungefähr? (in Mio.)",
 		"Wie werden Artikel bei Wikipedia erstellt und bearbeitet?",
 		"Facebook wurde gegründet von Marc…?",
 		"Wann erschien Facebook?",
