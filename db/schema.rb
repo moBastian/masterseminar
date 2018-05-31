@@ -102,7 +102,6 @@ ActiveRecord::Schema.define(version: 20180530144657) do
     t.text     "short_info"
     t.text     "subject"
     t.text     "construct"
-    t.text     "answers"
     t.text     "picture"
   end
 

@@ -471,6 +471,6 @@ while i<items_n4.size do
 	i = i+1
 end
 
-it = t.items.build(itemtext: "Ende", itemtype:1, itemview:"items/studentbased/quiz/3ende")
+it = t.items.build(itemtext: "Ende", itemtype:1, itemview:"items/ws17_18/quiz/3ende")
 it.save
 t.save

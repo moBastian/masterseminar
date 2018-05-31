@@ -174,7 +174,7 @@ class Student < ActiveRecord::Base
       end
     end
     #Erzeugen des Probanden
-    s = group.students.build(name: cur, group_type: Random.rand(group.test_condition_count),feedback_send:false,survey_done:false, login_times:0, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
+    s = group.students.build(name: cur, login: cur, group_type: Random.rand(group.test_condition_count),feedback_send:false,survey_done:false, login_times:0, ip: ip, fingerprint: fingerprint, gender:"keine Angabe", achievement: achievement, points:0, played_questions:0)
     s.save
     return s
   end
