@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
-
+#Seeds für den Web-Test
+#Alle der test ladbar über: rails db:seed:tests
 # Neue Elemente mit der festen Reihenfolge
 
 items_n4 = %w{

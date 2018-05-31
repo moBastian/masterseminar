@@ -1,3 +1,4 @@
+#Seeds um Fakenamen anzulegen
 #Array für Usernamen
 usernames = %w{
 Kylin

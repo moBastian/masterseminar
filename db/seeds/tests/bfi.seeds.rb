@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
-
+#Seeds für den BFI-Test
+#Alle der test ladbar über: rails db:seed:tests
 
 questions = [
 "Ich bin eher zurückhaltend, reserviert.",

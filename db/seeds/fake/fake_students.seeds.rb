@@ -1,3 +1,4 @@
+#Seeds um fakeprobanden anzulegen für den angegeben Nutzer
 #hier passende Mail eingeben
 #user = User.find_by_email("test@test.com")
 user = User.find_by_email("stu114712@mail.uni-kiel.de")
